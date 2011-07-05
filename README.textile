@@ -4,7 +4,7 @@ Script de instalação de todos os aplicativos e hambiente de desenvolvimento do
 
 h2. Mantenedor
 
-* Gabriel F. Vilar - http://cogumm.net
+* Gabriel F. Vilar - "CoGUMm.net":http://cogumm.net
 
 
 h2. Modo de usar
@@ -12,8 +12,8 @@ h2. Modo de usar
 <pre>git clone git@github.com:cogumm/myUbuntu.git</pre>
 
 <pre>
-    cd myUbuntu
-    sh my-ubuntu.sh
+cd myUbuntu
+sh my-ubuntu.sh
 </pre>
 
 

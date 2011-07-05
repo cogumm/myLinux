@@ -9,7 +9,6 @@
 mainTitle="Meu Ubuntu"
 tmpFile=`tempfile`
 
-# functions
 #---------------------------------------------------------------
 # Atualizando o sistema antes da instalação dos programas
 installServerUpdates()
@@ -49,7 +48,7 @@ installMySQL()
         GRANT ALL PRIVILEGES ON \`${username}\`.* TO '$username'@'localhost' IDENTIFIED BY '$mysql_password'; \
         FLUSH PRIVILEGES;" | mysql -u root -p
         
-     sudo /etc/init.d/mysql restart
+    sudo /etc/init.d/mysql restart
     
     cd /var/
     sudo chmod -R 777 www/
@@ -181,41 +180,9 @@ OpenOfficeLibreOffice()
     cd ~/LibreOffice/LibO_3.3.3rc1_Linux_x86_install-deb_en-US/
     sudo sh update
     
-    return
-}
-
-# Ruby on Rails Veja: "http://urele.com/pBy"
-installRoR()
-{
-    sudo apt-get update
-    sudo apt-get install -y curl libxslt1-dev libxml2-dev
-    
-    #erro aqui!!!!!
-    bash < <(curl -s https://rvm.beginrescueend.com/install/rvm)
-    ####################
-    
-    echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"' >> ~/.bashrc
-    . ~/.bashrc
-    
-    # Dependencias
-    sudo apt-get install -y build-essential bison openssl libreadline5 libreadline-dev zlib1g zlib1g-dev libssl-dev vim libsqlite3-0 libsqlite3-dev sqlite3 libreadline-dev autoconf clang
-    type rvm | head -n1
-    
-    # Instalando o Ruby pelo RVM
-    rvm install 1.9.2
-    rvm --default 1.9.2
-    
-    # Atualizando a gems
-    gem update --system
-    
-    # Instalando o Rails
-    gem install rails -v=3.0.7
-    
-    # Gems MySQL e PostgreSQL
-    sudo apt-get install -y libmysqlclient16-dev
-    gem install mysql2
-    sudo apt-get install libpq-dev 
-    gem install pg -v=0.9.0
+    # Removendo tudo
+    cd ~/
+    sudo rm -rf ~/LibreOffice/
     
     return
 }
@@ -230,6 +197,83 @@ installGedit()
     return
 }
 
+# Ubuntu-Tweak
+installUbuntuTweak()
+{
+    sudo add-apt-repository ppa:tualatrix/ppa
+    sudo apt-get update
+    sudo apt-get install ubuntu-tweak
+    
+    return
+}
+
+# PostgreSQL
+installPG()
+{
+    sudo apt-get install -y postgresql
+    sudo apt-get install -y pgadmin3
+    
+    sudo su postgres -c psql postgres
+    
+    echo ""
+    echo "Type your PG root password:"
+    echo "\
+        ALTER USER postgres WITH PASSWORD 'root'; \
+        \q;"
+        
+    sudo /etc/init.d/postgresql restart
+    
+    return
+}
+
+# VLC
+installVLC()
+{
+    sudo add-apt-repository ppa:ferramroberto/vlc
+    sudo apt-get update
+    sudo apt-get install -y vlc mozilla-plugin-vlc
+    
+    return
+}
+
+# MySQL-Workbench
+installMySQLWorkbench()
+{
+    cd ~/myUbuntu/scr/
+    sudo dpkg -i mysql-workbench-gpl-5.2.33b-1ubu1010-i386.deb
+    
+    return
+}
+
+# TeamViewer
+installTeamViewer()
+{
+    cd ~/myUbuntu/scr/
+    sudo dpkg -i teamviewer_linux.deb
+    
+    return
+}
+
+
+# Eclipse
+installEclipse()
+{
+    cd ~/myUbuntu/scr/
+    tar -zxvf eclipse-php-helios-SR2-linux-gtk.tar.gz 
+    sudo mv eclipse /opt/
+
+    return
+}
+
+
+# Váriados
+installAll()
+{
+    sudo apt-get install -y gimp
+    sudo apt-get install -y guake 
+    sudo apt-get install -y gtranslator
+    sudo apt-get install -y xchat
+}
 
 # Should remove tmp file and clear the screen before exiting
 exitScript()
@@ -272,11 +316,11 @@ installServerClean()
     sudo apt-get autoremove
 }
 
-# First, install dialog
+# Instalando o dialog
 #---------------------------------------------------------------
 sudo apt-get install dialog
 
-# Then show welcome screen
+# Tela de bem vinda
 #---------------------------------------------------------------
 dialog --backtitle "$mainTitle" --title "Bem vindo!" \
        --yesno "Olá, este é um script para a instalação de alguns pacotes para o Ubuntu.\n\nVocê tem certeza que deseja continuar?" \
@@ -286,9 +330,8 @@ input=$?
 exitIfCancelOrESC $input
 clear
 
-# Ask for username
 #---------------------------------------------------------------
-dialog  --backtitle "$mainTitle" --title "Creating user account" \
+dialog  --backtitle "$mainTitle" --title "Conta de usuário" \
         --inputbox "Um usuário será criado para armazenar todos os arquivos de configuração e sua aplicação.\n\nDigite o nome de usuário abaixo." \
         12 50 app_test 2> $tmpFile
 
@@ -297,7 +340,7 @@ exitIfCancelOrESC $input
 username=`cat $tmpFile`
 clear
 
-# Ask for MySQL password
+# MySQL senha
 #---------------------------------------------------------------
 dialog  --backtitle "$mainTitle" --title "Conta de usuário do MySQL" \
         --inputbox "Um usuário será adicionado ao MySQL '$username'. Além disso, um banco de dados chamado '${username}' também será criado.\n\nPor favor, digite uma nova senha. para este usuário MySQL." \
@@ -323,9 +366,15 @@ installGoogleChrome
 installGoogleTalkPlugin
 installjDownload
 OpenOfficeLibreOffice
-installRoR
 installGedit
-
+installUbuntuTweak
+installPG
+installVLC
+installMySQLWorkbench
+installTeamViewer
+installEclipse
+installAll
+installServerClean
 
 dialog  --backtitle "$mainTitle" --title "Instalação completa!" \
         --msgbox "Para testar o Apache+PHP acesse http://$domain/info.php e veja se esta tudo ok." 8 50
