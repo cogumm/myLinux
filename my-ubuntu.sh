@@ -258,7 +258,7 @@ installTeamViewer()
 # Eclipse
 installEclipse()
 {
-    wget 
+    wget http://db.tt/WY1bqxM
     tar -zxvf eclipse-php-helios-SR2-linux-gtk.tar.gz 
     sudo mv eclipse /opt/
 
