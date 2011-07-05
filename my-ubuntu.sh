@@ -269,6 +269,7 @@ installEclipse()
 # Váriados
 installAll()
 {
+    sudo apt-get install -y p7zip p7zip-full p7zip-rar 
     sudo apt-get install -y gimp
     sudo apt-get install -y guake 
     sudo apt-get install -y gtranslator
@@ -375,6 +376,7 @@ installTeamViewer
 installEclipse
 installAll
 installServerClean
+
 
 dialog  --backtitle "$mainTitle" --title "Instalação completa!" \
         --msgbox "Para testar o Apache+PHP acesse http://$domain/info.php e veja se esta tudo ok." 8 50
