@@ -239,7 +239,7 @@ installVLC()
 # MySQL-Workbench
 installMySQLWorkbench()
 {
-    cd ~/myUbuntu/scr/
+    wget http://db.tt/XqWYhnz
     sudo dpkg -i mysql-workbench-gpl-5.2.33b-1ubu1010-i386.deb
     
     return
@@ -248,7 +248,7 @@ installMySQLWorkbench()
 # TeamViewer
 installTeamViewer()
 {
-    cd ~/myUbuntu/scr/
+    wget http://db.tt/w7i1gP7
     sudo dpkg -i teamviewer_linux.deb
     
     return
@@ -258,7 +258,7 @@ installTeamViewer()
 # Eclipse
 installEclipse()
 {
-    cd ~/myUbuntu/scr/
+    wget 
     tar -zxvf eclipse-php-helios-SR2-linux-gtk.tar.gz 
     sudo mv eclipse /opt/
 
