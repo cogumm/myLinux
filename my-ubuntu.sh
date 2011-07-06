@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #---------------------------------------------------------------
 # Desenvolvido por Gabriel F. Vilar
 # E-mail cogumm@gmail.com
@@ -269,6 +271,7 @@ installEclipse()
 # Váriados
 installAll()
 {
+    sudo apt-get install -y gnome-do
     sudo apt-get install -y p7zip p7zip-full p7zip-rar 
     sudo apt-get install -y gimp
     sudo apt-get install -y guake 
@@ -295,23 +298,8 @@ exitIfCancelOrESC()
     esac 
 }
 
-# Some configurations after all process has been completed
-postInstall()
-{
-    cd /tmp/conf
-    cp bash_profile ~/.bash_profile
-    source ~/.bash_profile
-    
-    cp bash_profile /home/$username/.bash_profile
-    sudo chown $username:$username /home/$username/.bash_profile
-    
-    echo "set rebinddelete" > /home/$username/.nanorc
-    sudo chown $username:$username /home/$username/.nanorc
-    
-    return
-}
-
-installServerClean()
+# Removendo o Lixo
+installClean()
 {
     sudo apt-get autoclean
     sudo apt-get autoremove
@@ -375,7 +363,7 @@ installMySQLWorkbench
 installTeamViewer
 installEclipse
 installAll
-installServerClean
+installClean
 
 
 dialog  --backtitle "$mainTitle" --title "Instalação completa!" \
