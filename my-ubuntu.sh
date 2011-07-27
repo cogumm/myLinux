@@ -267,6 +267,15 @@ installEclipse()
     return
 }
 
+# Skype
+installSkype()
+{
+    wget http://download.skype.com/linux/skype-ubuntu_2.2.0.35-1_i386.deb
+    sudo dpkg -i
+
+    return
+}
+
 
 # Váriados
 installAll()
@@ -362,6 +371,7 @@ installVLC
 installMySQLWorkbench
 installTeamViewer
 installEclipse
+installSkype
 installAll
 installClean
 
