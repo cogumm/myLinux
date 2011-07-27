@@ -271,7 +271,7 @@ installEclipse()
 installSkype()
 {
     wget http://download.skype.com/linux/skype-ubuntu_2.2.0.35-1_i386.deb
-    sudo dpkg -i
+    sudo dpkg -i skype-ubuntu_2.2.0.35-1_i386.deb
 
     return
 }
