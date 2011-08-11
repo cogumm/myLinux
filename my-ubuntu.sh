@@ -112,6 +112,15 @@ installDropbox()
 # Google Chrome
 installGoogleChrome()
 {
+    cd ~
+    if [ -e temp ]
+    then
+        echo "Diretório já existe."
+        cd ~/temp/
+    else
+        mkdir temp
+        cd ~/temp/
+    fi
     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
     sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
     
@@ -182,10 +191,6 @@ OpenOfficeLibreOffice()
     cd ~/LibreOffice/LibO_3.3.3rc1_Linux_x86_install-deb_en-US/
     sudo sh update
     
-    # Removendo tudo
-    cd ~/
-    sudo rm -rf ~/LibreOffice/
-    
     return
 }
 
@@ -241,7 +246,16 @@ installVLC()
 # MySQL-Workbench
 installMySQLWorkbench()
 {
-    wget http://db.tt/XqWYhnz
+    cd ~
+    if [ -e temp ]
+    then
+        echo "Diretório já existe."
+        cd ~/temp/
+    else
+        mkdir temp
+        cd ~/temp/
+    fi
+    wget http://dl.dropbox.com/u/1774817/myUbuntu/mysql-workbench-gpl-5.2.33b-1ubu1010-i386.deb
     sudo dpkg -i mysql-workbench-gpl-5.2.33b-1ubu1010-i386.deb
     
     return
@@ -250,7 +264,16 @@ installMySQLWorkbench()
 # TeamViewer
 installTeamViewer()
 {
-    wget http://db.tt/w7i1gP7
+    cd ~
+    if [ -e temp ]
+    then
+        echo "Diretório já existe."
+        cd ~/temp/
+    else
+        mkdir temp
+        cd ~/temp/
+    fi
+    wget http://dl.dropbox.com/u/1774817/myUbuntu/teamviewer_linux.deb
     sudo dpkg -i teamviewer_linux.deb
     
     return
@@ -260,7 +283,16 @@ installTeamViewer()
 # Eclipse
 installEclipse()
 {
-    wget http://db.tt/WY1bqxM
+    cd ~
+    if [ -e temp ]
+    then
+        echo "Diretório já existe."
+        cd ~/temp/
+    else
+        mkdir temp
+        cd ~/temp/
+    fi
+    wget http://dl.dropbox.com/u/1774817/myUbuntu/eclipse-php-helios-SR2-linux-gtk.tar.gz
     tar -zxvf eclipse-php-helios-SR2-linux-gtk.tar.gz 
     sudo mv eclipse /opt/
 
@@ -270,6 +302,15 @@ installEclipse()
 # Skype
 installSkype()
 {
+    cd ~
+    if [ -e temp ]
+    then
+        echo "Diretório já existe."
+        cd ~/temp/
+    else
+        mkdir temp
+        cd ~/temp/
+    fi
     wget http://download.skype.com/linux/skype-ubuntu_2.2.0.35-1_i386.deb
     sudo dpkg -i skype-ubuntu_2.2.0.35-1_i386.deb
 
@@ -287,6 +328,7 @@ installAll()
     sudo apt-get install -y gtranslator
     sudo apt-get install -y xchat
 }
+
 
 # Should remove tmp file and clear the screen before exiting
 exitScript()
@@ -308,10 +350,14 @@ exitIfCancelOrESC()
 }
 
 # Removendo o Lixo
+# Removendo tudo
 installClean()
 {
     sudo apt-get autoclean
     sudo apt-get autoremove
+    cd ~/
+    sudo rm -rf ~/LibreOffice/
+    sudo rm -rf ~/temp/
 }
 
 # Instalando o dialog
