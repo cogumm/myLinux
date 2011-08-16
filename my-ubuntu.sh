@@ -318,17 +318,23 @@ installSkype()
 }
 
 
+# Gestão de arquivo
+installZIP()
+{
+    sudo apt-get install -y unace unrar zip unzip p7zip-full p7zip-rar sharutils rar uudeview mpack lha arj cabextract file-roller
+    
+    return
+}
+
 # Váriados
 installAll()
 {
     sudo apt-get install -y gnome-do
-    sudo apt-get install -y p7zip p7zip-full p7zip-rar 
     sudo apt-get install -y gimp
     sudo apt-get install -y guake 
     sudo apt-get install -y gtranslator
     sudo apt-get install -y xchat
 }
-
 
 # Should remove tmp file and clear the screen before exiting
 exitScript()
@@ -418,6 +424,7 @@ installMySQLWorkbench
 installTeamViewer
 installEclipse
 installSkype
+installZIP
 installAll
 installClean
 
