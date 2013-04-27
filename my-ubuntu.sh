@@ -25,14 +25,14 @@ installServerUpdates()
 # VIM
 installVim()
 {
-    sudo apt-get install vim
+    sudo apt-get install vim -y
     
     return
 }
 # Instalando Apache
 installApache()
 {
-    sudo apt-get install apache2
+    sudo apt-get install apache2 -y
     
     return
 }
@@ -40,7 +40,7 @@ installApache()
 # Instalando MySQL
 installMySQL()
 {
-    sudo apt-get install mysql-server-5.1 
+    sudo apt-get install mysql-server-5.5 
     
     echo ""
     echo "Type your MySQL root password:"
@@ -63,7 +63,7 @@ installMySQL()
 # Instalando PHP5
 installPHP()
 {
-    sudo apt-get install php5 php5-cli php5-curl php5-mysql php5-pgsql php5-sqlite
+    sudo apt-get install php5 php5-cli php5-curl php5-mysql php5-sqlite -y
     
     return
 }
@@ -71,7 +71,7 @@ installPHP()
 # Instalando phpMyAdmin
 installphpMyAdmin()
 {
-    sudo apt-get install phpmyadmin
+    sudo apt-get install phpmyadmin -y
     
     sudo /etc/init.d/apache2 restart
     
@@ -92,7 +92,7 @@ installDocky()
 {
     sudo add-apt-repository ppa:docky-core/ppa 
     sudo apt-get update
-    sudo apt-get docky
+    sudo apt-get install docky -y
     
     return
 }
