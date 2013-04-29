@@ -4,6 +4,10 @@
 # Desenvolvido por Gabriel F. Vilar
 # E-mail cogumm@gmail.com
 # Website www.cogumm.net
+# v. - 
+# LOG:
+#   28-04-13 => CoGUMm - Atualizado alguns pacotes
+# 29-04-13 => CoGUMm -Atualizado alguns pacotes, adicionado a instalação do Ruby, RoR e Sublime2
 #---------------------------------------------------------------
 
 # script variables
@@ -25,14 +29,14 @@ installServerUpdates()
 # VIM
 installVim()
 {
-    sudo apt-get install vim -y
+    sudo apt-get install -y vim
     
     return
 }
 # Instalando Apache
 installApache()
 {
-    sudo apt-get install apache2 -y
+    sudo apt-get install -y apache2
     
     return
 }
@@ -40,7 +44,7 @@ installApache()
 # Instalando MySQL
 installMySQL()
 {
-    sudo apt-get install mysql-server-5.5 
+    sudo apt-get install -y mysql-server-5.5
     
     echo ""
     echo "Type your MySQL root password:"
@@ -63,7 +67,7 @@ installMySQL()
 # Instalando PHP5
 installPHP()
 {
-    sudo apt-get install php5 php5-cli php5-curl php5-mysql php5-sqlite -y
+    sudo apt-get install -y php5 php5-cli php5-curl php5-mysql php5-pgsql php5-sqlite
     
     return
 }
@@ -71,7 +75,7 @@ installPHP()
 # Instalando phpMyAdmin
 installphpMyAdmin()
 {
-    sudo apt-get install phpmyadmin -y
+    sudo apt-get install -y phpmyadmin
     
     sudo /etc/init.d/apache2 restart
     
@@ -81,7 +85,7 @@ installphpMyAdmin()
 # Instalando Git
 installGit()
 {
-    sudo apt-get install git-core git-gui git-doc gitg
+    sudo apt-get install -y git-core git-gui git-doc gitg
     
     return
 }
@@ -92,7 +96,7 @@ installDocky()
 {
     sudo add-apt-repository ppa:docky-core/ppa 
     sudo apt-get update
-    sudo apt-get install docky -y
+    sudo apt-get install -y docky
     
     return
 }
@@ -100,11 +104,17 @@ installDocky()
 # Dropbox
 installDropbox()
 {
-    sudo apt-key adv --keyserver pgp.mit.edu --recv-keys 5044912E
-    sudo sh -c 'echo "deb http://linux.dropbox.com/ubuntu/ natty main" >> /etc/apt/sources.list.d/dropbox.list' 
-    
-    sudo apt-get update 
-    sudo apt-get install nautilus-dropbox
+    cd ~
+    if [ -e temp ]
+    then
+        echo "Diretório já existe."
+        cd ~/temp/
+    else
+        mkdir temp
+        cd ~/temp/
+    fi
+    wget https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_1.6.0_i386.deb
+    sudo dpkg -i dropbox_1.6.0_i386.deb
     
     return
 }
@@ -125,7 +135,7 @@ installGoogleChrome()
     sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
     
     sudo apt-get update 
-    sudo apt-get install google-chrome-stable
+    sudo apt-get install -y google-chrome-stable
 
     return
 }
@@ -136,7 +146,7 @@ installGoogleTalkPlugin()
     sudo sh -c 'echo "deb http://dl.google.com/linux/talkplugin/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 
     sudo apt-get update 
-    sudo apt-get install google-talkplugin
+    sudo apt-get install -y google-talkplugin
     
     return
 }
@@ -146,7 +156,7 @@ installjDownload()
 {
     sudo add-apt-repository ppa:jd-team/jdownloader
     sudo apt-get update
-    sudo apt-get install jdownloader
+    sudo apt-get install -y jdownloader
     
     return
 }
@@ -199,7 +209,7 @@ installGedit()
 {
     sudo apt-add-repository ppa:ubuntu-on-rails/ppa
     sudo apt-get update
-    sudo apt-get install gedit-gmate
+    sudo apt-get install -y gedit-gmate
     
     return
 }
@@ -209,7 +219,7 @@ installUbuntuTweak()
 {
     sudo add-apt-repository ppa:tualatrix/ppa
     sudo apt-get update
-    sudo apt-get install ubuntu-tweak
+    sudo apt-get install -y ubuntu-tweak
     
     return
 }
@@ -273,7 +283,7 @@ installTeamViewer()
         mkdir temp
         cd ~/temp/
     fi
-    wget http://dl.dropbox.com/u/1774817/myUbuntu/teamviewer_linux.deb
+    wget http://www.teamviewer.com/download/teamviewer_linux.deb
     sudo dpkg -i teamviewer_linux.deb
     
     return
@@ -311,7 +321,7 @@ installSkype()
         mkdir temp
         cd ~/temp/
     fi
-    wget http://download.skype.com/linux/skype-ubuntu_2.2.0.35-1_i386.deb
+    wget http://download.skype.com/linux/skype-ubuntu-precise_4.1.0.20-1_i386.deb
     sudo dpkg -i skype-ubuntu_2.2.0.35-1_i386.deb
 
     return
@@ -334,6 +344,37 @@ installAll()
     sudo apt-get install -y guake 
     sudo apt-get install -y gtranslator
     sudo apt-get install -y xchat
+    
+    return
+}
+
+# RVM
+installRuby()
+{
+     curl -L https://get.rvm.io | bash -s stable --rails --autolibs=enabled
+     rvm install 1.9.3
+     rvm use --default 1.9.3
+
+     return
+}
+
+# RoR
+installRoR()
+{
+    gem install rails
+    gem install mysql2
+
+    return
+}
+
+# Sublime Text 2
+installSublime()
+{
+    sudo add-apt-repository ppa:webupd8team/sublime-text-2
+    sudo apt-get update
+    sudo apt-get install sublime-text-2-dev
+
+    return
 }
 
 # Should remove tmp file and clear the screen before exiting
@@ -347,7 +388,7 @@ exitScript()
 exitIfCancelOrESC()
 {
     action=$1
-    
+
     case $action in
         1) exitScript;;
         255) exitScript;;
@@ -415,7 +456,7 @@ installDropbox
 installGoogleChrome
 installGoogleTalkPlugin
 installjDownload
-OpenOfficeLibreOffice
+#OpenOfficeLibreOffice
 installGedit
 installUbuntuTweak
 installPG
@@ -426,7 +467,13 @@ installEclipse
 installSkype
 installZIP
 installAll
+installRuby
+installRoR
+installSublime
 installClean
+
+exitScript
+exitIfCancelOrESC
 
 
 dialog  --backtitle "$mainTitle" --title "Instalação completa!" \
