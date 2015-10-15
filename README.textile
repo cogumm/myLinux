@@ -1,6 +1,6 @@
 h1. Home
 
-Script de instalação de todos os aplicativos e hambiente de desenvolvimento do meu Ubuntu 10.x
+Script de instalação de todos os aplicativos e hambiente de desenvolvimento do meu Ubuntu 14.x
 
 h2. Mantenedor
 
