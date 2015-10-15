@@ -137,7 +137,7 @@ installGoogleChrome()
 
     sudo apt-get update
     sudo apt-get install -y google-chrome-stable
-    
+
     sudo echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list
 
     return
@@ -352,7 +352,7 @@ installAll()
     sudo apt-get install -y gtranslator
     sudo apt-get install -y xchat
     sudo apt-get install -y filezilla
-    
+
     return
 }
 
@@ -388,9 +388,9 @@ installSublime()
 # Telegram
 installTelegram()
 {
-    sudo add-apt-repository ppa:costales/unity-webapps-telegram 
+    sudo add-apt-repository ppa:costales/unity-webapps-telegram
     sudo apt-get install unity-webapps-telegram
-    
+
     return
 }
 
@@ -418,6 +418,25 @@ installPopCorn()
     sudo ./install
 
     return
+}
+
+# Atom
+installAtom
+{
+    cd ~
+    if [ -e temp ]
+    then
+        echo "Diretório já existe."
+        cd ~/temp/
+    else
+        mkdir temp
+        cd ~/temp/
+    fi
+    wget https://github-cloud.s3.amazonaws.com/releases/3228505/873ec70a-6378-11e5-96e0-a5349100d0aa.deb?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIMWPLRQEC4XCWWPA%2F20151015%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20151015T031937Z&X-Amz-Expires=3600&X-Amz-Signature=c4e01c7e6973f8868453388dadb8613cefdb07c0136ca74623f038693f444961&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3Datom-amd64.deb&response-content-type=application%2Foctet-stream
+    sudo dpkg -i atom-amd64.deb
+
+    return
+
 }
 
 # Should remove tmp file and clear the screen before exiting
@@ -517,6 +536,7 @@ installSublime
 installTelegram
 installWine
 installPopCorn
+installAtom
 installClean
 
 exitScript
