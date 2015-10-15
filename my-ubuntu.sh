@@ -4,10 +4,12 @@
 # Desenvolvido por Gabriel F. Vilar
 # E-mail cogumm@gmail.com
 # Website www.cogumm.net
-# v. -
+# NÃO ME RESPONSABILIZO POR MAUS DANOS À MÁQUINA COM ESTE SCRIPT, FAVOR UTILIZÁ-LO SE APENAS TIVER CERTEZA DO QUE ESTEJA FAZENDO.
+# v. 15102015
 # LOG:
-#   28-04-13 => CoGUMm - Atualizado alguns pacotes
-# 29-04-13 => CoGUMm -Atualizado alguns pacotes, adicionado a instalação do Ruby, RoR e Sublime2
+#   28-04-13 => CoGUMm  - Atualizado alguns pacotes
+#   29-04-13 => CoGUMm  - Atualizado alguns pacotes, adicionado a instalação do Ruby, RoR e Sublime2
+#   14-10-15 => CoGUMm  - Atualizado vários pacores, adicionado a instalação Telegram, Wine e Popcorn Time
 #---------------------------------------------------------------
 
 # script variables
@@ -44,7 +46,7 @@ installApache()
 # Instalando MySQL
 installMySQL()
 {
-    sudo apt-get install -y mysql-server-5.5
+    sudo apt-get install -y mysql-server-5.6
 
     echo ""
     echo "Type your MySQL root password:"
@@ -90,7 +92,6 @@ installGit()
     return
 }
 
-# Aplicações pessoais
 # Docky
 installDocky()
 {
@@ -113,8 +114,8 @@ installDropbox()
         mkdir temp
         cd ~/temp/
     fi
-    wget https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_1.6.0_i386.deb
-    sudo dpkg -i dropbox_1.6.0_i386.deb
+    wget -O - "https://www.dropbox.com/download?plat=lnx.x86" | tar xzf -
+    sudo ~/.dropbox-dist/dropboxd
 
     return
 }
@@ -136,6 +137,8 @@ installGoogleChrome()
 
     sudo apt-get update
     sudo apt-get install -y google-chrome-stable
+    
+    sudo echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list
 
     return
 }
@@ -335,7 +338,7 @@ installSkype()
 # Gestão de arquivo
 installZIP()
 {
-    sudo apt-get install -y unace unrar zip unzip p7zip-full p7zip-rar sharutils rar uudeview mpack lha arj cabextract file-roller
+    sudo apt-get install -y unace unrar zip unzip p7zip-full p7zip-rar sharutils rar uudeview mpack arj cabextract file-roller
 
     return
 }
@@ -348,7 +351,8 @@ installAll()
     sudo apt-get install -y guake
     sudo apt-get install -y gtranslator
     sudo apt-get install -y xchat
-
+    sudo apt-get install -y filezilla
+    
     return
 }
 
@@ -381,6 +385,41 @@ installSublime()
     return
 }
 
+# Telegram
+installTelegram()
+{
+    sudo add-apt-repository ppa:costales/unity-webapps-telegram 
+    sudo apt-get install unity-webapps-telegram
+    
+    return
+}
+
+# Wine
+installWine()
+{
+    sudo apt-get install wine winetricks -y
+    sudo apt-get update
+    sudo apt-get install playonlinux
+}
+
+# Popcorn Time
+installPopCorn()
+{
+    cd ~
+    if [ -e temp ]
+    then
+        echo "Diretório já existe."
+        cd ~/temp/
+    else
+        mkdir temp
+        cd ~/temp/
+    fi
+    wget -O - "https://get.popcorntime.io/build/Popcorn-Time-0.3.8-5-Linux-64.tar.xz" | tar xzf -
+    sudo ./install
+
+    return
+}
+
 # Should remove tmp file and clear the screen before exiting
 exitScript()
 {
@@ -404,6 +443,7 @@ exitIfCancelOrESC()
 # Removendo tudo
 installClean()
 {
+    sudo apt-get -f install
     sudo apt-get autoclean
     sudo apt-get autoremove
     cd ~/
@@ -415,7 +455,7 @@ installClean()
 #---------------------------------------------------------------
 sudo apt-get install dialog
 
-# Tela de bem vinda
+# Tela de bem vindo
 #---------------------------------------------------------------
 dialog --backtitle "$mainTitle" --title "Bem vindo!" \
        --yesno "Olá, este é um script para a instalação de alguns pacotes para o Ubuntu.\n\nVocê tem certeza que deseja continuar?" \
@@ -457,23 +497,26 @@ installphpMyAdmin
 installGit
 installDocky
 installDropbox
-installGoogleChrome
+#installGoogleChrome
 installGoogleTalkPlugin
-installjDownload
+#installjDownload
 #OpenOfficeLibreOffice
 installGedit
-installUbuntuTweak
-installPG
+#installUbuntuTweak
+#installPG
 installVLC
-installMySQLWorkbench
-installTeamViewer
-installEclipse
-installSkype
+#installMySQLWorkbench
+#installTeamViewer
+#installEclipse
+#installSkype
 installZIP
 installAll
-installRuby
-installRoR
+#installRuby
+#installRoR
 installSublime
+installTelegram
+installWine
+installPopCorn
 installClean
 
 exitScript
