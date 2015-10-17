@@ -10,6 +10,7 @@
 #   28-04-13 => CoGUMm  - Atualizado alguns pacotes
 #   29-04-13 => CoGUMm  - Atualizado alguns pacotes, adicionado a instalação do Ruby, RoR e Sublime2
 #   14-10-15 => CoGUMm  - Atualizado vários pacores, adicionado a instalação Telegram, Wine e Popcorn Time
+#   16-10-15 => CoGUMm  - Adicionado Spotify
 #---------------------------------------------------------------
 
 # script variables
@@ -400,6 +401,8 @@ installWine()
     sudo apt-get install wine winetricks -y
     sudo apt-get update
     sudo apt-get install playonlinux
+
+    return
 }
 
 # Popcorn Time
@@ -421,7 +424,7 @@ installPopCorn()
 }
 
 # Atom
-installAtom
+installAtom()()
 {
     cd ~
     if [ -e temp ]
@@ -436,7 +439,17 @@ installAtom
     sudo dpkg -i atom-amd64.deb
 
     return
+}
 
+# Spotify
+installSpotify()
+{
+  sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D2C19886
+  echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
+  sudo apt-get update
+  sudo apt-get install -y spotify-client
+
+  return
 }
 
 # Should remove tmp file and clear the screen before exiting
@@ -537,6 +550,7 @@ installTelegram
 installWine
 installPopCorn
 installAtom
+installSpotify
 installClean
 
 exitScript
