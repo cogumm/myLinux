@@ -79,9 +79,9 @@ else
 
 ## Cores e efeitos do usuário comum
 
-PS1="$BR┌─[$BG\u$BR]$BY@$BR[$BW${HOSTNAME%%.*}$BR]$B:\n$BR└──> [ $BW$BB\w$BR ]$BG\$ $NONE"
+PS1="$BR┌─[$BG\u$BR]$BY@$BR[$BW${HOSTNAME%%.*}$BR]$B\n$BR└──> [ $BW$BB\w$BR ]$BG\$ $NONE"
 # Se vê assim:
-#┌─[usuario]@[hostname]:
+#┌─[usuario]@[hostname]
 #└──> [ /diretório/atual ]$ 
 
 fi # Fim da condição if
