@@ -9,15 +9,26 @@ h2. Mantenedor
 
 h2. Modo de usar
 
+h3. To install it, just execute the following command:
+
 <pre>git clone git@github.com:cogumm/myUbuntu.git</pre>
 
 <pre>
 cd myUbuntu
-sh my-ubuntu.sh
+sh my-ubuntu.sh or
+sh dev.sh
+</pre>
+
+<pre>
+cd myUbuntu/home/
+cp .bashrc ~/
+cp .gitconfig ~/
 </pre>
 
 
 h2. License
+
+Copyright (c) 2010
 
 (The MIT License)
 
