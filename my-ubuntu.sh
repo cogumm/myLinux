@@ -222,6 +222,9 @@ installAll()
     sudo apt-get install -y xchat
     sudo apt-get install -y filezilla
 
+    # Pendencias FF HTML5
+    sudo apt-get install -y ubuntu-restricted-extras
+
     return
 }
 
@@ -269,6 +272,24 @@ installSpotify()
   echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
   sudo apt-get update
   sudo apt-get install -y spotify-client
+
+  return
+}
+
+# Anki
+installAnki()
+{
+  cd ~
+  if [ -e temp ]
+  then
+      echo "Diretório já existe."
+      cd ~/temp/
+  else
+      mkdir temp
+      cd ~/temp/
+  fi
+  wget http://ankisrs.net/download/mirror/anki-2.0.33.deb
+  sudo dpkg -i anki-2.0.33.deb
 
   return
 }
@@ -347,6 +368,7 @@ installTelegram
 installWine
 installPopCorn
 installSpotify
+installAnki
 installClean
 
 exitScript
