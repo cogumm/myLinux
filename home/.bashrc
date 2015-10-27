@@ -2,7 +2,7 @@
 # * ~/.bashrc Personalizado para Ubuntu
 # * System: Ubuntu 14.04 – The Trusty Tahr
 # * local: /home/user/.bashrc
-# * 
+# *
 # * Author: Gabriel F. Vilar
 # * E-Mail: cogumm@gmail.com
 # * Date: 2015-10-10
@@ -82,7 +82,7 @@ else
 PS1="$BR┌─[$BG\u$BR]$BY@$BR[$BW${HOSTNAME%%.*}$BR]$B\n$BR└──> [ $BW$BB\w$BR ]$BG\$ $NONE"
 # Se vê assim:
 #┌─[usuario]@[hostname]
-#└──> [ /diretório/atual ]$ 
+#└──> [ /diretório/atual ]$
 
 fi # Fim da condição if
 
@@ -127,13 +127,16 @@ alias lists='sudo vim /etc/apt/sources.list'
 
 # atualizar o apt-get
 alias upd='sudo apt-get update'
-alias ugd='sudo apt-get upgrade'
+alias ugd='sudo apt-get upgrade -y'
 
 # Reparar o apt-get
 alias aptrepair='sudo apt-get -f install'
 
 # Reparar o dpkg
 alias dpkgrepair='sudo dpkg --configure -a'
+
+# Limpar apt-get
+alias auc='sudo apt-get autoclean'
 
 #==============================================
 # Aliases para uso no dia-a-dia e testes
@@ -142,3 +145,6 @@ alias dpkgrepair='sudo dpkg --configure -a'
 # Testar conexão com ping
 alias google='ping -t 3 www.google.com.br' # Ping ao google a cada 3 segundos
 alias uol='ping -t 3 www.uol.com.br' # Ping ao UOL a cada 3 segundos
+
+# GNOME
+alias revise='msgfmt -cvo /dev/null'
