@@ -294,6 +294,14 @@ installAnki()
   return
 }
 
+# Caffeine
+installCaffeine()
+{
+    sudo add-apt-repository ppa:caffeine-developers/ppa
+    sudo apt-get update
+    sudo apt-get install -y caffeine
+}
+
 # Should remove tmp file and clear the screen before exiting
 exitScript()
 {
@@ -369,6 +377,7 @@ installWine
 installPopCorn
 installSpotify
 installAnki
+installCaffeine
 installClean
 
 exitScript
