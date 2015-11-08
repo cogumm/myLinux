@@ -3,6 +3,10 @@
     email = cogumm@gmail.com
     signingkey = Gabriel F. Vilar <cogumm@gmail.com>
 
+[github]
+    user = cogumm
+    token = 85d2ae434b7a2371593ac5e7934fdd0a
+
 [merge]
     #tool = meld
     tool = diffuse
@@ -19,6 +23,9 @@
     suppressBlankEmpty = true
     mnemonicprefix = true
     #noprefix = true
+
+[branch]
+    autosetuprebase = always
 
 [color]
     status = auto
@@ -51,7 +58,6 @@
     commit = yellow bold
     func = green dim
     #plain = white bold
-    
 [alias]
     b = branch
     ca = commit --amend
