@@ -15,7 +15,7 @@ h3. To install it, just execute the following command:
 
 <pre>
 cd myUbuntu
-sh my-ubuntu.sh or
+sh myUbuntu.sh or
 sh dev.sh
 </pre>
 
