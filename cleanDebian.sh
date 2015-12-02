@@ -17,6 +17,11 @@ if [ `id -u` -ne 0 ]; then
 		exit
 fi
 
+testConnection()
+{
+    sh testConnection.sh
+}
+
 cleanDebian()
 {
     echo "Limpando a lixeira"
@@ -55,10 +60,11 @@ cleanDebian()
 echo "Bem vindo ao script para limpar as sugeiras que ficam no sistema Linux."
 read -p "Para continuar escolha s(sim) ou n(não)  " escolha
 	case $escolha in
-		s|S) echo
+		s|S|sim) echo
+		    testConnection
 			cleanDebian
 			;;
-		n|N) echo
+		n|N|não|nao) echo
 			echo Finalizando o script..
 			sleep 1
 			exit
