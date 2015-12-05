@@ -1,5 +1,12 @@
 #!/bin/bash
 
+echo "---------------------------------------------------------------"
+echo "Desenvolvido por Gabriel F. Vilar"
+echo "E-mail: cogumm@gmail.com"
+echo "Website: http://cogumm.net"
+echo "NÃO ME RESPONSABILIZO POR MAUS DANOS À MÁQUINA COM ESTE SCRIPT,\nFAVOR UTILIZÁ-LO SE APENAS TIVER CERTEZA DO QUE ESTEJA FAZENDO."
+echo "---------------------------------------------------------------"
+
 # Verificando e validando se é root
 if [ `id -u` -ne 0 ]; then
 	echo
