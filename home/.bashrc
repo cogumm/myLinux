@@ -78,7 +78,7 @@ PS1="$G┌─[$BR\u$G]$BY@$G[$BW${HOSTNAME%%.*}$G]$B:\w\n$G└──>$BR \\$ $NO
 else
 
 ## Cores e efeitos do usuário comum
-
+figlet CoGUMm
 PS1="$BR┌─[$BG\u$BR]$BY@$BR[$BW${HOSTNAME%%.*}$BR]$B\n$BR└──> [ $BW$BB\w$BR ]$BG\$ $NONE"
 # Se vê assim:
 #┌─[usuario]@[hostname]
@@ -148,3 +148,19 @@ alias uol='ping -t 3 www.uol.com.br' # Ping ao UOL a cada 3 segundos
 
 # GNOME
 alias revise='msgfmt -cvo /dev/null'
+
+# bug traker autocomplete
+#if [ -f ~/.bash_aliases ]; then
+#    . ~/.bash_aliases
+#fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
