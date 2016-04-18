@@ -2,10 +2,10 @@
 ### by CoGUMm
 
 # Personalização
-PROMP_ICON="~"
-PROMPT_AT="@"
+PROMPT_AT=""
 PROMPT_ADM="~>"
 HOURS="{%b %d %a, %H:%M}"
+FIGLET="CoGUMm"
 
 # Colors
 RESET="%{$reset_color%}"
@@ -32,11 +32,11 @@ function _my_git_status() {
 }
 
 function _my_home_folder() {
-  echo "└[$WHITE %$PROMP_ICON $RESET$RED]"
+  echo "└[$WHITE %~ $RESET$RED]"
 }
 
 function _my_custom_prompt() {
-  echo "$RED┌[ $(_my_name)$PROMPT_AT$(_my_hostname) ]$(_my_hours) $(_my_git_status)\n$RED$(_my_home_folder) $RESET"
+  echo "$RED┌[ $(_my_name) $PROMPT_AT $(_my_hostname) ]$(_my_hours) $(_my_git_status)\n$RED$(_my_home_folder) $RESET"
 }
 
 # Configurações do GIT
@@ -73,6 +73,6 @@ ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL=$WHITE
 ###┌[ USUÁRIO@HOSTNAME ][ DATA E HORA ] 
 ###└[ ~ ]
 
-figlet CoGUMm
+figlet $FIGLET
 PROMPT=$'$(_my_custom_prompt)'
 PS2=$' $RED$PROMPT_ADM$RESET '
