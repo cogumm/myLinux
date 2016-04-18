@@ -1,4 +1,5 @@
 ### ZSH Theme cgm.zsh-theme
+### Vercion: 3.18.04.16
 ### by CoGUMm
 
 # Personalização
