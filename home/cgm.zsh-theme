@@ -1,17 +1,78 @@
-# meh. Dark Blood Rewind, a new beginning.
+### ZSH Theme cgm.zsh-theme
+### by CoGUMm
+
+# Personalização
+PROMP_ICON="~"
+PROMPT_AT="@"
+PROMPT_ADM="~>"
+HOURS="{%b %d %a, %H:%M}"
+
+# Colors
+RESET="%{$reset_color%}"
+RED="%{$fg[red]%}"
+WHITE="%{$fg_bold[white]%}"
+BLUE="%{$fg[blue]%}"
+GREEN="%{$fg_bold[green]%}"
+
+# Functions
+function _my_name() {
+  echo "$WHITE%n$RESET$RED"
+}
+
+function _my_hostname() {
+  echo "$WHITE%m$RESET$RED"
+}
+
+function _my_hours() {
+  echo "[$WHITE %D$HOURS%b $RESET$RED%}]"
+}
+
+function _my_git_status() {
+  echo "${return_status}$(git_prompt_info)$(git_prompt_status)%(?,,'$RED'['$WHITE'%?$RESET'$RED'])"
+}
+
+function _my_home_folder() {
+  echo "└[$WHITE %$PROMP_ICON $RESET$RED]"
+}
+
+function _my_custom_prompt() {
+  echo "$RED┌[ $(_my_name)$PROMPT_AT$(_my_hostname) ]$(_my_hours) $(_my_git_status)\n$RED$(_my_home_folder) $RESET"
+}
+
+# Configurações do GIT
+# %{$(git_prompt_info)%}
+ZSH_THEME_GIT_PROMPT_SHA_BEFORE="[$YELLOW"
+ZSH_THEME_GIT_PROMPT_SHA_AFTER="$reset_color]"
+
+ZSH_THEME_GIT_PROMPT_PREFIX="$reset_color("
+ZSH_THEME_GIT_PROMPT_SUFFIX="$reset_color)"
+
+ZSH_THEME_GIT_PROMPT_SEPARATOR="|"
+ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[magenta]%}"
+ZSH_THEME_GIT_PROMPT_STAGED="$RED%{●%G%}"
+ZSH_THEME_GIT_PROMPT_CONFLICTS="$RED%{✖%G%}"
+ZSH_THEME_GIT_PROMPT_CHANGED="$BLUE%{✚%G%}"
+ZSH_THEME_GIT_PROMPT_BEHIND="%{↓%G%}"
+ZSH_THEME_GIT_PROMPT_AHEAD="%{↑%G%}"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{…%G%}"
+ZSH_THEME_GIT_PROMPT_CLEAN="$GREEN%{✔%G%}"
+
+ZSH_THEME_GIT_TIME_SINCE_COMMIT_SHORT=$GREEN
+ZSH_THEME_GIT_TIME_SHORT_COMMIT_MEDIUM=$YELLOW
+ZSH_THEME_GIT_TIME_SINCE_COMMIT_LONG=$RED
+ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL=$WHITE
+
+# Prompt
+# Como irá mostrar
+### _____                          _       
+###| ____|_  _____ _ __ ___  _ __ | | ___  
+###|  _| \ \/ / _ \ '_ ` _ \| '_ \| |/ _ \ 
+###| |___ >  <  __/ | | | | | |_) | | (_) |
+###|_____/_/\_\___|_| |_| |_| .__/|_|\___/ 
+###                                         
+###┌[ USUÁRIO@HOSTNAME ][ DATA E HORA ] 
+###└[ ~ ]
 
 figlet CoGUMm
-PROMPT=$'%{$fg[red]%}┌[ %{$fg_bold[white]%}%n%{$reset_color%}%{$fg[red]%}@%{$fg_bold[white]%}%m%{$reset_color%}%{$fg[red]%} ][%{$fg_bold[white]%} '%D{"%b %d %a, %H:%M"}%b$' %{$reset_color%}%{$fg[red]%}] ${return_status}$(git_prompt_info)$(git_prompt_status)%(?,,%{$fg[red]%}[%{$fg_bold[white]%}%?%{$reset_color%}%{$fg[red]%}])
-%{$fg[red]%}└[%{$fg_bold[white]%}%~%{$reset_color%}%{$fg[red]%}]%{$reset_color%} '
-PS2=$' %{$fg[red]%}|>%{$reset_color%} '
-
-# git settings
-# %{$(git_prompt_info)%}
-ZSH_THEME_GIT_PROMPT_PREFIX="$fg[red][ %{$reset_color%}git:branch:"
-ZSH_THEME_GIT_PROMPT_CLEAN=""
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="$fg[red] ]%{$reset_color%}"
-
-#ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[red]%}[%{$fg_bold[white]%}"
-#ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}%{$fg[red]%}] "
-#ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[red]%}⚡%{$reset_color%}"
+PROMPT=$'$(_my_custom_prompt)'
+PS2=$' $RED$PROMPT_ADM$RESET '
