@@ -4,6 +4,8 @@
 
 # Personalização
 PROMPT_AT=""
+# Lista de caracteres que pode utilizar
+#=> http://www.disner.com.br/lista-caracteres-especiais-html/
 PROMPT_ADM="~>"
 HOURS="{%b %d %a, %H:%M}"
 FIGLET="CoGUMm"
@@ -70,7 +72,7 @@ ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL=$WHITE
 ###|  _| \ \/ / _ \ '_ ` _ \| '_ \| |/ _ \ 
 ###| |___ >  <  __/ | | | | | |_) | | (_) |
 ###|_____/_/\_\___|_| |_| |_| .__/|_|\___/ 
-###                                         
+###                         |_|            
 ###┌[ USUÁRIO@HOSTNAME ][ DATA E HORA ] 
 ###└[ ~ ]
 
