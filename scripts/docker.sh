@@ -39,17 +39,26 @@ checkDocker()
 
 cleanDocker()
 {
-    docker rm -f $(docker ps -qa) && docker rmi $(docker images -f "dangling=true" -q)
+    #docker rm -f $(docker ps -qa) && docker rmi $(docker images -f "dangling=true" -q)
+    if [ $(docker info | grep -c "Storage Driver: btrfs") == ' WARNING: No swap limit support \
+    0' ];
+    then
+        echo "ok"
+    else
+        echo "deu ruim"
+    fi
+    return
 
 }
 
 runmyDocker()
 {
-    echo "Rodando apache-php"
-    docker run -v /home/cogumm/dev/www:/app -d -p 80:80 tutum/apache-php
+    #echo "Rodando apache-php"
+    #docker run -v /home/cogumm/dev/www:/app -d -p 80:80 tutum/apache-php
     echo
     echo "Entrando no container"
-    docker exec -it 145c0ea49a2d bash
+    id = docker ps -a | grep -v "CONTAINER ID"
+    docker exec -it $id bash
 }
 
 echo "Bem vindo ao script de gerenciamento do Docker."
@@ -67,11 +76,11 @@ echo "s) Sair "
 read -p "Para continuar escolha uma das opções  " escolha
 	case $escolha in
 		1) echo
-	        installDocker
+	        #installDocker
 	        sleep 2
 	        ;;
 		2) echo
-	        checkDocker
+	        #checkDocker
 	        sleep 2
 	        ;;
 		3) echo
@@ -79,7 +88,7 @@ read -p "Para continuar escolha uma das opções  " escolha
 	        sleep 2
 	        ;;
 		4) echo
-	        runmyDocker
+	        #runmyDocker
 	        sleep 2
 	        ;;
 		s|S) echo
