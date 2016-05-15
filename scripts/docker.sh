@@ -40,8 +40,7 @@ checkDocker()
 cleanDocker()
 {
     #docker rm -f $(docker ps -qa) && docker rmi $(docker images -f "dangling=true" -q)
-    if [ $(docker info | grep -c "Storage Driver: btrfs") == ' WARNING: No swap limit support \
-    0' ];
+    if [ docker info 2>/dev/null | sed '/btrfs/!d' | grep -c "btrfs" ];
     then
         echo "ok"
     else
