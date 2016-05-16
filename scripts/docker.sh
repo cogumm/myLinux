@@ -39,12 +39,12 @@ checkDocker()
 
 cleanDocker()
 {
-    #docker rm -f $(docker ps -qa) && docker rmi $(docker images -f "dangling=true" -q)
-    if [ $(docker info 2>/dev/null | sed '/btrfs/!d' | grep -c "btrfs" ) = 0 ];
+    if [ $(docker info 2>/dev/null | sed '/btrfs/!d' | grep -c "btrfs") = 1 ];
     then
-        echo "ok"
+        docker rm -f $(docker ps -qa) && docker rmi $(docker images -q)
+        for i in "/var/lib/docker/btrfs/subvolumes/*"; do btrfs subvolume delete $i; done;
     else
-        echo "deu ruim"
+        docker rm -f $(docker ps -qa) && docker rmi $(docker images -f "dangling=true" -q)
     fi
     return
 
