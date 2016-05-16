@@ -21,7 +21,8 @@ installDocker()
 {
     if [ which -a docker ]
     then
-        echo "Docker já instalado"
+        echo "Docker já esta instalado!"
+        echo "Saindo.."
     else
         echo "Instalando e configurando o Docker, aguarde.."
         curl -sSl https://get.docker.com | sh
@@ -53,14 +54,15 @@ cleanDocker()
 runmyDocker()
 {
     echo "Rodando apache-php"
-    docker run -v /home/cogumm/dev/www:/app -d -p 80:80 tutum/apache-php
+    docker run -v /home/cogumm/dev/www:/app -d -p 80:80 tutum/apache-php /bin/bash
 }
     
 execDocker()
 {
     echo "Executando o container"
-    id = docker ps -a | grep -v "CONTAINER ID" | awk '{print $1}'
-    docker exec -it id bash
+    #cid = docker ps -a | grep -v "CONTAINER ID" | awk '{print $1}'
+    #docker exec -it ${cid} bash
+    docker run -ti tutum/apache-php /bin/bash 
 }
 
 echo "Bem vindo ao script de gerenciamento do Docker."
@@ -73,14 +75,14 @@ echo "3) Limpar Docker "
 echo
 echo "4) Rodar container "
 echo
-echo "5) Executar o container "
+echo "5) Executar o container (NÃO FUNCIONA)"
 echo
 echo "s) Sair "
 
 read -p "Para continuar escolha uma das opções  " escolha
 	case $escolha in
 		1) echo
-	        #installDocker
+	        installDocker
 	        sleep 2
 	        ;;
 		2) echo
