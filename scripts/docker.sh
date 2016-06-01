@@ -6,7 +6,8 @@ echo "E-mail: cogumm@gmail.com"
 echo "Website: http://cogumm.net"
 echo "NÃO ME RESPONSABILIZO POR MAUS DANOS À MÁQUINA COM ESTE SCRIPT,\nFAVOR UTILIZÁ-LO SE APENAS TIVER CERTEZA DO QUE ESTEJA FAZENDO."
 echo "---------------------------------------------------------------"
-
+  
+ 
 # Verificando e validando se é root
 if [ `id -u` -ne 0 ]; then
 	echo
@@ -16,6 +17,14 @@ if [ `id -u` -ne 0 ]; then
 		exit
 fi
 
+#Verificação da instalação do curl
+if [ which -a curl ]; then
+   echo 'Curl instalado!'
+else
+    echo 'curl não encontrado'
+    echo 'instalando...'
+    apt-get install curl
+fi    
 
 installDocker()
 {
