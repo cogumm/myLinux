@@ -1,6 +1,6 @@
 h1. Home
 
-Script de instalação de todos os aplicativos e hambiente de desenvolvimento do meu Ubuntu 14.x
+Script de instalação de todos os aplicativos e ambiente de desenvolvimento do meu Linux.
 
 h2. Mantenedor
 
@@ -11,7 +11,7 @@ h2. Modo de usar
 
 h3. To install it, just execute the following command:
 
-<pre>git clone git@github.com:cogumm/myUbuntu.git</pre>
+<pre>git clone git@github.com:cogumm/myLinux.git</pre>
 
 <pre>
 cd myUbuntu
@@ -19,8 +19,8 @@ sh myUbuntu.sh
 </pre>
 
 <pre>
-cp myUbuntu/home/.bashrc ~/
-cp myUbuntu/home/.gitconfig ~/
+cp myLinux/home/.bashrc ~/
+cp myLinux/home/.gitconfig ~/
 </pre>
 
 
