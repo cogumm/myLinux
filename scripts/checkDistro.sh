@@ -7,6 +7,15 @@ echo "Website: http://cogumm.net"
 echo "NÃO ME RESPONSABILIZO POR MAUS DANOS À MÁQUINA COM ESTE SCRIPT,\nFAVOR UTILIZÁ-LO SE APENAS TIVER CERTEZA DO QUE ESTEJA FAZENDO."
 echo "---------------------------------------------------------------"
 
+# Verificando e validando se é root
+if [ `id -u` -ne 0 ]; then
+	echo
+		echo "Você precisa ter poderes administrativos (root)"
+		echo "O script está sendo finalizado.."
+		sleep 4
+		exit
+fi
+
 checkDistro()
 {
 verificadistro=$(cat /etc/*-release | grep "DISTRIB_ID")

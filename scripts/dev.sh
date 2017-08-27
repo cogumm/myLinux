@@ -9,6 +9,15 @@ echo "LOG:"
 echo "      19-10-15 => CoGUMm  - Programas de para desenvolvimento"
 echo "---------------------------------------------------------------"
 
+# Verificando e validando se é root
+if [ `id -u` -ne 0 ]; then
+	echo
+		echo "Você precisa ter poderes administrativos (root)"
+		echo "O script está sendo finalizado.."
+		sleep 4
+		exit
+fi
+
 # script variables
 #---------------------------------------------------------------
 mainTitle="Meu Ubuntu"

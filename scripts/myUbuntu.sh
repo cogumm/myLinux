@@ -13,6 +13,15 @@ echo "  16-10-15 => CoGUMm  - Adicionado Spotify"
 echo "  19-10-15 => CoGUMm  - Criado um novo arquivo só para programas de desenvolvimento."
 echo "---------------------------------------------------------------"
 
+# Verificando e validando se é root
+if [ `id -u` -ne 0 ]; then
+	echo
+		echo "Você precisa ter poderes administrativos (root)"
+		echo "O script está sendo finalizado.."
+		sleep 4
+		exit
+fi
+
 # script variables
 #---------------------------------------------------------------
 mainTitle="Meu Ubuntu"
