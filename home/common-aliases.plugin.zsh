@@ -46,7 +46,7 @@ alias unexport='unset'
 
 alias whereami=display_info
 
-alias rm='rm -rfi'
+alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 
@@ -88,6 +88,9 @@ fi
 # Make zsh know about hosts already accessed by SSH
 zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
 
-# Alias personalizados
+# Alias perssonales
+alias cbtc="cat ~XXX"
 alias up="(uptime -p | sed 's/hours/horas/' | sed 's/minutes/minutos/'| sed 's/hour/Hora/' | sed 's/minute/minuto/' | sed 's/day/dia/' | sed 's/up//')"
 alias revise="msgfmt -cvo /dev/null $i"
+alias updt="sudo apt-get update && sudo apt-get upgrade -y"
+alias insignia="./dev/Steam/ASF-linux-x64/ArchiSteamFarm"
