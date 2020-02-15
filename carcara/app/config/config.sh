@@ -2,6 +2,7 @@
 clear
 #---------------------------------------------------------------------------#
 # Data: 06 de Setembro de 2017
+# Última alteração: 15 de Fevereiro de 2020
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
 # Telegram: http://t.me/CoGUMm
@@ -17,7 +18,8 @@ dirSys=app/scripts/system
 license=app/config/license
 
 # Menu
-menuApp=app/config/menu.sh
+menuApp=app/config/menuGeral.sh
+menuSof=app/scripts/software/menuSof.sh
 
 # Configurações da janela do Yad
 # Janela sem botões
