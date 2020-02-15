@@ -1,5 +1,6 @@
 #!/bin/bash
 . app/config/config.sh
+. app/config/dependences.sh
 #-----------------------------------------------------------#
 # Data: 05 de Setembro de 2017
 # Nome: Gabriel F. Vilar (CoGUMm)
@@ -8,16 +9,16 @@
 # Script: startApp
 # Descrição: Script de inicialização da aplicação.
 # Variáveis: $license	 : Carrega a licensa da aplicação.
-#			 $configYad	 : Carrega as configurações do Yad (sem botões).
+#            $configYad	 : Carrega as configurações do Yad (sem botões).
 #            $menuApp       : Carrega o menu da aplicação.
 #-----------------------------------------------------------#
 
 # Carrega a primeira tela que é a licença de uso da aplicação.
-# zenity --width=600 --height=500 \
-# 	   --text-info \
-#        --title="Licença de uso" \
-#        --filename=$license \
-#        --checkbox="Continuar"
+#  zenity --width=600 --height=500 \
+#         --text-info \
+#         --title="Licença de uso" \
+#         --filename=$license \
+#         --checkbox="Continuar"
 
 case $? in
     0)
