@@ -20,7 +20,7 @@
 
 <p align="center">
   <a href="#information_source-what-is-the-project-">What is the project ?</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#use">Use</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#coffee-who-to-use">Who to use</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-how-to-contribute">How to contribute</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#memo-license">License</a>
 </p>
@@ -31,7 +31,7 @@
 
 This project as a installation script for some development applications and settings for my 🐧 Linux environment.
 
-### Use
+### :coffee: Who to use
 
 Only perform the following steps:
 
@@ -57,13 +57,13 @@ $ git clone https://github.com/cogumm/myLinux.git
 $ cd 'myLinux'
 
 # Running the program.
-$ bash myLinux.sh
+$ bash init.sh
 ```
 
 Or
 
 ```
-$ sudo curl -L https://raw.githubusercontent.com/cogumm/myLinux/master/myLinux.sh | bash
+$ sudo curl -L https://raw.githubusercontent.com/cogumm/myLinux/master/init.sh | bash
 ```
 
 ## 🤔 How to contribute

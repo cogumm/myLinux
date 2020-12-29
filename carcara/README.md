@@ -1,6 +1,6 @@
-<div style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+<div align="center">
     <img alt="#Delicinha" title="Project Carcará" src="./app/assets/img/logo.png" width="120px" />
-    <h1 align="center">Project Carcará</h1>
+    <h1>Project Carcará</h1>
 </div>
 
 ---
@@ -9,7 +9,7 @@
 
 This project as a installation script for some development applications and settings for my 🐧 Linux environment.
 
-### Use
+## :coffee: Who to use
 
 Only perform the following steps:
 
@@ -23,4 +23,47 @@ $ cd 'myLinux/carcara/'
 
 # Running the program.
 $ sudo bash startApp.sh
+```
+
+## Project structure
+
+This project has the following structure:
+
+```
+.
+├── app
+│   ├── assets
+│   │   └── img
+│   │       ├── logo.png
+│   │       └── wat-dog.jpg
+│   ├── config
+│   │   ├── config.sh
+│   │   ├── dependences.sh
+│   │   ├── license
+│   │   ├── menuGeral.sh
+│   │   └── testConnection.sh
+│   └── scripts
+│       ├── software
+│       │   ├── development
+│       │   │   ├── firacode.sh
+│       │   │   ├── git.sh
+│       │   │   ├── insomnia.sh
+│       │   │   └── vscode.sh
+│       │   ├── menuSof.sh
+│       │   ├── productivity
+│       │   │   └── dropbox.sh
+│       │   ├── social
+│       │   │   ├── discord.sh
+│       │   │   ├── _menu.sh
+│       │   │   ├── spotify.sh
+│       │   │   └── telegram.sh
+│       │   └── utilities
+│       │       ├── _menu.sh
+│       │       └── vlc.sh
+│       └── system
+│           ├── cleanDistro.sh
+│           ├── fixSystem.sh
+│           └── updateDistro.sh
+├── README.md
+└── startApp.sh
 ```
