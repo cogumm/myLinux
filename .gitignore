@@ -1,7 +1,4 @@
 #Vamos ignorar algumas coisas!
 
-# cGmIcons
-cGmIcons/
-
 # Scripts de testes
 carcara/teste/*
