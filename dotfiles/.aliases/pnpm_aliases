@@ -1,0 +1,14 @@
+# Npm alias
+alias pnp='pnpm'
+
+# Npm install
+alias pnpi='pnpm install'
+alias pnpis='pnpm install --save'
+alias pnpig='pnpm install -g'
+
+# Npm update
+alias pnpu='pnpm update'
+alias pnpug='pnpm update -g'
+
+# Npm search
+alias pnps='pnpm search'
