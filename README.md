@@ -79,7 +79,8 @@ After merging your receipt request to done, you can delete a branch from yours. 
 
 This project is under MIT license (Copyright (c) 2010 CoGUMm), for more details check [LICENSE][license]!
 
-Made with ♥ by Gabriel F. Vilar :wave: [Telegram][telegram]
+Made with ♥ by Gabriel F. Vilar :wave: [Ko-fi][kofi]
 
 [license]: https://cogumm.mit-license.org/
 [telegram]: https://t.me/CoGUMm
+[kofi]: https://ko-fi.com/cogumm
