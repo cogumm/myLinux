@@ -1,6 +1,7 @@
 #!/bin/bash
 #-----------------------------------------------------------#
-# Data: 19 de Agosto de 2025
+# Data criação: 19 de Agosto de 2025
+# Última alteração: 16 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
 # Telegram: http://t.me/CoGUMm

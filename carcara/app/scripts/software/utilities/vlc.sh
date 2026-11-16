@@ -1,7 +1,9 @@
 #!/bin/bash
 clear
+. app/config/config.sh
 #----------------------------------------------------------------------------------------------------#
-# Data: 15 de Fevereiro de 2020
+# Data criação: 15 de Fevereiro de 2020
+# Última alteração: 16 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
 # Telegram: http://t.me/CoGUMm

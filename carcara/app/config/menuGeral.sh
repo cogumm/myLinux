@@ -1,7 +1,7 @@
 #!/bin/bash
 . app/config/config.sh
 #----------------------------------------------------------------------------------------------------#
-# Data: 05 de Setembro de 2017
+# Data criação: 05 de Setembro de 2017
 # Última alteração: 15 de Fevereiro de 2020
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net

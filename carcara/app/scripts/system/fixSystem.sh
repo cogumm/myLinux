@@ -2,7 +2,8 @@
 clear
 . app/config/config.sh
 #-------------------------------------------------------------------------------#
-# Data: 20 de Setembro de 2017
+# Data criação: 20 de Setembro de 2017
+# Última alteração: 16 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
 # Telegram: http://t.me/CoGUMm

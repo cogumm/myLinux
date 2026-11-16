@@ -18,10 +18,10 @@ Software menu: “Desenvolvimento” / “Produção” / “Social” / “Util
 
 ## Bootstrap (Wave 1 Step 1 — done)
 
-- `dependences.sh`: detects `yad` / `zenity` / `curl` via `command -v`; installs with `apt-get`; ensures `snapd` and optional `flatpak`.
+- `dependences.sh`: installs `yad` / `zenity` / `curl` **first** (echo-only until Yad exists), then runs `testConnection`; ensures `snapd` and optional `flatpak`.
 - `startApp.sh`: Zenity license gate restored (`--checkbox=Continuar`) then `bash "$menuApp"`.
 - All installers source `. app/config/config.sh` (cwd must be `carcara/`).
-- `testConnection.sh` is **sourced** from `dependences.sh` so `$configYad` is inherited.
+- `testConnection.sh` is sourced for the function only; auto-run only when executed as a script (avoids Yad-before-install).
 
 ## Fix priorities (remaining)
 
