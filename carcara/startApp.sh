@@ -1,5 +1,6 @@
 #!/bin/bash
 . app/config/config.sh
+# shellcheck source=app/config/dependences.sh
 . app/config/dependences.sh
 #-----------------------------------------------------------#
 # Data criação: 05 de Setembro de 2017
@@ -14,6 +15,11 @@
 #            $menuApp   : Menu principal (menuGeral.sh)
 #-----------------------------------------------------------#
 
+if ! dependences; then
+	echo "Falha nas dependências do Carcará. Abortando."
+	exit 1
+fi
+
 # Licença de uso — checkbox "Continuar" obrigatório para abrir o menu.
 if zenity --width=600 --height=500 \
 	--text-info \
@@ -22,6 +28,7 @@ if zenity --width=600 --height=500 \
 	--checkbox="Continuar"; then
 	bash "$menuApp"
 else
+	# shellcheck disable=SC2086
 	yad --text "Saindo do programa" $configYad
 fi
 # Fim
