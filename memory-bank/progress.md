@@ -18,3 +18,4 @@ Append-only log. Do not delete completed history.
 - [x] Saved Carcará modernization plan to `.agents/idea/carcara-modern-install.md` (not implemented yet)
 - [x] Wave 1 Step 1: fixed `dependences.sh`, restored `startApp.sh` license gate, unified `. app/config/config.sh` sourcing (+ `vlc.sh`)
 - [x] Captured Carcará 2.0 vision (Electron UI) in `.agents/idea/carcara-2.0-electron.md` — not started; 1.x Bash track continues
+- [x] Refocused 1.x plan: engine/backends first; Yad polish and Wave 3 UI marked low-priority/skip toward Electron 2.0

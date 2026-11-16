@@ -47,7 +47,7 @@ flowchart LR
   backends --> snapChan[Snap]
 ```
 
-- Finish / stabilize 1.x waves in [carcara-modern-install.md](carcara-modern-install.md) so backends exist.
+- 1.x plan is **engine-first**: [carcara-modern-install.md](carcara-modern-install.md) prioritizes `install_backends.sh` + system scripts; Yad polish is explicitly deprioritized.
 - 2.0 consumes those backends; do not fork install logic into the renderer.
 - Do not delete 1.x when 2.0 ships — keep as CLI/fallback entry (`startApp.sh`).
 
