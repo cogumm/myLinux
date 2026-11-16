@@ -1,0 +1,22 @@
+---
+description: Git commit, tag, and push policy for myLinux
+---
+
+# Git — commit and push
+
+Never **commit** or **push** unless I explicitly ask.
+
+- Do not run `git commit` unless the commit request is in **this** message.
+- Do not run `git push` unless the push request is in **this** message.
+- Asking for a commit does **not** authorize a push. They are two separate requests.
+- Updating the README, memory-bank, or “making the repo ready” does **not** authorize a commit.
+
+## Tags
+
+Create local tags only if I ask (e.g. `vX.Y.Z` for a Carcará modernization). A tag does **not** authorize commit or push.
+
+Do not use `--no-verify`, force push, amend someone else’s commit, or change `git config`.
+
+## Dotfiles git
+
+`dotfiles/git/.gitconfig` is a **template/personal snapshot**. Never commit real GitHub tokens or signing secrets. Prefer placeholders.

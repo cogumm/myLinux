@@ -1,0 +1,34 @@
+# TODO — myLinux inbox
+
+Last updated: 2026-11-16
+
+Unscheduled ideas (promote into active work deliberately):
+
+## Carcará / scripts
+
+- [ ] Repair `carcara/app/config/dependences.sh` detection logic
+- [ ] Wire `menuSof.sh` Desenvolvimento → `development/*.sh`
+- [ ] Wire Produção → `productivity/dropbox.sh` (or drop stub)
+- [ ] Unify all `. app/config/config.sh` includes
+- [ ] README: replace missing `init.sh` story with Carcará instructions (keep curl install only if wrapper exists)
+- [ ] `bash -n` / ShellCheck pass on `carcara/**/*.sh` (use installed skill `shellcheck-configuration`)
+- [ ] Dotfiles apply helper with `*.bak` backups
+- [ ] Replace dead patterns from `old/` only when needed (docker helper refresh?)
+- [ ] Consider non-root mode for dry-run / help
+- [ ] i18n optional (en) for menus — low priority
+
+## Future agent skills (skills.sh) — install when modernizing that area
+
+Incremental modernization; do **not** install everything at once. Playbook stays canonical: `.agents/playbook/`.
+
+| Priority | Skill | Install | When it helps |
+|----------|--------|---------|----------------|
+| Done | `shellcheck-configuration` (`wshobson/agents`) | installed → `.agents/skills/shellcheck-configuration` | Lint/harden Carcará Bash during script rewrites |
+| Next | `bash-scripting` (`sickn33/agentic-awesome-skills`) | `npx skills add sickn33/agentic-awesome-skills@bash-scripting` | Defensive scripting patterns when rewriting installers / menus |
+| Later | `debian-linux-triage` (`github/awesome-copilot`) | `npx skills add github/awesome-copilot@debian-linux-triage` | Safer apt/dpkg/systemd flows in `updateDistro` / `fixSystem` / `cleanDistro` |
+
+Links:
+
+- https://skills.sh/wshobson/agents/shellcheck-configuration
+- https://skills.sh/sickn33/agentic-awesome-skills/bash-scripting
+- https://skills.sh/github/awesome-copilot/debian-linux-triage
