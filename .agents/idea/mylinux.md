@@ -32,3 +32,7 @@ Web application, payments, multi-user SaaS, equal support for every distro.
 - Correct, idempotent dependency detection.
 - Packages and PPAs brought up to date (no PHP5 / MySQL 5.6 / dead links).
 - Dotfiles installable without overwriting `$HOME` without confirmation.
+
+## Related ideas (not implemented until requested)
+
+- **[Carcará modern install](carcara-modern-install.md)** — apt keyrings + Flatpak/Flathub + Snap fallback, waved foundation → app rewrites.

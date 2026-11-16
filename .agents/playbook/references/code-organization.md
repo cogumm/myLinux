@@ -14,3 +14,4 @@ cleanup-zone-identifiers.sh
 - One installer script per app.
 - Category menus: `_menu.sh` or `menuSof.sh`.
 - Always `. app/config/config.sh` from scripts running with cwd `carcara/` (document if a script needs another cwd).
+- **Header banner required** on every Carcará `.sh` (Data / Nome / Script / Descrição / Variáveis) — same pattern as `system/cleanDistro.sh` and `system/updateDistro.sh`. Full convention: `.agents/idea/carcara-modern-install.md` → “Script header convention”.

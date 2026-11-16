@@ -4,6 +4,10 @@ Last updated: 2026-11-16
 
 Unscheduled ideas (promote into active work deliberately):
 
+## Planned ideas (do not start until explicitly requested)
+
+- [ ] Execute [`.agents/idea/carcara-modern-install.md`](../.agents/idea/carcara-modern-install.md) — Wave 1 foundation first (backends, deps, menus, system scripts)
+
 ## Carcará / scripts
 
 - [ ] Repair `carcara/app/config/dependences.sh` detection logic

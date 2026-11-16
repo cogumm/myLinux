@@ -15,3 +15,4 @@ Append-only log. Do not delete completed history.
 - [x] Documented future skills (`bash-scripting`, `debian-linux-triage`) in `TODO.md` for gradual modernization
 - [x] Mirrored `.cursor/rules/*.mdc` → `.claude/rules/*.md` for Claude Code
 - [x] Updated root `README.md` (Carcará entry, layout, docs links; removed missing `init.sh` / curl install)
+- [x] Saved Carcará modernization plan to `.agents/idea/carcara-modern-install.md` (not implemented yet)
