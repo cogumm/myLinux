@@ -6,14 +6,15 @@ Unscheduled ideas (promote into active work deliberately):
 
 ## Planned ideas (do not start until explicitly requested)
 
-- [ ] Execute [`.agents/idea/carcara-modern-install.md`](../.agents/idea/carcara-modern-install.md) — Wave 1 foundation first (backends, deps, menus, system scripts)
+- [ ] Continue [`.agents/idea/carcara-modern-install.md`](../.agents/idea/carcara-modern-install.md) — Wave 1 Step 2+ (backends, system scripts, menus)
 
 ## Carcará / scripts
 
-- [ ] Repair `carcara/app/config/dependences.sh` detection logic
+- [x] Repair `carcara/app/config/dependences.sh` detection logic (Wave 1 Step 1)
+- [x] Unify all `. app/config/config.sh` includes (Wave 1 Step 1)
+- [x] Restore `startApp.sh` Zenity license gate (Wave 1 Step 1)
 - [ ] Wire `menuSof.sh` Desenvolvimento → `development/*.sh`
 - [ ] Wire Produção → `productivity/dropbox.sh` (or drop stub)
-- [ ] Unify all `. app/config/config.sh` includes
 - [x] README: document Carcará as real entry (no fake `init.sh` / curl pipe)
 - [ ] Optional: thin root `init.sh` wrapper that delegates to `carcara/startApp.sh` (only if wanted)
 - [ ] `bash -n` / ShellCheck pass on `carcara/**/*.sh` (use installed skill `shellcheck-configuration`)

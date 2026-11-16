@@ -16,3 +16,4 @@ Append-only log. Do not delete completed history.
 - [x] Mirrored `.cursor/rules/*.mdc` → `.claude/rules/*.md` for Claude Code
 - [x] Updated root `README.md` (Carcará entry, layout, docs links; removed missing `init.sh` / curl install)
 - [x] Saved Carcará modernization plan to `.agents/idea/carcara-modern-install.md` (not implemented yet)
+- [x] Wave 1 Step 1: fixed `dependences.sh`, restored `startApp.sh` license gate, unified `. app/config/config.sh` sourcing (+ `vlc.sh`)

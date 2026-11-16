@@ -16,9 +16,16 @@ Software menu: “Desenvolvimento” / “Produção” / “Social” / “Util
 - productivity: `dropbox.sh`
 - system: `updateDistro.sh`, `cleanDistro.sh`, `fixSystem.sh`, `sync_time.sh`
 
-## Fix priorities
+## Bootstrap (Wave 1 Step 1 — done)
 
-1. Wire the development menu to existing scripts.
-2. Repair `dependences.sh` detection.
-3. Unify the `config.sh` sourcing path.
-4. Replace interactive `read` inside Yad flows with consistent TUI confirms where possible.
+- `dependences.sh`: detects `yad` / `zenity` / `curl` via `command -v`; installs with `apt-get`; ensures `snapd` and optional `flatpak`.
+- `startApp.sh`: Zenity license gate restored (`--checkbox=Continuar`) then `bash "$menuApp"`.
+- All installers source `. app/config/config.sh` (cwd must be `carcara/`).
+- `testConnection.sh` is **sourced** from `dependences.sh` so `$configYad` is inherited.
+
+## Fix priorities (remaining)
+
+1. Wave 1 Step 2 — `install_backends.sh`.
+2. Wire the development / productivity menus.
+3. Replace interactive `read` inside Yad flows with consistent TUI confirms where possible.
+4. Wave 2 — rewrite app installers onto Flatpak/apt keyrings.

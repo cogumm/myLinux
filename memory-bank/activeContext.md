@@ -4,24 +4,23 @@ Last updated: 2026-11-16
 
 ## Current focus
 
-Agent scaffolding (AGENTS, memory-bank, `.cursor`, docs, design-system) describes the **myLinux** Linux toolkit. Code under `carcara/`, `dotfiles/`, `old/` is the source of truth.
+Carcará modernization per `.agents/idea/carcara-modern-install.md`. **Wave 1 Step 1 done** (bootstrap). Next: Wave 1 Step 2 (`install_backends.sh`).
 
 ## Recent decisions
 
 - Product is Bash/Zenity/Yad + dotfiles.
 - Agent-agnostic docs: `.agents/idea/`, `.agents/playbook/`.
 - Cursor adapter: `.cursor/rules/`; Claude adapter: `.claude/rules/` (mirrored policies).
-- Design system: `design-system/carcara/` (TUI).
-- `old/` remains archive; modernization happens in `carcara/`.
-- Installed optional skill: `shellcheck-configuration` (skills.sh / `wshobson/agents`). Future skills listed in `TODO.md` for gradual modernization.
+- Install backend policy: apt keyrings → Flatpak/Flathub → Snap fallback.
+- Script header banner required on all Carcará `.sh` files.
+- Installed optional skill: `shellcheck-configuration`.
 
 ## Next useful engineering work
 
-1. Fix `dependences.sh` and wire Development menu to existing installers.
-2. Idempotent refresh of vscode/git/firacode/social installers.
-3. Safe dotfiles apply script with backups.
-4. Run ShellCheck on `carcara/**/*.sh` using the installed skill when touching scripts.
-5. Optional: root `init.sh` wrapper → Carcará (only if wanted).
+1. Wave 1 Step 2 — `carcara/app/config/install_backends.sh`.
+2. Wave 1 Steps 3–4 — system scripts + menu wiring.
+3. Wave 1 Step 5 — ShellCheck pass on touched tree.
+4. Wave 2 — rewrite app installers by category.
 
 ## Blockers
 

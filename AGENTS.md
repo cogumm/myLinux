@@ -57,11 +57,11 @@ Act as a **Linux systems analysis & development** specialist:
 
 ## Known debt (do not paper over)
 
-- `dependences.sh` condition is broken (`dpkg | grep -c` piped incorrectly; `which -a dependencias`)
 - Several Carcará menus still say “Ainda em desenvolvimento”
-- Dev installers source `. app/config.sh` in some scripts vs `. app/config/config.sh` elsewhere
+- App installers still Snap-era / brittle `which -a` (Wave 2)
 - Legacy `old/scripts/*.sh` install obsolete stacks and unsafe defaults (`chmod 777 www`, hardcoded passwords)
-- (README entrypoint aligned with Carcará; optional future `init.sh` wrapper still open in `TODO.md` if desired)
+- Optional future `init.sh` wrapper still open in `TODO.md` if desired
+- Wave 1 Step 1 done: deps detection, license gate, unified `config.sh` sourcing
 
 ## Project guidance
 

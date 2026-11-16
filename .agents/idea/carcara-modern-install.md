@@ -21,8 +21,8 @@ Canonical examples: `carcara/app/scripts/system/cleanDistro.sh`, `carcara/app/sc
 
 ```bash
 #----------------------------------------------------------------------------------------------------#
-# Data: <original or creation date>
-# Última alteração: <YYYY-MM-DD>   # optional; update when rewriting
+# Data criação: <original or creation date>
+# Última alteração: <DD/MM/AAAA por extenso>   # optional; update when rewriting
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
 # Telegram: http://t.me/CoGUMm
@@ -32,12 +32,15 @@ Canonical examples: `carcara/app/scripts/system/cleanDistro.sh`, `carcara/app/sc
 #----------------------------------------------------------------------------------------------------#
 ```
 
+Example for `Última alteração` (DD/MM/AAAA por extenso): `16 de Novembro de 2026` (= 16/11/2026).
+
 Rules:
 
 - Place the banner near the top (after shebang / `clear` / config source is OK, matching existing style).
 - Keep author identity as above unless the owner changes it.
 - List important variables (`$configYad`, `$SUDO_USER`, paths, etc.) in `Variáveis`.
-- On modernization edits, set or refresh `Última alteração` with today’s date (`date '+%Y-%m-%d'`).
+- Use Portuguese long-form dates (not ISO `YYYY-MM-DD`). Months: Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro.
+- On modernization edits, set or refresh `Última alteração` when rewriting.
 - Applies to: `startApp.sh`, `app/config/*.sh`, `app/scripts/**/*.sh`, and any new helper such as `install_backends.sh`.
 
 ## Why (current gaps)
@@ -150,7 +153,7 @@ Thin installer shape:
 
 ## Implementation checklist (when execution is requested)
 
-- [ ] Wave 1 Step 1 — deps / startApp / config sourcing
+- [x] Wave 1 Step 1 — deps / startApp / config sourcing (2026-11-16)
 - [ ] Wave 1 Step 2 — `install_backends.sh`
 - [ ] Wave 1 Step 3 — system scripts
 - [ ] Wave 1 Step 4 — menu wiring
