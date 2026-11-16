@@ -1,13 +1,14 @@
 #!/bin/bash
 clear
 #---------------------------------------------------------------------------#
-# Data: 06 de Setembro de 2017
-# Última alteração: 15 de Fevereiro de 2020
+# Data criação: 06 de Setembro de 2017
+# Última alteração: 16 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
 # Telegram: http://t.me/CoGUMm
 # Script: config
-# Descrição: Arquivo de configuraçõs da aplicação (s2 DRY KISS s2).
+# Descrição: Configurações compartilhadas do Carcará (paths, Yad, head, isRoot).
+# Variáveis: $dirSof $dirSys $license $menuApp $menuSof $configYad $configYadB
 #---------------------------------------------------------------------------#
 
 # Mapeando diretórios dos scripts

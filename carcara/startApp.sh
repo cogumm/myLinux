@@ -2,31 +2,26 @@
 . app/config/config.sh
 . app/config/dependences.sh
 #-----------------------------------------------------------#
-# Data: 05 de Setembro de 2017
+# Data criação: 05 de Setembro de 2017
+# Última alteração: 16 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
 # Telegram: http://t.me/CoGUMm
 # Script: startApp
 # Descrição: Script de inicialização da aplicação.
-# Variáveis: $license	 : Carrega a licensa da aplicação.
-#            $configYad	 : Carrega as configurações do Yad (sem botões).
-#            $menuApp       : Carrega o menu da aplicação.
+# Variáveis: $license   : Arquivo de licença de uso
+#            $configYad : Configurações Yad (sem botões)
+#            $menuApp   : Menu principal (menuGeral.sh)
 #-----------------------------------------------------------#
 
-# Carrega a primeira tela que é a licença de uso da aplicação.
-#  zenity --width=600 --height=500 \
-#         --text-info \
-#         --title="Licença de uso" \
-#         --filename=$license \
-#         --checkbox="Continuar"
-
-case $? in
-    0)
-        # O script só realiza esta chamada do menu se o checkbox do "Continuar" estiver selecionado.
-        bash $menuApp
-	;;
-	* )
-        yad --text "Saindo do programa" $configYad
-	;;
-esac
+# Licença de uso — checkbox "Continuar" obrigatório para abrir o menu.
+if zenity --width=600 --height=500 \
+	--text-info \
+	--title="Licença de uso" \
+	--filename="$license" \
+	--checkbox="Continuar"; then
+	bash "$menuApp"
+else
+	yad --text "Saindo do programa" $configYad
+fi
 # Fim
