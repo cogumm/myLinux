@@ -27,6 +27,8 @@ jspm_packages/
 .env
 .env.test
 
-# Next.js build output
+# Frontend / Node build output
 .next
 out
+dist
+build
