@@ -4,7 +4,8 @@ Last updated: 2026-11-16
 
 ## Current focus
 
-Carcará modernization per `.agents/idea/carcara-modern-install.md`. **Wave 1 Step 1 done** (bootstrap). Next: Wave 1 Step 2 (`install_backends.sh`).
+Carcará **1.x** modernization per `.agents/idea/carcara-modern-install.md`. **Wave 1 Step 1 done**. Next: Wave 1 Step 2 (`install_backends.sh`).  
+**2.0 vision** (Electron) documented in `.agents/idea/carcara-2.0-electron.md` — do not start until requested; prefer stable 1.x backends first.
 
 ## Recent decisions
 

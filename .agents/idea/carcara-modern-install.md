@@ -144,11 +144,11 @@ Thin installer shape:
 - Install backlog skills when useful: `bash-scripting`, then `debian-linux-triage`.
 - `nala` only as a later optional nicer apt UI — not required for Wave 1.
 
-## Non-goals
+## Non-goals (this 1.x Bash plan)
 
 - No Nix/Guix/Home Manager migration.
 - No rewriting `old/` in place.
-- No Electron/HTML installer UI.
+- No Electron UI **in this 1.x track** — that is **Carcará 2.0** (see [carcara-2.0-electron.md](carcara-2.0-electron.md)).
 - No silent `curl | bash` as default UX.
 
 ## Implementation checklist (when execution is requested)

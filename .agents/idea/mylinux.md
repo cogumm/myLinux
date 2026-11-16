@@ -35,4 +35,5 @@ Web application, payments, multi-user SaaS, equal support for every distro.
 
 ## Related ideas (not implemented until requested)
 
-- **[Carcará modern install](carcara-modern-install.md)** — apt keyrings + Flatpak/Flathub + Snap fallback, waved foundation → app rewrites.
+- **[Carcará modern install (1.x)](carcara-modern-install.md)** — apt keyrings + Flatpak/Flathub + Snap fallback; Bash + Zenity/Yad waves.
+- **[Carcará 2.0 Electron](carcara-2.0-electron.md)** — desktop app UI; reuses 1.x install backends; dual-entry with `startApp.sh`.
