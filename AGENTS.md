@@ -23,7 +23,7 @@ Playbook: `.agents/playbook/SKILL.md`
 | `.cursor/rules/` | Cursor rules adapter (points at `.agents/`) |
 | `.claude/rules/` | Claude Code rules (same policies as `.cursor/rules/`) |
 
-Root `README.md` still mentions `init.sh` / remote pipe install — **that entrypoint is missing**. Real entry today is Carcará.
+Root `README.md` documents Carcará as the entrypoint (`cd carcara && sudo bash startApp.sh`).
 
 ## Target environment
 
@@ -61,7 +61,7 @@ Act as a **Linux systems analysis & development** specialist:
 - Several Carcará menus still say “Ainda em desenvolvimento”
 - Dev installers source `. app/config.sh` in some scripts vs `. app/config/config.sh` elsewhere
 - Legacy `old/scripts/*.sh` install obsolete stacks and unsafe defaults (`chmod 777 www`, hardcoded passwords)
-- README `init.sh` gap vs Carcará entry
+- (README entrypoint aligned with Carcará; optional future `init.sh` wrapper still open in `TODO.md` if desired)
 
 ## Project guidance
 

@@ -18,10 +18,10 @@ Agent scaffolding (AGENTS, memory-bank, `.cursor`, docs, design-system) describe
 ## Next useful engineering work
 
 1. Fix `dependences.sh` and wire Development menu to existing installers.
-2. Align README entrypoint with Carcará (wrapper `init.sh` or rewrite README).
-3. Idempotent refresh of vscode/git/firacode/social installers.
-4. Safe dotfiles apply script with backups.
-5. Run ShellCheck on `carcara/**/*.sh` using the installed skill when touching scripts.
+2. Idempotent refresh of vscode/git/firacode/social installers.
+3. Safe dotfiles apply script with backups.
+4. Run ShellCheck on `carcara/**/*.sh` using the installed skill when touching scripts.
+5. Optional: root `init.sh` wrapper → Carcará (only if wanted).
 
 ## Blockers
 

@@ -27,7 +27,7 @@ Web application, payments, multi-user SaaS, equal support for every distro.
 
 ## Modernization direction
 
-- Single documented entrypoint (today: `carcara/startApp.sh`; README still mentions missing `init.sh`).
+- Single documented entrypoint: `carcara/startApp.sh` (README aligned; optional root `init.sh` wrapper only if desired).
 - Incomplete menus wired to existing installers (`development/`, `social/`, `utilities/`).
 - Correct, idempotent dependency detection.
 - Packages and PPAs brought up to date (no PHP5 / MySQL 5.6 / dead links).

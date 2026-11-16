@@ -14,3 +14,4 @@ Append-only log. Do not delete completed history.
 - [x] Installed `shellcheck-configuration` from skills.sh into `.agents/skills/`; locked in `skills-lock.json`
 - [x] Documented future skills (`bash-scripting`, `debian-linux-triage`) in `TODO.md` for gradual modernization
 - [x] Mirrored `.cursor/rules/*.mdc` → `.claude/rules/*.md` for Claude Code
+- [x] Updated root `README.md` (Carcará entry, layout, docs links; removed missing `init.sh` / curl install)

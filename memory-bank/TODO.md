@@ -10,7 +10,8 @@ Unscheduled ideas (promote into active work deliberately):
 - [ ] Wire `menuSof.sh` Desenvolvimento → `development/*.sh`
 - [ ] Wire Produção → `productivity/dropbox.sh` (or drop stub)
 - [ ] Unify all `. app/config/config.sh` includes
-- [ ] README: replace missing `init.sh` story with Carcará instructions (keep curl install only if wrapper exists)
+- [x] README: document Carcará as real entry (no fake `init.sh` / curl pipe)
+- [ ] Optional: thin root `init.sh` wrapper that delegates to `carcara/startApp.sh` (only if wanted)
 - [ ] `bash -n` / ShellCheck pass on `carcara/**/*.sh` (use installed skill `shellcheck-configuration`)
 - [ ] Dotfiles apply helper with `*.bak` backups
 - [ ] Replace dead patterns from `old/` only when needed (docker helper refresh?)
