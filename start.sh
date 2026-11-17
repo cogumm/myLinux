@@ -126,12 +126,12 @@ usage() {
 	cat <<'EOF'
 Uso: ./start.sh [opção]
 
-  (sem opção)     Menu interativo — Electron 2.0 ou terminal 1.x
+  (sem opção)     Menu interativo — Carcará 2.0 ou terminal 1.x
   -e, --electron  Carcará 2.0 (Electron + Bun; precisa de root/sudo)
   -t, --terminal  Carcará 1.x (Bash + Zenity/Yad; precisa de root/sudo)
   -h, --help      Esta ajuda
 
-Aliases: electron | 2.0 | gui   →  Electron
+Aliases: electron | 2.0 | gui   →  Carcará 2.0
          terminal | cli | tui | 1.x  →  terminal
 
 Bootstrap (sem clone local):
@@ -167,7 +167,7 @@ require_root_or_sudo() {
 
 run_electron() {
 	echo
-	echo "[carcara] Modo: Electron 2.0"
+	echo "[carcara] Modo: Carcará 2.0"
 	echo "[carcara] Diretório: ${CARCARA_2X}"
 	echo "[carcara] Esta sessão precisa de privilégios administrativos (sudo/root)."
 	echo
@@ -181,7 +181,7 @@ run_electron() {
 	# Prefer elevating *before* PATH fix so sudo injects Bun; still fix PATH when
 	# the user already ran `sudo ./start.sh` (secure_path hides ~/.bun/bin).
 	if [[ "$(id -u)" -ne 0 ]]; then
-		require_root_or_sudo "Electron 2.0" --electron
+		require_root_or_sudo "Carcará 2.0" --electron
 	fi
 
 	if ! ensure_bun_on_path; then
@@ -246,13 +246,13 @@ pick_interactive() {
 				--text="Como deseja iniciar o Carcará?" \
 				--column="Opção" \
 				--width=420 --height=280 \
-				"Electron 2.0 (interface gráfica + root)" \
+				"Carcará 2.0 (interface gráfica + root)" \
 				"Terminal 1.x (scripts Zenity/Yad + root)" \
 				"Sair" \
 				|| true
 		)"
 		case "$choice" in
-			"Electron 2.0 (interface gráfica + root)") run_electron ;;
+			"Carcará 2.0 (interface gráfica + root)") run_electron ;;
 			"Terminal 1.x (scripts Zenity/Yad + root)") run_terminal ;;
 			*) echo "Saindo."; exit 0 ;;
 		esac
@@ -262,7 +262,7 @@ pick_interactive() {
 	echo "========================================"
 	echo "  Carcará — escolha o modo de execução"
 	echo "========================================"
-	echo "  1) Electron 2.0  (interface gráfica + root)"
+	echo "  1) Carcará 2.0  (interface gráfica + root)"
 	echo "  2) Terminal 1.x  (scripts Zenity/Yad + root)"
 	echo "  3) Sair"
 	echo "========================================"

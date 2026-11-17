@@ -59,20 +59,21 @@ testConnection() {
 			--text "Favor, verifique a conexão de rede do seu computador." \
 			$configYad
 		sleep 2
-		read -r -p "Refazer o teste de conexão? (y/n): " escolha
-		case $escolha in
-			y|Y)
-				testConnection
-				;;
-			*)
-				# shellcheck disable=SC2086
-				yad --title "Testando conexão" \
-					--text "Saindo do teste de conexão." \
-					$configYad
-				sleep 2
-				return 1
-				;;
-		esac
+		# No terminal y/N under sudo — use Yad; Cancel/No exits once.
+		# shellcheck disable=SC2086
+		if yad --title "Testando conexão" \
+			--text "Refazer o teste de conexão?" \
+			--button=gtk-yes:0 --button=gtk-no:1 \
+			--center; then
+			testConnection
+		else
+			# shellcheck disable=SC2086
+			yad --title "Testando conexão" \
+				--text "Saindo do teste de conexão." \
+				$configYad
+			sleep 2
+			return 1
+		fi
 	else
 		# shellcheck disable=SC2086
 		yad --title "Testando conexão" \

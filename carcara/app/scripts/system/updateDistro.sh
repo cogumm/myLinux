@@ -9,20 +9,9 @@
 # Telegram: http://t.me/CoGUMm
 # Script: updateDistro
 # Descrição: Atualização do sistema (update, upgrade, full-upgrade).
-# Variáveis: $configYad ; CARCARA_NONINTERACTIVE=1 assume yes (Electron/helper)
+# Variáveis: $configYad ; root / CARCARA_NONINTERACTIVE → carcara_confirm auto-yes
 #----------------------------------------------------------------------------------------------------#
 # shellcheck disable=SC2154 # configYad exported by config.sh when sourced
-
-_update_confirm() {
-	local prompt="$1"
-	local answer
-	if [[ -n "${CARCARA_NONINTERACTIVE:-}" ]]; then
-		carcara_log "auto-yes: $prompt"
-		return 0
-	fi
-	read -r -p "$prompt [y/N]: " answer
-	[[ "$answer" == [Yy]* ]]
-}
 
 _update_notify() {
 	local title="$1"
@@ -40,7 +29,7 @@ updateDistro() {
 
 	carcara_log "updateDistro: starting"
 
-	if _update_confirm "Rodar apt-get update"; then
+	if carcara_confirm "Rodar apt-get update"; then
 		if ! run_with_progress "apt-get update" \
 			env DEBIAN_FRONTEND=noninteractive apt-get update; then
 			carcara_err "apt-get update failed"
@@ -48,7 +37,7 @@ updateDistro() {
 		fi
 	fi
 
-	if _update_confirm "Rodar apt-get upgrade"; then
+	if carcara_confirm "Rodar apt-get upgrade"; then
 		if ! run_with_progress "apt-get upgrade" \
 			env DEBIAN_FRONTEND=noninteractive apt-get upgrade -y; then
 			carcara_err "apt-get upgrade failed"
@@ -57,7 +46,7 @@ updateDistro() {
 	fi
 
 	# full-upgrade is the modern name for dist-upgrade
-	if _update_confirm "Rodar apt-get full-upgrade (dist-upgrade)"; then
+	if carcara_confirm "Rodar apt-get full-upgrade (dist-upgrade)"; then
 		if ! run_with_progress "apt-get full-upgrade" \
 			env DEBIAN_FRONTEND=noninteractive apt-get full-upgrade -y; then
 			carcara_err "apt-get full-upgrade failed"

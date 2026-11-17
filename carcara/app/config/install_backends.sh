@@ -28,6 +28,20 @@ carcara_err() {
 	echo "[carcara:error] $*" >&2
 }
 
+# carcara_confirm <prompt>
+# Root (Carcará always elevates) or CARCARA_NONINTERACTIVE=1 → auto-yes (-y).
+# Interactive non-root (rare; scripts normally hit isRoot first) → read [y/N].
+carcara_confirm() {
+	local prompt="${1:-}"
+	local answer
+	if [[ "$(id -u)" -eq 0 ]] || [[ -n "${CARCARA_NONINTERACTIVE:-}" ]]; then
+		carcara_log "auto-yes: $prompt"
+		return 0
+	fi
+	read -r -p "$prompt [y/N]: " answer
+	[[ "$answer" == [Yy]* ]]
+}
+
 # --- presence checks ---
 
 # pkg_present <command|dpkg|flatpak|snap> <name>

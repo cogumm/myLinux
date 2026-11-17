@@ -8,22 +8,10 @@
 # E-mail: gabriel[at]cogumm[dot]net
 # Telegram: http://t.me/CoGUMm
 # Script: cleanDistro
-# Descrição: Limpeza segura (lixeira, tmp, apt clean/autoclean/autoremove); lock só com confirmação.
-# Variáveis: $SUDO_USER $configYad ; CARCARA_NONINTERACTIVE=1 skips locks/lists (safe path)
+# Descrição: Limpeza (lixeira, tmp, apt clean/autoclean/autoremove; locks/lists via carcara_confirm).
+# Variáveis: $SUDO_USER $configYad ; root / CARCARA_NONINTERACTIVE → auto-yes
 #----------------------------------------------------------------------------------------------------#
 # shellcheck disable=SC2154 # configYad exported by config.sh when sourced
-
-_clean_confirm() {
-	local prompt="$1"
-	local answer
-	# Destructive steps stay opt-in even for Electron — never auto-yes locks/lists.
-	if [[ -n "${CARCARA_NONINTERACTIVE:-}" ]]; then
-		carcara_log "auto-skip (noninteractive): $prompt"
-		return 1
-	fi
-	read -r -p "$prompt [y/N]: " answer
-	[[ "$answer" == [Yy]* ]]
-}
 
 _clean_notify() {
 	local title="$1"
@@ -77,8 +65,8 @@ cleanDebian() {
 		fi
 	fi
 
-	# Last-resort lock removal — never automatic
-	if _clean_confirm "Remover locks do apt/dpkg (último recurso; só se apt estiver travado)"; then
+	# Lock removal — carcara_confirm auto-yes when already root / noninteractive
+	if carcara_confirm "Remover locks do apt/dpkg (último recurso; só se apt estiver travado)"; then
 		carcara_log "Removing apt/dpkg lock files"
 		rm -f /var/lib/dpkg/lock /var/lib/dpkg/lock-frontend \
 			/var/cache/apt/archives/lock /var/lib/apt/lists/lock || failed=1
@@ -87,7 +75,7 @@ cleanDebian() {
 	fi
 
 	# Clear apt lists
-	if _clean_confirm "Limpar listas apt (/var/lib/apt/lists) — depois rode update"; then
+	if carcara_confirm "Limpar listas apt (/var/lib/apt/lists) — depois rode update"; then
 		if ! run_with_progress "apt lists" \
 			bash -c 'rm -rf /var/lib/apt/lists/*'; then
 			carcara_err "Failed clearing apt lists"

@@ -32,7 +32,7 @@ const TILES: TileProps[] = [
     desc: "Caminho seguro, sem locks",
     action: "clean-distro",
     confirm:
-      "Limpeza segura (lixeira, tmp, apt clean/autoclean/autoremove)? Locks e listas apt não serão removidos.",
+      "Limpeza do sistema (lixeira, tmp, apt clean/autoclean/autoremove, locks e listas apt)? Requer privilégios.",
   },
   {
     kicker: "Rede",
