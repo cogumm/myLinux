@@ -4,6 +4,7 @@ Last updated: 2026-11-17
 
 Unscheduled ideas (promote into active work deliberately).  
 Canonical product ideas: `.agents/idea/mylinux.md`, `.agents/idea/carcara-2.0-electron.md`.  
+Session dump: `memory-bank/activeContext.md` (17 Nov 2026).  
 Also mirrored under “Still open” in `.agents/playbook/references/carcara-2.0.md` and `references/carcara.md`.
 
 ## Still open (summary)

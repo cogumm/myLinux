@@ -6,11 +6,11 @@ Last updated: 2026-11-17
 
 ```
 startApp.sh
-  └─ config.sh (paths, Yad, head, isRoot, install_backends + carcara_confirm)
+  └─ config.sh (paths, Yad, head, isRoot, install_backends + carcara_confirm + i18n)
   └─ dependences.sh
   └─ Zenity license gate (carcara/app/config/license)
   └─ menuGeral.sh
-       ├─ system/{update,fix,clean,applyDotfiles}.sh
+       ├─ system/{update,fix,clean,applyDotfiles,sync_time}.sh
        └─ menuSof.sh → category _menu.sh → per-app installers
 ```
 
@@ -19,10 +19,11 @@ startApp.sh
 ```
 ./start.sh --electron (sudo + Bun PATH + WSL GPU flags)
   └─ carcara-electron
-       ├─ main.ts → requireRoot, IPC (helper / license / quit / openExternal)
+       ├─ main.ts → requireRoot, IPC (helper / license / quit / openExternal / lang)
        ├─ renderer: license-gate → app shell (views + components)
+       │    rail: Sistema | Software | Dotfiles | Sobre + PT|EN + version pill
        └─ bun scripts/run-helper.ts → carcara-helper.sh
-            ├─ privileged → 1.x scripts (CARCARA_NONINTERACTIVE=1)
+            ├─ privileged → 1.x scripts (CARCARA_NONINTERACTIVE=1) incl. sync-time
             └─ unprivileged → ping | dotfiles-* (as $SUDO_USER)
 ```
 
@@ -32,15 +33,17 @@ Dotfiles tree is user-space (`dotfiles/apply.sh`); Carcará menus only **invoke*
 
 1. **Central config (1.x)** — Yad flags and dirs in `config.sh`; shared API in `install_backends.sh`.
 2. **One script per app** — thin installers on backends.
-3. **Category menus** — Social / Utilities / Development / Productivity (same in 2.0 Software).
+3. **Category menus** — Social / Utilities / Development / Productivity (same in 2.0 Software); v2.0.1 may add Browsers / Games / Media.
 4. **Disclaimer + root gate** — 1.x Zenity license + `isRoot`; 2.0 license-gate + `requireRoot()` + action confirms.
-5. **Archive, don’t delete history** — `old/` stays for reference.
-6. **2.0 component factories** — `createTile` / `createRail` / `createLicenseGate` / `createActivityConsole`; one view file per menu.
+5. **Archive, don’t delete history** — `old/` stays for reference; port *ideas*, not dead scripts.
+6. **2.0 component factories** — `createTile` / `createRail` / `createLicenseGate` / `createActivityConsole` / `createPagedTiles` / `createLangSwitch`; one view file per menu.
 7. **Shared brand assets** — only `assets/img/`; build copies into Electron `dist/`.
 8. **WSL-aware externals** — PowerShell `Start-Process` before Linux `xdg-open`.
 9. **Zod env** — validate in `src/env.ts`; `z.prettifyError` for failures.
 10. **Dotfiles as user** — always `$SUDO_USER` / non-root `$HOME`; never apply as root.
-11. **Shared i18n** — `locales/{pt,en}.json` + `CARCARA_LANG`; 1.x `t` / Zenity IDs; 2.0 renderer `t()` (playbook `references/i18n.md`).
+11. **Shared i18n** — nested `locales/{pt,en}.json` → flatten → dotted `t("…")`; rail PT\|EN overrides via `localStorage`.
+12. **Software pagination** — 6 tiles/page; hide pager when ≤1 page; tile clicks via event delegation.
+13. **Brand version** — UI pill = `package.json` `"version"` (`lib/version.ts`).
 
 ## Patterns to fix when touching code
 
@@ -51,6 +54,8 @@ Dotfiles tree is user-space (`dotfiles/apply.sh`); Carcará menus only **invoke*
 5. Do not invent a second design palette — use `design-system/carcara-2-0/`.
 6. Do not use Zod 4 deprecated `ZodError.flatten()` — use `z.prettifyError` / `z.treeifyError`.
 7. Tile “featured” look is **hover-only**; do not restore permanent orange tile borders.
+8. Keep `locales/pt.json` and `en.json` **same nested shape**; never leave flat-only keys in one language.
+9. Do not duplicate the software wishlist in `listSoftwares.md` — waves live in `TODO.md`.
 
 ## File creation rules
 
@@ -58,6 +63,7 @@ Dotfiles tree is user-space (`dotfiles/apply.sh`); Carcará menus only **invoke*
 - New 2.0 screen → `views/<name>.ts` + optional `design-system/carcara-2-0/pages/<name>.md`.
 - New reusable UI → `components/` factory (not duplicated markup in views).
 - New agent docs → playbook `references/` or `docs/`.
+- New installer → thin script + 1.x `_menu` + helper allowlist + 2.0 tile + locale keys (both langs).
 
 ## Safety pattern
 

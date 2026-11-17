@@ -44,32 +44,34 @@ Renderer (license-gate → views + components)
 
 ```
 src/renderer/
-  main.ts              # license gate → mountApp
-  app.ts               # shell, routing, runAction
+  main.ts              # lang + license gate → mountApp
+  app.ts               # shell, routing, runAction, lang remount
   views/               # sistema | software | dotfiles | sobre
-  components/          # rail, tile, license-gate, confirm-dialog, activity-console, …
-  lib/                 # types, api, log-highlight
-  styles.css           # Flat tokens + terminal + license-gate
+  components/          # rail, tile, paged-tiles, pager, lang-switch, license-gate, …
+  lib/                 # types, api, i18n, flatten-locale, version, log-highlight
+  styles.css           # Flat tokens + terminal + license-gate + pager
   index.html           # CSP + #app
 src/env.ts             # Zod + dotenv
+src/native-i18n.ts     # main-process nested locale flatten
 ```
 
 - `tsconfig.json` — main + preload + open-external + app-menu + **env**
-- `tsconfig.renderer.json` — typecheck renderer (`moduleResolution: bundler`)
-- Build: Bun IIFE → `dist/renderer/renderer.js`; copies CSS/HTML/`license.txt`/assets
+- `tsconfig.renderer.json` — typecheck renderer (`moduleResolution: bundler`, `resolveJsonModule`)
+- Build: Bun IIFE → `dist/renderer/renderer.js`; copies CSS/HTML/`license.txt`/assets; embeds `package.json` version
 
 ## UI patterns (ui-ux-pro-max)
 
 | Piece | Rule |
 |-------|------|
 | Style | Flat Design, dark; primary `#0D9488`, accent `#EA580C` (CTA only), card `#111827` |
-| Brand | `assets/img/logo_moderno_final.png`; wordmark + `2.0` pill beside name |
-| Rail | Sistema / Software / **Dotfiles** / Sobre; footer `MIT · 2010–YYYY · cogumm.net` |
+| Brand | `assets/img/logo_moderno_final.png`; wordmark + **version pill** = `package.json` `"version"` |
+| Rail | Sistema / Software / **Dotfiles** / Sobre; footer PT\|EN + `MIT · 2010–YYYY · cogumm.net` |
+| Lang | Env `CARCARA_LANG` default; rail switch → `localStorage` `carcara.lang` + remount |
 | Tiles | Resting = neutral border; **hover** = teal left inset + primary border (no permanent orange outline) |
-| Software | Secondary `nav-list` for categories → **paged** tiles (6/page) |
+| Software | Category `nav-list` → **paged** tiles (`SOFTWARE_PAGE_SIZE=6`); pager i18n |
 | Confirms | `<dialog>` before mutating helper actions |
 | Terminal | Dracula-like; JetBrains Mono 13px (local woff2); line numbers; stdout+stderr merged chronologically |
-| Sobre | Facts from root README; allowlisted external links |
+| Sobre | Nested locale facts (`sobre.fact.*.label/.value`); allowlisted external links |
 | License | Full-screen gate before shell (`license-gate.ts`) |
 
 When changing visuals: run skill `--design-system`; read `pages/app-shell.md` first.

@@ -6,10 +6,11 @@ Last updated: 2026-11-17
 
 | Layer | Choice |
 |-------|--------|
-| Shell (1.x) | Bash |
+| Shell (1.x) | Bash (+ python3 for nested locale flatten) |
 | UI 1.x | Zenity lists, Yad progress/dialogs |
 | UI 2.0 | Electron + TypeScript vanilla renderer (Bun toolchain) |
 | Env (2.0) | `dotenv` + **Zod 4** (`src/env.ts`) |
+| i18n | Nested `locales/{pt,en}.json` → flattened dotted keys |
 | Packages | apt-get, dpkg, Flatpak/Flathub, snap |
 | VCS | Git |
 | Host | Linux apt-family; WSL2 supported for helpers + Electron with caveats |
@@ -19,20 +20,22 @@ Last updated: 2026-11-17
 ### 1.x
 
 - `carcara/startApp.sh` — deps → **license** → `menuGeral.sh`
-- `carcara/app/config/{config,dependences,menuGeral,testConnection,license,install_backends}.sh`
-- `carcara/app/scripts/system/{updateDistro,fixSystem,cleanDistro,applyDotfiles}.sh`
+- `carcara/app/config/{config,dependences,menuGeral,testConnection,license,install_backends,i18n}.sh`
+- `carcara/app/scripts/system/{updateDistro,fixSystem,cleanDistro,applyDotfiles,sync_time}.sh`
 - `carcara/app/scripts/software/**`
 
 ### 2.0
 
-- `carcara-electron/` — Electron app
-- `carcara-electron/.env.example` / `.env` — Zod-validated
+- `carcara-electron/` — Electron app (`package.json` version drives brand pill)
+- `carcara-electron/.env.example` / `.env` — Zod-validated (`CARCARA_LANG`, window, ping, root)
 - `carcara-electron/src/env.ts`
+- `carcara-electron/src/native-i18n.ts` — main-process `t` (nested locales)
 - `carcara-electron/scripts/{build,run-helper}.ts`
-- `carcara-electron/helper/carcara-helper.sh`
+- `carcara-electron/helper/carcara-helper.sh` — allowlist incl. `sync-time`
 - `carcara-electron/src/{main,preload,open-external,app-menu}.ts`
 - `carcara-electron/src/renderer/{main,app,views,components,lib}/`
-- `carcara-electron/src/renderer/components/license-gate.ts`
+- `carcara-electron/src/renderer/lib/{i18n,flatten-locale,version}.ts`
+- `carcara-electron/src/renderer/components/{paged-tiles,pager,lang-switch,license-gate}.ts`
 - `design-system/carcara-2-0/`
 - `assets/img/` — shared brand images
 - `carcara-electron/assets/fonts/JetBrainsMono-Regular.woff2`
@@ -41,19 +44,19 @@ Last updated: 2026-11-17
 
 - `dotfiles/apply.sh` — non-root apply with `*.bak`
 - `docs/dotfiles.md`
-- `locales/{pt,en}.json` — shared UI i18n (`CARCARA_LANG`)
-- `carcara/app/config/i18n.sh` — Bash `t`
+- `locales/{pt,en}.json` — nested UI strings
 - `start.sh` — dual entry (+ Bun PATH + WSL GPU)
-- `old/**` (archive)
+- `old/**` (archive — see playbook `legacy.md`)
 - `cleanup-zone-identifiers.sh`
+- `memory-bank/TODO.md` — **v2.0.1** catalog waves
 
 ## Commands agents use for validation
 
 ```bash
 # 1.x
-bash -n carcara/app/config/config.sh
-bash -n carcara/app/scripts/system/applyDotfiles.sh
-shellcheck -x carcara/startApp.sh   # if available
+bash -n carcara/app/config/i18n.sh
+bash -n carcara/app/scripts/system/sync_time.sh
+CARCARA_LANG=en bash -c 'source carcara/app/config/i18n.sh; t menu.choose'
 
 # Dotfiles
 dotfiles/apply.sh --dry-run --all
@@ -63,6 +66,7 @@ cd carcara-electron
 bun run typecheck
 bun run build
 bun run helper -- ping
+bun run helper -- sync-time   # privileged / owner-requested
 bun run helper -- dotfiles-dry-run
 ```
 
@@ -74,4 +78,5 @@ Do **not** run live `sudo`, apt mutations, or `pkexec` flows unless the owner as
 - Renderer must not own package safety — helper allowlist only
 - No remote font CDN under Electron CSP (`font-src 'self'`)
 - Dotfiles apply never as root
+- Nested locales require python3 on hosts that run 1.x `t`
 - Funding: `.github/FUNDING.yml` → ko_fi cogumm

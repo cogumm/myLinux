@@ -22,8 +22,9 @@
 ```
 
 - Brand (logo + name) is the strongest signal in the first viewport of the rail.
-- Rail footer: compact **PT | EN** language switch (`CARCARA_LANG` default; `localStorage` override).
-- One job per view: Sistema = maintenance; Software = installs; Dotfiles = `$HOME` apply; Sobre = identity.
+- Rail footer: compact **PT | EN** language switch (`CARCARA_LANG` default; `localStorage` override) + MIT meta.
+- Brand version pill = `package.json` version (not hardcoded `2.0`).
+- One job per view: Sistema = maintenance (incl. sync clock); Software = installs; Dotfiles = `$HOME` apply; Sobre = identity.
 - Software catalog: **6 tiles per page** + Anterior/Próxima (pager hidden when ≤1 page).
 - Activity log is always visible (source of truth for apt/flatpak/snap).
 - No marketing “Product Demo + Features” section order from MASTER.
@@ -43,8 +44,8 @@
 
 - Primary mark: `assets/img/logo_moderno_final.png` (hero in rail, ~96px)
 - Wordmark **Carcará** Inter 700, tracking −0.03em (Modern Dark Cinema)
-- Version as teal nowrap pill (`2.0`) beside the wordmark — compact label, never wrap
+- Version as teal nowrap pill beside the wordmark — value from `package.json` (e.g. `2.0.0-alpha.0`); never wrap
 - Active nav: accent orange inset + secondary teal icon
 - Tile hover: teal left bar + primary border (no permanent featured outline)
-- Footer microcopy one line: `MIT · 2010–YYYY · @CoGUMm`
+- Footer: **PT | EN** lang switch + `MIT · 2010–YYYY · cogumm.net`
 - Accent CTA `#EA580C` (beak) for confirm dialogs; teal `#0D9488` / `#14B8A6` for chrome + featured tiles

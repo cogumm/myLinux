@@ -38,6 +38,10 @@ description: >-
 - Do not revive dead PPAs or PHP5-era stacks from `old/` without modernization.
 - Do not commit/push unless asked.
 
-## Closing a wave
+## Closing a wave / session dump
 
-Append `memory-bank/progress.md`, refresh `activeContext.md`, and update `TODO.md` if items remain.
+1. Append `memory-bank/progress.md` (never delete history).
+2. Refresh `activeContext.md` (may rewrite).
+3. Update `TODO.md`, `techContext.md` / `systemPatterns.md` / `productContext.md` if patterns or stack changed.
+4. Sync playbook `references/` (+ `AGENTS.md` known debt) for durable how-to.
+5. Keep `locales/pt.json` ↔ `en.json` nested shape in parity when adding strings.

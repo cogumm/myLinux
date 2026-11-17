@@ -14,21 +14,22 @@ Secondary: anyone who clones the MIT repo and accepts root risk.
 1. `./start.sh --terminal` or `cd carcara && sudo bash startApp.sh`
 2. Deps script ensures yad/curl/snap (and optional flatpak)
 3. Zenity **license** checkbox Continuar
-4. Main menu: update, install software, fix, clean, **Dotfiles**, Sair
+4. Main menu: update, install software, fix, clean, **Dotfiles**, Sair (i18n via `CARCARA_LANG`)
 5. Yad shows progress; terminal shows apt detail; root scripts use `carcara_confirm` auto-yes
 
 ### B — Maintain / install via Carcará 2.0
 
-1. `./start.sh --electron` (needs Bun)
+1. `./start.sh --electron` (needs Bun; elevates to root)
 2. License gate (same terms as 1.x) — checkbox Continuar or Sair
-3. Rail: **Sistema** · **Software** · **Dotfiles** · **Sobre**
+3. Rail: **Sistema** · **Software** · **Dotfiles** · **Sobre** + **PT|EN** + version pill (`package.json`)
 4. Confirm dialog → helper → activity console (Dracula terminal)
 5. Engine is still 1.x backends; UI never invents package policy
 
 ### C — Install curated apps (either UI)
 
-Same catalog: Git, VS Code, Insomnia, Fira Code, **Docker**, Dropbox, Discord, Spotify, Telegram, VLC.  
-Policy: apt (or official keyring) → Flatpak → Snap where applicable. Catalog notes: `.agents/idea/softwares.md`.
+**Shipped today:** Git, VS Code, Insomnia, Fira Code, **Docker Engine**, Dropbox, Discord, Spotify, Telegram, VLC.  
+**v2.0.1 backlog:** waves in `memory-bank/TODO.md` (Firefox, WhatsApp, Cursor, Steam, …).  
+Policy: apt (or official keyring) → Flatpak → Snap. Notes: `.agents/idea/softwares.md`.
 
 ### D — Apply dotfiles
 
@@ -42,15 +43,16 @@ Policy: apt (or official keyring) → Flatpak → Snap where applicable. Catalog
 
 ## UX principles
 
-- Menu labels via i18n (`CARCARA_LANG=pt|en`); verbs stay consistent across 1.x/2.0
+- Nested i18n (`locales/*.json`); verbs consistent across 1.x/2.0; rail language switch for speed
+- Software catalog **paginated** (6/page) as the list grows
 - License gate every launch (1.x Zenity / 2.0 license-gate) — same `license` file
 - Root warning + disclaimer (1.x header; 2.0 Sobre + confirms)
 - Prefer confirmations before destructive clean/repair (UI dialog; no terminal y/N when already root)
 - Logs remain source of truth (Atividade merges stdout/stderr in order)
-- Brand-first rail (logo + Carcará + 2.0 pill)
+- Brand-first rail (logo + Carcará + **package version** pill)
 - Flat Design tokens from `ui-ux-pro-max` — do not freestyle a new palette
 - Tile hover = teal accent bar; orange only on confirm CTAs
 
 ## Non-goals
 
-See `.agents/idea/mylinux.md` and product rules — not a SaaS, not a full distro installer.
+See `.agents/idea/mylinux.md` and product rules — not a SaaS, not a full distro installer, not a Snap Store mirror.

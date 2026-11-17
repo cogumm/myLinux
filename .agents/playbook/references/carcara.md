@@ -24,7 +24,7 @@ Policy: apt (distro or keyring) → Flatpak/Flathub → Snap. Idempotent via `pk
 | development | `firacode.sh` | apt `fonts-firacode` |
 | development | `docker.sh` | Docker CE apt → `docker.io` (+ group `$SUDO_USER`) |
 | productivity | `dropbox.sh` | Flatpak → Snap |
-| system | update / fix / clean / `applyDotfiles.sh` / `sync_time.sh` | Wave 1 + Dotfiles menu |
+| system | update / fix / clean / `applyDotfiles.sh` / `sync_time.sh` | Wave 1 + Dotfiles; **sync-time** also on 2.0 Sistema |
 
 ## Bootstrap (Wave 1 Step 1 — done)
 

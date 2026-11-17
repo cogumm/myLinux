@@ -13,10 +13,11 @@
 
 - Electron + TypeScript + vanilla renderer under `carcara-electron/`
 - **Bun** toolchain (`bun install`, `bun run`, [Shell `$`](https://bun.sh/docs/runtime/shell))
-- Env: Zod 4 + dotenv (`src/env.ts`, `.env.example`)
+- Env: Zod 4 + dotenv (`src/env.ts`, `.env.example`) incl. `CARCARA_LANG`
 - Privilege: `scripts/run-helper.ts` (Bun.$) → `helper/carcara-helper.sh` + `pkexec` when needed
-- Unprivileged: `ping`, `dotfiles-*` (as `$SUDO_USER`)
+- Unprivileged: `ping`, `dotfiles-*` (as `$SUDO_USER`); privileged incl. `sync-time`
 - License gate before shell (same `carcara/app/config/license` as 1.x)
+- Brand version pill ← `package.json`; Software pagination 6/page; rail PT\|EN
 - External links (WSL): `src/open-external.ts` → PowerShell `Start-Process`
 - Design: `ui-ux-pro-max` → `design-system/carcara-2-0/`
 - Entry: `sudo ./start.sh --electron` (root) or root + `bun run dev`
@@ -25,7 +26,9 @@
 ## Shared
 
 - **Chooser:** repo-root `./start.sh` — Electron 2.0 or terminal 1.x (`--electron` / `--terminal`).
+- **i18n:** nested `locales/{pt,en}.json` + `CARCARA_LANG` (`references/i18n.md`); 1.x needs python3 to flatten.
 - **Images:** `assets/img/` for 1.x and 2.0 (Electron build copies into `dist/renderer/assets/`).
 - **Fonts (2.0 terminal):** `carcara-electron/assets/fonts/JetBrainsMono-Regular.woff2`
 - **Dotfiles:** `dotfiles/apply.sh` + menus in both UIs (`references/dotfiles.md`).
 - Optional: `cleanup-zone-identifiers.sh` for WSL ADS junk files.
+- **Catalog backlog:** `memory-bank/TODO.md` v2.0.1 waves.

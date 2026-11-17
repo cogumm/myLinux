@@ -55,3 +55,7 @@ Append-only log. Do not delete completed history.
 - [x] Rail PT|EN language switch (`localStorage` override; env default) (2026-11-17)
 - [x] Rescued `sync_time.sh` (timedatectl → ntpdate, NI) + 2.0 Sistema tile `sync-time`; TODO v2.0.1 waves A–C (2026-11-17)
 - [x] Software view pagination (6/page, `createPagedTiles` + i18n pager; tile click delegation) (2026-11-17)
+- [x] Nested locales (`locales/{pt,en}.json` groups) + flatten in Bash/TS/native-i18n; Sobre fact `.label`/`.value` (2026-11-17)
+- [x] Brand version pill ← `package.json` version (`lib/version.ts`) (2026-11-17)
+- [x] TODO v2.0.1 waves synced to wishlist; `listSoftwares.md` reduced to Snap pointer + date (2026-11-17)
+- [x] Session knowledge re-consolidated (i18n nest, rail lang, sync-time, pager, brand version, v2.0.1 catalog, old/ guidance) → memory-bank + playbook + AGENTS (2026-11-17)
