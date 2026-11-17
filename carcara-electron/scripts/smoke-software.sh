@@ -17,7 +17,7 @@ SOFTWARE_TS="${ELECTRON_ROOT}/src/renderer/views/software.ts"
 RUN_HELPER_NODE="${ELECTRON_ROOT}/src/run-helper-node.ts"
 RUN_HELPER_BUN="${ELECTRON_ROOT}/scripts/run-helper.ts"
 
-# Curated baseline live set (early thin installers). Extend this list — do not add smoke:waveN scripts.
+# Curated live sets. Extend these lists — do not add smoke:waveN scripts.
 CORE_LIVE_ACTIONS=(
 	install-git
 	install-vscode
@@ -28,6 +28,18 @@ CORE_LIVE_ACTIONS=(
 	install-spotify
 	install-telegram
 	install-dropbox
+)
+
+# Beyond baseline (catalog sample — apt/Flatpak/Snap mix; still idempotent when present).
+EXTENDED_LIVE_ACTIONS=(
+	install-firefox
+	install-brave
+	install-obs
+	install-thunderbird
+	install-postman
+	install-whatsapp
+	install-libreoffice
+	install-bitwarden
 )
 
 PASS=0
@@ -62,21 +74,24 @@ _ensure_bun_on_path() {
 
 usage() {
 	cat <<'EOF'
-usage: smoke-software.sh [--pkexec] [--live <action>...] [--live-safe] [--live-core] [--help]
+usage: smoke-software.sh [--pkexec] [--live <action>...] [--live-safe] [--live-core] [--live-extended] [--help]
 
-  default       UI↔helper↔scripts wiring (incl. bash -n) + ping + pkexec probe
-  --pkexec      also run apt-dry-run via bun helper bridge (root or pkexec)
-  --live …      run install-* / preset-* for real (mutating; owner machine)
-  --live-safe   shorthand: --live install-git (idempotent apt when git present)
-  --live-core   curated baseline set (git vscode insomnia firacode vlc discord
-                spotify telegram dropbox) — requires root or pkexec
+  default         UI↔helper↔scripts wiring (incl. bash -n) + ping + pkexec probe
+  --pkexec        also run apt-dry-run via bun helper bridge (root or pkexec)
+  --live …        run install-* / preset-* for real (mutating; owner machine)
+  --live-safe     shorthand: --live install-git (idempotent apt when git present)
+  --live-core     curated baseline set — requires root or pkexec
+  --live-extended baseline + catalog sample (firefox brave obs thunderbird
+                  postman whatsapp libreoffice bitwarden)
 
 Examples:
   bun run smoke:software
-  bun run smoke:software -- --pkexec
-  # sudo drops ~/.bun/bin — preserve PATH or call the script with bash:
+  # pkexec: unelevated user (NOT sudo) so the polkit dialog can run
+  bun run smoke:software -- --pkexec --live-safe
+  bun run smoke:software -- --pkexec --live-extended
+  # sudo: never bare `sudo bun` (secure_path hides ~/.bun/bin)
   sudo env "PATH=$PATH" bun run smoke:software -- --live-core
-  sudo bash scripts/smoke-software.sh --live-core
+  sudo bash scripts/smoke-software.sh --live-extended
 EOF
 }
 
@@ -89,6 +104,11 @@ while [[ $# -gt 0 ]]; do
 			;;
 		--live-core)
 			LIVE_ACTIONS+=("${CORE_LIVE_ACTIONS[@]}")
+			MODE_PKEXEC=1
+			shift
+			;;
+		--live-extended)
+			LIVE_ACTIONS+=("${CORE_LIVE_ACTIONS[@]}" "${EXTENDED_LIVE_ACTIONS[@]}")
 			MODE_PKEXEC=1
 			shift
 			;;
@@ -236,15 +256,18 @@ _pkexec_probe() {
 	_log "env: uid=$uid pkexec=$has_pkexec display=$has_display"
 
 	if grep -qi microsoft /proc/version 2>/dev/null; then
-		_log "host looks like WSL — polkit/pkexec often missing or non-interactive"
+		_log "host looks like WSL — approve polkit prompts in the GUI agent if shown"
 	fi
 
-	if [[ "$has_pkexec" -eq 1 && "$has_display" -eq 1 ]]; then
-		_pass "pkexec + display available for elevation path"
-	elif [[ "$uid" -eq 0 ]]; then
-		_pass "already root — helper skips pkexec (1.x parity)"
+	if [[ "$uid" -eq 0 ]]; then
+		_pass "already root — helper skips pkexec (1.x parity); for real pkexec re-run as normal user"
+	elif [[ "$has_pkexec" -eq 1 && "$has_display" -eq 1 ]]; then
+		_pass "pkexec + display available for elevation path (unelevated)"
+		if [[ "$MODE_PKEXEC" -eq 1 ]]; then
+			_log "privileged helper actions will go through pkexec — approve the dialog if prompted"
+		fi
 	else
-		_skip "pkexec elevation not available (install policykit-1 on a real desktop / WSLg, or run as root)"
+		_skip "pkexec elevation not available (install policykit-1, or use sudo with PATH preserved)"
 	fi
 
 	# Bridge decision parity: both Node and Bun bridges treat the same UNPRIVILEGED set.

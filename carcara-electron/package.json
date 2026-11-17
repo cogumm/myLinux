@@ -18,6 +18,8 @@
     "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.renderer.json",
     "helper": "bun scripts/run-helper.ts",
     "smoke:software": "bash scripts/smoke-software.sh",
+    "smoke:elevated": "bash scripts/smoke-elevated.sh",
+    "smoke:nopasswd-install": "bash scripts/smoke-elevated.sh install",
     "pack:deb": "bun run build && electron-builder --linux deb --config electron-builder.yml --publish never",
     "pack:appimage": "bun run build && electron-builder --linux AppImage --config electron-builder.yml --publish never",
     "pack:linux": "bun run build && electron-builder --linux deb AppImage --config electron-builder.yml --publish never",
