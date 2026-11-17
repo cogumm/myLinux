@@ -4,8 +4,8 @@ Last updated: 2026-11-16
 
 ## Current focus
 
-Carcará **1.x = install engine** (not final UI). Plan: `.agents/idea/carcara-modern-install.md`. Step 1 done → **Step 2 `install_backends.sh` next**.  
-**2.0** Electron: `.agents/idea/carcara-2.0-electron.md` — after backends; do not polish Yad for its own sake.
+Carcará **1.x = install engine**. Plan: `.agents/idea/carcara-modern-install.md`. Steps 1–2 done → **Step 3 system scripts next**.  
+**2.0** Electron: `.agents/idea/carcara-2.0-electron.md` — backends ready to consume later.
 
 ## Recent decisions
 
@@ -17,10 +17,10 @@ Carcará **1.x = install engine** (not final UI). Plan: `.agents/idea/carcara-mo
 
 ## Next useful engineering work
 
-1. Wave 1 Step 2 — `install_backends.sh` (critical for 2.0).
-2. Wave 1 Step 3 — system scripts.
-3. Wave 1 Step 4 — minimal menus + Step 5 ShellCheck.
-4. Wave 2 lean installers → then Electron 2.0 when requested.
+1. Wave 1 Step 3 — modernize `updateDistro` / `fixSystem` / `cleanDistro`.
+2. Wave 1 Step 4 — minimal menu wiring + Step 5 ShellCheck.
+3. Wave 2 lean installers onto backends.
+4. Electron 2.0 when requested.
 
 ## Blockers
 

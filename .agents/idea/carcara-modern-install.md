@@ -114,12 +114,11 @@ Confirm Flathub app IDs / apt package names per-app when Wave 2 starts. Do not h
 - `startApp.sh`: Zenity license gate; abort if `dependences` fails.
 - Unified `. app/config/config.sh` sourcing.
 
-### Step 2 — Add shared install library — **next / critical for 2.0**
+### Step 2 — Add shared install library — **done** (17 de Novembro de 2026)
 
-- New file: `carcara/app/config/install_backends.sh` (shared idempotent install API), **with the required script header banner**.
-- Source from `config.sh` or from each installer after `config.sh`.
-- Document in `.agents/playbook/references/carcara.md`.
-- Design helpers so Electron can invoke them non-interactively later (flags / exit codes / logs).
+- `carcara/app/config/install_backends.sh` loaded from `config.sh`.
+- Helpers: `pkg_present`, `apt_install`, `ensure_apt_keyring_repo`, `ensure_flatpak_flathub`, `flatpak_install`, `snap_install`, `run_with_progress`.
+- stderr logs `[carcara]` / `[carcara:error]` for CLI and future Electron.
 
 ### Step 3 — Modernize system scripts — **high value for 2.0**
 
@@ -174,11 +173,11 @@ Explicitly **out** of Wave 3 now: Yad redesign, `gum` migration, nala-as-UI.
 ## Implementation checklist
 
 - [x] Wave 1 Step 1 — deps / startApp / config sourcing (16 de Novembro de 2026)
-- [ ] Wave 1 Step 2 — `install_backends.sh` (**priority**)
+- [x] Wave 1 Step 2 — `install_backends.sh` (17 de Novembro de 2026)
 - [ ] Wave 1 Step 3 — system scripts
 - [ ] Wave 1 Step 4 — minimal menu wiring
 - [ ] Wave 1 Step 5 — ShellCheck + docs
 - [ ] Wave 2 — thin installers onto backends
 - [ ] Wave 3 — optional CLI only / **skip** if 2.0 starts
 
-Next coding session when approved: **Wave 1 Step 2**.
+Next coding session when approved: **Wave 1 Step 3** (system scripts).

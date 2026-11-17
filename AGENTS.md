@@ -61,7 +61,8 @@ Act as a **Linux systems analysis & development** specialist:
 - App installers still Snap-era / brittle `which -a` (Wave 2)
 - Legacy `old/scripts/*.sh` install obsolete stacks and unsafe defaults (`chmod 777 www`, hardcoded passwords)
 - Optional future `init.sh` wrapper still open in `TODO.md` if desired
-- Wave 1 Step 1 done: deps detection, license gate, unified `config.sh` sourcing
+- Wave 1 Steps 1–2 done: bootstrap + `install_backends.sh` (apt/Flatpak/Snap API)
+- Next: Wave 1 Step 3 — system scripts (`updateDistro` / `fixSystem` / `cleanDistro`)
 
 ## Project guidance
 

@@ -27,6 +27,10 @@ See `carcara/README.md` tree. Config hub: `app/config/config.sh`. Menus: `menuGe
 | Limpeza de memória | Stub |
 | Social / Utilidades (via software menu) | Wired |
 
+## Install backends (1.x engine)
+
+Shared helpers in `app/config/install_backends.sh` (loaded via `config.sh`): `apt_install`, `ensure_apt_keyring_repo`, `flatpak_install`, `snap_install`, `pkg_present`, `run_with_progress`.
+
 ## Safety
 
 Runs as root. Review scripts before use. Author disclaimer applies (`head` in `config.sh`).
