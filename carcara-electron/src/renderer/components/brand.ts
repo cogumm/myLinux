@@ -1,13 +1,16 @@
-export function createBrand(): HTMLDivElement {
-  const brand = document.createElement("div");
+/** Brand block for the app rail — hero-level mark + name (ui-ux-pro-max). */
+export function createBrand(): HTMLElement {
+  const brand = document.createElement("header");
   brand.className = "brand";
+  brand.setAttribute("aria-label", "Carcará 2.0");
 
   const mark = document.createElement("img");
   mark.className = "brand__mark";
   mark.src = "assets/logo_moderno_final.png";
-  mark.width = 72;
-  mark.height = 72;
+  mark.width = 96;
+  mark.height = 96;
   mark.alt = "";
+  mark.decoding = "async";
 
   const text = document.createElement("div");
   text.className = "brand__text";
@@ -16,7 +19,7 @@ export function createBrand(): HTMLDivElement {
   name.className = "brand__name";
   name.textContent = "Carcará";
 
-  const ver = document.createElement("p");
+  const ver = document.createElement("span");
   ver.className = "brand__ver";
   ver.textContent = "2.0";
 

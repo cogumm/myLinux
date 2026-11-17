@@ -34,5 +34,9 @@
 
 ## Brand
 
-- Primary mark: `assets/img/logo_moderno_final.png`
-- Accent CTA `#EA580C` aligns with beak orange; teal `#0D9488` for focus/primary chrome.
+- Primary mark: `assets/img/logo_moderno_final.png` (hero in rail, ~96px)
+- Wordmark **Carcará** Inter 700, tracking −0.03em (Modern Dark Cinema)
+- Version as teal nowrap pill (`2.0`) beside the wordmark — compact label, never wrap
+- Active nav: accent orange inset + secondary teal icon
+- Footer microcopy one line: `MIT · 2010–YYYY · @CoGUMm`
+- Accent CTA `#EA580C` (beak); teal `#0D9488` / `#14B8A6` for chrome

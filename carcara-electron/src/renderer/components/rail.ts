@@ -38,10 +38,24 @@ export function createRail(
     { label: "Principal", className: "nav-list rail__nav" },
   );
 
-  const foot = document.createElement("p");
+  const foot = document.createElement("footer");
   foot.className = "rail__foot";
   const year = new Date().getFullYear();
-  foot.textContent = `MIT license 2010 - ${year} | cogumm.net`;
+
+  const license = document.createElement("span");
+  license.className = "rail__foot-meta";
+  license.textContent = `MIT · 2010–${year}`;
+
+  const sep = document.createElement("span");
+  sep.className = "rail__foot-sep";
+  sep.setAttribute("aria-hidden", "true");
+  sep.textContent = "·";
+
+  const credit = document.createElement("span");
+  credit.className = "rail__foot-credit";
+  credit.textContent = "cogumm.net";
+
+  foot.append(license, sep, credit);
 
   aside.append(createBrand(), nav.root, foot);
 

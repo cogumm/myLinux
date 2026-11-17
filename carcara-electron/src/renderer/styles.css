@@ -35,7 +35,13 @@
   --term-prop: #8be9fd;
   --term-err: #ed2655;
 
-  --rail-w: 240px;
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+
+  --rail-w: 248px;
   --radius: 10px;
   --ease: 180ms ease;
   --focus: 0 0 0 2px var(--color-background), 0 0 0 4px var(--color-ring);
@@ -117,12 +123,12 @@ button:disabled {
   min-height: 100vh;
 }
 
-/* Rail */
+/* Rail — brand-first Flat shell (ui-ux-pro-max) */
 .rail {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-  padding: 1.25rem 1rem;
+  gap: var(--space-md);
+  padding: var(--space-lg) var(--space-md) var(--space-md);
   background: var(--color-card);
   border-right: 1px solid var(--color-border);
 }
@@ -131,45 +137,67 @@ button:disabled {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.65rem;
+  gap: var(--space-sm);
   text-align: center;
-  padding: 0.35rem 0 0.5rem;
+  padding: var(--space-xs) 0 var(--space-md);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .brand__mark {
-  width: 72px;
-  height: 72px;
+  width: 96px;
+  height: 96px;
   object-fit: contain;
   display: block;
+}
+
+.brand__text {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 0.45rem;
 }
 
 .brand__name {
   margin: 0;
   font-family: var(--font-heading);
-  font-size: 1.35rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--color-foreground);
 }
 
 .brand__ver {
-  margin: 0.15rem 0 0;
-  font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 1.35rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--color-secondary) 45%, var(--color-border));
+  background: color-mix(in srgb, var(--color-secondary) 14%, transparent);
+  font-size: 0.7rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-secondary);
+  white-space: nowrap;
 }
 
 .nav-list,
 .rail__nav {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: var(--space-xs);
 }
 
 .rail__nav {
   flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding-top: var(--space-xs);
 }
 
 .rail__link {
@@ -182,7 +210,7 @@ button:disabled {
   color: var(--color-muted-foreground);
   font-weight: 500;
   text-align: left;
-  transition: background var(--ease), color var(--ease);
+  transition: background var(--ease), color var(--ease), box-shadow var(--ease);
 }
 
 .rail__link:hover {
@@ -196,19 +224,38 @@ button:disabled {
   box-shadow: inset 3px 0 0 var(--color-accent);
 }
 
+.rail__link.is-active .ico {
+  color: var(--color-secondary);
+}
+
 .ico {
   width: 1.15rem;
   height: 1.15rem;
   flex-shrink: 0;
+  transition: color var(--ease);
 }
 
 .rail__foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
   margin: 0;
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-border);
   font-size: 0.65rem;
   line-height: 1.2;
   color: var(--color-muted-foreground);
-  text-align: center;
   white-space: nowrap;
+}
+
+.rail__foot-sep {
+  color: var(--color-border);
+}
+
+.rail__foot-credit {
+  color: var(--color-secondary);
+  font-weight: 600;
 }
 
 /* Stage */
