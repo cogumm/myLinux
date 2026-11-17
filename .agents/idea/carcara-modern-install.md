@@ -39,7 +39,7 @@ Canonical examples: `carcara/app/scripts/system/cleanDistro.sh`, `carcara/app/sc
 # Última alteração: <DD/MM/AAAA por extenso>   # optional; update when rewriting
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
-# Telegram: http://t.me/CoGUMm
+# Telegram: https://t.me/CoGUMm
 # Script: <scriptName>
 # Descrição: <one-line purpose in Portuguese or English>
 # Variáveis: $<name> : <what it loads / means>

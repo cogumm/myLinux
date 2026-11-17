@@ -26,6 +26,7 @@
 - Brand version pill = `package.json` version (not hardcoded `2.0`).
 - One job per view: Sistema = maintenance (incl. sync clock); Software = installs; Dotfiles = `$HOME` apply; Sobre = identity.
 - Software catalog: Snap Store **19 categories**; **6 tiles per page** + Anterior/Próxima; empty cats show muted placeholder.
+- Software layout: category column fills stage height (scroll inside); tiles use **`auto-fit`** so few cards expand across the pane (not tiny left-aligned stubs).
 - Activity log is always visible (source of truth for apt/flatpak/snap).
 - No marketing “Product Demo + Features” section order from MASTER.
 

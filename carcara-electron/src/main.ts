@@ -93,6 +93,7 @@ function createWindow(): void {
 }
 
 const ALLOWED_EXTERNAL = new Set([
+  "https://cogumm.net/",
   "https://ko-fi.com/cogumm",
   "https://t.me/CoGUMm",
   "https://cogumm.mit-license.org/",

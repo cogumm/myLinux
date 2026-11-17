@@ -2,8 +2,11 @@ import { createBrand } from "./brand.js";
 import { createLangSwitch } from "./lang-switch.js";
 import { createNavList } from "./nav-list.js";
 import { icons } from "./icons.js";
+import { openExternal } from "../lib/api.js";
 import { t, type Lang } from "../lib/i18n.js";
 import type { ViewId } from "../lib/types.js";
+
+const SITE_URL = "https://cogumm.net/";
 
 export type RailItem = {
   id: ViewId;
@@ -66,9 +69,14 @@ export function createRail(
   sep.setAttribute("aria-hidden", "true");
   sep.textContent = "·";
 
-  const credit = document.createElement("span");
+  const credit = document.createElement("button");
+  credit.type = "button";
   credit.className = "rail__foot-credit";
   credit.textContent = "cogumm.net";
+  credit.title = SITE_URL;
+  credit.addEventListener("click", () => {
+    void openExternal(SITE_URL);
+  });
 
   meta.append(license, sep, credit);
   foot.append(meta);
