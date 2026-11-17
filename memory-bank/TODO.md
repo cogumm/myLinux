@@ -11,11 +11,9 @@ Also mirrored under “Still open” in `.agents/playbook/references/carcara-2.0
 
 | Track | Open item | Notes |
 |-------|-----------|--------|
-| **2.0** | Live Software installs (`--live` / `--live-safe`) | Needs root/pkexec on owner machine |
-| **2.0** | Live **pkexec** elevation | Needs `policykit-1` on real desktop / WSLg |
-| **1.x** | Live smoke-test Wave 2 installers | Same gate; wiring + `bash -n` covered by `smoke:software` |
+| — | _(smoke inbox clear)_ | Use `smoke:elevated` after one-time `smoke:nopasswd-install` |
 
-**Done recently:** Waves A–C; `.deb` + **AppImage** (`pack:appimage` / CI `pack:linux`); skills; Software smoke harness.  
+**Done recently:** Waves A–C; `.deb` + AppImage; `--live-core` / `--live-extended`; passwordless `smoke:elevated`; skills.  
 Wave 1–2 engine **done**. Wave 3 **cancelled** (UI is Electron 2.0).  
 **v2.0.0** = usable alpha. **v2.0.1** = richer catalog + polish (waves below — catalog shipped).
 
@@ -40,7 +38,7 @@ Wave 1–2 engine **done**. Wave 3 **cancelled** (UI is Electron 2.0).
 
 - [x] Wave 1 + Wave 2 engine work
 - [x] Wave 2 installer wiring + `bash -n` via `bun run smoke:software` (17 de Novembro de 2026)
-- [ ] Live smoke-test of Wave 2 installers on owner machine (`--live` / root)
+- [x] Live smoke-test baseline installers on owner machine — `sudo env "PATH=$PATH" bun run smoke:software -- --live-core` (17 de Novembro de 2026)
 - [x] Harden / rewrite `dependences.sh` (apt-family, update, Flathub, NI) (17 de Novembro de 2026)
 - [x] Dotfiles apply helper with `*.bak` backups (`dotfiles/apply.sh`) (17 de Novembro de 2026)
 - [x] Menu 1.x **Dotfiles** → `applyDotfiles.sh` as `$SUDO_USER` (17 de Novembro de 2026)
@@ -62,8 +60,9 @@ Wave 1–2 engine **done**. Wave 3 **cancelled** (UI is Electron 2.0).
 - [x] Rail language switch PT\|EN (`localStorage` override; env default) (17 de Novembro de 2026)
 - [x] Sistema **sync-time** → `sync_time.sh` (17 de Novembro de 2026)
 - [x] Software smoke harness (`scripts/smoke-software.sh` / `bun run smoke:software`) — UI↔helper↔scripts + ping + pkexec probe (17 de Novembro de 2026)
-- [ ] Live Software installs via harness `--live` / `--live-safe` (owner-requested root/pkexec)
-- [ ] Live **pkexec** elevation on real desktop / WSLg (`--pkexec`; needs policykit-1)
+- [x] Live baseline installs via `--live-core` (owner machine; preserve Bun PATH under sudo) (17 de Novembro de 2026)
+- [x] Broader live Software installs — `--live-extended` + `smoke:elevated` (17 de Novembro de 2026)
+- [x] Passwordless elevated smoke — `smoke:nopasswd-install` + `smoke:elevated` (`sudo -n`; avoids polkit hang on WSL) (17 de Novembro de 2026)
 - [x] Package `.deb` for Carcará 2.0 (`electron-builder` + `pack:deb`) (17 de Novembro de 2026)
 - [x] Package **AppImage** (`pack:appimage` / `pack:linux`; CI attaches with `.deb`) (17 de Novembro de 2026)
 - [x] CI: `.github/workflows/release-deb.yml` — Release published → attach `.deb` + AppImage (17 de Novembro de 2026)

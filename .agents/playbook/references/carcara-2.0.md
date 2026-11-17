@@ -153,12 +153,14 @@ AppImage: `bun run pack:appimage` (portable; no afterInstall — use root/pkexec
 ```bash
 cd carcara-electron
 bun run smoke:software              # wiring + bash -n + ping + pkexec probe
-bun run smoke:software -- --pkexec  # + apt-dry-run (root|pkexec)
-# sudo bun run smoke:software -- --live-safe   # mutating (install-git)
+# Passwordless live (WSL-friendly — one-time sudoers, then no password):
+# sudo bun run smoke:nopasswd-install
+bun run smoke:elevated -- --live-safe
+bun run smoke:elevated -- --live-extended
 ```
 
-Harness: `scripts/smoke-software.sh`. Bun bridge passes `CARCARA_*` via `pkexec env` (same as Node).
+Harness: `smoke-software.sh` + optional `smoke-elevated.sh` (NOPASSWD scoped sudoers). Flags: `--live-core` / `--live-extended` / `--live-safe` / `--live …` — no `smoke:waveN`. Prefer `smoke:elevated` over pkexec on WSL (polkit often hangs without agent/TTY).
 
 ## Still open
 
-1. Live `--live` / `--live-safe` installs + live pkexec on real desktop / WSLg (owner-approved; needs policykit)
+_(none for smoke elevation — use `smoke:elevated` after `smoke:nopasswd-install`)_

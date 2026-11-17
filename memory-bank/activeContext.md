@@ -10,8 +10,8 @@ Last updated: 2026-11-17
 **v2.0.1 Waves A–C shipped:** full curated catalog + presets + Software search/badges + Sobre host health.  
 **Release:** cutting **v2.0.1** — notes in `docs/releases/2.0.1.md`; every future release needs that md + tag `vX.Y.Z` on the notes commit (`systemPatterns` #16).  
 **Packaging:** `.deb` + **AppImage** (`pack:appimage` / CI `pack:linux`).  
-**Next:** live `--live` / pkexec on host with policykit or root — `memory-bank/TODO.md`.  
-**Smoke harness:** `cd carcara-electron && bun run smoke:software` (wiring + bash -n; pkexec SKIP without policykit).  
+**Live smoke:** `--live-core` passed; `--live-extended` available; passwordless via `smoke:elevated`.  
+**Smoke:** one-time `sudo bun run smoke:nopasswd-install`, then `bun run smoke:elevated -- --live-safe` (no password / no polkit hang).  
 **Skills installed:** `bash-scripting`, `debian-linux-triage` (+ existing shellcheck / ui-ux-pro-max) — see `.agents/skills/README.md`.
 
 Canonical agent how-to:
@@ -95,14 +95,13 @@ Canonical agent how-to:
 ## Validated
 
 - Sistema as root: update / fix / clean → exit 0.
-- `bun run typecheck` + `bun run build` + `bun run pack:deb` OK.
+- `bun run typecheck` + `bun run build` + `bun run pack:deb` / `pack:appimage` OK.
 - Deb contains `resources/mylinux/{carcara,locales,dotfiles,helper}` + postinst wrapper.
+- Owner `--live-core` smoke (sudo + preserved `PATH`) — 17 Nov 2026.
 
 ## Still open
 
-1. Smoke-test Software installers / presets (owner-requested apt/flatpak/snap).
-2. Smoke-test **pkexec** on real desktop / WSLg (unelevated → elevates).
-3. Optional Electron AppImage.
+_(none for Software smoke — use `smoke:elevated` after `smoke:nopasswd-install`)_
 
 ## Blockers / notes
 

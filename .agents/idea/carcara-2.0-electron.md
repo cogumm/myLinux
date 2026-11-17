@@ -151,5 +151,6 @@ flowchart LR
 - [x] Package `.deb` (`electron-builder.yml` + `bun run pack:deb` + Release workflow) (17 de Novembro de 2026)
 - [x] AppImage target (`pack:appimage` / CI `pack:linux`) — 17 de Novembro de 2026
 - [x] Software / pkexec smoke harness (`bun run smoke:software`; wiring + ping + probe) — 17 de Novembro de 2026
-- [ ] Live Software `--live` + live `pkexec` on owner desktop (policykit / root)
+- [x] Live baseline `--live-core` on owner machine (sudo + `PATH=$PATH`) — 17 de Novembro de 2026
+- [x] Broader `--live-extended` + passwordless `smoke:elevated` (sudoers; WSL-friendly) — 17 de Novembro de 2026
 - [x] Document dual entry in root README + `carcara-electron/README.md` (alpha)

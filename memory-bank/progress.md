@@ -74,3 +74,6 @@ Append-only log. Do not delete completed history.
 - [x] Fix Release `.deb` CI: electron-builder `--publish never` + `publish: null` + `repository` in package.json; workflow_dispatch can attach to existing tag; checkout@v5 (2026-11-17)
 - [x] Default branch rename: docs/scripts use `main` (`start.sh` bootstrap, README, AGENTS, `.env.example`) (2026-11-17)
 - [x] AppImage packaging: `electron-builder` AppImage target + `pack:appimage` / `pack:linux`; CI attaches AppImage with `.deb`; smoke `bash -n` + `--live-safe` (2026-11-17)
+- [x] Live smoke harness: single `smoke:software` + `--live-core` / `--live-safe` (no smoke:waveN scripts); Bun PATH recovery under sudo (2026-11-17)
+- [x] Owner live `--live-core` smoke passed (`sudo env "PATH=$PATH" bun run smoke:software -- --live-core`) (2026-11-17)
+- [x] Passwordless smoke elevation: `smoke-elevated.sh` + `/etc/sudoers.d/carcara-smoke`; `--live-extended` set; prefer over pkexec on WSL (2026-11-17)

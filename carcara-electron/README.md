@@ -46,9 +46,12 @@ bun run dev
 | `bun run dev` | build + local `electron . --no-sandbox` |
 | `bun run start` | last build |
 | `bun run helper -- ping` | `testConnection.sh` → ping Google DNS IP (−c 3) |
-| `bun run smoke:software` | Software wiring + ping + pkexec probe (safe default) |
-| `bun run smoke:software -- --pkexec` | also `apt-dry-run` via helper (root or pkexec) |
-| `bun run smoke:software -- --live install-git …` | mutating installs (owner machine) |
+| `bun run smoke:software` | Software wiring + bash -n + ping + pkexec probe (safe default) |
+| `bun run smoke:nopasswd-install` | one-time sudoers for passwordless smoke (prompts sudo once) |
+| `bun run smoke:elevated -- --live-safe` | live smoke via `sudo -n` (no password after install) |
+| `bun run smoke:elevated -- --live-core` | baseline live set, passwordless after install |
+| `bun run smoke:elevated -- --live-extended` | baseline + catalog sample, passwordless after install |
+| `bun run smoke:software -- --pkexec --live-safe` | live via **pkexec** (unelevated user; needs `policykit-1`) |
 | `bun run typecheck` | `tsc --noEmit` |
 | `bun run pack:deb` | build + **electron-builder** → `release/*.deb` |
 | `bun run pack:appimage` | build → `release/*.AppImage` (portable; no postinst wrapper) |
@@ -61,13 +64,26 @@ Default mode does **not** install packages: it checks UI tiles ↔ helper allowl
 
 ```bash
 cd carcara-electron
+
+# Safe (non-mutating) wiring check
 bun run smoke:software
-# On a real desktop with policykit (or already-root):
-bun run smoke:software -- --pkexec
-sudo bun run smoke:software -- --live install-git install-vlc
+
+# --- Recommended on WSL: passwordless elevated smoke (no polkit hang) ---
+bun run smoke:nopasswd-install                 # one-time (prompts sudo password once)
+bun run smoke:elevated -- --live-safe          # install-git
+bun run smoke:elevated -- --live-core          # baseline set
+bun run smoke:elevated -- --live-extended      # baseline + catalog sample
+
+# --- pkexec path (needs policykit; prefer a real TTY / GUI agent) ---
+sudo apt install policykit-1
+cd carcara-electron
+# Keep Bun on PATH under sudo (bare `sudo bun` → "command not found"):
+sudo env "PATH=$PATH" bun run smoke:software -- --pkexec --live-safe
+# Or unelevated so polkit can prompt (NOT already-root):
+bun run smoke:software -- --pkexec --live-safe
 ```
 
-On **WSL** without `policykit-1`, pkexec probes **SKIP** — use root (`sudo ./start.sh --electron`) or a native desktop for elevation.
+`smoke:elevated` uses `sudo -n` + `/etc/sudoers.d/carcara-smoke` (scoped to `smoke-software.sh` only). Prefer it over pkexec on WSL. Never bare `sudo bun …` — sudo’s `secure_path` drops `~/.bun/bin`. One harness: `smoke:software` (+ flags) — do not add `smoke:waveN`.
 
 ## Packaging (`.deb` + AppImage)
 
