@@ -7,7 +7,7 @@
     "name": "Carcará"
   },
   "window": {
-    "title": "Carcará 2.0"
+    "title": "Carcará {version}"
   },
   "menu": {
     "choose": "Choose an option",
@@ -179,7 +179,7 @@
     "link": "Skip to content"
   },
   "ready": {
-    "log": "$ Carcará 2.0 ready.\n"
+    "log": "$ Carcará {version} ready.\n"
   },
   "console": {
     "title": "Activity",

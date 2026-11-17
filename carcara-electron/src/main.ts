@@ -33,7 +33,7 @@ function createWindow(): void {
     height: env.CARCARA_WINDOW_HEIGHT,
     minWidth: env.CARCARA_WINDOW_MIN_WIDTH,
     minHeight: env.CARCARA_WINDOW_MIN_HEIGHT,
-    title: nativeT("window.title"),
+    title: nativeT("window.title", { version: app.getVersion() }),
     icon: logoPath,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),

@@ -53,6 +53,17 @@ export function applyDocumentLang(lang: Lang = current): void {
   document.documentElement.lang = lang === "en" ? "en" : "pt-BR";
 }
 
-export function t(key: string): string {
-  return catalogs[current][key] ?? catalogs.pt[key] ?? key;
+/** Replace `{name}` placeholders (e.g. `{version}` from `package.json`). */
+export function interpolate(
+  template: string,
+  vars: Record<string, string>,
+): string {
+  return template.replace(/\{([a-zA-Z][a-zA-Z0-9_]*)\}/g, (full, name: string) =>
+    Object.prototype.hasOwnProperty.call(vars, name) ? vars[name]! : full,
+  );
+}
+
+export function t(key: string, vars?: Record<string, string>): string {
+  const raw = catalogs[current][key] ?? catalogs.pt[key] ?? key;
+  return vars ? interpolate(raw, vars) : raw;
 }

@@ -12,6 +12,7 @@ import {
   type Lang,
 } from "./lib/i18n.js";
 import type { AppContext, ViewId } from "./lib/types.js";
+import { APP_VERSION } from "./lib/version.js";
 import { getView, views } from "./views/index.js";
 
 export type MountOptions = {
@@ -116,7 +117,7 @@ export function mountApp(root: HTMLElement, options: MountOptions = {}): void {
   header.setStatus(t("status.ready"), "idle");
   navigate(currentView);
   if (!options.quiet) {
-    console.append(t("ready.log"), "info");
+    console.append(t("ready.log", { version: APP_VERSION }), "info");
   }
 
   carcaraApi().onNavigate?.((view) => {
