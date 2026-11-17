@@ -2,34 +2,33 @@
 . app/config/config.sh
 #----------------------------------------------------------------------------------------------------#
 # Data criação: 15 de Fevereiro de 2020
-# Última alteração: 16 de Novembro de 2026
+# Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
 # Telegram: http://t.me/CoGUMm
-# Script: menu
+# Script: social/_menu
 # Descrição: Menu de instalação dos aplicativos social.
-# Variáveis: $menuSof   : Volta pro menu de software.
 #----------------------------------------------------------------------------------------------------#
 
-while [ true ]; do
+while true; do
 	menu=$(zenity --width=330 --height=500 --list --column "Escolha uma das opções" --title="cGm" \
-			"Instalar o Discord" \
-			"Instalar o Spotify" \
-			"Instalar o Telegram" \
-	    	"Voltar" )
+		"Instalar o Discord" \
+		"Instalar o Spotify" \
+		"Instalar o Telegram" \
+		"Voltar")
 	case "$menu" in
-		"Instalar o Discord" )
+		"Instalar o Discord")
 			bash app/scripts/software/social/discord.sh
-		;;
-		"Instalar o Spotify" )
+			;;
+		"Instalar o Spotify")
 			bash app/scripts/software/social/spotify.sh
-		;;
-		"Instalar o Telegram" )
+			;;
+		"Instalar o Telegram")
 			bash app/scripts/software/social/telegram.sh
-		;;
-        "Voltar" )
-			bash $menuSof
-		;;
+			;;
+		"Voltar"|*)
+			break
+			;;
 	esac
 done
 # Fim

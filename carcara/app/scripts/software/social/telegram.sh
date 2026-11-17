@@ -1,34 +1,32 @@
 #!/bin/bash
-clear
 . app/config/config.sh
 #----------------------------------------------------------------------------------------------------#
 # Data criação: 15 de Fevereiro de 2020
-# Última alteração: 16 de Novembro de 2026
+# Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
 # Telegram: http://t.me/CoGUMm
 # Script: Telegram
-# Descrição: Script para instalar o Telegram
-# Variáveis: $configYad	 : Carrega as configurações do Yad (sem botões).
+# Descrição: Instala o Telegram Desktop (Flatpak → Snap).
 #----------------------------------------------------------------------------------------------------#
 
-installTelegram() {
-    if [ which -a telegram ]
-    then
-        yad --title "Instalando o Telegram" \
-            --text "Telegram já está instalado.
-                Voltando.." $configYad --timeout 3
-    else
+isRoot
 
-    yad --title "Instalando o Telegram" \
-        --text "Bem vindo ao script de instalação do Telegram" $configYad --timeout 5
+if pkg_present command telegram-desktop || pkg_present flatpak org.telegram.desktop \
+	|| pkg_present snap telegram-desktop; then
+	carcara_log "Telegram already installed — skip"
+	exit 0
+fi
 
-    sudo snap install telegram-desktop
-    sudo snap install telegram-cli
+if run_with_progress "Telegram (Flatpak)" flatpak_install org.telegram.desktop; then
+	exit 0
+fi
 
-    fi
-    return
-}
+carcara_log "Flatpak failed — trying Snap"
+if run_with_progress "Telegram (Snap)" snap_install telegram-desktop; then
+	exit 0
+fi
 
-installTelegram
+carcara_err "Telegram install failed"
+exit 1
 # Fim

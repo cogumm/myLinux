@@ -1,33 +1,32 @@
 #!/bin/bash
-clear
 . app/config/config.sh
 #----------------------------------------------------------------------------------------------------#
 # Data criação: 15 de Fevereiro de 2020
-# Última alteração: 16 de Novembro de 2026
+# Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
 # Telegram: http://t.me/CoGUMm
 # Script: Discord
-# Descrição: Script para instalar o Discord
-# Variáveis: $configYad	 : Carrega as configurações do Yad (sem botões).
+# Descrição: Instala o Discord (Flatpak → Snap).
 #----------------------------------------------------------------------------------------------------#
 
-installDiscord() {
-    if [ which -a discord ]
-    then
-        yad --title "Instalando o Discord" \
-            --text "Discord já está instalado.
-                Voltando.." $configYad --timeout 3
-    else
+isRoot
 
-    yad --title "Instalando o Discord" \
-        --text "Bem vindo ao script de instalação do Discord" $configYad --timeout 5
+if pkg_present command discord || pkg_present flatpak com.discordapp.Discord \
+	|| pkg_present snap discord; then
+	carcara_log "Discord already installed — skip"
+	exit 0
+fi
 
-    sudo snap install discord
+if run_with_progress "Discord (Flatpak)" flatpak_install com.discordapp.Discord; then
+	exit 0
+fi
 
-    fi
-    return
-}
+carcara_log "Flatpak failed — trying Snap"
+if run_with_progress "Discord (Snap)" snap_install discord; then
+	exit 0
+fi
 
-installDiscord
+carcara_err "Discord install failed"
+exit 1
 # Fim

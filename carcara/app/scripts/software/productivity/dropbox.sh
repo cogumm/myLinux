@@ -1,39 +1,32 @@
 #!/bin/bash
-clear
 . app/config/config.sh
 #----------------------------------------------------------------------------------------------------#
 # Data criação: 15 de Fevereiro de 2020
-# Última alteração: 16 de Novembro de 2026
+# Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
 # Telegram: http://t.me/CoGUMm
 # Script: Dropbox
-# Descrição: Script para instalar o Dropbox
-# Variáveis: $configYad	 : Carrega as configurações do Yad (sem botões).
+# Descrição: Instala o Dropbox (Flatpak → Snap).
 #----------------------------------------------------------------------------------------------------#
 
-installDropbox() {
-    yad --title "Instalando o Driobox" \
-		--text "Bem vindo ao script de instalação do Driobox" $configYad --timeout 5
+isRoot
 
-    cd ~
-    if [ -e temp ]
-    then
-        echo "Diretório já existe."
-        cd ~/temp/
-    else
-        mkdir temp
-        cd ~/temp/
-    fi
+if pkg_present command dropbox || pkg_present flatpak com.dropbox.Client \
+	|| pkg_present snap dropbox; then
+	carcara_log "Dropbox already installed — skip"
+	exit 0
+fi
 
-    cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
-    ~/.dropbox-dist/dropboxd
+if run_with_progress "Dropbox (Flatpak)" flatpak_install com.dropbox.Client; then
+	exit 0
+fi
 
-    cd ~
-    sudo rm -rf ~/temp/
+carcara_log "Flatpak failed — trying Snap"
+if run_with_progress "Dropbox (Snap)" snap_install dropbox; then
+	exit 0
+fi
 
-    return
-}
-
-installDropbox
+carcara_err "Dropbox install failed"
+exit 1
 # Fim

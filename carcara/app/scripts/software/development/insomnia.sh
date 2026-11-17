@@ -1,25 +1,32 @@
 #!/bin/bash
-clear
 . app/config/config.sh
 #----------------------------------------------------------------------------------------------------#
 # Data criação: 15 de Fevereiro de 2020
-# Última alteração: 16 de Novembro de 2026
+# Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
 # Telegram: http://t.me/CoGUMm
 # Script: Insomnia
-# Descrição: Script para instalar o Insomnia
-# Variáveis: $configYad	 : Carrega as configurações do Yad (sem botões).
+# Descrição: Instala o Insomnia (Flatpak → Snap).
 #----------------------------------------------------------------------------------------------------#
 
-installInsomnia() {
-    yad --title "Instalando o Insomnia" \
-        --text "Bem vindo ao script de instalação do Insomnia" $configYad --timeout 5
+isRoot
 
-    sudo snap install insomnia
+if pkg_present command insomnia || pkg_present flatpak rest.insomnia.Insomnia \
+	|| pkg_present snap insomnia; then
+	carcara_log "Insomnia already installed — skip"
+	exit 0
+fi
 
-    return
-}
+if run_with_progress "Insomnia (Flatpak)" flatpak_install rest.insomnia.Insomnia; then
+	exit 0
+fi
 
-installInsomnia
+carcara_log "Flatpak failed — trying Snap"
+if run_with_progress "Insomnia (Snap)" snap_install insomnia; then
+	exit 0
+fi
+
+carcara_err "Insomnia install failed"
+exit 1
 # Fim
