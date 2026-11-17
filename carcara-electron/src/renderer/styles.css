@@ -62,7 +62,8 @@
 }
 
 html,
-body {
+body,
+#app {
   height: 100%;
   margin: 0;
 }
@@ -303,6 +304,8 @@ button:disabled {
   grid-template-rows: auto minmax(0, 1fr) minmax(140px, 28vh);
   min-width: 0;
   min-height: 0;
+  height: 100%;
+  overflow: hidden;
 }
 
 .stage__head {
@@ -333,9 +336,9 @@ button:disabled {
 
 .lede {
   margin: 0.35rem 0 0;
-  max-width: none;
+  max-width: 52rem;
   color: var(--color-muted-foreground);
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .pill {
@@ -367,7 +370,9 @@ button:disabled {
 }
 
 .stage__body {
-  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   padding: 1.25rem 1.5rem;
   min-height: 0;
 }
@@ -377,8 +382,19 @@ button:disabled {
 }
 
 .panel.is-visible {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
   animation: rise 200ms ease;
+}
+
+/* Sistema / Dotfiles / Sobre — scroll inside the panel */
+.panel.is-visible > :not(.soft-layout) {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
 }
 
 .panel[hidden] {
@@ -406,45 +422,73 @@ button:disabled {
   }
 }
 
-/* Software — category rail + pane (same link style as main rail) */
+/* Software — category rail + pane (fills stage; tiles grow with auto-fit) */
 .soft-layout {
   display: grid;
-  grid-template-columns: minmax(180px, 220px) minmax(0, 1fr);
-  gap: 1rem;
-  align-items: start;
-  min-height: 100%;
+  grid-template-columns: minmax(240px, 300px) minmax(0, 1fr);
+  gap: 1.1rem;
+  align-items: stretch;
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  height: 100%;
 }
 
 .soft-layout__nav {
-  position: sticky;
-  top: 0;
-  max-height: calc(100vh - 8rem);
-  overflow: auto;
-  padding: 0.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  align-self: stretch;
+  min-height: 0;
+  height: 100%;
+  max-height: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 0.45rem;
   border-radius: var(--radius);
   border: 1px solid var(--color-border);
   background: var(--color-card);
+  scrollbar-gutter: stable;
+}
+
+.soft-layout__nav .rail__link {
+  flex-shrink: 0;
+  min-height: 40px;
+  padding: 0.45rem 0.65rem;
+  font-size: 0.86rem;
+}
+
+.soft-layout__nav .rail__link span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .soft-empty {
   margin: 0;
-  padding: 1.25rem 1rem;
+  padding: 1.5rem 1.25rem;
   border-radius: var(--radius);
   border: 1px dashed var(--color-border);
+  background: color-mix(in srgb, var(--color-card) 80%, transparent);
   color: var(--color-muted-foreground);
-  font-size: 0.9rem;
-  line-height: 1.45;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  max-width: 36rem;
 }
 
 .soft-layout__pane {
   min-width: 0;
+  min-height: 0;
+  height: 100%;
+  overflow: auto;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.85rem;
 }
 
 .soft-layout__pane .paged-tiles[hidden],
-.soft-layout__pane .tile-grid[hidden] {
+.soft-layout__pane .tile-grid[hidden],
+.soft-layout__pane .soft-empty[hidden] {
   display: none !important;
 }
 
@@ -453,6 +497,7 @@ button:disabled {
   flex-direction: column;
   gap: 0.85rem;
   min-width: 0;
+  flex: 1 1 auto;
 }
 
 .pager {
@@ -499,15 +544,38 @@ button:disabled {
   letter-spacing: 0.02em;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 1100px) {
+  .soft-layout {
+    grid-template-columns: minmax(200px, 240px) minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
   .soft-layout {
     grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(0, 1fr);
   }
 
   .soft-layout__nav {
     flex-direction: row;
     flex-wrap: wrap;
-    position: static;
+    height: auto;
+    max-height: 9.5rem;
+    overflow: auto;
+  }
+
+  .soft-layout__nav .rail__link {
+    flex: 0 1 auto;
+  }
+
+  .soft-layout__nav .rail__link span {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 720px) {
+  .soft-layout {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -529,17 +597,21 @@ button:disabled {
 
 .tile-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
-  gap: 0.75rem;
+  /* auto-fit collapses empty tracks so few tiles expand across the pane */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 0.85rem;
+  align-content: start;
+  width: 100%;
 }
 
 .tile {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.25rem;
-  min-height: 96px;
-  padding: 0.9rem 1rem;
+  gap: 0.35rem;
+  width: 100%;
+  min-height: 112px;
+  padding: 1rem 1.1rem;
   text-align: left;
   border-radius: var(--radius);
   border: 1px solid var(--color-border);

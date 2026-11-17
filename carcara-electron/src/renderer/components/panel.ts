@@ -17,11 +17,12 @@ export function createPanel(
 export function showPanel(panels: Map<ViewId, HTMLElement>, id: ViewId): void {
   for (const [viewId, panel] of panels) {
     const match = viewId === id;
-    panel.hidden = !match;
     panel.classList.toggle("is-visible", match);
     if (match) {
+      panel.hidden = false;
       panel.removeAttribute("hidden");
-      panel.style.display = "";
+    } else {
+      panel.hidden = true;
     }
   }
 }
