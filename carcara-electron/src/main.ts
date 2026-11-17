@@ -1,9 +1,21 @@
 import { app, BrowserWindow, ipcMain } from "electron";
 import { spawn } from "node:child_process";
+import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { installAppMenu } from "./app-menu";
 import { env } from "./env";
 import { openExternalUrl } from "./open-external";
+
+/** Same disclaimer file as Carcará 1.x Zenity license gate. */
+const LICENSE_PATH = path.join(
+  __dirname,
+  "..",
+  "..",
+  "carcara",
+  "app",
+  "config",
+  "license",
+);
 
 /** Bun Shell bridge — privilege allowlist runs under Bun, not Electron's Node. */
 const HELPER_BRIDGE = path.join(__dirname, "..", "scripts", "run-helper.ts");
@@ -108,6 +120,14 @@ app.whenReady().then(() => {
       const message = err instanceof Error ? err.message : String(err);
       return { ok: false as const, error: message };
     }
+  });
+
+  ipcMain.handle("license:get", async () => {
+    return readFile(LICENSE_PATH, "utf8");
+  });
+
+  ipcMain.handle("app:quit", () => {
+    app.quit();
   });
 
   createWindow();

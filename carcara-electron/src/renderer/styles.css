@@ -678,6 +678,87 @@ button:disabled {
   color: var(--term-err);
 }
 
+/* License gate (1.x Zenity checkbox parity) */
+.license-gate {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 1.5rem;
+  background:
+    radial-gradient(ellipse at 20% 0%, color-mix(in srgb, var(--color-primary) 18%, transparent), transparent 55%),
+    var(--color-background);
+}
+
+.license-gate__card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  width: min(640px, 100%);
+  max-height: min(90vh, 720px);
+  padding: 1.35rem 1.4rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  background: var(--color-card);
+  color: var(--color-card-foreground);
+  box-shadow: 0 18px 40px rgb(0 0 0 / 0.35);
+}
+
+.license-gate__title {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.license-gate__lede {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-muted-foreground);
+}
+
+.license-gate__body {
+  flex: 1 1 auto;
+  margin: 0;
+  padding: 0.85rem 1rem;
+  overflow: auto;
+  min-height: 12rem;
+  max-height: 42vh;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-muted);
+  color: var(--color-foreground);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+
+.license-gate__check {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+}
+
+.license-gate__check input {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--color-primary);
+}
+
+.license-gate__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
 /* Dialog */
 .dialog {
   border: none;

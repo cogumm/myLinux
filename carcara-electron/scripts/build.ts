@@ -28,6 +28,8 @@ if (!bundle.success) {
 
 await $`cp ${path.join(root, "src/renderer/index.html")} ${rendererDest}/`;
 await $`cp ${path.join(root, "src/renderer/styles.css")} ${rendererDest}/`;
+// Same license text as 1.x Zenity gate (fallback if IPC unavailable).
+await $`cp ${path.join(repoRoot, "carcara/app/config/license")} ${path.join(rendererDest, "license.txt")}`;
 
 const fontsSrc = path.join(root, "assets/fonts");
 const fontsDest = path.join(assetsDest, "fonts");
