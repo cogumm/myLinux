@@ -46,10 +46,10 @@ function createWindow(): void {
     "logo_moderno_final.png",
   );
   const win = new BrowserWindow({
-    width: 960,
-    height: 720,
-    minWidth: 720,
-    minHeight: 520,
+    width: 1080,
+    height: 760,
+    minWidth: 780,
+    minHeight: 560,
     title: "Carcará 2.0",
     icon: logoPath,
     webPreferences: {

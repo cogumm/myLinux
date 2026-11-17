@@ -12,174 +12,210 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="app">
-      <aside class="sidebar" aria-label="Navegação principal">
-        <div class="brand-block">
+    <a class="skip-link" href="#main">Ir ao conteúdo</a>
+
+    <div class="shell">
+      <aside class="rail" aria-label="Navegação">
+        <div class="brand">
           <img
-            class="brand-logo"
+            class="brand__mark"
             src="assets/logo_moderno_final.png"
-            width="56"
-            height="56"
-            alt="Carcará"
+            width="72"
+            height="72"
+            alt=""
           />
-          <div class="brand-text">
-            <p class="brand">Carcará</p>
-            <p class="brand-sub">2.0</p>
+          <div class="brand__text">
+            <p class="brand__name">Carcará</p>
+            <p class="brand__ver">2.0</p>
           </div>
         </div>
-        <nav class="nav">
-          <button type="button" class="nav-item is-active" data-view="sistema" aria-current="page">
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75">
-              <path d="M4 7h16M4 12h16M4 17h10" stroke-linecap="round" />
+
+        <nav class="rail__nav" aria-label="Principal">
+          <button type="button" class="rail__link is-active" data-view="sistema" aria-current="page">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75">
+              <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h10" />
             </svg>
-            Sistema
+            <span>Sistema</span>
           </button>
-          <button type="button" class="nav-item" data-view="software">
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75">
+          <button type="button" class="rail__link" data-view="software">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75">
               <rect x="4" y="5" width="16" height="14" rx="2" />
-              <path d="M8 9h8M8 13h5" stroke-linecap="round" />
+              <path stroke-linecap="round" d="M8 9h8M8 13h5" />
             </svg>
-            Software
+            <span>Software</span>
           </button>
-          <button type="button" class="nav-item" data-view="sobre">
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75">
+          <button type="button" class="rail__link" data-view="sobre">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75">
               <circle cx="12" cy="12" r="8" />
-              <path d="M12 11v5M12 8h.01" stroke-linecap="round" />
+              <path stroke-linecap="round" d="M12 11v5M12 8h.01" />
             </svg>
-            Sobre
+            <span>Sobre</span>
           </button>
         </nav>
+
+        <p class="rail__foot">Motor 1.x · UI Electron</p>
       </aside>
 
-      <div class="workspace">
-        <header class="topbar">
-          <h1 id="view-title">Sistema</h1>
-          <p id="view-lede" class="lede">Manutenção apt — ações elevadas via helper.</p>
+      <div class="stage">
+        <header class="stage__head">
+          <div>
+            <p class="eyebrow" id="view-eyebrow">Manutenção</p>
+            <h1 id="view-title">Sistema</h1>
+            <p class="lede" id="view-lede">Atualizar, corrigir e limpar via helper privilegiado.</p>
+          </div>
+          <p id="status" class="pill" role="status" aria-live="polite">Pronto</p>
         </header>
 
-        <main class="main">
-          <section id="view-sistema" class="view is-visible" aria-labelledby="view-title">
-            <div class="action-grid">
-              <button type="button" class="card-action primary" data-action="update-distro" data-confirm="Atualizar o sistema (apt update + upgrade + full-upgrade)? Requer privilégios.">
-                <span class="card-action-title">Atualizar sistema</span>
-                <span class="card-action-desc">update → upgrade → full-upgrade (scripts 1.x).</span>
+        <main id="main" class="stage__body">
+          <!-- Sistema -->
+          <section id="view-sistema" class="panel is-visible" aria-labelledby="view-title">
+            <div class="tile-grid">
+              <button type="button" class="tile tile--accent" data-action="update-distro" data-confirm="Atualizar o sistema (apt update + upgrade + full-upgrade)? Requer privilégios.">
+                <span class="tile__kicker">Apt</span>
+                <span class="tile__title">Atualizar sistema</span>
+                <span class="tile__desc">update → upgrade → full-upgrade</span>
               </button>
-              <button type="button" class="card-action" data-action="fix-system" data-confirm="Corrigir pacotes quebrados (apt -f + dpkg --configure -a)?">
-                <span class="card-action-title">Correção do sistema</span>
-                <span class="card-action-desc">Repara dependências e configurações pendentes.</span>
+              <button type="button" class="tile" data-action="fix-system" data-confirm="Corrigir pacotes quebrados (apt -f + dpkg --configure -a)?">
+                <span class="tile__kicker">Reparar</span>
+                <span class="tile__title">Correção do sistema</span>
+                <span class="tile__desc">Dependências e configure -a</span>
               </button>
-              <button type="button" class="card-action" data-action="clean-distro" data-confirm="Limpeza segura (lixeira, tmp, apt clean/autoclean/autoremove)? Locks e listas apt NÃO serão removidos neste modo.">
-                <span class="card-action-title">Limpeza do sistema</span>
-                <span class="card-action-desc">Caminho seguro; sem remoção automática de locks.</span>
+              <button type="button" class="tile" data-action="clean-distro" data-confirm="Limpeza segura (lixeira, tmp, apt clean/autoclean/autoremove)? Locks e listas apt não serão removidos.">
+                <span class="tile__kicker">Limpar</span>
+                <span class="tile__title">Limpeza do sistema</span>
+                <span class="tile__desc">Caminho seguro, sem locks</span>
               </button>
-              <button type="button" class="card-action" data-action="apt-dry-run">
-                <span class="card-action-title">Apt dry-run</span>
-                <span class="card-action-desc">Simula upgrade sem alterar pacotes.</span>
+              <button type="button" class="tile" data-action="apt-dry-run">
+                <span class="tile__kicker">Simular</span>
+                <span class="tile__title">Apt dry-run</span>
+                <span class="tile__desc">Sem alterar pacotes</span>
               </button>
-              <button type="button" class="card-action" data-action="ping">
-                <span class="card-action-title">Ping helper</span>
-                <span class="card-action-desc">Testa o bridge Bun sem mudar o sistema.</span>
+              <button type="button" class="tile" data-action="ping">
+                <span class="tile__kicker">Diagnóstico</span>
+                <span class="tile__title">Ping helper</span>
+                <span class="tile__desc">Testa o bridge Bun</span>
               </button>
             </div>
           </section>
 
-          <section id="view-software" class="view" hidden aria-labelledby="view-title">
-            <div class="category">
-              <h2 class="category-title">Desenvolvimento</h2>
-              <div class="action-grid">
-                <button type="button" class="card-action" data-action="install-git" data-confirm="Instalar Git e ferramentas GUI via apt?">
-                  <span class="card-action-title">Git</span>
-                  <span class="card-action-desc">apt: git, git-gui, git-doc, gitg</span>
-                </button>
-                <button type="button" class="card-action primary" data-action="install-vscode" data-confirm="Instalar Visual Studio Code (Microsoft apt → Snap)?">
-                  <span class="card-action-title">VS Code</span>
-                  <span class="card-action-desc">apt keyring Microsoft → Snap classic</span>
-                </button>
-                <button type="button" class="card-action" data-action="install-insomnia" data-confirm="Instalar Insomnia (Flatpak → Snap)?">
-                  <span class="card-action-title">Insomnia</span>
-                  <span class="card-action-desc">Flatpak → Snap</span>
-                </button>
-                <button type="button" class="card-action" data-action="install-firacode" data-confirm="Instalar fonte Fira Code (fonts-firacode)?">
-                  <span class="card-action-title">Fira Code</span>
-                  <span class="card-action-desc">apt: fonts-firacode</span>
-                </button>
+          <!-- Software -->
+          <section id="view-software" class="panel" hidden aria-labelledby="view-title">
+            <div class="stack">
+              <div class="group">
+                <h2 class="group__title">Desenvolvimento</h2>
+                <div class="tile-grid">
+                  <button type="button" class="tile" data-action="install-git" data-confirm="Instalar Git e ferramentas GUI via apt?">
+                    <span class="tile__title">Git</span>
+                    <span class="tile__desc">apt · gui / doc / gitg</span>
+                  </button>
+                  <button type="button" class="tile tile--accent" data-action="install-vscode" data-confirm="Instalar Visual Studio Code (Microsoft apt → Snap)?">
+                    <span class="tile__title">VS Code</span>
+                    <span class="tile__desc">apt keyring → Snap</span>
+                  </button>
+                  <button type="button" class="tile" data-action="install-insomnia" data-confirm="Instalar Insomnia (Flatpak → Snap)?">
+                    <span class="tile__title">Insomnia</span>
+                    <span class="tile__desc">Flatpak → Snap</span>
+                  </button>
+                  <button type="button" class="tile" data-action="install-firacode" data-confirm="Instalar fonte Fira Code?">
+                    <span class="tile__title">Fira Code</span>
+                    <span class="tile__desc">apt fonts-firacode</span>
+                  </button>
+                </div>
               </div>
-            </div>
 
-            <div class="category">
-              <h2 class="category-title">Produção</h2>
-              <div class="action-grid">
-                <button type="button" class="card-action" data-action="install-dropbox" data-confirm="Instalar Dropbox (Flatpak → Snap)?">
-                  <span class="card-action-title">Dropbox</span>
-                  <span class="card-action-desc">Flatpak → Snap</span>
-                </button>
+              <div class="group">
+                <h2 class="group__title">Produção</h2>
+                <div class="tile-grid">
+                  <button type="button" class="tile" data-action="install-dropbox" data-confirm="Instalar Dropbox (Flatpak → Snap)?">
+                    <span class="tile__title">Dropbox</span>
+                    <span class="tile__desc">Flatpak → Snap</span>
+                  </button>
+                </div>
               </div>
-            </div>
 
-            <div class="category">
-              <h2 class="category-title">Social</h2>
-              <div class="action-grid">
-                <button type="button" class="card-action" data-action="install-discord" data-confirm="Instalar Discord (Flatpak → Snap)?">
-                  <span class="card-action-title">Discord</span>
-                  <span class="card-action-desc">Flatpak → Snap</span>
-                </button>
-                <button type="button" class="card-action" data-action="install-spotify" data-confirm="Instalar Spotify (apt keyring → Flatpak → Snap)?">
-                  <span class="card-action-title">Spotify</span>
-                  <span class="card-action-desc">apt keyring → Flatpak → Snap</span>
-                </button>
-                <button type="button" class="card-action" data-action="install-telegram" data-confirm="Instalar Telegram Desktop (Flatpak → Snap)?">
-                  <span class="card-action-title">Telegram</span>
-                  <span class="card-action-desc">Flatpak → Snap</span>
-                </button>
+              <div class="group">
+                <h2 class="group__title">Social</h2>
+                <div class="tile-grid">
+                  <button type="button" class="tile" data-action="install-discord" data-confirm="Instalar Discord?">
+                    <span class="tile__title">Discord</span>
+                    <span class="tile__desc">Flatpak → Snap</span>
+                  </button>
+                  <button type="button" class="tile" data-action="install-spotify" data-confirm="Instalar Spotify?">
+                    <span class="tile__title">Spotify</span>
+                    <span class="tile__desc">apt → Flatpak → Snap</span>
+                  </button>
+                  <button type="button" class="tile" data-action="install-telegram" data-confirm="Instalar Telegram Desktop?">
+                    <span class="tile__title">Telegram</span>
+                    <span class="tile__desc">Flatpak → Snap</span>
+                  </button>
+                </div>
               </div>
-            </div>
 
-            <div class="category">
-              <h2 class="category-title">Utilidades</h2>
-              <div class="action-grid">
-                <button type="button" class="card-action" data-action="install-vlc" data-confirm="Instalar VLC (apt → Flatpak → Snap)?">
-                  <span class="card-action-title">VLC</span>
-                  <span class="card-action-desc">apt → Flatpak → Snap</span>
-                </button>
+              <div class="group">
+                <h2 class="group__title">Utilidades</h2>
+                <div class="tile-grid">
+                  <button type="button" class="tile" data-action="install-vlc" data-confirm="Instalar VLC?">
+                    <span class="tile__title">VLC</span>
+                    <span class="tile__desc">apt → Flatpak → Snap</span>
+                  </button>
+                </div>
               </div>
             </div>
           </section>
 
-          <section id="view-sobre" class="view" hidden aria-labelledby="view-title">
-            <div class="about-hero">
+          <!-- Sobre -->
+          <section id="view-sobre" class="panel" hidden aria-labelledby="view-title">
+            <div class="about">
               <img
-                class="about-logo"
+                class="about__hero"
                 src="assets/logo_moderno_final.png"
-                width="120"
-                height="120"
+                width="160"
+                height="160"
                 alt="Logo Carcará"
               />
-              <div class="about-copy">
-                <p class="hint">
-                  Motor de instalação: scripts Bash 1.x. UI: Electron + Bun.
-                  Design: Flat Design (<code>design-system/carcara-2-0</code>).
-                  Ações de sistema usam <code>CARCARA_NONINTERACTIVE=1</code> via helper.
+              <div class="about__body">
+                <p>
+                  Painel Electron + Bun sobre o motor Bash 1.x.
+                  Design Flat (<code>ui-ux-pro-max</code> → <code>design-system/carcara-2-0</code>).
                 </p>
-                <div class="about-variants" aria-label="Variantes do logo">
-                  <img src="assets/logo_moderno_final.png" alt="logo_moderno_final" width="48" height="48" />
-                  <img src="assets/logo_moderno.png" alt="logo_moderno" width="48" height="48" />
-                  <img src="assets/logo_redesenhado.png" alt="logo_redesenhado" width="48" height="48" />
-                  <img src="assets/logo.png" alt="logo" width="48" height="48" />
+                <p class="muted">
+                  Marca: <code>assets/img/logo_moderno_final.png</code>
+                </p>
+                <div class="about__marks" aria-label="Variantes">
+                  <img src="assets/logo_moderno_final.png" alt="" width="40" height="40" />
+                  <img src="assets/logo_moderno.png" alt="" width="40" height="40" />
+                  <img src="assets/logo_redesenhado.png" alt="" width="40" height="40" />
+                  <img src="assets/logo.png" alt="" width="40" height="40" />
                 </div>
               </div>
             </div>
           </section>
         </main>
 
-        <section class="log-panel" aria-labelledby="log-title">
-          <div class="log-head">
+        <section class="console" aria-labelledby="log-title">
+          <div class="console__bar">
             <h2 id="log-title">Atividade</h2>
-            <p id="status" class="status" role="status" aria-live="polite">Pronto</p>
+            <button type="button" class="ghost" id="btn-clear-log" aria-label="Limpar log">
+              Limpar
+            </button>
           </div>
-          <pre id="log" class="log" tabindex="0"></pre>
+          <pre id="log" class="console__out" tabindex="0"></pre>
         </section>
       </div>
     </div>
+
+    <dialog id="confirm-dialog" class="dialog" aria-labelledby="confirm-title">
+      <form method="dialog" class="dialog__card">
+        <h2 id="confirm-title">Confirmar</h2>
+        <p id="confirm-text" class="dialog__text"></p>
+        <div class="dialog__actions">
+          <button type="submit" value="cancel" class="btn">Cancelar</button>
+          <button type="submit" value="ok" class="btn btn--accent" id="confirm-ok">
+            Continuar
+          </button>
+        </div>
+      </form>
+    </dialog>
 
     <script src="renderer.js"></script>
   </body>

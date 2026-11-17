@@ -8,16 +8,22 @@ type CarcaraApi = {
   runHelper: (action: string) => Promise<HelperResult>;
 };
 
-const VIEW_META: Record<string, { title: string; lede: string }> = {
+const VIEW_META: Record<
+  string,
+  { eyebrow: string; title: string; lede: string }
+> = {
   sistema: {
+    eyebrow: "Manutenção",
     title: "Sistema",
-    lede: "Manutenção apt — ações elevadas via helper.",
+    lede: "Atualizar, corrigir e limpar via helper privilegiado.",
   },
   software: {
+    eyebrow: "Catálogo",
     title: "Software",
-    lede: "Instalações curadas (apt → Flatpak → Snap).",
+    lede: "Instalações curadas — apt → Flatpak → Snap.",
   },
   sobre: {
+    eyebrow: "Identidade",
     title: "Sobre",
     lede: "Carcará 2.0 — painel Electron sobre o motor 1.x.",
   },
@@ -29,12 +35,20 @@ function carcaraApi(): CarcaraApi {
 
 const logEl = document.getElementById("log") as HTMLPreElement;
 const statusEl = document.getElementById("status") as HTMLParagraphElement;
+const eyebrowEl = document.getElementById("view-eyebrow") as HTMLParagraphElement;
 const titleEl = document.getElementById("view-title") as HTMLHeadingElement;
 const ledeEl = document.getElementById("view-lede") as HTMLParagraphElement;
+const confirmDialog = document.getElementById("confirm-dialog") as HTMLDialogElement;
+const confirmText = document.getElementById("confirm-text") as HTMLParagraphElement;
+const clearLogBtn = document.getElementById("btn-clear-log") as HTMLButtonElement;
+
 const actionButtons = Array.from(
   document.querySelectorAll<HTMLButtonElement>("[data-action]"),
 );
-const navItems = Array.from(document.querySelectorAll<HTMLButtonElement>(".nav-item"));
+const navItems = Array.from(
+  document.querySelectorAll<HTMLButtonElement>(".rail__link"),
+);
+const panels = Array.from(document.querySelectorAll<HTMLElement>(".panel"));
 
 function appendLog(text: string): void {
   logEl.textContent += text;
@@ -50,77 +64,98 @@ function setStatus(text: string, kind: "idle" | "busy" | "ok" | "err"): void {
 }
 
 function setBusy(busy: boolean): void {
-  actionButtons.forEach((btn) => {
+  for (const btn of actionButtons) {
     btn.disabled = busy;
-  });
-  setStatus(busy ? "Executando…" : "Pronto", busy ? "busy" : "idle");
+  }
 }
 
-function showView(view: string): void {
-  const meta = VIEW_META[view] ?? VIEW_META.sistema;
-  titleEl.textContent = meta.title;
-  ledeEl.textContent = meta.lede;
-
-  document.querySelectorAll<HTMLElement>(".view").forEach((el) => {
-    const match = el.id === `view-${view}`;
-    el.hidden = !match;
-    el.classList.toggle("is-visible", match);
+function askConfirm(message: string): Promise<boolean> {
+  confirmText.textContent = message;
+  confirmDialog.showModal();
+  return new Promise((resolve) => {
+    const onClose = (): void => {
+      confirmDialog.removeEventListener("close", onClose);
+      resolve(confirmDialog.returnValue === "ok");
+    };
+    confirmDialog.addEventListener("close", onClose);
   });
+}
 
-  navItems.forEach((btn) => {
-    const active = btn.dataset.view === view;
-    btn.classList.toggle("is-active", active);
-    if (active) {
-      btn.setAttribute("aria-current", "page");
-    } else {
-      btn.removeAttribute("aria-current");
+async function runAction(action: string, confirmMsg?: string): Promise<void> {
+  if (confirmMsg) {
+    const ok = await askConfirm(confirmMsg);
+    if (!ok) {
+      setStatus("Cancelado", "idle");
+      return;
     }
-  });
-}
+  }
 
-async function runAction(action: string): Promise<void> {
   setBusy(true);
-  logEl.classList.remove("ok", "err");
-  appendLog(`\n--- ${action} ---\n`);
+  setStatus("Executando…", "busy");
+  appendLog(`\n$ carcara ${action}\n`);
+
   try {
     const result = await carcaraApi().runHelper(action);
     if (result.stdout) appendLog(result.stdout);
     if (result.stderr) appendLog(result.stderr);
-    appendLog(`\n[exit ${result.code ?? "null"}]\n`);
-    const ok = result.code === 0;
-    logEl.classList.add(ok ? "ok" : "err");
-    setStatus(ok ? "Concluído" : "Falhou", ok ? "ok" : "err");
+    const code = result.code ?? 1;
+    appendLog(`\n[exit ${code}]\n`);
+    if (code === 0) {
+      setStatus("Concluído", "ok");
+    } else {
+      setStatus(`Falhou (${code})`, "err");
+    }
   } catch (err) {
-    appendLog(`\n[ipc error] ${String(err)}\n`);
-    logEl.classList.add("err");
-    setStatus("Erro IPC", "err");
+    const msg = err instanceof Error ? err.message : String(err);
+    appendLog(`\n[erro] ${msg}\n`);
+    setStatus("Erro", "err");
   } finally {
-    actionButtons.forEach((btn) => {
-      btn.disabled = false;
-    });
+    setBusy(false);
   }
 }
 
-navItems.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    showView(btn.dataset.view ?? "sistema");
-  });
-});
+function showView(view: string): void {
+  const meta = VIEW_META[view] ?? VIEW_META.sistema;
+  eyebrowEl.textContent = meta.eyebrow;
+  titleEl.textContent = meta.title;
+  ledeEl.textContent = meta.lede;
 
-actionButtons.forEach((btn) => {
+  for (const panel of panels) {
+    const match = panel.id === `view-${view}`;
+    panel.hidden = !match;
+    panel.classList.toggle("is-visible", match);
+  }
+
+  for (const item of navItems) {
+    const active = item.dataset.view === view;
+    item.classList.toggle("is-active", active);
+    if (active) {
+      item.setAttribute("aria-current", "page");
+    } else {
+      item.removeAttribute("aria-current");
+    }
+  }
+}
+
+for (const item of navItems) {
+  item.addEventListener("click", () => {
+    const view = item.dataset.view;
+    if (view) showView(view);
+  });
+}
+
+for (const btn of actionButtons) {
   btn.addEventListener("click", () => {
     const action = btn.dataset.action;
     if (!action) return;
-    const confirmMsg = btn.dataset.confirm;
-    if (confirmMsg && !window.confirm(confirmMsg)) {
-      appendLog(`\n--- ${action} cancelado pelo usuário ---\n`);
-      return;
-    }
-    void runAction(action);
+    void runAction(action, btn.dataset.confirm);
   });
+}
+
+clearLogBtn.addEventListener("click", () => {
+  logEl.textContent = "";
+  setStatus("Pronto", "idle");
 });
 
 showView("sistema");
-appendLog(
-  "Carcará 2.0 pronto. Sistema e Software usam o helper (confirmação na UI antes de instalar/alterar).\n",
-);
+appendLog("Carcará 2.0 pronto.\n");
