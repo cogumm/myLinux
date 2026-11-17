@@ -11,7 +11,6 @@ Session dump: `memory-bank/activeContext.md`.
 | Track | Open item | Notes |
 |-------|-----------|--------|
 | **2.0.2** | Manual GUI smoke on native Linux | Confirm `./start.sh --electron` on yavin |
-| **2.0.2** | Rail brand height vs stage header | Logo + name + version align with right header band |
 | **2.0.2** | Software category “Todas” / “All” | Filter across all categories |
 | **2.0.2** | Resizable activity/terminal height | User-adjustable bottom console |
 
@@ -43,7 +42,7 @@ Release notes: [`docs/releases/2.0.2.md`](../docs/releases/2.0.2.md). Before tag
 
 ### UX / Software (scoped — not started)
 
-- [ ] Align rail brand block (logo + name + version) to the same height as the stage header band on the right (match top padding / divider with Sistema header)
+- [x] Align rail brand block (logo + name + version) to the same height as the stage header band on the right (match top padding / divider with Sistema header) — `--shell-head-*` + compact mark
 - [ ] Software: add category **Todas** / **All** in `carcara-electron/src/renderer/views/software.ts` — filter searches across every category
 - [ ] Activity / “terminal” panel: user-resizable height (drag handle or similar)
 

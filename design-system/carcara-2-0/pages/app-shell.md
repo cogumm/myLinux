@@ -43,9 +43,10 @@
 
 ## Brand
 
-- Primary mark: `assets/img/logo_moderno_final.png` (hero in rail, ~96px)
+- Primary mark: `assets/img/logo_moderno_final.png` sized to band (`--brand-mark-size`) **left of** wordmark; version pill **under** the name
 - Wordmark **Carcará** Inter 700, tracking −0.03em (Modern Dark Cinema)
-- Version as teal nowrap pill beside the wordmark — value from `package.json` (e.g. `2.0.0-alpha.0`); never wrap
+- Brand band and `stage__head` share exact `--shell-head-h` (tight pad) so the divider is one continuous line
+- Version pill from `package.json`; never wrap
 - Active nav: accent orange inset + secondary teal icon
 - Tile hover: teal left bar + primary border (no permanent featured outline)
 - Footer: **PT | EN** lang switch + `MIT · 2010–YYYY · cogumm.net`

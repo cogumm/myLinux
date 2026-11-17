@@ -81,3 +81,4 @@ Append-only log. Do not delete completed history.
 - [x] **v2.0.2** filed: Electron/`bun run dev` must not run as root — yavin X11/D-Bus/GLES report (2026-11-17)
 - [x] **v2.0.2** implement: `start.sh` drop-root for Electron; `CARCARA_REQUIRE_ROOT` default `0`; docs/playbook/idea; await native GUI confirm (2026-11-17)
 - [x] Release notes for desktop-user Electron live in `docs/releases/2.0.2.md` (2.0.1.md restored as shipped history) (2026-11-17)
+- [x] **v2.0.2** UX: rail brand band height synced with `stage__head` via `--shell-head-*` (ui-ux-pro-max) (2026-11-17)
