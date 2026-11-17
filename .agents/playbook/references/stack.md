@@ -22,7 +22,7 @@
 - Packaging: `electron-builder.yml` in `carcara-electron/`; CI `.github/workflows/release-deb.yml`
 - External links (WSL): `src/open-external.ts` → PowerShell `Start-Process`
 - Design: `ui-ux-pro-max` → `design-system/carcara-2-0/`
-- Entry: `sudo ./start.sh --electron` (dev) · or installed `carcara` from `.deb`
+- Entry: `./start.sh --electron` (dev, as desktop user) · or installed `carcara` from `.deb`
 - Detail: `references/carcara-2.0.md` · Plan: `.agents/idea/carcara-2.0-electron.md`
 
 ## Shared

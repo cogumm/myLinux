@@ -10,9 +10,9 @@ Memory dump: `memory-bank/activeContext.md` (session 17 Nov 2026)
 | Command | What |
 |---------|------|
 | `./start.sh` | Chooser Electron vs terminal |
-| `sudo ./start.sh --electron` | Carcará 2.0 — **requires root** (re-exec via sudo like 1.x) |
+| `./start.sh --electron` | Carcará 2.0 — **desktop user** (no sudo; drops root → `SUDO_USER` if needed) |
 | `sudo ./start.sh --terminal` | Carcará 1.x |
-| `cd carcara-electron && bun run build` | `tsc` + Bun IIFE renderer (build OK as user) |
+| `cd carcara-electron && bun run build` | `tsc` + Bun IIFE renderer |
 | `bun run pack:deb` | electron-builder → `release/carcara_<ver>_amd64.deb` |
 | `bun run pack:appimage` | → `release/carcara_<ver>_amd64.AppImage` |
 | `bun run pack:linux` | `.deb` + AppImage (CI) |
@@ -20,12 +20,12 @@ Memory dump: `memory-bank/activeContext.md` (session 17 Nov 2026)
 | `bun run helper -- dotfiles-dry-run` | Preview `dotfiles/apply.sh --dry-run --all` as user |
 | Install `.deb` + `carcara` | Packaged path (pkexec wrapper; **no Bun**) — owner-requested only |
 
-**Root policy:** Electron main `requireRoot()` (uid 0), mirroring 1.x `isRoot`. `start.sh --electron` elevates with `sudo` and preserves `DISPLAY` / `WAYLAND_DISPLAY` / `XAUTHORITY`.  
-**Bun under sudo:** `secure_path` drops `~/.bun/bin`. `ensure_bun_on_path` in `start.sh` recovers `$SUDO_USER/.bun/bin`.
+**Privilege policy:** GUI runs as the session user. Apt/install/fix/clean go through `helper` + `pkexec`. `CARCARA_REQUIRE_ROOT=1` is legacy opt-in only (default `0`). If `sudo ./start.sh --electron`, `start.sh` re-execs as `SUDO_USER` with display/session env.  
+**Bun PATH:** `ensure_bun_on_path` recovers `~/.bun/bin` when missing from `PATH`.
 
 ## Boot sequence
 
-1. `requireRoot()` (unless `CARCARA_REQUIRE_ROOT=0` in `.env`)
+1. Optional `requireRoot()` only if `CARCARA_REQUIRE_ROOT=1` (default off)
 2. **License gate** — same text as 1.x `carcara/app/config/license`; checkbox Continuar → Aceitar; Sair → `app:quit`
 3. Shell mounts (rail + stage + Atividade)
 

@@ -19,7 +19,7 @@ Secondary: anyone who clones the MIT repo and accepts root risk.
 
 ### B — Maintain / install via Carcará 2.0
 
-1. `./start.sh --electron` (dev needs Bun; elevates to root) **or** install `carcara_*.deb` and run `carcara` (pkexec wrapper; **no Bun at runtime**)
+1. `./start.sh --electron` (dev needs Bun; desktop user) **or** install `carcara_*.deb` and run `carcara` (pkexec wrapper; **no Bun at runtime**)
 2. License gate (same terms as 1.x) — checkbox Continuar or Sair
 3. Rail: **Sistema** · **Software** · **Dotfiles** · **Sobre** + **PT|EN** + version pill (`package.json`)
 4. Confirm dialog → helper → activity console (Dracula terminal)

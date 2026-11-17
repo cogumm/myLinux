@@ -10,11 +10,11 @@ Session dump: `memory-bank/activeContext.md`.
 
 | Track | Open item | Notes |
 |-------|-----------|--------|
-| **2.0.2** | Electron UI must not run as root | `sudo ./start.sh --electron` breaks X11/Wayland on real desktops (yavin report) |
+| **2.0.2** | Manual GUI smoke on native Linux | Confirm `./start.sh --electron` on yavin (code path landed) |
 
 **v2.0.1 shipped** (catalog A–C, `.deb`+AppImage+CI, smoke/`smoke:elevated`, i18n, Dotfiles, license).  
 Default branch: **`main`**. Release pattern: `docs/releases/X.Y.Z.md` → commit → tag `vX.Y.Z`.  
-When work starts: bump `carcara-electron/package.json` → `2.0.2`; add `docs/releases/2.0.2.md` before tag.
+Release notes: [`docs/releases/2.0.2.md`](../docs/releases/2.0.2.md). Before tag: bump `carcara-electron/package.json` → `2.0.2` + owner GUI confirm.
 
 ## v2.0.2 — inbox
 
@@ -30,13 +30,13 @@ When work starts: bump `carcara-electron/package.json` → `2.0.2`; add `docs/re
 
 **Target design (v2.0.2):**
 
-- [ ] Run Electron / `bun run dev` as the **invoking desktop user** (`SUDO_USER` or plain user) — never as UID 0 for the GUI
-- [ ] Keep privilege only on the **helper** path (`pkexec` / allowlisted `run-helper`) for apt/install/fix/clean — same model as packaged `.deb`
-- [ ] Change `start.sh`: drop `require_root_or_sudo` for `--electron`; if started with `sudo`, re-exec as `SUDO_USER` with `DISPLAY` / `XAUTHORITY` / `WAYLAND_DISPLAY` / `DBUS_SESSION_BUS_ADDRESS` / `XDG_RUNTIME_DIR` from the user session
-- [ ] Docs/UX: `./start.sh --electron` (no sudo); warn if already root; update README / playbook `carcara-2.0.md` / idea status
-- [ ] Smoke: GUI launch check (or documented manual) on native Linux + keep `smoke:elevated` for backends only
+- [x] Run Electron / `bun run dev` as the **invoking desktop user** (`SUDO_USER` or plain user) — never as UID 0 for the GUI
+- [x] Keep privilege only on the **helper** path (`pkexec` / allowlisted `run-helper`) for apt/install/fix/clean — same model as packaged `.deb`
+- [x] Change `start.sh`: drop elevate-for-electron; if started with `sudo`, re-exec as `SUDO_USER` with session env (`DISPLAY` / `XAUTHORITY` / …)
+- [x] Docs/UX: `./start.sh --electron` (no sudo); error if bare root; README / playbook / idea updated; `CARCARA_REQUIRE_ROOT` default `0`
+- [ ] Smoke: owner confirms GUI on native Linux (yavin); keep `smoke:elevated` for backends only
 
-**Workaround until fixed:** run without sudo — `cd carcara-electron && bun run dev` (privileged actions still via helper/pkexec when the UI requests them).
+**Dev entry:** `./start.sh --electron` (no sudo). Accidental `sudo` → drop to `SUDO_USER`.
 
 ### Other
 

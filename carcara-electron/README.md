@@ -11,11 +11,11 @@ Structure: `src/renderer/views/` (Sistema / Software / Sobre) + `src/renderer/co
 
 ## Requirements
 
-- **Root / sudo** — same policy as Carcará 1.x (`isRoot`). Prefer `sudo ./start.sh --electron` from the repo root.
+- **Desktop user** — run the UI without sudo (`./start.sh --electron`). Privilege for apt/install goes through the helper/`pkexec`.
 - **License gate** — same `carcara/app/config/license` text as 1.x; checkbox **Continuar** before the shell opens.
-- [Bun](https://bun.sh) ≥ 1.1 (usually `~/.bun/bin`; `start.sh` restores it under sudo’s `secure_path`)
+- [Bun](https://bun.sh) ≥ 1.1 (usually `~/.bun/bin`; `start.sh` restores it on `PATH` when needed)
 - Linux desktop (or WSLg) for the window
-- Already-root sessions skip `pkexec` for helper actions
+- Already-root helper sessions skip `pkexec` (elevated smoke / accidental root)
 
 ## Environment
 
@@ -29,16 +29,16 @@ Validated with **Zod** in `src/env.ts` (loads `.env` via `dotenv`). Notable keys
 ## Dev
 
 ```bash
-# From repo root (recommended — elevates like 1.x):
-sudo ./start.sh --electron
+# From repo root (recommended — no sudo):
+./start.sh --electron
 
-# Or already as root:
+# Or directly:
 cd carcara-electron
 bun install
 bun run dev
 ```
 
-`electron` / `bun run start` exit if uid ≠ 0 (unless `CARCARA_REQUIRE_ROOT=0`).
+Default: UI as desktop user (`CARCARA_REQUIRE_ROOT=0`). If you start with `sudo`, `start.sh` re-execs as `SUDO_USER`.
 
 | Script | What it does |
 |--------|----------------|
@@ -122,7 +122,7 @@ From the **repo root**:
 |-------|--------|
 | Chooser | `./start.sh` |
 | 1.x CLI/TUI | `cd carcara && sudo bash startApp.sh` |
-| 2.0 UI | `sudo ./start.sh --electron` (or root + `bun run dev`) |
+| 2.0 UI | `./start.sh --electron` (or `bun run dev` as user) |
 
 Plan: `.agents/idea/carcara-2.0-electron.md`  
 Agent how-to: `.agents/playbook/references/carcara-2.0.md`

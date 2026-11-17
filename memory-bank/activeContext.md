@@ -4,18 +4,17 @@ Last updated: 2026-11-17
 
 ## Current focus
 
-**v2.0.1 closed.** First **v2.0.2** item scoped: Electron must run as the desktop user (not root).
+**v2.0.2 in progress** — Electron UI as desktop user (code landed; await yavin GUI confirm).
 
 | Surface | State |
 |---------|--------|
-| **2.0** (`carcara-electron/`, package **`2.0.1`**) | Usable alpha; `sudo ./start.sh --electron` broken on native Linux GUI (yavin) |
-| **1.x** (`carcara/`) | Install/maintenance **engine** + CLI/fallback |
+| **2.0** (`carcara-electron/`, package **`2.0.1`**) | `./start.sh --electron` as user; `CARCARA_REQUIRE_ROOT` default `0`; sudo → drop to `SUDO_USER` |
+| **1.x** (`carcara/`) | Install/maintenance **engine** + CLI/fallback (still root) |
 | **Packaging** | `.deb` + AppImage; GHA `release-deb.yml` on Release / `workflow_dispatch` |
 | **Default branch** | `main` |
 | **Smoke** | `smoke:software` + `smoke:elevated` (after one-time `smoke:nopasswd-install`) |
 
-**Next (2.0.2):** stop elevating the Electron process in `start.sh`; privilege only via helper/pkexec. Detail: `memory-bank/TODO.md`.  
-Release when ready: bump version → `docs/releases/2.0.2.md` → tag `v2.0.2`.
+**Next:** owner GUI smoke on native Linux; then bump → `docs/releases/2.0.2.md` → tag when cutting the release.
 
 ## Canonical agent how-to
 
@@ -30,6 +29,7 @@ Release when ready: bump version → `docs/releases/2.0.2.md` → tag `v2.0.2`.
 | `design-system/carcara-2-0/pages/app-shell.md` | Rail / tiles / pager / lang |
 | `memory-bank/TODO.md` | Inbox (**v2.0.2** empty) |
 | `docs/releases/2.0.1.md` | What shipped in 2.0.1 |
+| `docs/releases/2.0.2.md` | In-progress 2.0.2 (Electron as desktop user) |
 
 ## Shipped in 2.0.1 (do not re-open without cause)
 
@@ -51,7 +51,7 @@ Release when ready: bump version → `docs/releases/2.0.2.md` → tag `v2.0.2`.
 
 - Already-root → helper skips `pkexec` (expected). Prefer `smoke:elevated` on WSL.
 - Never bare `sudo bun` — use `sudo env "PATH=$PATH" bun …` or `smoke:elevated`.
-- **Do not** launch Electron as root on native Linux — X11 auth / GLES / D-Bus fail (filed under v2.0.2).
+- Electron GUI: desktop user only; `start.sh` drops root → `SUDO_USER` when needed.
 - Bash i18n flatten needs **python3**.
 - `electron-builder.yml` stays under `carcara-electron/` (not `.github/workflows/`).
 - FPM: avoid `${LetterOnly}` macros in afterInstall scripts.

@@ -17,9 +17,9 @@ startApp.sh
 ## Architecture (2.0)
 
 ```
-./start.sh --electron (sudo + Bun PATH + WSL GPU flags)   # OR .deb → /usr/bin/carcara (pkexec)
+./start.sh --electron (desktop user; drops root→SUDO_USER; WSL GPU flags)   # OR .deb → carcara (pkexec)
   └─ carcara-electron
-       ├─ main.ts → requireRoot, paths, IPC
+       ├─ main.ts → paths, IPC (optional legacy requireRoot if CARCARA_REQUIRE_ROOT=1)
        ├─ run-helper-node.ts → helper/carcara-helper.sh (+ pkexec env when needed)
        │    (dev CLI: bun scripts/run-helper.ts — Bun.$; not required in .deb)
        ├─ renderer: license-gate → app shell (views + components)
