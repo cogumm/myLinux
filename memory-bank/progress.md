@@ -60,3 +60,5 @@ Append-only log. Do not delete completed history.
 - [x] TODO v2.0.1 waves synced to wishlist; `listSoftwares.md` reduced to Snap pointer + date (2026-11-17)
 - [x] Session knowledge re-consolidated (i18n nest, rail lang, sync-time, pager, brand version, v2.0.1 catalog, old/ guidance) → memory-bank + playbook + AGENTS (2026-11-17)
 - [x] Software 2.0 categories = Snap Store 19; realistic `desc.*` i18n; empty-state placeholder (2026-11-17)
+- [x] Carcará 2.0 `.deb` packaging: electron-builder + `run-helper-node` (no Bun at runtime) + pkexec postinst wrapper; local `carcara_2.0.1_amd64.deb` OK (2026-11-17)
+- [x] GitHub Actions `release-deb.yml`: Release published → build/attach amd64 `.deb` (2026-11-17)

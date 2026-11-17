@@ -68,7 +68,7 @@ Act as a **Linux systems analysis & development** specialist:
 - `dependences.sh` hardened 17 Nov 2026 (apt-family detect, apt update, Flathub, NI-safe notify)
 - Wave 2 installers / 2.0 privileged actions not fully smoke-tested live (needs owner-requested apt/flatpak/snap + pkexec)
 - WSL: no `pkexec` → privileged helper runs unelevated (apt locks fail); use real desktop for elevation tests
-- Packaging `.deb` still open
+- Packaging `.deb` done (`pack:deb` + `release-deb.yml`); live Software/pkexec smoke + optional AppImage still open
 - 1.x i18n flatten needs **python3** on the machine
 
 ## Project guidance

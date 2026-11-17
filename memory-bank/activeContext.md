@@ -4,9 +4,10 @@ Last updated: 2026-11-17
 
 ## Current focus
 
-**Carcará 2.0 usable alpha** (`carcara-electron/`, package `2.0.0-alpha.0`).  
+**Carcará 2.0 usable alpha** (`carcara-electron/`, package `2.0.1`).  
 **1.x** (`carcara/`) = install/maintenance **engine** + CLI/fallback.  
-**Next product slice:** **v2.0.1** catalog waves A→C — tracker in `memory-bank/TODO.md` (wishlist pointer: `.agents/idea/listSoftwares.md`).
+**Packaging:** `.deb` via `bun run pack:deb` + GHA `.github/workflows/release-deb.yml` (Release → asset).  
+**Next product slice:** owner smoke (Software / pkexec) + **v2.0.1** catalog waves A→C — `memory-bank/TODO.md`.
 
 Canonical agent how-to:
 
@@ -38,7 +39,7 @@ Canonical agent how-to:
 ### Brand version — done
 
 - Rail pill reads **`package.json` `"version"`** via `src/renderer/lib/version.ts` (bundled at build).
-- Current: `2.0.0-alpha.0` — change package.json + rebuild to update UI.
+- Current: `2.0.1` — change package.json + rebuild to update UI / `.deb` version.
 
 ### Sistema: sync clock — done
 
@@ -85,12 +86,13 @@ Canonical agent how-to:
 - Sistema as root: update / fix / clean → exit 0.
 - `bun run helper -- dotfiles-dry-run` OK.
 - `bun run typecheck` + `bun run build` OK after i18n nest / pager / sync-time / version pill.
+- `bun run pack:deb` → `release/carcara_2.0.1_amd64.deb` (~75 MB) with `resources/mylinux/` + postinst wrapper.
 
 ## Still open
 
-1. Package `.deb` (AppImage optional).
-2. Smoke-test Software + **pkexec** on real desktop (owner-requested).
-3. Execute **v2.0.1** Wave A→C installers (see `TODO.md`).
+1. Smoke-test Software + **pkexec** on real desktop (owner-requested).
+2. Execute **v2.0.1** Wave A→C installers (see `TODO.md`).
+3. Optional AppImage.
 
 ## Blockers / notes
 

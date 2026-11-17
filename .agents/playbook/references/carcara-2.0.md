@@ -30,13 +30,14 @@ Memory dump: `memory-bank/activeContext.md` (session 17 Nov 2026)
 ```
 Renderer (license-gate → views + components)
   → preload IPC
-  → Electron main (spawn bun | license:get | app:quit | openExternal)
-  → scripts/run-helper.ts (Bun.$)
-  → helper/carcara-helper.sh (allowlist)
+  → Electron main (run-helper-node | license:get | app:quit | openExternal)
+  → helper/carcara-helper.sh (allowlist; pkexec when needed)
   → carcara/ 1.x scripts (CARCARA_NONINTERACTIVE=1)
      or dotfiles/apply.sh as $SUDO_USER
 ```
 
+- Dev-only Bun bridge: `bun run helper` → `scripts/run-helper.ts` (`Bun.$`).
+- Packaged `.deb` uses Node `run-helper-node.ts` — **no Bun at runtime**.
 - **Never** reimplement apt/flatpak/snap in the renderer.
 - Unknown helper actions → exit 2.
 
@@ -110,8 +111,21 @@ When changing visuals: run skill `--design-system`; read `pages/app-shell.md` fi
 - License copy: `dist/renderer/license.txt` (IPC prefers live `carcara/app/config/license`)
 - CSP: `default-src 'self'`; `font-src 'self'` (no Google Fonts CDN)
 
+## Packaging (`.deb`)
+
+| Piece | Path / command |
+|-------|----------------|
+| Config | `carcara-electron/electron-builder.yml` |
+| Postinst wrapper | `carcara-electron/build/deb/after-install.sh` → `/usr/bin/carcara` + pkexec |
+| Local build | `cd carcara-electron && bun run pack:deb` → `release/carcara_<ver>_amd64.deb` |
+| CI | `.github/workflows/release-deb.yml` on **release: published** (also `workflow_dispatch`) |
+| Runtime layout | `resources/mylinux/{carcara,locales,dotfiles,assets,carcara-electron/helper}` |
+| Paths | `src/paths.ts` (`getRepoRoot` / helper / locales / license) |
+
+AppImage remains optional / not required for v2.0.1.
+
 ## Still open
 
-1. Package `.deb` (AppImage optional)
-2. Live smoke-test Software + pkexec on real desktop / WSLg (owner-approved)
-3. **v2.0.1** catalog waves A→C — see `memory-bank/TODO.md`
+1. Live smoke-test Software + pkexec on real desktop / WSLg (owner-approved)
+2. **v2.0.1** catalog waves A→C — see `memory-bank/TODO.md`
+3. Optional AppImage target

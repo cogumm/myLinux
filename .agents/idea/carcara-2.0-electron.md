@@ -2,7 +2,7 @@
 
 Status: **in progress** (plan locked + spike started)  
 Saved: 16 de Novembro de 2026  
-Updated: 17 de Novembro de 2026 (env/Zod, Dotfiles rail, license gate, carcara_confirm → playbook + memory-bank)  
+Updated: 17 de Novembro de 2026 (`.deb` + Release CI; env/Zod; Dotfiles; license; i18n)  
 Related: [mylinux.md](mylinux.md) · [carcara-modern-install.md](carcara-modern-install.md) (1.x engine — complete)
 
 ## Intent
@@ -19,7 +19,7 @@ Ship **Carcará 2.0** as a desktop app with a modern UI using **Electron**.
 | UI kit | **Vanilla** HTML/CSS + TypeScript renderer (no React for first ship) |
 | UI/UX | Skill **`ui-ux-pro-max`** → `design-system/carcara-2-0/` (Flat Design, dark utility) |
 | Privilege | App runs as **root** (like 1.x `isRoot`); helper allowlist via Bun bridge (pkexec only if somehow non-root) |
-| Packaging | Later: `.deb` first; AppImage optional — not part of the spike |
+| Packaging | `.deb` via `electron-builder` + GHA on Release; AppImage optional later |
 | Engine | **Reuse** `carcara/app/config/install_backends.sh` and existing system/app scripts — never reimplement apt/flatpak/snap in the renderer |
 
 ## Why Electron + Bun
@@ -144,6 +144,7 @@ flowchart LR
 - [x] Env: `.env.example` + Zod/`dotenv` (`src/env.ts`) wired to main + helper (17 de Novembro de 2026)
 - [x] Dotfiles rail + helper `dotfiles-*` → `apply.sh` as `$SUDO_USER` (17 de Novembro de 2026)
 - [x] License gate (1.x parity: checkbox Continuar before shell) (17 de Novembro de 2026)
-- [ ] Package `.deb` (AppImage optional)
+- [x] Package `.deb` (`electron-builder.yml` + `bun run pack:deb` + Release workflow) (17 de Novembro de 2026)
+- [ ] AppImage optional
 - [ ] Software installer smoke-test via 2.0 UI
 - [x] Document dual entry in root README + `carcara-electron/README.md` (alpha)

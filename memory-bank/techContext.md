@@ -31,6 +31,9 @@ Last updated: 2026-11-17
 - `carcara-electron/src/env.ts`
 - `carcara-electron/src/native-i18n.ts` — main-process `t` (nested locales)
 - `carcara-electron/scripts/{build,run-helper}.ts`
+- `carcara-electron/src/{paths,run-helper-node}.ts` — packaged helper (no Bun runtime)
+- `carcara-electron/electron-builder.yml` + `build/deb/after-install.sh`
+- `.github/workflows/release-deb.yml` — Release → `.deb` asset
 - `carcara-electron/helper/carcara-helper.sh` — allowlist incl. `sync-time`
 - `carcara-electron/src/{main,preload,open-external,app-menu}.ts`
 - `carcara-electron/src/renderer/{main,app,views,components,lib}/`
@@ -68,6 +71,7 @@ bun run build
 bun run helper -- ping
 bun run helper -- sync-time   # privileged / owner-requested
 bun run helper -- dotfiles-dry-run
+bun run pack:deb              # → release/carcara_<ver>_amd64.deb (heavy; needs network)
 ```
 
 Do **not** run live `sudo`, apt mutations, or `pkexec` flows unless the owner asks.

@@ -3,7 +3,7 @@
 Desktop UI for myLinux. Install **engine** stays in Bash 1.x (`../carcara/`).  
 Toolchain and privilege bridge use **[Bun](https://bun.sh/docs)** (including [`Bun` Shell](https://bun.sh/docs/runtime/shell)).
 
-Electron’s main process still runs Chromium’s Node; it spawns `bun scripts/run-helper.ts`, which uses `$` to call the allowlisted `helper/carcara-helper.sh` (via `pkexec` when needed).
+Electron’s main process runs Chromium’s Node and calls `helper/carcara-helper.sh` via `src/run-helper-node.ts` (pkexec when needed). Dev also has `bun run helper` (`scripts/run-helper.ts` + Bun Shell). Packaged `.deb` does **not** require Bun at runtime.
 
 Logo: **`assets/img/logo_moderno_final.png`** (build copies all `assets/img/*` into `dist/renderer/assets/`).  
 UI: Flat Design from **`ui-ux-pro-max`** → `design-system/carcara-2-0/` (rail + tiles + activity console).  
@@ -47,6 +47,22 @@ bun run dev
 | `bun run start` | last build |
 | `bun run helper -- ping` | `testConnection.sh` → ping Google DNS IP (−c 3) |
 | `bun run typecheck` | `tsc --noEmit` |
+| `bun run pack:deb` | build + **electron-builder** → `release/*.deb` |
+| `bun run pack:dir` | unpacked dir under `release/` (debug packaging) |
+
+## Packaging (`.deb`)
+
+- Config: `electron-builder.yml` — Linux `deb` + `extraResources` → `resources/mylinux/{carcara,locales,dotfiles,assets,carcara-electron/helper}`.
+- Postinst: `build/deb/after-install.sh` wraps `/usr/bin/carcara` with **pkexec** (1.x root parity) and `--no-sandbox`.
+- CI: `.github/workflows/release-deb.yml` — on **Release published** (or `workflow_dispatch`), builds amd64 `.deb` and attaches it to the release.
+
+```bash
+cd carcara-electron
+bun run pack:deb
+# → release/carcara_<version>_amd64.deb
+sudo apt install ./release/carcara_*.deb
+carcara   # elevates via pkexec when not root
+```
 
 `--no-sandbox` is required on many WSL/Linux setups where `chrome-sandbox` is not root-owned (SUID).  
 On **WSL**, `--disable-gpu` / `--disable-dev-shm-usage` (and `LIBGL_ALWAYS_SOFTWARE=1` from `start.sh`) reduce `libEGL` / `MESA` / DRI3 noise when running as root under WSLg. Prefer a real desktop for packaging.

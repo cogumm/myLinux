@@ -98,6 +98,8 @@ cd myLinux
 Direct entries still work: `cd carcara && sudo bash startApp.sh` · `cd carcara-electron && bun run dev`.  
 Plan: [`.agents/idea/carcara-2.0-electron.md`](.agents/idea/carcara-2.0-electron.md).
 
+**`.deb` (2.0):** publish a GitHub Release (tag `vX.Y.Z`) — [`.github/workflows/release-deb.yml`](.github/workflows/release-deb.yml) builds and attaches `carcara_*_amd64.deb`. Local: `cd carcara-electron && bun run pack:deb`.
+
 ### Dotfiles
 
 ```bash

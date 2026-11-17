@@ -32,7 +32,8 @@ Wave 1–2 engine **done**. Wave 3 **cancelled** (UI is Electron 2.0).
 - [x] Session knowledge consolidated → memory-bank + playbook (17 de Novembro de 2026)
 - [x] i18n + rail PT\|EN switch (17 de Novembro de 2026)
 - [x] Sistema tile **Sincronizar horário** → `sync_time.sh` (17 de Novembro de 2026)
-- [ ] Continue [`.agents/idea/carcara-2.0-electron.md`](../.agents/idea/carcara-2.0-electron.md) — Software/pkexec smoke-test + packaging `.deb`
+- [ ] Continue [`.agents/idea/carcara-2.0-electron.md`](../.agents/idea/carcara-2.0-electron.md) — Software/pkexec smoke-test (owner machine)
+- [x] Package `.deb` + GitHub Actions Release workflow (17 de Novembro de 2026)
 - [ ] **v2.0.1** catalog waves A → B → C (see section below)
 
 ## Carcará / scripts (1.x)
@@ -61,7 +62,8 @@ Wave 1–2 engine **done**. Wave 3 **cancelled** (UI is Electron 2.0).
 - [x] Sistema **sync-time** → `sync_time.sh` (17 de Novembro de 2026)
 - [ ] Smoke-test Software installers (owner-requested)
 - [ ] Smoke-test with **pkexec** on real desktop / WSLg (unelevated user → elevates)
-- [ ] Package `.deb` for Carcará 2.0 (AppImage optional)
+- [x] Package `.deb` for Carcará 2.0 (`electron-builder` + `pack:deb`; AppImage optional later) (17 de Novembro de 2026)
+- [x] CI: `.github/workflows/release-deb.yml` — Release published → attach `carcara_*_amd64.deb` (17 de Novembro de 2026)
 
 ## v2.0.1 — catalog enrichment (planned)
 
