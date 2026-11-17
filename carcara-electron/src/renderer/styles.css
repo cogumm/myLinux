@@ -161,10 +161,14 @@ button:disabled {
   color: var(--color-secondary);
 }
 
+.nav-list,
 .rail__nav {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
+}
+
+.rail__nav {
   flex: 1;
 }
 
@@ -281,13 +285,17 @@ button:disabled {
   min-height: 0;
 }
 
-.panel[hidden] {
-  display: none !important;
+.panel {
+  display: none;
 }
 
 .panel.is-visible {
   display: block;
   animation: rise 200ms ease;
+}
+
+.panel[hidden] {
+  display: none !important;
 }
 
 @keyframes rise {
@@ -308,6 +316,44 @@ button:disabled {
 
   * {
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* Software — category rail + pane (same link style as main rail) */
+.soft-layout {
+  display: grid;
+  grid-template-columns: minmax(160px, 200px) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+  min-height: 100%;
+}
+
+.soft-layout__nav {
+  position: sticky;
+  top: 0;
+  padding: 0.35rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  background: var(--color-card);
+}
+
+.soft-layout__pane {
+  min-width: 0;
+}
+
+.soft-layout__pane .tile-grid[hidden] {
+  display: none !important;
+}
+
+@media (max-width: 720px) {
+  .soft-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .soft-layout__nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: static;
   }
 }
 

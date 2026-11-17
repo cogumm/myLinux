@@ -4,6 +4,8 @@ export { createBrand } from "./brand.js";
 export { createConfirmDialog } from "./confirm-dialog.js";
 export { createGroup, createStack } from "./group.js";
 export { icons } from "./icons.js";
+export { createNavList } from "./nav-list.js";
+export type { NavListItem, NavListHandle } from "./nav-list.js";
 export { createPanel, showPanel } from "./panel.js";
 export { createRail } from "./rail.js";
 export { createStageHeader } from "./stage-header.js";

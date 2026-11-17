@@ -19,5 +19,9 @@ export function showPanel(panels: Map<ViewId, HTMLElement>, id: ViewId): void {
     const match = viewId === id;
     panel.hidden = !match;
     panel.classList.toggle("is-visible", match);
+    if (match) {
+      panel.removeAttribute("hidden");
+      panel.style.display = "";
+    }
   }
 }

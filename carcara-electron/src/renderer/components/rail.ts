@@ -1,4 +1,5 @@
 import { createBrand } from "./brand.js";
+import { createNavList } from "./nav-list.js";
 import { icons } from "./icons.js";
 import type { ViewId } from "../lib/types.js";
 
@@ -27,38 +28,25 @@ export function createRail(
   aside.className = "rail";
   aside.setAttribute("aria-label", "Navegação");
 
-  const nav = document.createElement("nav");
-  nav.className = "rail__nav";
-  nav.setAttribute("aria-label", "Principal");
-
-  const buttons = new Map<ViewId, HTMLButtonElement>();
-
-  for (const item of items) {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "rail__link";
-    btn.dataset.view = item.id;
-    btn.innerHTML = `${icons[item.icon]()}<span>${item.label}</span>`;
-    btn.addEventListener("click", () => onNavigate(item.id));
-    buttons.set(item.id, btn);
-    nav.append(btn);
-  }
+  const nav = createNavList(
+    items.map((item) => ({
+      id: item.id,
+      label: item.label,
+      iconHtml: icons[item.icon](),
+    })),
+    (id) => onNavigate(id as ViewId),
+    { label: "Principal", className: "nav-list rail__nav" },
+  );
 
   const foot = document.createElement("p");
   foot.className = "rail__foot";
   const year = new Date().getFullYear();
   foot.textContent = `MIT license 2010 - ${year} @CoGUMm`;
 
-  aside.append(createBrand(), nav, foot);
+  aside.append(createBrand(), nav.root, foot);
 
-  function setActive(id: ViewId): void {
-    for (const [viewId, btn] of buttons) {
-      const active = viewId === id;
-      btn.classList.toggle("is-active", active);
-      if (active) btn.setAttribute("aria-current", "page");
-      else btn.removeAttribute("aria-current");
-    }
-  }
-
-  return { root: aside, setActive };
+  return {
+    root: aside,
+    setActive: (id) => nav.setActive(id),
+  };
 }
