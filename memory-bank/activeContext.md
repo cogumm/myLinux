@@ -74,8 +74,14 @@ Canonical agent how-to for this state:
 
 1. Package `.deb` (AppImage optional).
 2. Smoke-test Software installers + pkexec on real desktop (owner-requested).
-3. Harden `dependences.sh` (1.x debt in `AGENTS.md`).
-4. Optional: i18n EN; port from `old/` only if needed.
+3. Optional: i18n EN; port from `old/` only if needed.
+
+### dependences.sh (done this session)
+
+- Apt-family check (`/etc/os-release` + apt-get fallback).
+- Required: yad, zenity, curl, iputils-ping — `apt-get update` only when installing.
+- Optional: snapd (+ systemd socket best-effort), `ensure_flatpak_flathub`.
+- Notify via `$configYad` / `carcara_log` under NI (no blocking YadB).
 
 ## Blockers / notes
 

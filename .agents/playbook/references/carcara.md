@@ -27,7 +27,7 @@ Policy: apt (distro or keyring) → Flatpak/Flathub → Snap. Idempotent via `pk
 
 ## Bootstrap (Wave 1 Step 1 — done)
 
-- `dependences.sh`: installs `yad` / `zenity` / `curl` **first** (echo-only until Yad exists), then runs `testConnection`; ensures `snapd` and optional `flatpak`.
+- `dependences.sh` (hardened): apt-family via `/etc/os-release`; required `yad`/`zenity`/`curl`/`iputils-ping` (apt update only if missing); then `testConnection`; optional `snapd` (+ systemd socket best-effort) and `ensure_flatpak_flathub`; Yad notify uses `$configYad` (not blocking); NI → log only.
 - `startApp.sh`: Zenity license gate; abort if `dependences` fails.
 - All installers source `. app/config/config.sh` (cwd must be `carcara/`).
 - `testConnection.sh` is sourced for the function only; auto-run only when executed as a script.

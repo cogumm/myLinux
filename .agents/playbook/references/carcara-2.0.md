@@ -111,4 +111,4 @@ When changing visuals: run skill `--design-system`; read `pages/app-shell.md` fi
 
 1. Package `.deb` (AppImage optional)
 2. Live smoke-test Software + pkexec on real desktop / WSLg (owner-approved)
-3. See `memory-bank/TODO.md` for 1.x leftovers (`dependences.sh`, i18n, …)
+3. See `memory-bank/TODO.md` for 1.x leftovers (smoke-test installers, i18n, …)

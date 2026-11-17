@@ -7,7 +7,7 @@
 - Config: `carcara/app/config/config.sh` + `install_backends.sh` (`carcara_confirm`, backends).
 - Entry: `cd carcara && sudo bash startApp.sh` (or `./start.sh --terminal`)
 - Boot: `dependences` → Zenity **license** → `menuGeral` (incl. Dotfiles)
-- Deps bootstrap: `dependences.sh` + `testConnection.sh` (still debt to harden)
+- Deps bootstrap: hardened `dependences.sh` + `testConnection.sh`
 
 ## 2.0 (product UI)
 

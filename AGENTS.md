@@ -32,7 +32,7 @@ Root entry: `./start.sh` (choose Electron vs terminal). Optional bootstrap: `cur
 
 - **Family:** Debian/Ubuntu apt-based (Ubuntu, Debian, Linux Mint); scripts assume `apt-get` / `dpkg` / optional `snap`
 - **Arch:** primarily `x86_64`
-- **UI deps (Carcará):** `yad`, `zenity`, `curl`, `snap` (see `carcara/app/config/dependences.sh` — checker is buggy; treat as debt)
+- **UI deps (Carcará):** `yad`, `zenity`, `curl`, `iputils-ping`; optional `snap` / `flatpak`+Flathub via hardened `dependences.sh`
 - **WSL2:** relevant for Zone.Identifier cleanup and mixed Windows/Linux paths
 - **Privilege:** system install/clean/fix scripts require **root** (`isRoot` in `config.sh`)
 
@@ -64,7 +64,7 @@ Act as a **Linux systems analysis & development** specialist:
 - Wave 1 + Wave 2 done (1.x engine). Wave 3 cancelled — product UI is Electron 2.0
 - Active: Carcará 2.0 **usable alpha** (`carcara-electron/`) — license gate, Dotfiles rail, Zod env, Sistema smoke OK; see playbook `references/carcara-2.0.md` + `memory-bank/activeContext.md`
 - 1.x `menuGeral`: Atualizar / Instalar / Correção / Limpeza / **Dotfiles** / Sair
-- `dependences.sh` still treated as debt (harden when next touching bootstrap)
+- `dependences.sh` hardened 17 Nov 2026 (apt-family detect, apt update, Flathub, NI-safe notify)
 - Wave 2 installers / 2.0 privileged actions not fully smoke-tested live (needs owner-requested apt/flatpak/snap + pkexec)
 - WSL: no `pkexec` → privileged helper runs unelevated (apt locks fail); use real desktop for elevation tests
 - Packaging `.deb` still open
