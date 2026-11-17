@@ -1,34 +1,31 @@
-/* Design Tokens - Auto-generated */
-/* Do not edit directly - modify tokens.json instead */
-
-/* === PRIMITIVES === */
-:root {
-
-}
+/* Design Tokens — Carcará 2.0
+ * Source of truth for runtime: carcara-electron/src/renderer/styles.css
+ * Keep this file in sync when the shell palette changes.
+ */
 
 /* === SEMANTIC === */
 :root {
-  --color-primary: #0D9488;
-  --color-on-primary: #000000;
-  --color-secondary: #14B8A6;
-  --color-on-secondary: #0F172A;
-  --color-accent: #EA580C;
-  --color-on-accent: #000000;
-  --color-background: #0F172A;
-  --color-foreground: #F8FAFC;
-  --color-card: #111827;
-  --color-card-foreground: #F8FAFC;
-  --color-muted: #1E293B;
-  --color-muted-foreground: #CBD5E1;
-  --color-border: #334155;
-  --color-destructive: #DC2626;
-  --color-on-destructive: #FFFFFF;
-  --color-ring: #0D9488;
+  --color-primary: #0f766e;
+  --color-on-primary: #ffffff;
+  --color-secondary: #0d9488;
+  --color-on-secondary: #ffffff;
+  --color-accent: #c2410c;
+  --color-on-accent: #ffffff;
+  --color-background: #f4f6f5;
+  --color-foreground: #18232d;
+  --color-card: #ffffff;
+  --color-card-foreground: #18232d;
+  --color-muted: #edf1ef;
+  --color-muted-foreground: #5b6872;
+  --color-border: #d9e1de;
+  --color-destructive: #b42318;
+  --color-on-destructive: #ffffff;
+  --color-ring: #0f766e;
   --font-heading: Inter, sans-serif;
   --font-body: Inter, sans-serif;
-}
 
-/* === COMPONENTS === */
-:root {
-
+  /* Warm rail / brand surfaces (shell-only; not generic card) */
+  --color-rail: #fbfaf7;
+  --color-brand-wash-start: #f8f2e9;
+  --color-brand-wash-end: #fbfaf7;
 }
