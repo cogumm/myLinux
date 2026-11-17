@@ -14,7 +14,7 @@ Also mirrored under “Still open” in `.agents/playbook/references/carcara-2.0
 | **2.0** | Smoke-test Software installers via UI | Owner-requested apt/flatpak/snap |
 | **2.0** | Smoke-test privileged actions with **pkexec** | Real Linux desktop / WSLg (not already-root) |
 | **2.0** | Optional AppImage | `.deb` + Release CI **done** |
-| **2.0.1** | Catalog waves A→C (below) | Curated installers + categories |
+| **2.0.1** | Catalog waves **B→C** (below) | Wave A **done**; curated installers + categories |
 | **1.x** | Live smoke-test Wave 2 installers | Same machine gate as 2.0 Software |
 | Skills | `bash-scripting`, `debian-linux-triage` | Install when rewriting that area |
 
@@ -34,7 +34,8 @@ Wave 1–2 engine **done**. Wave 3 **cancelled** (UI is Electron 2.0).
 - [x] Sistema tile **Sincronizar horário** → `sync_time.sh` (17 de Novembro de 2026)
 - [ ] Continue [`.agents/idea/carcara-2.0-electron.md`](../.agents/idea/carcara-2.0-electron.md) — Software/pkexec smoke-test (owner machine)
 - [x] Package `.deb` + GitHub Actions Release workflow (17 de Novembro de 2026)
-- [ ] **v2.0.1** catalog waves A → B → C (see section below)
+- [x] **v2.0.1** Wave A catalog (11 apps + `install_deb_url`) (17 de Novembro de 2026)
+- [ ] **v2.0.1** catalog waves B → C (see section below)
 
 ## Carcará / scripts (1.x)
 
@@ -80,18 +81,18 @@ Policy stays **apt → Flatpak/Flathub → Snap**. Thin installers + 1.x menus +
 
 ### Wave A — core wishlist (ship first)
 
-- [ ] **Firefox** (Browsers)
-- [ ] **WhatsApp Desktop** (Social)
-- [ ] **Cursor** (Development) — vendor `.deb` / AppImage
-- [ ] **Termius** (Development) — SSH client (“Terminus” in list)
-- [ ] **Anki** (Productivity) — Flatpak
-- [ ] **Steam** (Games) — Flatpak preferred
-- [ ] **Notion** (Productivity)
-- [ ] **Brave** (Browsers)
-- [ ] **Postman** (Development) — keep Insomnia unless you drop it from the list
-- [ ] **Thunderbird** (Productivity / mail)
-- [ ] **OBS Studio** (Media)
-- [ ] Update `softwares.md` as each lands
+- [x] **Firefox** (Browsers) — `utilities/firefox.sh` (17 de Novembro de 2026)
+- [x] **WhatsApp Desktop** (Social) — `social/whatsapp.sh` (17 de Novembro de 2026)
+- [x] **Cursor** (Development) — vendor amd64 `.deb` via `install_deb_url` (17 de Novembro de 2026)
+- [x] **Termius** (Development) — `development/termius.sh` (17 de Novembro de 2026)
+- [x] **Anki** (Productivity) — Flatpak → Snap (17 de Novembro de 2026)
+- [x] **Steam** (Games) — Flatpak → apt (17 de Novembro de 2026)
+- [x] **Notion** (Productivity) — Snap → Flatpak (17 de Novembro de 2026)
+- [x] **Brave** (Browsers) — apt keyring → Snap (17 de Novembro de 2026)
+- [x] **Postman** (Development) — Flatpak → Snap; Insomnia kept (17 de Novembro de 2026)
+- [x] **Thunderbird** (Productivity / mail) (17 de Novembro de 2026)
+- [x] **OBS Studio** (Media) — `utilities/obs.sh` (17 de Novembro de 2026)
+- [x] Update `softwares.md` as Wave A lands (17 de Novembro de 2026)
 
 ### Wave B — fill Snap Store categories (2.0 already lists all 19)
 

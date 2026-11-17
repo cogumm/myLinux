@@ -28,9 +28,9 @@ Secondary: anyone who clones the MIT repo and accepts root risk.
 
 ### C — Install curated apps (either UI)
 
-**Shipped today:** Git, VS Code, Insomnia, Fira Code, **Docker Engine**, Dropbox, Discord, Spotify, Telegram, VLC.  
-**v2.0.1 backlog:** waves in `memory-bank/TODO.md` (Firefox, WhatsApp, Cursor, Steam, …).  
-Policy: apt (or official keyring) → Flatpak → Snap. Notes: `.agents/idea/softwares.md`.
+**Shipped today:** Wave 2 + **Wave A** — see `.agents/idea/softwares.md` (Firefox, Brave, WhatsApp, Cursor, Termius, Postman, Anki, Notion, Thunderbird, Steam, OBS, …).  
+**v2.0.1 backlog:** waves **B→C** in `memory-bank/TODO.md`.  
+Policy: apt (or official keyring) → Flatpak → Snap; vendor `.deb` via `install_deb_url`.
 
 ### D — Apply dotfiles
 

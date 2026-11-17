@@ -64,3 +64,4 @@ Append-only log. Do not delete completed history.
 - [x] GitHub Actions `release-deb.yml`: Release published → build/attach amd64 `.deb` (2026-11-17)
 - [x] Locale `{version}` interpolation (`window.title`, `ready.log`) from `package.json` / `app.getVersion()` (2026-11-17)
 - [x] Session knowledge re-consolidated (packaging CI, FPM macro trap, paths/helper, version i18n) → memory-bank + playbook + AGENTS (2026-11-17)
+- [x] v2.0.1 **Wave A**: 11 thin installers (Firefox, Brave, WhatsApp, Cursor, Termius, Postman, Anki, Notion, Thunderbird, Steam, OBS) + menus/helper/2.0 tiles/locales; `install_deb_url` backend (2026-11-17)

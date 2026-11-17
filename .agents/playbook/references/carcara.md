@@ -8,22 +8,29 @@ Main menu (trimmed 17 Nov 2026): Atualizar · Instalar → `menuSof` · Correç�
 
 Software menu: “Desenvolvimento” / “Produção” / “Social” / “Utilidades” — all four wired (`development/_menu.sh`, `productivity/_menu.sh`, `social/_menu.sh`, `utilities/_menu.sh`).
 
-## Installers present (Wave 2 — thin / backends)
+## Installers present (Wave 2 + Wave A — thin / backends)
 
-Policy: apt (distro or keyring) → Flatpak/Flathub → Snap. Idempotent via `pkg_present`.
+Policy: apt (distro or keyring) → Flatpak/Flathub → Snap. Vendor `.deb` via `install_deb_url`. Idempotent via `pkg_present`.
 
 | Area | Script | Preferred path |
 |------|--------|----------------|
 | utilities | `vlc.sh` | apt `vlc` → Flatpak → Snap |
+| utilities | `firefox.sh` | apt → Flatpak → Snap |
+| utilities | `brave.sh` | Brave apt keyring → Snap |
+| utilities | `steam.sh` | Flatpak → apt `steam-installer` |
+| utilities | `obs.sh` | apt → Flatpak → Snap |
 | social | `discord.sh` | Flatpak → Snap |
 | social | `spotify.sh` | Spotify apt keyring → Flatpak → Snap |
 | social | `telegram.sh` | Flatpak → Snap (`telegram-desktop` only) |
+| social | `whatsapp.sh` | Flatpak → Snap |
 | development | `git.sh` | apt `git` + gui/doc/gitg |
 | development | `vscode.sh` | Microsoft apt → Snap `--classic` |
-| development | `insomnia.sh` | Flatpak → Snap |
+| development | `cursor.sh` | vendor amd64 `.deb` (`install_deb_url`) |
+| development | `insomnia.sh` / `postman.sh` | Flatpak → Snap |
+| development | `termius.sh` | Snap → Flatpak |
 | development | `firacode.sh` | apt `fonts-firacode` |
 | development | `docker.sh` | Docker CE apt → `docker.io` (+ group `$SUDO_USER`) |
-| productivity | `dropbox.sh` | Flatpak → Snap |
+| productivity | `dropbox.sh` / `anki.sh` / `notion.sh` / `thunderbird.sh` | Flatpak/Snap/apt chains |
 | system | update / fix / clean / `applyDotfiles.sh` / `sync_time.sh` | Wave 1 + Dotfiles; **sync-time** also on 2.0 Sistema |
 
 ## Bootstrap (Wave 1 Step 1 — done)
@@ -45,6 +52,7 @@ Library: `carcara/app/config/install_backends.sh` (sourced from `config.sh`).
 | `ensure_flatpak_flathub` | Install flatpak + add Flathub |
 | `flatpak_install <app-id>` | Idempotent Flathub install |
 | `snap_install <name> [--classic …]` | Idempotent snap install (installs snapd if needed) |
+| `install_deb_url <dpkg-name> <url>` | curl `.deb` → dpkg -i → `apt-get -f` (Wave A Cursor; reusable) |
 | `run_with_progress <title> <cmd…>` | Optional Yad pulsate; preserves `PIPESTATUS[0]` |
 
 Logs go to stderr as `[carcara] …` / `[carcara:error] …` for CLI and future Electron.
@@ -67,8 +75,10 @@ snap_install code --classic
 
 ## Menus (Wave 1 Step 4 — done)
 
-- Desenvolvimento → git / VS Code / Insomnia / Fira Code
-- Produção → Dropbox
+- Desenvolvimento → git / VS Code / Cursor / Insomnia / Postman / Termius / Fira Code / Docker
+- Produção → Dropbox / Anki / Notion / Thunderbird
+- Social → Discord / Spotify / Telegram / WhatsApp
+- Utilidades → VLC / Firefox / Brave / Steam / OBS
 - Voltar breaks back to parent (no nested `bash $menuSof`)
 
 ## QA (Wave 1 Step 5 — done)
@@ -90,5 +100,5 @@ Alpha UI: modular views/components, Flat Design, helper allowlist + `CARCARA_NON
 
 ## Fix priorities (remaining)
 
-1. Package Carcará 2.0 `.deb` (+ optional AppImage).
-2. Live install / pkexec smoke-test on a disposable machine (owner-requested).
+1. Live install / pkexec smoke-test on a disposable machine (owner-requested) — Wave A + Wave 2.
+2. Wave B category rewire / Heroic / optional AppImage.

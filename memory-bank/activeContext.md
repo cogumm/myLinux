@@ -7,7 +7,8 @@ Last updated: 2026-11-17
 **Carcará 2.0 usable alpha** (`carcara-electron/`, package **`2.0.1`**).  
 **1.x** (`carcara/`) = install/maintenance **engine** + CLI/fallback.  
 **Packaging shipped:** `.deb` via `electron-builder` + GHA Release workflow.  
-**Next:** owner smoke (Software / pkexec) + **v2.0.1** catalog waves A→C — `memory-bank/TODO.md`.
+**v2.0.1 Wave A shipped:** 11 catalog apps (Firefox…OBS) + `install_deb_url`.  
+**Next:** owner smoke (Software / pkexec) + **Wave B→C** — `memory-bank/TODO.md`.
 
 Canonical agent how-to:
 
@@ -69,11 +70,17 @@ Canonical agent how-to:
 - Zod env + `z.prettifyError`; tile hover-only teal; `carcara_confirm` auto-yes when root/NI.
 - `dependences.sh` hardened; Docker CE → `docker.io`; root + Bun PATH under sudo; WSL openExternal + GPU flags.
 
+### Wave A catalog — done
+
+- Thin installers + 1.x menus + helper + 2.0 tiles + locales (pt/en parity).
+- `install_deb_url` in `install_backends.sh` (Cursor amd64 `.deb`).
+- 1.x still 4 folders (browsers/Steam/OBS under utilities until Wave B).
+
 ### Catalog planning — v2.0.1 (open)
 
-- Tracker: `TODO.md` § **v2.0.1** waves A / B / C.
+- Tracker: `TODO.md` § **v2.0.1** waves **B / C** (Wave A complete).
 - `listSoftwares.md` = Snap Store pointer only (no duplicate wishlist).
-- Policy: **apt → Flatpak → Snap**.
+- Policy: **apt → Flatpak → Snap** (+ `install_deb_url` for vendor debs).
 
 ### `old/` reuse (settled)
 
@@ -87,9 +94,9 @@ Canonical agent how-to:
 
 ## Still open
 
-1. Smoke-test Software installers (owner-requested apt/flatpak/snap).
+1. Smoke-test Software installers incl. Wave A (owner-requested apt/flatpak/snap).
 2. Smoke-test **pkexec** on real desktop / WSLg (unelevated → elevates).
-3. **v2.0.1** Wave A→C installers.
+3. **v2.0.1** Wave B→C.
 4. Optional AppImage.
 
 ## Blockers / notes

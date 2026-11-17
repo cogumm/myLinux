@@ -22,7 +22,7 @@ Last updated: 2026-11-17
 ### 1.x
 
 - `carcara/startApp.sh` — deps → **license** → `menuGeral.sh`
-- `carcara/app/config/{config,dependences,menuGeral,testConnection,license,install_backends,i18n}.sh`
+- `carcara/app/config/{config,dependences,menuGeral,testConnection,license,install_backends,i18n}.sh` — backends incl. `install_deb_url`
 - `carcara/app/scripts/system/{updateDistro,fixSystem,cleanDistro,applyDotfiles,sync_time}.sh`
 - `carcara/app/scripts/software/**`
 
