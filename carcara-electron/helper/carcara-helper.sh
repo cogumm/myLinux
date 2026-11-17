@@ -19,7 +19,7 @@ CARCARA_ROOT="${REPO_ROOT}/carcara"
 
 usage() {
 	echo "usage: carcara-helper.sh <action>" >&2
-	echo "system:   ping | apt-dry-run | update-distro | fix-system | clean-distro" >&2
+	echo "system:   ping | apt-dry-run | update-distro | fix-system | clean-distro | sync-time" >&2
 	echo "dotfiles: dotfiles-dry-run | dotfiles-aliases | dotfiles-all | dotfiles-git |" >&2
 	echo "          dotfiles-hyper | dotfiles-theme | dotfiles-bashrc" >&2
 	echo "install:  install-vlc | install-discord | install-spotify | install-telegram |" >&2
@@ -95,6 +95,10 @@ case "$action" in
 		;;
 	clean-distro)
 		_run_carcara_script "app/scripts/system/cleanDistro.sh"
+		exit $?
+		;;
+	sync-time)
+		_run_carcara_script "app/scripts/system/sync_time.sh"
 		exit $?
 		;;
 	# --- dotfiles (user home; unprivileged) ---

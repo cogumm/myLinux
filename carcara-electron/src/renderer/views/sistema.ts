@@ -41,6 +41,13 @@ export function renderSistema(): HTMLElement {
       desc: t("tile.ping.desc"),
       action: "ping",
     },
+    {
+      kicker: "NTP",
+      title: t("tile.sync.title"),
+      desc: t("tile.sync.desc"),
+      action: "sync-time",
+      confirm: t("tile.sync.confirm"),
+    },
   ];
   return createTileGrid(tiles);
 }

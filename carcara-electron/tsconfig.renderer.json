@@ -10,7 +10,8 @@
     "skipLibCheck": true,
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
+    "resolveJsonModule": true,
     "types": []
   },
-  "include": ["src/renderer/**/*.ts", "../locales/*.json"]
+  "include": ["src/renderer/**/*.ts", "../locales/*.json", "../package.json"]
 }

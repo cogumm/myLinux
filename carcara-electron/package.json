@@ -1,6 +1,6 @@
 {
   "name": "carcara-electron",
-  "version": "2.0.0-alpha.0",
+  "version": "2.0.1",
   "private": true,
   "description": "Carcará 2.0 — Electron UI over the 1.x install engine (Bun toolchain)",
   "main": "dist/main.js",
