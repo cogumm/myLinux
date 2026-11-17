@@ -40,9 +40,9 @@ const TILES: TileProps[] = [
     action: "apt-dry-run",
   },
   {
-    kicker: "Diagnóstico",
-    title: "Ping helper",
-    desc: "Testa o bridge Bun",
+    kicker: "Rede",
+    title: "Testar conexão",
+    desc: "testConnection → Google (ICMP)",
     action: "ping",
   },
 ];

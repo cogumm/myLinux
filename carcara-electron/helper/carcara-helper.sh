@@ -1,7 +1,7 @@
 #!/bin/bash
 #----------------------------------------------------------------------------------------------------#
 # Data criação: 17 de Novembro de 2026
-# Última alteração: 17 de Novembro de 2026
+# Última alteração: 17 de Novembro de 2026 (ping ICMP)
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
 # Telegram: http://t.me/CoGUMm
@@ -46,9 +46,9 @@ _run_carcara_script() {
 
 case "$action" in
 	ping)
-		echo "[carcara-helper] ok"
-		echo "[carcara-helper] repo=${REPO_ROOT}"
-		exit 0
+		# Reuses 1.x testConnection.sh (Google Public DNS IP; NI = full ping output).
+		_run_carcara_script "app/config/testConnection.sh"
+		exit $?
 		;;
 	apt-dry-run)
 		export DEBIAN_FRONTEND=noninteractive
