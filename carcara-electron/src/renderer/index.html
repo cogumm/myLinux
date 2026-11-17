@@ -8,14 +8,24 @@
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Carcará 2.0</title>
+    <link rel="icon" href="assets/logo.png" type="image/png" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="app">
       <aside class="sidebar" aria-label="Navegação principal">
         <div class="brand-block">
-          <p class="brand">Carcará</p>
-          <p class="brand-sub">2.0</p>
+          <img
+            class="brand-logo"
+            src="assets/logo.png"
+            width="56"
+            height="56"
+            alt="Carcará"
+          />
+          <div class="brand-text">
+            <p class="brand">Carcará</p>
+            <p class="brand-sub">2.0</p>
+          </div>
         </div>
         <nav class="nav">
           <button type="button" class="nav-item is-active" data-view="sistema" aria-current="page">
@@ -136,11 +146,21 @@
           </section>
 
           <section id="view-sobre" class="view" hidden aria-labelledby="view-title">
-            <p class="hint">
-              Motor de instalação: scripts Bash 1.x. UI: Electron + Bun.
-              Design: Flat Design (<code>design-system/carcara-2-0</code>).
-              Ações de sistema usam <code>CARCARA_NONINTERACTIVE=1</code> via helper.
-            </p>
+            <div class="about-hero">
+              <img
+                class="about-logo"
+                src="assets/logo.png"
+                width="120"
+                height="120"
+                alt="Logo Carcará"
+              />
+              <p class="hint">
+                Motor de instalação: scripts Bash 1.x. UI: Electron + Bun.
+                Design: Flat Design (<code>design-system/carcara-2-0</code>).
+                Ações de sistema usam <code>CARCARA_NONINTERACTIVE=1</code> via helper.
+                Logo: <code>assets/img/logo.png</code>.
+              </p>
+            </div>
           </section>
         </main>
 

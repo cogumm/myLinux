@@ -39,12 +39,14 @@ function runHelper(action: string): Promise<RunResult> {
 }
 
 function createWindow(): void {
+  const logoPath = path.join(__dirname, "renderer", "assets", "logo.png");
   const win = new BrowserWindow({
     width: 960,
     height: 720,
     minWidth: 720,
     minHeight: 520,
     title: "Carcará 2.0",
+    icon: logoPath,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       contextIsolation: true,

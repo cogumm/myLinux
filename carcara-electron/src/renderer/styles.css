@@ -64,7 +64,22 @@ body {
 }
 
 .brand-block {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
   padding: 0 var(--space-sm);
+}
+
+.brand-logo {
+  width: 3.5rem;
+  height: 3.5rem;
+  object-fit: contain;
+  flex-shrink: 0;
+  border-radius: var(--radius);
+}
+
+.brand-text {
+  min-width: 0;
 }
 
 .brand {
@@ -249,6 +264,28 @@ body {
   font-size: 0.9375rem;
 }
 
+.about-hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-lg);
+}
+
+.about-logo {
+  width: 7.5rem;
+  height: 7.5rem;
+  object-fit: contain;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-card);
+}
+
+.about-hero .hint {
+  margin: 0;
+  flex: 1;
+  min-width: 12rem;
+}
+
 .hint code {
   font-family: var(--font-mono);
   font-size: 0.85em;
@@ -335,6 +372,11 @@ body {
     gap: var(--space-md);
     border-right: none;
     border-bottom: 1px solid var(--color-border);
+  }
+
+  .brand-logo {
+    width: 2.75rem;
+    height: 2.75rem;
   }
 
   .nav {
