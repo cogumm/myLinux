@@ -7,6 +7,13 @@
       "sourceType": "github",
       "skillPath": "plugins/shell-scripting/skills/shellcheck-configuration/SKILL.md",
       "computedHash": "e4a65482cd932438bf6d98cc404814ad3cb8e21b13ad3589215489db1bd9df63"
+    },
+    "ui-ux-pro-max": {
+      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "commit": "e59ff376a41f7ca47b7541ad5c116495cbade3ee",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/ui-ux-pro-max/SKILL.md",
+      "computedHash": "9700c4f6c9460810a4158f3a6d3238d8ee58bc682e0aa7190c2c333cf6c666b1"
     }
   }
 }
