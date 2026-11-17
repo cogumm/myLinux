@@ -6,6 +6,18 @@ import { openExternalUrl } from "./open-external";
 /** Bun Shell bridge — privilege allowlist runs under Bun, not Electron's Node. */
 const HELPER_BRIDGE = path.join(__dirname, "..", "scripts", "run-helper.ts");
 
+/** Same policy as Carcará 1.x `isRoot` — maintenance UI only as root. */
+function requireRoot(): void {
+  const uid = typeof process.getuid === "function" ? process.getuid() : -1;
+  if (uid === 0) return;
+  console.error("");
+  console.error("[carcara] Você precisa ter poderes administrativos (root)");
+  console.error("[carcara] O aplicativo está sendo finalizado.");
+  console.error("[carcara] Use: sudo ./start.sh --electron");
+  console.error("");
+  app.exit(1);
+}
+
 type RunResult = {
   code: number | null;
   stdout: string;
@@ -72,6 +84,8 @@ const ALLOWED_EXTERNAL = new Set([
 ]);
 
 app.whenReady().then(() => {
+  requireRoot();
+
   ipcMain.handle("helper:run", async (_event, action: string) => {
     if (typeof action !== "string" || !/^[a-z][a-z0-9-]*$/.test(action)) {
       return { code: 2, stdout: "", stderr: "invalid action\n" };

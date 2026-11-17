@@ -1,7 +1,7 @@
 #!/bin/bash
 #----------------------------------------------------------------------------------------------------#
 # Data criação: 17 de Novembro de 2026
-# Última alteração: 17 de Novembro de 2026
+# Última alteração: 17 de Novembro de 2026 (Electron exige root como 1.x)
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
 # Telegram: http://t.me/CoGUMm
@@ -92,7 +92,7 @@ usage() {
 Uso: ./start.sh [opção]
 
   (sem opção)     Menu interativo — Electron 2.0 ou terminal 1.x
-  -e, --electron  Carcará 2.0 (Electron + Bun)
+  -e, --electron  Carcará 2.0 (Electron + Bun; precisa de root/sudo)
   -t, --terminal  Carcará 1.x (Bash + Zenity/Yad; precisa de root/sudo)
   -h, --help      Esta ajuda
 
@@ -105,10 +105,36 @@ Bootstrap (sem clone local):
 EOF
 }
 
+require_root_or_sudo() {
+	local mode="$1"
+	shift
+	if [[ "$(id -u)" -eq 0 ]]; then
+		return 0
+	fi
+	echo
+	echo "[carcara] Você precisa ter poderes administrativos (root)."
+	echo "[carcara] Modo ${mode}: elevando com sudo (mesmo requisito do Carcará 1.x)…"
+	echo
+	if ! have_cmd sudo; then
+		echo "[carcara:error] sudo não disponível e você não é root." >&2
+		exit 1
+	fi
+	local bun_dir=""
+	if have_cmd bun; then
+		bun_dir="$(cd "$(dirname "$(command -v bun)")" && pwd)"
+	fi
+	# Preserve GUI session env; keep Bun on PATH under sudo.
+	exec sudo \
+		--preserve-env=DISPLAY,WAYLAND_DISPLAY,XAUTHORITY,DBUS_SESSION_BUS_ADDRESS,XDG_RUNTIME_DIR \
+		env "PATH=${bun_dir:+${bun_dir}:}/usr/local/bin:/usr/bin:${PATH}" \
+		bash "${MYLINUX_ROOT}/start.sh" "$@"
+}
+
 run_electron() {
 	echo
 	echo "[carcara] Modo: Electron 2.0"
 	echo "[carcara] Diretório: ${CARCARA_2X}"
+	echo "[carcara] Esta sessão precisa de privilégios administrativos (sudo/root)."
 	echo
 
 	if [[ ! -d "${CARCARA_2X}" ]]; then
@@ -120,12 +146,17 @@ run_electron() {
 		exit 1
 	fi
 
+	# Re-exec via sudo before install/dev so deps and Electron share root (like 1.x).
+	if [[ "$(id -u)" -ne 0 ]]; then
+		require_root_or_sudo "Electron 2.0" --electron
+	fi
+
 	cd "${CARCARA_2X}"
 	if [[ ! -d node_modules ]]; then
 		echo "[carcara] Dependências ausentes — executando bun install…"
 		bun install
 	fi
-	echo "[carcara] Iniciando UI (bun run dev)…"
+	echo "[carcara] Iniciando UI (bun run dev) como root…"
 	exec bun run dev
 }
 
@@ -162,14 +193,14 @@ pick_interactive() {
 				--text="Como deseja iniciar o Carcará?" \
 				--column="Opção" \
 				--width=420 --height=280 \
-				"Electron 2.0 (interface gráfica)" \
-				"Terminal 1.x (scripts Zenity/Yad)" \
+				"Electron 2.0 (interface gráfica + root)" \
+				"Terminal 1.x (scripts Zenity/Yad + root)" \
 				"Sair" \
 				|| true
 		)"
 		case "$choice" in
-			"Electron 2.0 (interface gráfica)") run_electron ;;
-			"Terminal 1.x (scripts Zenity/Yad)") run_terminal ;;
+			"Electron 2.0 (interface gráfica + root)") run_electron ;;
+			"Terminal 1.x (scripts Zenity/Yad + root)") run_terminal ;;
 			*) echo "Saindo."; exit 0 ;;
 		esac
 		return
@@ -178,7 +209,7 @@ pick_interactive() {
 	echo "========================================"
 	echo "  Carcará — escolha o modo de execução"
 	echo "========================================"
-	echo "  1) Electron 2.0  (interface gráfica)"
+	echo "  1) Electron 2.0  (interface gráfica + root)"
 	echo "  2) Terminal 1.x  (scripts Zenity/Yad + root)"
 	echo "  3) Sair"
 	echo "========================================"
