@@ -11,7 +11,7 @@ if (process.resourcesPath) {
 
 const flag01 = z
   .union([z.literal("0"), z.literal("1")])
-  .default("1")
+  .default("0")
   .transform((v) => v === "1");
 
 const envSchema = z.object({
@@ -23,6 +23,7 @@ const envSchema = z.object({
     .transform((v) => (v.startsWith("en") ? "en" : "pt")),
   CARCARA_TEST_HOST: z.string().trim().min(1).default("8.8.8.8"),
   CARCARA_TEST_COUNT: z.coerce.number().int().min(1).max(20).default(3),
+  /** Default 0: GUI runs as desktop user; privilege via helper/pkexec. */
   CARCARA_REQUIRE_ROOT: flag01,
   CARCARA_WINDOW_WIDTH: z.coerce.number().int().min(640).max(3840).default(1080),
   CARCARA_WINDOW_HEIGHT: z.coerce.number().int().min(480).max(2160).default(760),

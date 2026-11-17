@@ -276,7 +276,7 @@
       },
       "entry": {
         "label": "Entrada",
-        "value": "sudo ./start.sh --electron | --terminal"
+        "value": "./start.sh --electron | sudo ./start.sh --terminal"
       },
       "author": {
         "label": "Autor",
@@ -301,7 +301,7 @@
   "main": {
     "requireRoot": "Você precisa ter poderes administrativos (root)",
     "exiting": "O aplicativo está sendo finalizado.",
-    "useSudo": "Use: sudo ./start.sh --electron",
+    "useSudo": "Use: ./start.sh --electron (sem sudo). Defina CARCARA_REQUIRE_ROOT=0.",
     "urlDenied": "URL não permitida"
   },
   "pager": {

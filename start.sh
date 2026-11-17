@@ -1,7 +1,7 @@
 #!/bin/bash
 #----------------------------------------------------------------------------------------------------#
 # Data criação: 17 de Novembro de 2026
-# Última alteração: 17 de Novembro de 2026 (Electron exige root como 1.x)
+# Última alteração: 17 de Novembro de 2026 (Electron como usuário da sessão; 1.x permanece root)
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
 # Telegram: https://t.me/CoGUMm
@@ -127,7 +127,7 @@ usage() {
 Uso: ./start.sh [opção]
 
   (sem opção)     Menu interativo — Carcará 2.0 ou terminal 1.x
-  -e, --electron  Carcará 2.0 (Electron + Bun; precisa de root/sudo)
+  -e, --electron  Carcará 2.0 (Electron + Bun; usuário da sessão — sem sudo)
   -t, --terminal  Carcará 1.x (Bash + Zenity/Yad; precisa de root/sudo)
   -h, --help      Esta ajuda
 
@@ -135,41 +135,71 @@ Aliases: electron | 2.0 | gui   →  Carcará 2.0
          terminal | cli | tui | 1.x  →  terminal
 
 Bootstrap (sem clone local):
-  sudo curl -L https://raw.githubusercontent.com/cogumm/myLinux/main/start.sh | bash
+  curl -L https://raw.githubusercontent.com/cogumm/myLinux/main/start.sh | bash
   # clona em ~/myLinux (ou $MYLINUX_DIR) e abre o menu
 EOF
 }
 
-require_root_or_sudo() {
-	local mode="$1"
-	shift
-	if [[ "$(id -u)" -eq 0 ]]; then
+# Electron must own the GUI session (X11/Wayland). If started via sudo, drop to SUDO_USER.
+drop_root_for_electron() {
+	if [[ "$(id -u)" -ne 0 ]]; then
 		return 0
 	fi
-	echo
-	echo "[carcara] Você precisa ter poderes administrativos (root)."
-	echo "[carcara] Modo ${mode}: elevando com sudo (mesmo requisito do Carcará 1.x)…"
-	echo
-	if ! have_cmd sudo; then
-		echo "[carcara:error] sudo não disponível e você não é root." >&2
+
+	if [[ -z "${SUDO_USER:-}" || "${SUDO_USER}" == "root" ]]; then
+		echo "[carcara:error] A UI Electron não deve rodar como root (quebra X11/Wayland)." >&2
+		echo "[carcara:error] Use: ./start.sh --electron  (sem sudo)." >&2
+		echo "[carcara:error] Ações privilegiadas ficam no helper/pkexec." >&2
 		exit 1
 	fi
-	local bun_dir=""
-	if have_cmd bun; then
-		bun_dir="$(cd "$(dirname "$(command -v bun)")" && pwd)"
+
+	if ! have_cmd sudo; then
+		echo "[carcara:error] sudo não disponível para reexecutar como ${SUDO_USER}." >&2
+		exit 1
 	fi
-	# Preserve GUI session env; keep Bun on PATH under sudo.
-	exec sudo \
-		--preserve-env=DISPLAY,WAYLAND_DISPLAY,XAUTHORITY,DBUS_SESSION_BUS_ADDRESS,XDG_RUNTIME_DIR \
-		env "PATH=${bun_dir:+${bun_dir}:}/usr/local/bin:/usr/bin:${PATH}" \
-		bash "${MYLINUX_ROOT}/start.sh" "$@"
+
+	local user_home user_uid xauth dbus_addr runtime_dir bun_dir
+	user_home="$(getent passwd "${SUDO_USER}" | cut -d: -f6 || true)"
+	user_uid="$(id -u "${SUDO_USER}" 2>/dev/null || true)"
+	if [[ -z "${user_home}" || -z "${user_uid}" ]]; then
+		echo "[carcara:error] Não foi possível resolver home/uid de ${SUDO_USER}." >&2
+		exit 1
+	fi
+
+	xauth="${XAUTHORITY:-}"
+	if [[ -z "${xauth}" && -f "${user_home}/.Xauthority" ]]; then
+		xauth="${user_home}/.Xauthority"
+	fi
+	runtime_dir="${XDG_RUNTIME_DIR:-/run/user/${user_uid}}"
+	dbus_addr="${DBUS_SESSION_BUS_ADDRESS:-}"
+	if [[ -z "${dbus_addr}" && -S "${runtime_dir}/bus" ]]; then
+		dbus_addr="unix:path=${runtime_dir}/bus"
+	fi
+	bun_dir=""
+	if [[ -x "${user_home}/.bun/bin/bun" ]]; then
+		bun_dir="${user_home}/.bun/bin"
+	fi
+
+	echo "[carcara] Sessão root detectada — reexecutando Electron como ${SUDO_USER}…"
+	exec sudo -u "${SUDO_USER}" -H \
+		env \
+		"HOME=${user_home}" \
+		"USER=${SUDO_USER}" \
+		"LOGNAME=${SUDO_USER}" \
+		"DISPLAY=${DISPLAY:-}" \
+		"WAYLAND_DISPLAY=${WAYLAND_DISPLAY:-}" \
+		"XAUTHORITY=${xauth}" \
+		"XDG_RUNTIME_DIR=${runtime_dir}" \
+		"DBUS_SESSION_BUS_ADDRESS=${dbus_addr}" \
+		"PATH=${bun_dir:+${bun_dir}:}/usr/local/bin:/usr/bin:/bin" \
+		bash "${MYLINUX_ROOT}/start.sh" --electron
 }
 
 run_electron() {
 	echo
 	echo "[carcara] Modo: Carcará 2.0"
 	echo "[carcara] Diretório: ${CARCARA_2X}"
-	echo "[carcara] Esta sessão precisa de privilégios administrativos (sudo/root)."
+	echo "[carcara] UI como usuário da sessão; privilégio só via helper/pkexec."
 	echo
 
 	if [[ ! -d "${CARCARA_2X}" ]]; then
@@ -177,16 +207,11 @@ run_electron() {
 		exit 1
 	fi
 
-	# Re-exec via sudo before install/dev so deps and Electron share root (like 1.x).
-	# Prefer elevating *before* PATH fix so sudo injects Bun; still fix PATH when
-	# the user already ran `sudo ./start.sh` (secure_path hides ~/.bun/bin).
-	if [[ "$(id -u)" -ne 0 ]]; then
-		require_root_or_sudo "Carcará 2.0" --electron
-	fi
+	drop_root_for_electron
 
 	if ! ensure_bun_on_path; then
-		echo "[carcara:error] Bun não está no PATH (nem em ~/.bun/bin do SUDO_USER)." >&2
-		echo "[carcara:error] Instale: https://bun.sh  — depois: sudo ./start.sh --electron" >&2
+		echo "[carcara:error] Bun não está no PATH (nem em ~/.bun/bin)." >&2
+		echo "[carcara:error] Instale: https://bun.sh  — depois: ./start.sh --electron" >&2
 		exit 1
 	fi
 
@@ -196,20 +221,13 @@ run_electron() {
 		bun install
 	fi
 
-	# WSLg + sudo: DRI3/MESA shm warnings are common — prefer software GL.
+	# WSLg: DRI3/MESA shm warnings are common — prefer software GL.
 	if [[ -r /proc/version ]] && grep -qi microsoft /proc/version; then
 		export LIBGL_ALWAYS_SOFTWARE="${LIBGL_ALWAYS_SOFTWARE:-1}"
-		# Root often lacks the invoking user's X cookie unless sudo preserved it.
-		if [[ -z "${XAUTHORITY:-}" && -n "${SUDO_USER:-}" ]]; then
-			_home="$(getent passwd "${SUDO_USER}" | cut -d: -f6 || true)"
-			if [[ -n "${_home}" && -f "${_home}/.Xauthority" ]]; then
-				export XAUTHORITY="${_home}/.Xauthority"
-			fi
-		fi
 		echo "[carcara] WSL detectado — Electron com GPU desligada (evita erros DRI3/MESA)."
 	fi
 
-	echo "[carcara] Iniciando UI (bun run dev) como root…"
+	echo "[carcara] Iniciando UI (bun run dev) como $(id -un)…"
 	exec bun run dev
 }
 
@@ -246,13 +264,13 @@ pick_interactive() {
 				--text="Como deseja iniciar o Carcará?" \
 				--column="Opção" \
 				--width=420 --height=280 \
-				"Carcará 2.0 (interface gráfica + root)" \
+				"Carcará 2.0 (interface gráfica)" \
 				"Terminal 1.x (scripts Zenity/Yad + root)" \
 				"Sair" \
 				|| true
 		)"
 		case "$choice" in
-			"Carcará 2.0 (interface gráfica + root)") run_electron ;;
+			"Carcará 2.0 (interface gráfica)") run_electron ;;
 			"Terminal 1.x (scripts Zenity/Yad + root)") run_terminal ;;
 			*) echo "Saindo."; exit 0 ;;
 		esac
@@ -262,7 +280,7 @@ pick_interactive() {
 	echo "========================================"
 	echo "  Carcará — escolha o modo de execução"
 	echo "========================================"
-	echo "  1) Carcará 2.0  (interface gráfica + root)"
+	echo "  1) Carcará 2.0  (interface gráfica)"
 	echo "  2) Terminal 1.x  (scripts Zenity/Yad + root)"
 	echo "  3) Sair"
 	echo "========================================"

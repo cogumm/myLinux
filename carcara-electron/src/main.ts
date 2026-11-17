@@ -17,7 +17,7 @@ import {
 } from "./paths";
 import { runHelperNode } from "./run-helper-node";
 
-/** Same policy as Carcará 1.x `isRoot` — maintenance UI only as root. */
+/** Optional legacy gate. Default off — UI as desktop user; privilege via helper/pkexec. */
 function requireRoot(): void {
   if (!env.CARCARA_REQUIRE_ROOT) return;
   const uid = typeof process.getuid === "function" ? process.getuid() : -1;
