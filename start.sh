@@ -7,11 +7,83 @@
 # Telegram: http://t.me/CoGUMm
 # Script: start
 # Descrição: Escolhe entre Carcará 2.0 (Electron) e Carcará 1.x (terminal / Zenity).
-# Variáveis: MYLINUX_ROOT : diretório deste repositório
+#            Também faz bootstrap (git clone) quando executado via curl | bash.
+# Variáveis: MYLINUX_ROOT MYLINUX_DIR SUDO_USER
 #----------------------------------------------------------------------------------------------------#
 set -euo pipefail
 
-MYLINUX_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_URL="${MYLINUX_REPO_URL:-https://github.com/cogumm/myLinux.git}"
+REPO_BRANCH="${MYLINUX_REPO_BRANCH:-master}"
+
+is_repo_root() {
+	local dir="$1"
+	[[ -f "${dir}/start.sh" && -d "${dir}/carcara" ]]
+}
+
+resolve_local_root() {
+	local src="${BASH_SOURCE[0]:-}"
+	local here=""
+	# Piped scripts (curl | bash) often have no usable BASH_SOURCE file path.
+	if [[ -z "$src" || "$src" == "bash" || "$src" == "-" || ! -f "$src" ]]; then
+		return 1
+	fi
+	here="$(cd "$(dirname "$src")" && pwd)"
+	if is_repo_root "$here"; then
+		printf '%s\n' "$here"
+		return 0
+	fi
+	return 1
+}
+
+real_user_home() {
+	if [[ -n "${SUDO_USER:-}" && "${SUDO_USER}" != "root" ]]; then
+		getent passwd "${SUDO_USER}" | cut -d: -f6
+	else
+		printf '%s\n' "${HOME}"
+	fi
+}
+
+bootstrap_repo() {
+	local dest="${MYLINUX_DIR:-$(real_user_home)/myLinux}"
+	echo "[carcara] Bootstrap: repositório não encontrado neste contexto (curl|bash?)."
+	echo "[carcara] Destino: ${dest}"
+
+	if ! have_cmd git; then
+		echo "[carcara:error] git é necessário para o bootstrap. Instale: sudo apt install git" >&2
+		exit 1
+	fi
+
+	if [[ -d "${dest}/.git" ]] && is_repo_root "$dest"; then
+		echo "[carcara] Atualizando clone existente…"
+		git -C "$dest" fetch --depth 1 origin "${REPO_BRANCH}" || true
+		git -C "$dest" checkout "${REPO_BRANCH}" || true
+		git -C "$dest" pull --ff-only origin "${REPO_BRANCH}" || true
+	else
+		if [[ -e "$dest" && ! -d "${dest}/.git" ]]; then
+			echo "[carcara:error] ${dest} existe e não é um clone git. Defina MYLINUX_DIR=…" >&2
+			exit 1
+		fi
+		echo "[carcara] Clonando ${REPO_URL} (${REPO_BRANCH})…"
+		git clone --branch "${REPO_BRANCH}" --depth 1 "${REPO_URL}" "$dest"
+	fi
+
+	# Prefer continuing as the invoking user when started with sudo curl | bash.
+	if [[ "$(id -u)" -eq 0 && -n "${SUDO_USER:-}" && "${SUDO_USER}" != "root" ]]; then
+		echo "[carcara] Reexecutando como ${SUDO_USER}…"
+		exec sudo -u "${SUDO_USER}" -H bash "${dest}/start.sh" "$@"
+	fi
+	exec bash "${dest}/start.sh" "$@"
+}
+
+have_cmd() {
+	command -v "$1" >/dev/null 2>&1
+}
+
+MYLINUX_ROOT="$(resolve_local_root || true)"
+if [[ -z "${MYLINUX_ROOT}" ]]; then
+	bootstrap_repo "$@"
+fi
+
 CARCARA_1X="${MYLINUX_ROOT}/carcara"
 CARCARA_2X="${MYLINUX_ROOT}/carcara-electron"
 
@@ -26,11 +98,11 @@ Uso: ./start.sh [opção]
 
 Aliases: electron | 2.0 | gui   →  Electron
          terminal | cli | tui | 1.x  →  terminal
-EOF
-}
 
-have_cmd() {
-	command -v "$1" >/dev/null 2>&1
+Bootstrap (sem clone local):
+  sudo curl -L https://raw.githubusercontent.com/cogumm/myLinux/master/start.sh | bash
+  # clona em ~/myLinux (ou $MYLINUX_DIR) e abre o menu
+EOF
 }
 
 run_electron() {
