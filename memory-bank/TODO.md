@@ -10,7 +10,10 @@ Session dump: `memory-bank/activeContext.md`.
 
 | Track | Open item | Notes |
 |-------|-----------|--------|
-| **2.0.2** | Manual GUI smoke on native Linux | Confirm `./start.sh --electron` on yavin (code path landed) |
+| **2.0.2** | Manual GUI smoke on native Linux | Confirm `./start.sh --electron` on yavin |
+| **2.0.2** | Rail brand height vs stage header | Logo + name + version align with right header band |
+| **2.0.2** | Software category “Todas” / “All” | Filter across all categories |
+| **2.0.2** | Resizable activity/terminal height | User-adjustable bottom console |
 
 **v2.0.1 shipped** (catalog A–C, `.deb`+AppImage+CI, smoke/`smoke:elevated`, i18n, Dotfiles, license).  
 Default branch: **`main`**. Release pattern: `docs/releases/X.Y.Z.md` → commit → tag `vX.Y.Z`.  
@@ -37,6 +40,12 @@ Release notes: [`docs/releases/2.0.2.md`](../docs/releases/2.0.2.md). Before tag
 - [ ] Smoke: owner confirms GUI on native Linux (yavin); keep `smoke:elevated` for backends only
 
 **Dev entry:** `./start.sh --electron` (no sudo). Accidental `sudo` → drop to `SUDO_USER`.
+
+### UX / Software (scoped — not started)
+
+- [ ] Align rail brand block (logo + name + version) to the same height as the stage header band on the right (match top padding / divider with Sistema header)
+- [ ] Software: add category **Todas** / **All** in `carcara-electron/src/renderer/views/software.ts` — filter searches across every category
+- [ ] Activity / “terminal” panel: user-resizable height (drag handle or similar)
 
 ### Other
 

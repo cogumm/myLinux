@@ -14,7 +14,7 @@ Last updated: 2026-11-17
 | **Default branch** | `main` |
 | **Smoke** | `smoke:software` + `smoke:elevated` (after one-time `smoke:nopasswd-install`) |
 
-**Next:** owner GUI smoke on native Linux; then bump → `docs/releases/2.0.2.md` → tag when cutting the release.
+**Next (inbox):** GUI smoke yavin; rail brand height; Software **Todas/All**; resizable activity console — see `memory-bank/TODO.md`. Tag when cutting: bump → `docs/releases/2.0.2.md` → `v2.0.2`.
 
 ## Canonical agent how-to
 
