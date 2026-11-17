@@ -38,11 +38,22 @@ cleanDebian() {
 	carcara_log "cleanDistro: starting"
 	_clean_notify "Limpeza" "Iniciando limpeza do sistema."
 
+	_clear_dir_contents() {
+		local d="$1"
+		local f
+		local oldnullglob
+		oldnullglob=$(shopt -p nullglob || true)
+		shopt -s nullglob
+		for f in "$d"/*; do
+			rm -rf -- "$f"
+		done
+		eval "$oldnullglob" 2>/dev/null || true
+	}
+
 	if [[ -n "$trash_user" ]]; then
 		trash_dir="/home/${trash_user}/.local/share/Trash/files"
 		if [[ -d "$trash_dir" ]]; then
-			if ! run_with_progress "Lixeira" \
-				bash -c 'rm -rf -- "$1"/*' _ "$trash_dir"; then
+			if ! run_with_progress "Lixeira" _clear_dir_contents "$trash_dir"; then
 				carcara_err "Failed clearing trash at $trash_dir"
 				failed=1
 			fi
@@ -54,8 +65,7 @@ cleanDebian() {
 	fi
 
 	if [[ -d /var/tmp ]]; then
-		if ! run_with_progress "var/tmp" \
-			bash -c 'rm -rf -- /var/tmp/*'; then
+		if ! run_with_progress "var/tmp" _clear_dir_contents /var/tmp; then
 			carcara_err "Failed clearing /var/tmp"
 			failed=1
 		fi

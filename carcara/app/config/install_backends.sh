@@ -12,8 +12,9 @@
 
 # Source-only library (no side effects). Requires root for apt/snap/flatpak system installs.
 # Safe to source multiple times.
+# When sourced twice: return. Do not execute this file as a program.
 if [[ -n "${CARCARA_BACKENDS_LOADED:-}" ]]; then
-	return 0 2>/dev/null || exit 0
+	return 0
 fi
 CARCARA_BACKENDS_LOADED=1
 

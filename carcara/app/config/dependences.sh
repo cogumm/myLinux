@@ -1,7 +1,7 @@
 #!/bin/bash
 #---------------------------------------------------------------------------#
 # Data criação: 15 de Fevereiro de 2020
-# Última alteração: 16 de Novembro de 2026
+# Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
 # Telegram: http://t.me/CoGUMm
@@ -13,6 +13,8 @@
 # Requires config.sh already sourced (configYad*, root). Prefer sourcing this file,
 # not executing it in a bare subshell, so Yad settings remain available.
 # Install UI tools BEFORE any yad/zenity call (including testConnection).
+# shellcheck disable=SC2154 # configYadB exported by config.sh when sourced from startApp
+
 
 _carcara_cmd_ok() {
 	command -v "$1" >/dev/null 2>&1

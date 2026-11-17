@@ -1,7 +1,7 @@
 #!/bin/bash
 #-------------------------------------------------------------------------------#
 # Data criação: 05 de Dezembro de 2015
-# Última alteração: 16 de Novembro de 2026
+# Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
 # Telegram: http://t.me/CoGUMm
@@ -9,6 +9,7 @@
 # Descrição: Testa conectividade de rede antes de downloads/atualizações.
 # Variáveis: $configYad : Configurações Yad (sem botões) — requer config.sh + yad
 #-------------------------------------------------------------------------------#
+# shellcheck disable=SC2154 # configYad exported by config.sh when sourced
 
 testConnection() {
 	if ! command -v yad >/dev/null 2>&1; then
