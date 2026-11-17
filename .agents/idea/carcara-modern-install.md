@@ -179,7 +179,7 @@ Explicitly **out** of Wave 3 now: Yad redesign, `gum` migration, nala-as-UI.
 - [x] Wave 1 Step 3 — system scripts (17 de Novembro de 2026)
 - [x] Wave 1 Step 4 — minimal menu wiring (17 de Novembro de 2026)
 - [x] Wave 1 Step 5 — ShellCheck + docs (17 de Novembro de 2026)
-- [ ] Wave 2 — thin installers onto backends
+- [x] Wave 2 — thin installers onto backends (17 de Novembro de 2026)
 - [ ] Wave 3 — optional CLI only / **skip** if 2.0 starts
 
-**Wave 1 complete.** Next coding session when approved: **Wave 2** (thin installers).
+**Wave 2 complete.** Next: optional Wave 3 CLI polish, or start Electron **2.0** when approved.

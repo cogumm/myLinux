@@ -23,3 +23,4 @@ Append-only log. Do not delete completed history.
 - [x] Wave 1 Step 3: modernized `updateDistro` / `fixSystem` / `cleanDistro` (exit codes, confirms, safer locks)
 - [x] Wave 1 Step 4: wired Desenvolvimento + Produção menus (`development/_menu.sh`, `productivity/_menu.sh`)
 - [x] Wave 1 Step 5 (2026-11-17): ShellCheck + `bash -n` on Wave 1 scripts; `.shellcheckrc`; export shared config; docs/playbook/memory-bank closed — **Wave 1 complete**
+- [x] Wave 2 (2026-11-17): thin installers on backends (vlc, discord, spotify, telegram, git, vscode, insomnia, firacode, dropbox); Social/Utilities Voltar → `break`; ShellCheck clean — **Wave 2 complete**

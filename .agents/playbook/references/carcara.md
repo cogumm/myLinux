@@ -8,13 +8,22 @@ Main options (UI labels as shipped): “Atualizar sistema” · “Instalar prog
 
 Software menu: “Desenvolvimento” / “Produção” / “Social” / “Utilidades” — all four wired (`development/_menu.sh`, `productivity/_menu.sh`, `social/_menu.sh`, `utilities/_menu.sh`).
 
-## Installers present
+## Installers present (Wave 2 — thin / backends)
 
-- development: `firacode.sh`, `git.sh`, `insomnia.sh`, `vscode.sh` (snap)
-- social: discord, spotify, telegram + `_menu.sh`
-- utilities: vlc + `_menu.sh`
-- productivity: `dropbox.sh`
-- system: `updateDistro.sh`, `cleanDistro.sh`, `fixSystem.sh`, `sync_time.sh`
+Policy: apt (distro or keyring) → Flatpak/Flathub → Snap. Idempotent via `pkg_present`.
+
+| Area | Script | Preferred path |
+|------|--------|----------------|
+| utilities | `vlc.sh` | apt `vlc` → Flatpak → Snap |
+| social | `discord.sh` | Flatpak → Snap |
+| social | `spotify.sh` | Spotify apt keyring → Flatpak → Snap |
+| social | `telegram.sh` | Flatpak → Snap (`telegram-desktop` only) |
+| development | `git.sh` | apt `git` + gui/doc/gitg |
+| development | `vscode.sh` | Microsoft apt → Snap `--classic` |
+| development | `insomnia.sh` | Flatpak → Snap |
+| development | `firacode.sh` | apt `fonts-firacode` |
+| productivity | `dropbox.sh` | Flatpak → Snap |
+| system | update / fix / clean / `sync_time.sh` | (Wave 1) |
 
 ## Bootstrap (Wave 1 Step 1 — done)
 
@@ -65,7 +74,11 @@ snap_install code --classic
 - Wave 1 scripts: `bash -n` + ShellCheck clean (`shellcheck` binary optional under `.tools/`, gitignored).
 - Shared paths/`configYad*` are `export`ed from `config.sh`; `isRoot` uses `$(id -u)`.
 
+## Menus — Voltar
+
+All software category menus (`development`, `productivity`, `social`, `utilities`) and `menuSof` use `break` (no nested `bash $menuSof`).
+
 ## Fix priorities (remaining)
 
-1. Wave 2 — thin installers onto backends (no Yad polish).
-2. Optional: fix legacy Social/Utilities “Voltar” nesting the same way.
+1. Wave 3 — optional CLI only / skip if Electron 2.0 starts.
+2. Live install smoke-test on a disposable machine (owner-requested).
