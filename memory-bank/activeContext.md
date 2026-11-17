@@ -4,108 +4,53 @@ Last updated: 2026-11-17
 
 ## Current focus
 
-**Carcará 2.0 usable alpha** (`carcara-electron/`, package **`2.0.1`**).  
-**1.x** (`carcara/`) = install/maintenance **engine** + CLI/fallback.  
-**Packaging shipped:** `.deb` via `electron-builder` + GHA Release workflow.  
-**v2.0.1 Waves A–C shipped:** full curated catalog + presets + Software search/badges + Sobre host health.  
-**Release:** cutting **v2.0.1** — notes in `docs/releases/2.0.1.md`; every future release needs that md + tag `vX.Y.Z` on the notes commit (`systemPatterns` #16).  
-**Packaging:** `.deb` + **AppImage** (`pack:appimage` / CI `pack:linux`).  
-**Live smoke:** `--live-core` passed; `--live-extended` available; passwordless via `smoke:elevated`.  
-**Smoke:** one-time `sudo bun run smoke:nopasswd-install`, then `bun run smoke:elevated -- --live-safe` (no password / no polkit hang).  
-**Skills installed:** `bash-scripting`, `debian-linux-triage` (+ existing shellcheck / ui-ux-pro-max) — see `.agents/skills/README.md`.
+**Carcará 2.0.1 closed** — ready for **v2.0.2** work when scoped in `memory-bank/TODO.md`.
 
-Canonical agent how-to:
+| Surface | State |
+|---------|--------|
+| **2.0** (`carcara-electron/`, package **`2.0.1`**) | Usable alpha: UI, helper, license, Dotfiles, i18n, Software catalog, smoke |
+| **1.x** (`carcara/`) | Install/maintenance **engine** + CLI/fallback |
+| **Packaging** | `.deb` + AppImage; GHA `release-deb.yml` on Release / `workflow_dispatch` |
+| **Default branch** | `main` |
+| **Smoke** | `smoke:software` + `smoke:elevated` (after one-time `smoke:nopasswd-install`) |
+
+Next release: bump version → `docs/releases/2.0.2.md` → tag `v2.0.2` (see `systemPatterns` #16).
+
+## Canonical agent how-to
 
 | Doc | Role |
 |------|------|
-| `.agents/playbook/references/carcara-2.0.md` | 2.0 UI, helper, packaging, WSL |
+| `.agents/playbook/references/carcara-2.0.md` | 2.0 UI, helper, packaging, WSL, smoke |
 | `.agents/playbook/references/carcara.md` | 1.x menus, backends, `carcara_confirm` |
 | `.agents/playbook/references/dotfiles.md` | `apply.sh` + menus |
 | `.agents/playbook/references/i18n.md` | Nested locales + `{version}` + rail PT\|EN |
 | `.agents/playbook/references/legacy.md` | `old/` — port ideas only |
 | `.agents/playbook/references/stack.md` | Entrypoints + toolchain |
 | `design-system/carcara-2-0/pages/app-shell.md` | Rail / tiles / pager / lang |
-| `memory-bank/TODO.md` | Inbox + **v2.0.1 waves** |
+| `memory-bank/TODO.md` | Inbox (**v2.0.2** empty) |
+| `docs/releases/2.0.1.md` | What shipped in 2.0.1 |
 
-## Session consolidation (17 Nov 2026) — full dump
+## Shipped in 2.0.1 (do not re-open without cause)
 
-### Packaging `.deb` + CI — done
-
-- **Config lives with the app**, not under `.github/workflows/`:
-  - `carcara-electron/electron-builder.yml` — electron-builder (targets, `extraResources`, deb deps)
-  - `.github/workflows/release-deb.yml` — GHA only (checkout → Bun → `pack:deb` → attach asset)
-- **Local:** `cd carcara-electron && bun run pack:deb` → `release/carcara_<ver>_amd64.deb` (~75 MB validated for `2.0.1`).
-- **CI trigger:** GitHub **Release published** (tag `vX.Y.Z`); also `workflow_dispatch` with optional version. Syncs `package.json` version from tag, uploads artifact + attaches to Release.
-- **Runtime without Bun:** main uses `src/run-helper-node.ts` (spawn helper + pkexec). Dev still has `bun run helper` → `scripts/run-helper.ts`.
-- **Paths:** `src/paths.ts` — packaged root = `process.resourcesPath/mylinux`; layout packs `carcara/`, `locales/`, `dotfiles/`, `assets/`, `carcara-electron/helper/`.
-- **Helper:** `CARCARA_REPO_ROOT` set by main; honor in `helper/carcara-helper.sh`. pkexec path passes env via `pkexec env KEY=…`.
-- **Postinst:** `build/deb/after-install.sh` renames `/opt/Carcara/carcara` → `carcara.bin`, writes `/usr/bin/carcara` wrapper with **pkexec** + `--no-sandbox` (1.x root parity).
-- **FPM trap:** electron-builder expands `${LetterOnly}` in maintainer scripts as macros — never use `${REAL}`, `${Name}`, etc. Prefer `$VAR`, underscore names, or quoted heredocs + `sed` placeholders (`__CARCARA_BIN__`).
-- **Package name:** `extraMetadata.name: carcara` (workspace npm name stays `carcara-electron`). Artifact: `carcara_${version}_${arch}.deb`.
-- **AppImage:** `bun run pack:appimage` / CI `pack:linux` (validated locally `carcara_2.0.1_x86_64.AppImage` ~109 MB).
-- Do **not** live-install the `.deb` / run pkexec smoke unless the owner asks.
-
-### Version in UI strings — done
-
-- Single source: `carcara-electron/package.json` `"version"` (currently `2.0.1`).
-- Rail pill: `lib/version.ts` → `APP_VERSION` (bundled).
-- Locales use placeholder **`{version}`**: `window.title`, `ready.log` (pt/en).
-- Interpolate: `t(key, { version: APP_VERSION })` · `nativeT(key, { version: app.getVersion() })`.
-- Never hardcode `2.0` / `2.0.1` in locale copy again.
-
-### i18n (1.x + 2.0) — done
-
-- Nested `locales/{pt,en}.json` → flatten → dotted keys.
-- Bash `i18n.sh` (python3) · renderer `flatten-locale.ts` · main `native-i18n.ts`.
-- `CARCARA_LANG` default; rail PT\|EN → `localStorage` `carcara.lang` + remount.
-- Sobre: `sobre.fact.*.label` / `.value`. Product names / `cogumm.net` not translated.
-
-### Software UX — done
-
-- Snap Store **19 categories**; empty = `cat.empty`.
-- Pagination **6/page** (`createPagedTiles` + `createPager`); click via event delegation.
-- Realistic `desc.*` i18n.
-
-### Sistema / Dotfiles / engine — done (earlier same day)
-
-- License gate 2.0 = 1.x `license` file.
-- Dotfiles rail + helper `dotfiles-*` as `$SUDO_USER`; `apply.sh` never root.
-- `sync-time` → hardened `sync_time.sh` (timedatectl → ntpdate; NI).
-- Zod env + `z.prettifyError`; tile hover-only teal; `carcara_confirm` auto-yes when root/NI.
-- `dependences.sh` hardened; Docker CE → `docker.io`; root + Bun PATH under sudo; WSL openExternal + GPU flags.
-
-### Waves A–C catalog — done
-
-- Thin installers + helper + 2.0 tiles + locales (pt/en parity).
-- Zen AppImage (GitHub); Cursor deb; Node toolchain (NodeSource + Bun zip).
-- 1.x folders include `security/` + `presets/`.
-- Wave C UX: Software category search; tile backend badges; Sobre `host:info`.
-- Docker Desktop skipped (Engine enough).
-
-### Catalog planning — v2.0.1 (open)
-
-- Tracker: smoke + optional AppImage only (`TODO.md`).
-- `listSoftwares.md` = Snap Store pointer.
-- Policy: **apt → Flatpak → Snap** (+ deb/AppImage/zip helpers).
-
-### `old/` reuse (settled)
-
-- Ported: Docker only. Idea-only vs do-not-port: see `references/legacy.md`.
+- Waves A–C thin installers + helper allowlist + 2.0 tiles/locales
+- Software: 19 Snap Store categories, search, backend badges, pagination 6/page, presets
+- Sistema: update / fix / clean / sync-time; Dotfiles rail; license gate
+- Packaging: `pack:deb` / `pack:appimage` / `pack:linux`; CI attaches both
+- Smoke: wiring + `bash -n` + `--live-core` / `--live-extended` + passwordless elevated path
+- Skills: shellcheck, ui-ux-pro-max, bash-scripting, debian-linux-triage
 
 ## Validated
 
-- Sistema as root: update / fix / clean → exit 0.
-- `bun run typecheck` + `bun run build` + `bun run pack:deb` / `pack:appimage` OK.
-- Deb contains `resources/mylinux/{carcara,locales,dotfiles,helper}` + postinst wrapper.
-- Owner `--live-core` smoke (sudo + preserved `PATH`) — 17 Nov 2026.
+- Sistema as root: update / fix / clean → exit 0
+- `bun run typecheck` + `build` + `pack:deb` / `pack:appimage`
+- Owner `--live-core` smoke (sudo + preserved `PATH`)
+- Release `v2.0.1` + `.deb` on GitHub
 
-## Still open
+## Standing notes (not backlog)
 
-_(none for Software smoke — use `smoke:elevated` after `smoke:nopasswd-install`)_
-
-## Blockers / notes
-
-- Already-root → helper skips `pkexec` (expected).
-- WSL often lacks pkexec → privileged actions fail apt locks; use real desktop for elevation tests.
+- Already-root → helper skips `pkexec` (expected). Prefer `smoke:elevated` on WSL.
+- Never bare `sudo bun` — use `sudo env "PATH=$PATH" bun …` or `smoke:elevated`.
 - Bash i18n flatten needs **python3**.
-- `electron-builder.yml` ≠ GHA workflow — do not move into `.github/workflows/`.
+- `electron-builder.yml` stays under `carcara-electron/` (not `.github/workflows/`).
+- FPM: avoid `${LetterOnly}` macros in afterInstall scripts.
+- Do not live-install `.deb` / mutate apt unless the owner asks in that message.

@@ -6,7 +6,7 @@ Updated: 17 de Novembro de 2026
 Install policy: **apt (distro or official keyring) → Flatpak/Flathub → Snap**.  
 Vendor `.deb` / AppImage / zip via `install_deb_url` / `install_appimage_url` / GitHub (no `curl | bash`).
 
-**Backlog:** smoke-tests only — waves A–C shipped (`memory-bank/TODO.md`).  
+**Status:** Waves 2 + A–C shipped (v2.0.1). New apps → **v2.0.2** in `memory-bank/TODO.md`.  
 **Research pointer:** `.agents/idea/listSoftwares.md` → [Snap Store](https://snapcraft.io/store).
 
 ## 1.x menu folders

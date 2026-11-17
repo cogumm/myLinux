@@ -1,8 +1,8 @@
 # Idea — Carcará 2.0 (Electron)
 
-Status: **in progress** (plan locked + spike started)  
+Status: **v2.0.1 shipped** — ready for **v2.0.2** (see `memory-bank/TODO.md`)  
 Saved: 16 de Novembro de 2026  
-Updated: 17 de Novembro de 2026 (`.deb` + Release CI; env/Zod; Dotfiles; license; i18n)  
+Updated: 17 de Novembro de 2026 (2.0.1 closed: catalog, packaging, smoke)  
 Related: [mylinux.md](mylinux.md) · [carcara-modern-install.md](carcara-modern-install.md) (1.x engine — complete)
 
 ## Intent
@@ -135,7 +135,7 @@ flowchart LR
 ## Implementation checklist
 
 - [x] Write detailed 2.0 plan (stack, folder layout, privilege helper)
-- [x] Spike scaffold: `carcara-electron/` + Bun bridge (`bun run build` / `bun scripts/run-helper.ts ping` OK; GUI/`pkexec` validation pending)
+- [x] Spike scaffold: `carcara-electron/` + Bun bridge (`bun run build` / `bun scripts/run-helper.ts ping` OK)
 - [x] UI direction via `ui-ux-pro-max` → `design-system/carcara-2-0/` + app-shell renderer
 - [x] Full UI rebuild from scratch (Flat tokens, rail + tiles + dialog confirm, brand `logo_moderno_final`) — 17 de Novembro de 2026
 - [x] Renderer modular: `views/{sistema,software,sobre}.ts` + reusable `components/` (Bun IIFE bundle) — 17 de Novembro de 2026

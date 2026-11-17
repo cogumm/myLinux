@@ -58,19 +58,16 @@ Act as a **Linux systems analysis & development** specialist:
 - i18n: Portuguese default; English via `CARCARA_LANG=en` — shared `locales/*.json` (see playbook `references/i18n.md`).
 - Read `memory-bank/activeContext.md` + `memory-bank/progress.md` before coding.
 
-## Known debt (do not paper over)
+## Known debt / standing notes (do not paper over)
 
-- Legacy `old/scripts/*.sh` install obsolete stacks and unsafe defaults (`chmod 777 www`, hardcoded passwords)
-- Wave 1 + Wave 2 done (1.x engine). Wave 3 cancelled — product UI is Electron 2.0
-- Active: Carcará 2.0 **usable alpha** (`2.0.1`) — license gate, Dotfiles, Zod, nested i18n + rail PT\|EN, sync-time, Software pagination, **`.deb` + Release CI**, `{version}` in locales; see playbook `carcara-2.0` + `memory-bank/activeContext.md`
-- Smoke: `smoke:elevated` after `smoke:nopasswd-install` (passwordless; prefer over pkexec on WSL)
-- 1.x `menuGeral`: Atualizar / Instalar / Correção / Limpeza / **Dotfiles** / Sair
-- `dependences.sh` hardened 17 Nov 2026 (apt-family detect, apt update, Flathub, NI-safe notify)
-- Baseline `--live-core` / `--live-extended` via `smoke:elevated` (NOPASSWD sudoers); pkexec GUI optional
-- WSL: prefer `smoke:elevated` over pkexec (polkit often no agent/TTY)
-- Packaging `.deb` + AppImage done (`pack:linux` + `release-deb.yml`)
-- `electron-builder.yml` lives under `carcara-electron/` — not under `.github/workflows/`
-- 1.x i18n flatten needs **python3** on the machine
+- Legacy `old/scripts/*.sh` — obsolete stacks / unsafe defaults; **archive only**
+- Wave 1–2 done; Wave 3 cancelled; product UI is Electron **2.0.1** (closed) — next inbox **v2.0.2** in `memory-bank/TODO.md`
+- Smoke: `smoke:elevated` after `smoke:nopasswd-install` (prefer over pkexec on WSL)
+- Never bare `sudo bun` — `secure_path` drops `~/.bun/bin`
+- `electron-builder.yml` under `carcara-electron/` only — not `.github/workflows/`
+- FPM afterInstall: avoid `${LetterOnly}` macros
+- 1.x i18n flatten needs **python3**
+- Default git branch: **`main`**
 
 ## Project guidance
 

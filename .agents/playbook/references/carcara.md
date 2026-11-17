@@ -94,6 +94,7 @@ Plan: `.agents/idea/carcara-2.0-electron.md`.
 1.x remains CLI/fallback (`startApp.sh`). Chooser: `./start.sh`.  
 Alpha UI: modular views/components, Flat Design, helper allowlist + `CARCARA_NONINTERACTIVE=1`.
 
-## Fix priorities (remaining)
+## Status
 
-1. Live **pkexec** / broader `--live` via `bun run smoke:software -- --pkexec` (baseline `--live-core` already owner-validated).
+**1.x engine + v2.0.1 catalog closed.** Operator smoke: `cd carcara-electron && bun run smoke:elevated -- --live-safe` (after `smoke:nopasswd-install`).  
+New work: `memory-bank/TODO.md` → **v2.0.2**.

@@ -29,7 +29,7 @@ Secondary: anyone who clones the MIT repo and accepts root risk.
 ### C — Install curated apps (either UI)
 
 **Shipped today:** Wave 2 + **A–C** — see `.agents/idea/softwares.md` (office, passwords, Proton/Nord, Node toolchain, presets, …).  
-**Backlog:** live smoke + optional AppImage (`memory-bank/TODO.md`).  
+**Backlog:** empty for 2.0.1 — next items go under **v2.0.2** in `memory-bank/TODO.md`.  
 Policy: apt → Flatpak → Snap; vendor deb/AppImage/zip helpers (no curl\|bash).
 
 ### D — Apply dotfiles

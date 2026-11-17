@@ -11,7 +11,7 @@ Last updated: 2026-11-17
 | UI 2.0 | Electron + TypeScript vanilla renderer (Bun toolchain) |
 | Env (2.0) | `dotenv` + **Zod 4** (`src/env.ts`) |
 | i18n | Nested `locales/{pt,en}.json` → flattened dotted keys; `{version}` interpolate |
-| Packaging | **electron-builder** → `.deb`; GHA `release-deb.yml` on Release |
+| Packaging | **electron-builder** → `.deb` + AppImage; GHA `release-deb.yml` on Release |
 | Runtime (.deb) | Node `run-helper-node` + Bash helper — **no Bun** |
 | Packages | apt-get, dpkg, Flatpak/Flathub, snap |
 | VCS | Git — default branch **`main`** |

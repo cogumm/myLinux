@@ -77,3 +77,4 @@ Append-only log. Do not delete completed history.
 - [x] Live smoke harness: single `smoke:software` + `--live-core` / `--live-safe` (no smoke:waveN scripts); Bun PATH recovery under sudo (2026-11-17)
 - [x] Owner live `--live-core` smoke passed (`sudo env "PATH=$PATH" bun run smoke:software -- --live-core`) (2026-11-17)
 - [x] Passwordless smoke elevation: `smoke-elevated.sh` + `/etc/sudoers.d/carcara-smoke`; `--live-extended` set; prefer over pkexec on WSL (2026-11-17)
+- [x] Docs hygiene for **v2.0.2**: TODO inbox empty, activeContext/playbook/AGENTS/release notes cleared of stale “Still open” (2026-11-17)

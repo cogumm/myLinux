@@ -8,7 +8,7 @@ See also:
 - [Dotfiles](dotfiles.md)
 - [Legacy `old/`](legacy.md)
 - [WSL Zone.Identifier cleanup](wsl-cleanup.md)
-- [Releases](releases/2.0.1.md) (`docs/releases/X.Y.Z.md` per version)
+- [Releases](releases/README.md) (`docs/releases/X.Y.Z.md` per version)
 - Root [README](../README.md) and [carcara/README.md](../carcara/README.md)
 
 Agent entry: [AGENTS.md](../AGENTS.md).  

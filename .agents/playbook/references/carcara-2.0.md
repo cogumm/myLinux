@@ -161,6 +161,7 @@ bun run smoke:elevated -- --live-extended
 
 Harness: `smoke-software.sh` + optional `smoke-elevated.sh` (NOPASSWD scoped sudoers). Flags: `--live-core` / `--live-extended` / `--live-safe` / `--live …` — no `smoke:waveN`. Prefer `smoke:elevated` over pkexec on WSL (polkit often hangs without agent/TTY).
 
-## Still open
+## Status
 
-_(none for smoke elevation — use `smoke:elevated` after `smoke:nopasswd-install`)_
+**v2.0.1 closed.** Next work lands in `memory-bank/TODO.md` under **v2.0.2**.  
+Smoke: `smoke:elevated` after one-time `smoke:nopasswd-install` (prefer over pkexec on WSL).
