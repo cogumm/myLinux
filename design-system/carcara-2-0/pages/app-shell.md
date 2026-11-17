@@ -39,5 +39,6 @@
 - Wordmark **Carcará** Inter 700, tracking −0.03em (Modern Dark Cinema)
 - Version as teal nowrap pill (`2.0`) beside the wordmark — compact label, never wrap
 - Active nav: accent orange inset + secondary teal icon
+- Tile hover: teal left bar + primary border (no permanent featured outline)
 - Footer microcopy one line: `MIT · 2010–YYYY · @CoGUMm`
-- Accent CTA `#EA580C` (beak); teal `#0D9488` / `#14B8A6` for chrome
+- Accent CTA `#EA580C` (beak) for confirm dialogs; teal `#0D9488` / `#14B8A6` for chrome + featured tiles
