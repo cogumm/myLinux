@@ -8,4 +8,5 @@ Wishlist and waves live in `memory-bank/TODO.md` (section **v2.0.1 — catalog e
 - Tailscale
 - Nextcloud
 - NVIDIA DCGM
-- 
+- Certbot
+- Onlyoffice Docs
