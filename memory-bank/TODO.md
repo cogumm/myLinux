@@ -4,7 +4,7 @@ Last updated: 2026-11-17
 
 Unscheduled ideas (promote into active work deliberately).  
 Canonical product ideas: `.agents/idea/mylinux.md`, `.agents/idea/carcara-2.0-electron.md`.  
-Session dump: `memory-bank/activeContext.md` (17 Nov 2026).  
+Session dump: `memory-bank/activeContext.md` (17 Nov 2026 — packaging + version + helper paths).  
 Also mirrored under “Still open” in `.agents/playbook/references/carcara-2.0.md` and `references/carcara.md`.
 
 ## Still open (summary)
@@ -13,7 +13,7 @@ Also mirrored under “Still open” in `.agents/playbook/references/carcara-2.0
 |-------|-----------|--------|
 | **2.0** | Smoke-test Software installers via UI | Owner-requested apt/flatpak/snap |
 | **2.0** | Smoke-test privileged actions with **pkexec** | Real Linux desktop / WSLg (not already-root) |
-| **2.0** | Package `.deb` (AppImage optional) | Packaging only |
+| **2.0** | Optional AppImage | `.deb` + Release CI **done** |
 | **2.0.1** | Catalog waves A→C (below) | Curated installers + categories |
 | **1.x** | Live smoke-test Wave 2 installers | Same machine gate as 2.0 Software |
 | Skills | `bash-scripting`, `debian-linux-triage` | Install when rewriting that area |
@@ -64,6 +64,9 @@ Wave 1–2 engine **done**. Wave 3 **cancelled** (UI is Electron 2.0).
 - [ ] Smoke-test with **pkexec** on real desktop / WSLg (unelevated user → elevates)
 - [x] Package `.deb` for Carcará 2.0 (`electron-builder` + `pack:deb`; AppImage optional later) (17 de Novembro de 2026)
 - [x] CI: `.github/workflows/release-deb.yml` — Release published → attach `carcara_*_amd64.deb` (17 de Novembro de 2026)
+- [x] Locale `{version}` for `window.title` / `ready.log` ← `package.json` (17 de Novembro de 2026)
+- [x] Session knowledge re-consolidated (packaging + version + helper paths) → memory-bank + playbook (17 de Novembro de 2026)
+- [ ] Optional AppImage target
 
 ## v2.0.1 — catalog enrichment (planned)
 

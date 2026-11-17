@@ -62,13 +62,14 @@ Act as a **Linux systems analysis & development** specialist:
 
 - Legacy `old/scripts/*.sh` install obsolete stacks and unsafe defaults (`chmod 777 www`, hardcoded passwords)
 - Wave 1 + Wave 2 done (1.x engine). Wave 3 cancelled — product UI is Electron 2.0
-- Active: Carcará 2.0 **usable alpha** (`2.0.0-alpha.0`) — license gate, Dotfiles, Zod env, nested i18n + rail PT\|EN, sync-time, Software pagination; see playbook `carcara-2.0` + `memory-bank/activeContext.md`
+- Active: Carcará 2.0 **usable alpha** (`2.0.1`) — license gate, Dotfiles, Zod, nested i18n + rail PT\|EN, sync-time, Software pagination, **`.deb` + Release CI**, `{version}` in locales; see playbook `carcara-2.0` + `memory-bank/activeContext.md`
 - Next: **v2.0.1** catalog waves A→C in `memory-bank/TODO.md` (wishlist pointer `.agents/idea/listSoftwares.md`)
 - 1.x `menuGeral`: Atualizar / Instalar / Correção / Limpeza / **Dotfiles** / Sair
 - `dependences.sh` hardened 17 Nov 2026 (apt-family detect, apt update, Flathub, NI-safe notify)
 - Wave 2 installers / 2.0 privileged actions not fully smoke-tested live (needs owner-requested apt/flatpak/snap + pkexec)
 - WSL: no `pkexec` → privileged helper runs unelevated (apt locks fail); use real desktop for elevation tests
 - Packaging `.deb` done (`pack:deb` + `release-deb.yml`); live Software/pkexec smoke + optional AppImage still open
+- `electron-builder.yml` lives under `carcara-electron/` — not under `.github/workflows/`
 - 1.x i18n flatten needs **python3** on the machine
 
 ## Project guidance

@@ -29,5 +29,5 @@ Maintain a personal, scriptable **Linux workstation toolkit**: Carcará (interac
 3. **Installer refresh** — backends + thin installers — Wave 2 done.
 4. **Dotfiles install path** — `dotfiles/apply.sh` + `docs/dotfiles.md` — done.
 5. **Dual entrypoint** — root `./start.sh` chooses Electron 2.0 or terminal 1.x — done.
-6. **Carcará 2.0 alpha UI** — modular Electron shell + helper + license gate + Dotfiles rail + Zod env + i18n + sync-time + Software pagination — done (packaging / Software+pkexec smoke open).
-7. **v2.0.1 catalog** — expand curated installers (waves A→C in `TODO.md`); optional new categories Browsers / Games / Media — **planned**.
+6. **Carcará 2.0 alpha UI** — modular Electron shell + helper + license gate + Dotfiles + Zod + i18n + sync-time + Software pagination + **`.deb` packaging / Release CI** — done (Software+pkexec smoke still owner-gated).
+7. **v2.0.1 catalog** — expand curated installers (waves A→C in `TODO.md`); optional AppImage; optional new categories Browsers / Games / Media — **planned**.

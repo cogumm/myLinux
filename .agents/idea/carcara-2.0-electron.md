@@ -27,7 +27,7 @@ Ship **Carcará 2.0** as a desktop app with a modern UI using **Electron**.
 - Web UI without inventing a new desktop toolkit.
 - Better layout, theming, accessibility, and progress UX than Yad.
 - Same install backends via privileged helper; UI is never the source of truth for package safety.
-- Bun owns package install + build scripts + safe shell orchestration (`import { $ } from "bun"`). Electron main still uses Chromium’s Node and **spawns** `bun scripts/run-helper.ts` so Shell APIs stay on the Bun runtime.
+- Bun owns **dev/build** (`bun install`, `scripts/build.ts`, optional `scripts/run-helper.ts`). Packaged Electron uses Node `run-helper-node.ts` → Bash helper — **no Bun on installed systems**. `.deb` via electron-builder + GHA Release.
 
 ## Product sketch
 
@@ -44,9 +44,10 @@ Ship **Carcará 2.0** as a desktop app with a modern UI using **Electron**.
 
 - **Bun** ≥ 1.1 (package manager + script runner + Shell)
 - Electron (current stable) + TypeScript (main/preload compiled with `tsc` for Electron’s Node)
-- Vanilla renderer (PT labels, same verbs as 1.x)
-- Scripts: `bun run dev` / `build` / `start` / `helper`
-- Helper: Bash allowlist under `carcara-electron/helper/` + Bun bridge `scripts/run-helper.ts`
+- Vanilla renderer (PT labels, same verbs as 1.x); version from `package.json` (`{version}` in locales)
+- Scripts: `bun run dev` / `build` / `start` / `helper` / `pack:deb`
+- Helper: Bash allowlist + Node `run-helper-node.ts` (runtime) + Bun `run-helper.ts` (dev)
+- Packaging: `electron-builder.yml` + `build/deb/after-install.sh` + `.github/workflows/release-deb.yml`
 
 ## Repo layout
 
@@ -57,11 +58,14 @@ carcara-electron/
   bun.lock
   tsconfig.json
   helper/carcara-helper.sh    # pkexec-facing allowlist
+  electron-builder.yml        # .deb config (not under .github/workflows/)
+  build/deb/after-install.sh  # pkexec /usr/bin/carcara wrapper
   scripts/
     build.ts                  # Bun.$ → tsc + copy static + assets/img/logo.png
-    run-helper.ts             # Bun.$ → pkexec|helper
+    run-helper.ts             # Bun.$ → pkexec|helper (dev)
   src/
-    main.ts                   # BrowserWindow + IPC → spawn bun bridge
+    main.ts                   # BrowserWindow + IPC → run-helper-node
+    paths.ts / run-helper-node.ts
     preload.ts
     renderer/
       index.html              # #app mount + CSP

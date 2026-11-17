@@ -25,9 +25,9 @@ description: >-
 | `references/product.md` | Scope and non-goals |
 | `references/code-organization.md` | Where scripts live |
 | `references/carcara.md` | 1.x menus, config, installers, `carcara_confirm` |
-| `references/carcara-2.0.md` | Electron UI, Bun, helper, license, Zod env, Dotfiles, WSL |
+| `references/carcara-2.0.md` | Electron UI, helper, **`.deb` packaging / Release CI**, license, Zod, WSL |
 | `references/dotfiles.md` | `apply.sh` + menus 1.x/2.0, aliases, zsh, git, Hyper |
-| `references/i18n.md` | Shared `locales/{pt,en}.json` + `CARCARA_LANG` |
+| `references/i18n.md` | Shared `locales/{pt,en}.json` + `CARCARA_LANG` + `{version}` |
 | `references/legacy.md` | What `old/` means |
 
 ## Working style

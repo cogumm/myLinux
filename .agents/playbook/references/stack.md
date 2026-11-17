@@ -12,15 +12,17 @@
 ## 2.0 (product UI)
 
 - Electron + TypeScript + vanilla renderer under `carcara-electron/`
-- **Bun** toolchain (`bun install`, `bun run`, [Shell `$`](https://bun.sh/docs/runtime/shell))
+- **Bun** toolchain for **dev/build** (`bun install`, `bun run`, [Shell `$`](https://bun.sh/docs/runtime/shell))
+- **Packaged runtime:** Node `run-helper-node.ts` → Bash helper — **no Bun on target**
 - Env: Zod 4 + dotenv (`src/env.ts`, `.env.example`) incl. `CARCARA_LANG`
-- Privilege: `scripts/run-helper.ts` (Bun.$) → `helper/carcara-helper.sh` + `pkexec` when needed
+- Privilege: helper allowlist + `pkexec` when needed; `.deb` launcher also uses pkexec
 - Unprivileged: `ping`, `dotfiles-*` (as `$SUDO_USER`); privileged incl. `sync-time`
 - License gate before shell (same `carcara/app/config/license` as 1.x)
-- Brand version pill ← `package.json`; Software pagination 6/page; rail PT\|EN
+- Brand version ← `package.json` (pill + `{version}` in locales); Software pagination 6/page; rail PT\|EN
+- Packaging: `electron-builder.yml` in `carcara-electron/`; CI `.github/workflows/release-deb.yml`
 - External links (WSL): `src/open-external.ts` → PowerShell `Start-Process`
 - Design: `ui-ux-pro-max` → `design-system/carcara-2-0/`
-- Entry: `sudo ./start.sh --electron` (root) or root + `bun run dev`
+- Entry: `sudo ./start.sh --electron` (dev) · or installed `carcara` from `.deb`
 - Detail: `references/carcara-2.0.md` · Plan: `.agents/idea/carcara-2.0-electron.md`
 
 ## Shared
@@ -32,3 +34,4 @@
 - **Dotfiles:** `dotfiles/apply.sh` + menus in both UIs (`references/dotfiles.md`).
 - Optional: `cleanup-zone-identifiers.sh` for WSL ADS junk files.
 - **Catalog backlog:** `memory-bank/TODO.md` v2.0.1 waves.
+- **Releases:** tag `vX.Y.Z` → CI attaches `carcara_*_amd64.deb`.

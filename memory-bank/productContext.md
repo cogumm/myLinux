@@ -19,11 +19,12 @@ Secondary: anyone who clones the MIT repo and accepts root risk.
 
 ### B — Maintain / install via Carcará 2.0
 
-1. `./start.sh --electron` (needs Bun; elevates to root)
+1. `./start.sh --electron` (dev needs Bun; elevates to root) **or** install `carcara_*.deb` and run `carcara` (pkexec wrapper; **no Bun at runtime**)
 2. License gate (same terms as 1.x) — checkbox Continuar or Sair
 3. Rail: **Sistema** · **Software** · **Dotfiles** · **Sobre** + **PT|EN** + version pill (`package.json`)
 4. Confirm dialog → helper → activity console (Dracula terminal)
 5. Engine is still 1.x backends; UI never invents package policy
+6. Releases: GitHub Release tag `vX.Y.Z` → CI attaches amd64 `.deb`
 
 ### C — Install curated apps (either UI)
 
@@ -49,7 +50,7 @@ Policy: apt (or official keyring) → Flatpak → Snap. Notes: `.agents/idea/sof
 - Root warning + disclaimer (1.x header; 2.0 Sobre + confirms)
 - Prefer confirmations before destructive clean/repair (UI dialog; no terminal y/N when already root)
 - Logs remain source of truth (Atividade merges stdout/stderr in order)
-- Brand-first rail (logo + Carcará + **package version** pill)
+- Brand-first rail (logo + Carcará + **package version** pill); window title / ready log use `{version}` from the same source
 - Flat Design tokens from `ui-ux-pro-max` — do not freestyle a new palette
 - Tile hover = teal accent bar; orange only on confirm CTAs
 

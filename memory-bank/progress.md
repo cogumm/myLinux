@@ -62,3 +62,5 @@ Append-only log. Do not delete completed history.
 - [x] Software 2.0 categories = Snap Store 19; realistic `desc.*` i18n; empty-state placeholder (2026-11-17)
 - [x] Carcará 2.0 `.deb` packaging: electron-builder + `run-helper-node` (no Bun at runtime) + pkexec postinst wrapper; local `carcara_2.0.1_amd64.deb` OK (2026-11-17)
 - [x] GitHub Actions `release-deb.yml`: Release published → build/attach amd64 `.deb` (2026-11-17)
+- [x] Locale `{version}` interpolation (`window.title`, `ready.log`) from `package.json` / `app.getVersion()` (2026-11-17)
+- [x] Session knowledge re-consolidated (packaging CI, FPM macro trap, paths/helper, version i18n) → memory-bank + playbook + AGENTS (2026-11-17)

@@ -10,7 +10,9 @@ Last updated: 2026-11-17
 | UI 1.x | Zenity lists, Yad progress/dialogs |
 | UI 2.0 | Electron + TypeScript vanilla renderer (Bun toolchain) |
 | Env (2.0) | `dotenv` + **Zod 4** (`src/env.ts`) |
-| i18n | Nested `locales/{pt,en}.json` → flattened dotted keys |
+| i18n | Nested `locales/{pt,en}.json` → flattened dotted keys; `{version}` interpolate |
+| Packaging | **electron-builder** → `.deb`; GHA `release-deb.yml` on Release |
+| Runtime (.deb) | Node `run-helper-node` + Bash helper — **no Bun** |
 | Packages | apt-get, dpkg, Flatpak/Flathub, snap |
 | VCS | Git |
 | Host | Linux apt-family; WSL2 supported for helpers + Electron with caveats |
@@ -26,15 +28,17 @@ Last updated: 2026-11-17
 
 ### 2.0
 
-- `carcara-electron/` — Electron app (`package.json` version drives brand pill)
+- `carcara-electron/` — Electron app (`package.json` `"version"` → pill, title, ready log, `.deb`)
 - `carcara-electron/.env.example` / `.env` — Zod-validated (`CARCARA_LANG`, window, ping, root)
 - `carcara-electron/src/env.ts`
-- `carcara-electron/src/native-i18n.ts` — main-process `t` (nested locales)
-- `carcara-electron/scripts/{build,run-helper}.ts`
-- `carcara-electron/src/{paths,run-helper-node}.ts` — packaged helper (no Bun runtime)
-- `carcara-electron/electron-builder.yml` + `build/deb/after-install.sh`
-- `.github/workflows/release-deb.yml` — Release → `.deb` asset
-- `carcara-electron/helper/carcara-helper.sh` — allowlist incl. `sync-time`
+- `carcara-electron/src/native-i18n.ts` — main-process `nativeT(key, vars?)`
+- `carcara-electron/scripts/{build,run-helper}.ts` — Bun build + **dev** helper bridge
+- `carcara-electron/src/paths.ts` — repo root (dev) vs `resources/mylinux` (packaged)
+- `carcara-electron/src/run-helper-node.ts` — packaged/runtime helper (pkexec + env)
+- `carcara-electron/electron-builder.yml` — stays under `carcara-electron/` (not `.github/`)
+- `carcara-electron/build/deb/after-install.sh` — `/usr/bin/carcara` pkexec wrapper
+- `.github/workflows/release-deb.yml` — Release published → attach `carcara_*_amd64.deb`
+- `carcara-electron/helper/carcara-helper.sh` — allowlist; honors `CARCARA_REPO_ROOT`
 - `carcara-electron/src/{main,preload,open-external,app-menu}.ts`
 - `carcara-electron/src/renderer/{main,app,views,components,lib}/`
 - `carcara-electron/src/renderer/lib/{i18n,flatten-locale,version}.ts`
@@ -42,6 +46,7 @@ Last updated: 2026-11-17
 - `design-system/carcara-2-0/`
 - `assets/img/` — shared brand images
 - `carcara-electron/assets/fonts/JetBrainsMono-Regular.woff2`
+- `carcara-electron/release/` — local pack output (gitignored)
 
 ### Dotfiles / shared
 
@@ -76,10 +81,18 @@ bun run pack:deb              # → release/carcara_<ver>_amd64.deb (heavy; need
 
 Do **not** run live `sudo`, apt mutations, or `pkexec` flows unless the owner asks.
 
+## Packaging notes (agents)
+
+- `electron-builder.yml` = app packager config; `.github/workflows/*.yml` = CI only.
+- afterInstall: avoid `${LetterOnly}` — FPM treats them as macros (`Macro REAL is not defined`).
+- `extraMetadata.name: carcara` → Debian `Package:` field; artifact name still `carcara_${version}_amd64.deb`.
+- Bump version in `carcara-electron/package.json` before tagging `vX.Y.Z` (CI can sync from tag).
+
 ## Constraints
 
 - 2.0 UI is vanilla (no React) for first ship
 - Renderer must not own package safety — helper allowlist only
+- Packaged `.deb` must not require Bun on the target machine
 - No remote font CDN under Electron CSP (`font-src 'self'`)
 - Dotfiles apply never as root
 - Nested locales require python3 on hosts that run 1.x `t`

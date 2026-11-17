@@ -13,8 +13,10 @@ Memory dump: `memory-bank/activeContext.md` (session 17 Nov 2026)
 | `sudo ./start.sh --electron` | Carcará 2.0 — **requires root** (re-exec via sudo like 1.x) |
 | `sudo ./start.sh --terminal` | Carcará 1.x |
 | `cd carcara-electron && bun run build` | `tsc` + Bun IIFE renderer (build OK as user) |
-| `bun run helper -- ping` | `testConnection.sh` (Google DNS IP `8.8.8.8`) |
+| `bun run pack:deb` | electron-builder → `release/carcara_<ver>_amd64.deb` |
+| `bun run helper -- ping` | Dev Bun bridge → `testConnection.sh` |
 | `bun run helper -- dotfiles-dry-run` | Preview `dotfiles/apply.sh --dry-run --all` as user |
+| Install `.deb` + `carcara` | Packaged path (pkexec wrapper; **no Bun**) — owner-requested only |
 
 **Root policy:** Electron main `requireRoot()` (uid 0), mirroring 1.x `isRoot`. `start.sh --electron` elevates with `sudo` and preserves `DISPLAY` / `WAYLAND_DISPLAY` / `XAUTHORITY`.  
 **Bun under sudo:** `secure_path` drops `~/.bun/bin`. `ensure_bun_on_path` in `start.sh` recovers `$SUDO_USER/.bun/bin`.
@@ -53,10 +55,12 @@ src/renderer/
   styles.css           # Flat tokens + terminal + license-gate + pager
   index.html           # CSP + #app
 src/env.ts             # Zod + dotenv
-src/native-i18n.ts     # main-process nested locale flatten
+src/paths.ts           # repo root / packaged resources/mylinux
+src/run-helper-node.ts # runtime helper (no Bun)
+src/native-i18n.ts     # main-process nested locale flatten + `{version}`
 ```
 
-- `tsconfig.json` — main + preload + open-external + app-menu + **env**
+- `tsconfig.json` — main + preload + open-external + app-menu + **env** (+ imports pull paths/helper)
 - `tsconfig.renderer.json` — typecheck renderer (`moduleResolution: bundler`, `resolveJsonModule`)
 - Build: Bun IIFE → `dist/renderer/renderer.js`; copies CSS/HTML/`license.txt`/assets; embeds `package.json` version
 
@@ -65,7 +69,7 @@ src/native-i18n.ts     # main-process nested locale flatten
 | Piece | Rule |
 |-------|------|
 | Style | Flat Design, dark; primary `#0D9488`, accent `#EA580C` (CTA only), card `#111827` |
-| Brand | `assets/img/logo_moderno_final.png`; wordmark + **version pill** = `package.json` `"version"` |
+| Brand | `assets/img/logo_moderno_final.png`; wordmark + **version pill** = `package.json` `"version"`; `window.title` / `ready.log` use `{version}` |
 | Rail | Sistema / Software / **Dotfiles** / Sobre; footer PT\|EN + `MIT · 2010–YYYY · cogumm.net` |
 | Lang | Env `CARCARA_LANG` default; rail switch → `localStorage` `carcara.lang` + remount |
 | Tiles | Resting = neutral border; **hover** = teal left inset + primary border (no permanent orange outline) |
@@ -113,14 +117,31 @@ When changing visuals: run skill `--design-system`; read `pages/app-shell.md` fi
 
 ## Packaging (`.deb`)
 
+**Do not put `electron-builder.yml` under `.github/workflows/`.**  
+Workflows orchestrate CI; builder config stays next to the Electron app (relative paths to `../carcara`, `build/deb/`, etc.).
+
 | Piece | Path / command |
 |-------|----------------|
-| Config | `carcara-electron/electron-builder.yml` |
-| Postinst wrapper | `carcara-electron/build/deb/after-install.sh` → `/usr/bin/carcara` + pkexec |
+| Builder config | `carcara-electron/electron-builder.yml` |
+| Postinst wrapper | `carcara-electron/build/deb/after-install.sh` → `/usr/bin/carcara` + pkexec + `--no-sandbox` |
 | Local build | `cd carcara-electron && bun run pack:deb` → `release/carcara_<ver>_amd64.deb` |
-| CI | `.github/workflows/release-deb.yml` on **release: published** (also `workflow_dispatch`) |
+| CI | `.github/workflows/release-deb.yml` on **release: published** (+ `workflow_dispatch`) |
 | Runtime layout | `resources/mylinux/{carcara,locales,dotfiles,assets,carcara-electron/helper}` |
-| Paths | `src/paths.ts` (`getRepoRoot` / helper / locales / license) |
+| Paths | `src/paths.ts` (`getRepoRoot` / helper / locales / license / renderer) |
+| Helper runtime | `src/run-helper-node.ts` — **Bun not required** on installed systems |
+| Version / Package | `package.json` version; `extraMetadata.name: carcara` for Debian `Package:` |
+
+### Release flow
+
+1. Set `carcara-electron/package.json` `"version"` (or let CI sync from tag).
+2. Publish GitHub Release with tag `vX.Y.Z`.
+3. Workflow builds amd64 `.deb` and attaches it to that Release.
+
+### afterInstall / FPM gotchas
+
+- electron-builder FPM replaces `${LetterOnly}` in maintainer scripts as **macros**.
+- Avoid `${REAL}`, `${Name}`, etc. Use `$VAR`, names with underscores, or `'heredoc'` + `sed` placeholder (`__CARCARA_BIN__`).
+- Wrapper must elevate like 1.x when uid ≠ 0 (`pkexec` + display session env).
 
 AppImage remains optional / not required for v2.0.1.
 
