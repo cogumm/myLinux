@@ -32,3 +32,4 @@ Append-only log. Do not delete completed history.
 - [x] Carcará 2.0 system actions: helper `update-distro` / `fix-system` / `clean-distro` → 1.x scripts + `CARCARA_NONINTERACTIVE`; Sistema UI with confirms (2026-11-17)
 - [x] Carcará 2.0 software installers via helper allowlist + Software UI categories (development/productivity/social/utilities) (2026-11-17)
 - [x] Images for 1.x + 2.0 live under repo `assets/img/` (no copy under `carcara/app/assets`) (2026-11-17)
+- [x] Carcará 2.0 UI rebuilt from scratch with `ui-ux-pro-max` (Flat tokens, rail/tiles/dialog, brand logo_moderno_final; design-system + renderer) (2026-11-17)

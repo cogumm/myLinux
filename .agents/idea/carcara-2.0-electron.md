@@ -124,6 +124,7 @@ flowchart LR
 - [x] Write detailed 2.0 plan (stack, folder layout, privilege helper)
 - [x] Spike scaffold: `carcara-electron/` + Bun bridge (`bun run build` / `bun scripts/run-helper.ts ping` OK; GUI/`pkexec` validation pending)
 - [x] UI direction via `ui-ux-pro-max` → `design-system/carcara-2-0/` + app-shell renderer
+- [x] Full UI rebuild from scratch (Flat tokens, rail + tiles + dialog confirm, brand `logo_moderno_final`) — 17 de Novembro de 2026
 - [x] Port system actions (update / fix / clean) through helper → 1.x scripts (17 de Novembro de 2026)
 - [x] Port software categories / installers through helper (17 de Novembro de 2026)
 - [ ] Package `.deb` (AppImage optional)
