@@ -54,3 +54,4 @@ Append-only log. Do not delete completed history.
 - [x] i18n pt/en: shared `locales/*.json`; 1.x `i18n.sh`+Zenity IDs; 2.0 renderer + native menu via `CARCARA_LANG` (2026-11-17)
 - [x] Rail PT|EN language switch (`localStorage` override; env default) (2026-11-17)
 - [x] Rescued `sync_time.sh` (timedatectl → ntpdate, NI) + 2.0 Sistema tile `sync-time`; TODO v2.0.1 waves A–C (2026-11-17)
+- [x] Software view pagination (6/page, `createPagedTiles` + i18n pager; tile click delegation) (2026-11-17)

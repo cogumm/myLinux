@@ -66,7 +66,7 @@ src/env.ts             # Zod + dotenv
 | Brand | `assets/img/logo_moderno_final.png`; wordmark + `2.0` pill beside name |
 | Rail | Sistema / Software / **Dotfiles** / Sobre; footer `MIT · 2010–YYYY · cogumm.net` |
 | Tiles | Resting = neutral border; **hover** = teal left inset + primary border (no permanent orange outline) |
-| Software | Secondary `nav-list` (same `.rail__link`) for categories → tiles |
+| Software | Secondary `nav-list` for categories → **paged** tiles (6/page) |
 | Confirms | `<dialog>` before mutating helper actions |
 | Terminal | Dracula-like; JetBrains Mono 13px (local woff2); line numbers; stdout+stderr merged chronologically |
 | Sobre | Facts from root README; allowlisted external links |

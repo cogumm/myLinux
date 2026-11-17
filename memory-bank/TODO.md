@@ -94,6 +94,7 @@ Source lists: `.agents/idea/listSoftwares.md`, chat catalog plan. Promote into `
 - [ ] **Slack** / **Signal** (Social) if needed
 - [ ] **GitHub CLI (`gh`)** apt
 - [ ] Presets: *Dev box* / *Social box* / *Gaming light* (orchestrate existing installers)
+- [x] 2.0 Software **pagination** (6/page, Anterior/Próxima) (17 de Novembro de 2026)
 - [ ] 2.0 UX: search/filter tiles; backend badge (`apt` · `flatpak` · `snap`)
 - [ ] Sobre/health: distro + arch + flatpak/snap status
 - [ ] Expose more Sistema diagnostics if useful (disk, helper versions)

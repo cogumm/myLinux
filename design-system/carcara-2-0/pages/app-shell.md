@@ -24,6 +24,7 @@
 - Brand (logo + name) is the strongest signal in the first viewport of the rail.
 - Rail footer: compact **PT | EN** language switch (`CARCARA_LANG` default; `localStorage` override).
 - One job per view: Sistema = maintenance; Software = installs; Dotfiles = `$HOME` apply; Sobre = identity.
+- Software catalog: **6 tiles per page** + Anterior/Próxima (pager hidden when ≤1 page).
 - Activity log is always visible (source of truth for apt/flatpak/snap).
 - No marketing “Product Demo + Features” section order from MASTER.
 
