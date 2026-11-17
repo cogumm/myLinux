@@ -46,6 +46,9 @@ linux:
     - target: deb
       arch:
         - x64
+    - target: AppImage
+      arch:
+        - x64
   category: System
   synopsis: Carcará 2.0 — Linux maintenance UI (apt / Flatpak / Snap)
   description: >-
@@ -60,6 +63,11 @@ linux:
     Categories: System;Utility;Settings;
     Terminal: false
     StartupWMClass: Carcara
+
+# Portable build — no afterInstall wrapper. Prefer root or pkexec when launching.
+# .deb remains the primary install path (pkexec launcher via after-install.sh).
+appImage:
+  artifactName: carcara_${version}_${arch}.${ext}
 
 deb:
   packageCategory: utils

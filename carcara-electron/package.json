@@ -19,6 +19,8 @@
     "helper": "bun scripts/run-helper.ts",
     "smoke:software": "bash scripts/smoke-software.sh",
     "pack:deb": "bun run build && electron-builder --linux deb --config electron-builder.yml --publish never",
+    "pack:appimage": "bun run build && electron-builder --linux AppImage --config electron-builder.yml --publish never",
+    "pack:linux": "bun run build && electron-builder --linux deb AppImage --config electron-builder.yml --publish never",
     "pack:dir": "bun run build && electron-builder --linux dir --config electron-builder.yml --publish never"
   },
   "engines": {

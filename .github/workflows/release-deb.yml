@@ -1,4 +1,4 @@
-# Build Carcará 2.0 .deb and attach it to the GitHub Release that triggered the run.
+# Build Carcará 2.0 .deb + AppImage and attach them to the GitHub Release that triggered the run.
 name: Release .deb
 
 on:
@@ -84,34 +84,38 @@ jobs:
           chmod +x carcara-electron/helper/carcara-helper.sh
           chmod +x carcara-electron/build/deb/after-install.sh
 
-      - name: Build .deb
+      - name: Build .deb + AppImage
         working-directory: carcara-electron
         # --publish never: attach via softprops below; avoid electron-builder publish
         # (tag present + no package.json repository / no .git in app cwd → hard fail)
-        run: bun run pack:deb
+        run: bun run pack:linux
         env:
           # Electron zip download / GitHub API rate limits only — not for publish
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: List artifacts
-        run: ls -lah carcara-electron/release/*.deb
+        run: ls -lah carcara-electron/release/*.deb carcara-electron/release/*.AppImage
 
       - name: Upload workflow artifact
         uses: actions/upload-artifact@v4
         with:
-          name: carcara_${{ steps.ver.outputs.version }}_amd64.deb
-          path: carcara-electron/release/*.deb
+          name: carcara_${{ steps.ver.outputs.version }}_amd64
+          path: |
+            carcara-electron/release/*.deb
+            carcara-electron/release/*.AppImage
           if-no-files-found: error
 
-      - name: Attach .deb to GitHub Release
+      - name: Attach packages to GitHub Release
         # release event: tag from the published Release.
         # workflow_dispatch: rebuild from current branch and upload onto an existing tag
-        # (needed when a tag was cut before a pack:deb fix landed on that commit).
+        # (needed when a tag was cut before a pack fix landed on that commit).
         if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.ver.outputs.tag }}
-          files: carcara-electron/release/*.deb
+          files: |
+            carcara-electron/release/*.deb
+            carcara-electron/release/*.AppImage
           fail_on_unmatched_files: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

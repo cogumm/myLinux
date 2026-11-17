@@ -24,15 +24,17 @@ LIVE_ACTIONS=()
 
 usage() {
 	cat <<'EOF'
-usage: smoke-software.sh [--pkexec] [--live <action>...] [--help]
+usage: smoke-software.sh [--pkexec] [--live <action>...] [--live-safe] [--help]
 
-  default     UI↔helper↔scripts wiring + ping + unknown-action + pkexec probe
-  --pkexec    also run apt-dry-run via bun helper bridge (root or pkexec)
-  --live …    run install-* / preset-* actions for real (mutating; owner machine)
+  default       UI↔helper↔scripts wiring (incl. bash -n) + ping + pkexec probe
+  --pkexec      also run apt-dry-run via bun helper bridge (root or pkexec)
+  --live …      run install-* / preset-* for real (mutating; owner machine)
+  --live-safe   shorthand: --live install-git (idempotent apt when git present)
 
 Examples:
   bun run smoke:software
   bun run smoke:software -- --pkexec
+  sudo bun run smoke:software -- --live-safe
   sudo bun run smoke:software -- --live install-git install-vlc
 EOF
 }
@@ -40,6 +42,10 @@ EOF
 while [[ $# -gt 0 ]]; do
 	case "$1" in
 		--pkexec) MODE_PKEXEC=1; shift ;;
+		--live-safe)
+			LIVE_ACTIONS+=("install-git")
+			shift
+			;;
 		--live)
 			shift
 			while [[ $# -gt 0 && "$1" != --* ]]; do
@@ -132,7 +138,11 @@ _check_wiring() {
 		fi
 		script="${REPO_ROOT}/carcara/${rel}"
 		if [[ -f "$script" ]]; then
-			_pass "$action → $rel"
+			if bash -n "$script" 2>/dev/null; then
+				_pass "$action → $rel (bash -n OK)"
+			else
+				_fail "$action → $rel (bash -n failed)"
+			fi
 		else
 			_fail "$action → missing $script"
 		fi
