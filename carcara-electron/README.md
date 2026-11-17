@@ -5,7 +5,7 @@ Toolchain and privilege bridge use **[Bun](https://bun.sh/docs)** (including [`B
 
 Electron’s main process still runs Chromium’s Node; it spawns `bun scripts/run-helper.ts`, which uses `$` to call the allowlisted `helper/carcara-helper.sh` (via `pkexec` when needed).
 
-Logo: repo **`assets/img/logo.png`** (build copies into `dist/renderer/assets/` for the window).
+Logo: **`assets/img/logo_moderno_final.png`** (build copies all `assets/img/*` into `dist/renderer/assets/`).
 
 ## Requirements
 

@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/img/logo_moderno_final.png" alt="Carcará" title="Carcará — myLinux" width="180" />
+</p>
+
 <h1 align="center">myLinux</h1>
 
 <p align="center">
@@ -65,9 +69,19 @@ git config --global user.email 'you@example.com'
 
 ## Quick start
 
+### One-liner (bootstrap)
+
+Clones into `~/myLinux` (or `$MYLINUX_DIR`) if needed, then opens the chooser:
+
+```bash
+sudo curl -L https://raw.githubusercontent.com/cogumm/myLinux/master/start.sh | bash
+```
+
+Requires `git`. The published `master` script clones/updates `~/myLinux` (override with `MYLINUX_DIR`) and reopens the menu (drops back to your user if started with `sudo`). Review remote scripts before piping to bash; prefer a local clone when you can.
+
 ### Carcará (choose UI)
 
-From the repo root, pick **Electron 2.0** or **terminal 1.x**:
+From a local clone, pick **Electron 2.0** or **terminal 1.x**:
 
 ```bash
 git clone https://github.com/cogumm/myLinux.git
@@ -98,12 +112,26 @@ Copy or symlink files from [`dotfiles/`](dotfiles/) into `$HOME` after backing u
 
 See [docs/wsl-cleanup.md](docs/wsl-cleanup.md).
 
+## Brand
+
+Primary mark: [`assets/img/logo_moderno_final.png`](assets/img/logo_moderno_final.png) (used in this README, Carcará 1.x docs, and Electron 2.0).
+
+<p align="center">
+  <img src="assets/img/logo_moderno_final.png" alt="logo_moderno_final" width="96" />
+  &nbsp;
+  <img src="assets/img/logo_moderno.png" alt="logo_moderno" width="96" />
+  &nbsp;
+  <img src="assets/img/logo_redesenhado.png" alt="logo_redesenhado" width="96" />
+  &nbsp;
+  <img src="assets/img/logo.png" alt="logo" width="96" />
+</p>
+
 ## Repository layout
 
 ```
 .
 ├── start.sh                      # Choose Electron 2.0 or terminal 1.x
-├── assets/                       # Images for 1.x + 2.0 (img/logo.png)
+├── assets/                       # Images for 1.x + 2.0 (img/logo_*.png)
 ├── carcara/                      # 1.x engine + TUI (entry: startApp.sh)
 ├── carcara-electron/             # 2.0 Electron + Bun (entry: bun run dev)
 ├── dotfiles/                     # Aliases, bashrc, oh-my-zsh, git, Hyper

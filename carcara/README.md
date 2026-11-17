@@ -1,5 +1,5 @@
 <div align="center">
-    <img alt="#Delicinha" title="Project Carcará" src="../assets/img/logo.png" width="120px" />
+    <img alt="Carcará" title="Project Carcará" src="../assets/img/logo_moderno_final.png" width="140px" />
     <h1>Project Carcará</h1>
 </div>
 
