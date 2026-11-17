@@ -11,6 +11,7 @@ Playbook: `.agents/playbook/SKILL.md`
 
 | Path | Role |
 |------|------|
+| `start.sh` | Dual entry: choose Electron 2.0 or terminal 1.x (`--electron` / `--terminal`) |
 | `carcara/` | 1.x install engine + CLI/TUI (Bash + Zenity/Yad). Entry: `sudo bash startApp.sh` from `carcara/` |
 | `carcara-electron/` | 2.0 desktop UI (Electron + Bun). Entry: `cd carcara-electron && bun run dev` |
 | `dotfiles/` | Shell aliases, Bash/Zsh themes, git config, Hyper |
@@ -24,7 +25,7 @@ Playbook: `.agents/playbook/SKILL.md`
 | `.cursor/rules/` | Cursor rules adapter (points at `.agents/`) |
 | `.claude/rules/` | Claude Code rules (same policies as `.cursor/rules/`) |
 
-Root `README.md` documents Carcará as the entrypoint (`cd carcara && sudo bash startApp.sh`).
+Root entry: `./start.sh` (choose Electron vs terminal). Direct: `cd carcara && sudo bash startApp.sh` or `cd carcara-electron && bun run dev`.
 
 ## Target environment
 

@@ -108,7 +108,7 @@ flowchart LR
 ```
 
 - Do not delete 1.x when 2.0 ships — keep `cd carcara && sudo bash startApp.sh`.
-- Dual entry documented in root README when the spike is usable.
+- Dual entry: repo-root **`./start.sh`** (interactive or `--electron` / `--terminal`).
 
 ## Non-goals
 

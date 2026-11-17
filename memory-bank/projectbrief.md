@@ -27,4 +27,4 @@ Maintain a personal, scriptable **Linux workstation toolkit**: Carcará (interac
 2. **Carcará repair** — deps check, menu wiring, config source paths.
 3. **Installer refresh** — current packages, idempotent installs.
 4. **Dotfiles install path** — documented, non-destructive apply.
-5. **Single entrypoint** — align README with real `startApp.sh` or restore `init.sh` wrapper.
+5. **Dual entrypoint** — root `./start.sh` chooses Electron 2.0 or terminal 1.x (`startApp.sh`).

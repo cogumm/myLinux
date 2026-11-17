@@ -28,3 +28,4 @@ Append-only log. Do not delete completed history.
 - [x] Started Carcará 2.0: locked decisions in `carcara-2.0-electron.md`; scaffolded `carcara-electron/` (Electron + TS vanilla + `carcara-helper.sh` apt dry-run spike); `npm run build` OK
 - [x] Switched Carcará 2.0 toolchain to **Bun** (2026-11-17): `bun install` / `bun.lock`; `scripts/build.ts` + `scripts/run-helper.ts` via `Bun.$`; Electron main spawns Bun bridge; docs/stack updated
 - [x] Installed skill `ui-ux-pro-max`; persisted `design-system/carcara-2-0/`; app-shell UI (sidebar + pane + log) applied to Electron renderer (2026-11-17)
+- [x] Root `start.sh` dual entry: interactive / `--electron` / `--terminal` (2026-11-17)

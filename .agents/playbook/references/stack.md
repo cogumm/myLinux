@@ -18,5 +18,6 @@
 
 ## Shared
 
+- **Chooser:** repo-root `./start.sh` — Electron 2.0 or terminal 1.x (`--electron` / `--terminal`).
 - Dotfiles are static config, not generated.
 - Optional: `cleanup-zone-identifiers.sh` for WSL ADS junk files.

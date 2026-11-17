@@ -19,10 +19,9 @@ Wave 3 polish was **cancelled / removed**.
 
 ## Next useful engineering work
 
-1. Finish spike validation (run UI; ping + apt dry-run with pkexec).
-2. Wire system actions (update / fix / clean) through helper → 1.x scripts.
-3. Port software installers via helper allowlist.
-4. Dual-entry note in root README when spike is solid; later `.deb` packaging.
+1. Wire system actions (update / fix / clean) through helper → 1.x scripts.
+2. Port software installers via helper allowlist.
+3. Later: `.deb` packaging for 2.0.
 
 ## Blockers
 

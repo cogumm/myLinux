@@ -65,25 +65,24 @@ git config --global user.email 'you@example.com'
 
 ## Quick start
 
-### Carcará 1.x (installer / maintenance)
+### Carcará (choose UI)
+
+From the repo root, pick **Electron 2.0** or **terminal 1.x**:
 
 ```bash
 git clone https://github.com/cogumm/myLinux.git
-cd myLinux/carcara
-sudo bash startApp.sh
+cd myLinux
+./start.sh
 ```
 
-Main menu covers system update, software install, repair, and cleanup. See [carcara/README.md](carcara/README.md) for the tree and menu map.
+| Flag | Mode |
+|------|------|
+| `./start.sh` | Interactive menu (Zenity if available, else terminal prompt) |
+| `./start.sh --electron` | Carcará 2.0 (needs [Bun](https://bun.sh)) |
+| `./start.sh --terminal` | Carcará 1.x via `sudo bash carcara/startApp.sh` |
 
-### Carcará 2.0 (Electron — alpha)
-
-```bash
-cd myLinux/carcara-electron
-bun install
-bun run dev
-```
-
-Requires [Bun](https://bun.sh). Spike UI + privilege helper (`apt` dry-run). Plan: [`.agents/idea/carcara-2.0-electron.md`](.agents/idea/carcara-2.0-electron.md).
+Direct entries still work: `cd carcara && sudo bash startApp.sh` · `cd carcara-electron && bun run dev`.  
+Plan: [`.agents/idea/carcara-2.0-electron.md`](.agents/idea/carcara-2.0-electron.md).
 
 ### Dotfiles
 
@@ -103,6 +102,7 @@ See [docs/wsl-cleanup.md](docs/wsl-cleanup.md).
 
 ```
 .
+├── start.sh                      # Choose Electron 2.0 or terminal 1.x
 ├── carcara/                      # 1.x engine + TUI (entry: startApp.sh)
 ├── carcara-electron/             # 2.0 Electron + Bun (entry: bun run dev)
 ├── dotfiles/                     # Aliases, bashrc, oh-my-zsh, git, Hyper
@@ -110,6 +110,7 @@ See [docs/wsl-cleanup.md](docs/wsl-cleanup.md).
 ├── cleanup-zone-identifiers.sh   # WSL helper
 ├── docs/                         # Operator docs
 ├── design-system/carcara/        # 1.x TUI UX notes
+├── design-system/carcara-2-0/    # 2.0 Flat Design tokens (ui-ux-pro-max)
 ├── AGENTS.md                     # Agent entry
 ├── .agents/                      # Agent-agnostic idea + playbook + skills
 ├── .cursor/rules/                # Cursor adapter

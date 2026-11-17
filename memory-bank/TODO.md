@@ -25,7 +25,8 @@ Unscheduled ideas (promote into active work deliberately):
 - [ ] Validate spike on desktop / WSLg
 - [ ] Helper actions for update / fix / clean
 - [ ] Helper actions for software installers
-- [ ] Package `.deb`; document dual entry in root README
+- [x] Dual entry via root `start.sh` + README
+- [ ] Package `.deb` for Carcará 2.0
 
 ## Future agent skills (skills.sh) — install when modernizing that area
 

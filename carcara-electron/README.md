@@ -35,8 +35,17 @@ Window with **Ping helper** and **Apt dry-run** (`apt-get update` + `apt-get -s 
 
 ## Dual entry
 
+From the **repo root**:
+
+```bash
+./start.sh              # menu: Electron ou terminal
+./start.sh --electron   # este app
+./start.sh --terminal   # Carcará 1.x
+```
+
 | Track | Entry |
 |-------|--------|
+| Chooser | `./start.sh` |
 | 1.x CLI/TUI | `cd carcara && sudo bash startApp.sh` |
 | 2.0 UI | `cd carcara-electron && bun run dev` |
 
