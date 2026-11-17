@@ -6,9 +6,10 @@ Unscheduled ideas (promote into active work deliberately):
 
 ## Planned ideas (do not start until explicitly requested)
 
-- [ ] Continue [`.agents/idea/carcara-modern-install.md`](../.agents/idea/carcara-modern-install.md) — **1.x engine**: Step 4 menus → lean Wave 2; **skip Yad polish / Wave 3 UI**
+- [ ] Continue [`.agents/idea/carcara-modern-install.md`](../.agents/idea/carcara-modern-install.md) — **1.x engine**: Step 5 ShellCheck → lean Wave 2; **skip Yad polish / Wave 3 UI**
 - [x] Wave 1 Step 2 — `install_backends.sh` (17 de Novembro de 2026)
 - [x] Wave 1 Step 3 — system scripts update/fix/clean (17 de Novembro de 2026)
+- [x] Wave 1 Step 4 — wire Desenvolvimento / Produção menus (17 de Novembro de 2026)
 - [ ] Future: [`.agents/idea/carcara-2.0-electron.md`](../.agents/idea/carcara-2.0-electron.md) — Electron (**2.0**) after 1.x backends are stable
 
 ## Carcará / scripts
@@ -16,8 +17,8 @@ Unscheduled ideas (promote into active work deliberately):
 - [x] Repair `carcara/app/config/dependences.sh` detection logic (Wave 1 Step 1)
 - [x] Unify all `. app/config/config.sh` includes (Wave 1 Step 1)
 - [x] Restore `startApp.sh` Zenity license gate (Wave 1 Step 1)
-- [ ] Wire `menuSof.sh` Desenvolvimento → `development/*.sh`
-- [ ] Wire Produção → `productivity/dropbox.sh` (or drop stub)
+- [x] Wire `menuSof.sh` Desenvolvimento → `development/_menu.sh`
+- [x] Wire Produção → `productivity/_menu.sh` (Dropbox)
 - [x] README: document Carcará as real entry (no fake `init.sh` / curl pipe)
 - [ ] Optional: thin root `init.sh` wrapper that delegates to `carcara/startApp.sh` (only if wanted)
 - [ ] `bash -n` / ShellCheck pass on `carcara/**/*.sh` (use installed skill `shellcheck-configuration`)

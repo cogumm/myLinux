@@ -6,7 +6,7 @@
 
 Main options (UI labels as shipped): “Atualizar sistema” · “Instalar programas de desenvolvimento” · “Instalar programas diversos” · “Correção do sistema” · “Limpeza do sistema” · “Limpeza de memória” (stub) · “Sair”.
 
-Software menu: “Desenvolvimento” / “Produção” / “Social” / “Utilidades” — Social and Utilities are wired; Development and Productivity are still menu stubs even though scripts exist under `development/` and `productivity/`.
+Software menu: “Desenvolvimento” / “Produção” / “Social” / “Utilidades” — all four wired (`development/_menu.sh`, `productivity/_menu.sh`, `social/_menu.sh`, `utilities/_menu.sh`).
 
 ## Installers present
 
@@ -53,8 +53,14 @@ snap_install code --classic
 - `fixSystem.sh` — `apt-get -f install` + `dpkg --configure -a`.
 - `cleanDistro.sh` — trash/`/var/tmp`/clean/autoclean/autoremove; locks & apt lists only if confirmed.
 
+## Menus (Wave 1 Step 4 — done)
+
+- Desenvolvimento → git / VS Code / Insomnia / Fira Code
+- Produção → Dropbox
+- Voltar breaks back to parent (no nested `bash $menuSof`)
+
 ## Fix priorities (remaining)
 
-1. Wave 1 Step 4 — minimal menu wiring (Desenvolvimento / Produção).
-2. Wave 1 Step 5 — ShellCheck on touched tree.
-3. Wave 2 — thin installers onto backends (no Yad polish).
+1. Wave 1 Step 5 — ShellCheck on touched tree.
+2. Wave 2 — thin installers onto backends (no Yad polish).
+3. Optional: fix legacy Social/Utilities “Voltar” nesting the same way.

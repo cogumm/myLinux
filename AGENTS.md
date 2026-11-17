@@ -57,12 +57,12 @@ Act as a **Linux systems analysis & development** specialist:
 
 ## Known debt (do not paper over)
 
-- Several Carcará menus still say “Ainda em desenvolvimento”
 - App installers still Snap-era / brittle `which -a` (Wave 2)
 - Legacy `old/scripts/*.sh` install obsolete stacks and unsafe defaults (`chmod 777 www`, hardcoded passwords)
 - Optional future `init.sh` wrapper still open in `TODO.md` if desired
-- Wave 1 Steps 1–3 done: bootstrap + backends + system scripts
-- Next: Wave 1 Step 4 — minimal menu wiring (Desenvolvimento / Produção)
+- Wave 1 Steps 1–4 done: bootstrap + backends + system scripts + software menus wired
+- Next: Wave 1 Step 5 (ShellCheck) or Wave 2 (thin installers)
+- Several Carcará menus still say “Ainda em desenvolvimento” — only “Limpeza de memória” / “programas diversos” stubs remain in `menuGeral`
 
 ## Project guidance
 

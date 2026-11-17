@@ -126,10 +126,12 @@ Confirm Flathub app IDs / apt package names per-app when Wave 2 starts. Do not h
 - `fixSystem.sh` — `apt-get -f install` + `dpkg --configure -a` with exit tracking.
 - `cleanDistro.sh` — trash/`tmp`/apt clean suite; **dpkg/apt locks and apt lists only with explicit confirm**.
 
-### Step 4 — Wire menus — **minimal**
+### Step 4 — Wire menus — **done** (17 de Novembro de 2026)
 
-- Enough to reach existing installers for manual testing (Desenvolvimento / Produção).
-- Do not spend time on Yad UX beyond “works”.
+- `development/_menu.sh` → git, VS Code, Insomnia, Fira Code.
+- `productivity/_menu.sh` → Dropbox.
+- `menuSof.sh` calls both (no more “Ainda em desenvolvimento” stubs for those entries).
+- Voltar uses `break` to return to the parent `bash` caller (avoids nested menu loops).
 
 ### Step 5 — Quality gate
 
@@ -175,9 +177,9 @@ Explicitly **out** of Wave 3 now: Yad redesign, `gum` migration, nala-as-UI.
 - [x] Wave 1 Step 1 — deps / startApp / config sourcing (16 de Novembro de 2026)
 - [x] Wave 1 Step 2 — `install_backends.sh` (17 de Novembro de 2026)
 - [x] Wave 1 Step 3 — system scripts (17 de Novembro de 2026)
-- [ ] Wave 1 Step 4 — minimal menu wiring
+- [x] Wave 1 Step 4 — minimal menu wiring (17 de Novembro de 2026)
 - [ ] Wave 1 Step 5 — ShellCheck + docs
 - [ ] Wave 2 — thin installers onto backends
 - [ ] Wave 3 — optional CLI only / **skip** if 2.0 starts
 
-Next coding session when approved: **Wave 1 Step 4** (minimal menus).
+Next coding session when approved: **Wave 1 Step 5** (ShellCheck + docs) or **Wave 2**.
