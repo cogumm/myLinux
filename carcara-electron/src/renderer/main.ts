@@ -1,6 +1,6 @@
 import { createLicenseGate } from "./components/license-gate.js";
 import { carcaraApi } from "./lib/api.js";
-import { resolveLang, setLang } from "./lib/i18n.js";
+import { applyDocumentLang, loadPreferredLang, setLang } from "./lib/i18n.js";
 import { mountApp } from "./app.js";
 
 async function loadLicenseText(): Promise<string> {
@@ -22,11 +22,10 @@ async function boot(): Promise<void> {
   }
 
   const api = carcaraApi();
-  if (api.getLang) {
-    setLang(resolveLang(await api.getLang()));
-  } else {
-    setLang(resolveLang(undefined));
-  }
+  // Env CARCARA_LANG is the default; localStorage override (rail switch) wins.
+  const envLang = api.getLang ? await api.getLang() : undefined;
+  setLang(loadPreferredLang(envLang));
+  applyDocumentLang();
 
   let text: string;
   try {

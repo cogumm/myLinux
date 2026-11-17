@@ -10,6 +10,8 @@ const catalogs: Record<Lang, Dict> = {
   en: en as Dict,
 };
 
+const STORAGE_KEY = "carcara.lang";
+
 let current: Lang = "pt";
 
 export function resolveLang(raw?: string | null): Lang {
@@ -18,12 +20,36 @@ export function resolveLang(raw?: string | null): Lang {
   return "pt";
 }
 
+/** Env (`CARCARA_LANG`) is the default; localStorage override wins when set. */
+export function loadPreferredLang(envLang?: string | null): Lang {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored === "pt" || stored === "en") return stored;
+  } catch {
+    /* private mode / blocked storage */
+  }
+  return resolveLang(envLang);
+}
+
+export function persistLang(lang: Lang): void {
+  try {
+    localStorage.setItem(STORAGE_KEY, lang);
+  } catch {
+    /* ignore */
+  }
+  setLang(lang);
+}
+
 export function setLang(lang: Lang): void {
   current = lang;
 }
 
 export function getLang(): Lang {
   return current;
+}
+
+export function applyDocumentLang(lang: Lang = current): void {
+  document.documentElement.lang = lang === "en" ? "en" : "pt-BR";
 }
 
 export function t(key: string): string {

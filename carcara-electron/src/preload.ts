@@ -6,6 +6,12 @@ export type HelperResult = {
   stderr: string;
 };
 
+/** Single slot so remount (lang switch) does not stack IPC listeners. */
+let navigateHandler: ((view: string) => void) | null = null;
+ipcRenderer.on("app:navigate", (_event, view: unknown) => {
+  if (typeof view === "string") navigateHandler?.(view);
+});
+
 contextBridge.exposeInMainWorld("carcara", {
   runHelper: (action: string): Promise<HelperResult> =>
     ipcRenderer.invoke("helper:run", action),
@@ -18,8 +24,6 @@ contextBridge.exposeInMainWorld("carcara", {
   getLang: (): Promise<string> => ipcRenderer.invoke("app:lang"),
   quitApp: (): Promise<void> => ipcRenderer.invoke("app:quit"),
   onNavigate: (callback: (view: string) => void): void => {
-    ipcRenderer.on("app:navigate", (_event, view: unknown) => {
-      if (typeof view === "string") callback(view);
-    });
+    navigateHandler = callback;
   },
 });

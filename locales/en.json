@@ -117,5 +117,6 @@
   "main.exiting": "The application is exiting.",
   "main.useSudo": "Use: sudo ./start.sh --electron",
   "main.urlDenied": "URL not allowed",
-  "window.title": "Carcará 2.0"
+  "window.title": "Carcará 2.0",
+  "lang.switchAria": "Language"
 }

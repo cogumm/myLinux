@@ -5,11 +5,27 @@ import { createRail } from "./components/rail.js";
 import { createStageHeader } from "./components/stage-header.js";
 import { bindTiles, setTilesDisabled } from "./components/tile.js";
 import { carcaraApi } from "./lib/api.js";
-import { t } from "./lib/i18n.js";
+import {
+  applyDocumentLang,
+  persistLang,
+  t,
+  type Lang,
+} from "./lib/i18n.js";
 import type { AppContext, ViewId } from "./lib/types.js";
 import { getView, views } from "./views/index.js";
 
-export function mountApp(root: HTMLElement): void {
+export type MountOptions = {
+  /** Preserve active view when remounting after a language change. */
+  view?: ViewId;
+  /** Skip the welcome log line (used on lang remount). */
+  quiet?: boolean;
+};
+
+export function mountApp(root: HTMLElement, options: MountOptions = {}): void {
+  applyDocumentLang();
+
+  let currentView: ViewId = options.view ?? "sistema";
+
   const skip = document.createElement("a");
   skip.className = "skip-link";
   skip.href = "#main";
@@ -28,7 +44,7 @@ export function mountApp(root: HTMLElement): void {
 
   const panels = new Map<ViewId, HTMLElement>();
   for (const view of views) {
-    const panel = createPanel(view.id, view.render(), view.id === "sistema");
+    const panel = createPanel(view.id, view.render(), view.id === currentView);
     panels.set(view.id, panel);
     main.append(panel);
   }
@@ -79,21 +95,29 @@ export function mountApp(root: HTMLElement): void {
   });
 
   function navigate(id: ViewId): void {
+    currentView = id;
     const view = getView(id);
     header.setMeta(view.getMeta());
     showPanel(panels, id);
     rail.setActive(id);
   }
 
-  const rail = createRail(navigate);
+  function onLangChange(lang: Lang): void {
+    persistLang(lang);
+    mountApp(root, { view: currentView, quiet: true });
+  }
+
+  const rail = createRail(navigate, { onLangChange });
 
   stage.append(header.root, main, console.root);
   shell.append(rail.root, stage);
   root.replaceChildren(skip, shell, dialog.root);
 
   header.setStatus(t("status.ready"), "idle");
-  navigate("sistema");
-  console.append(t("ready.log"), "info");
+  navigate(currentView);
+  if (!options.quiet) {
+    console.append(t("ready.log"), "info");
+  }
 
   carcaraApi().onNavigate?.((view) => {
     if (

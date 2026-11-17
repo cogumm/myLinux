@@ -1,7 +1,8 @@
 import { createBrand } from "./brand.js";
+import { createLangSwitch } from "./lang-switch.js";
 import { createNavList } from "./nav-list.js";
 import { icons } from "./icons.js";
-import { t } from "../lib/i18n.js";
+import { t, type Lang } from "../lib/i18n.js";
 import type { ViewId } from "../lib/types.js";
 
 export type RailItem = {
@@ -15,8 +16,13 @@ export type RailHandle = {
   setActive: (id: ViewId) => void;
 };
 
+export type RailOptions = {
+  onLangChange?: (lang: Lang) => void;
+};
+
 export function createRail(
   onNavigate: (id: ViewId) => void,
+  options: RailOptions = {},
 ): RailHandle {
   const items: RailItem[] = [
     { id: "sistema", label: t("rail.sistema"), icon: "sistema" },
@@ -41,6 +47,14 @@ export function createRail(
 
   const foot = document.createElement("footer");
   foot.className = "rail__foot";
+
+  if (options.onLangChange) {
+    const lang = createLangSwitch(options.onLangChange);
+    foot.append(lang.root);
+  }
+
+  const meta = document.createElement("div");
+  meta.className = "rail__foot-meta-row";
   const year = new Date().getFullYear();
 
   const license = document.createElement("span");
@@ -56,7 +70,8 @@ export function createRail(
   credit.className = "rail__foot-credit";
   credit.textContent = "cogumm.net";
 
-  foot.append(license, sep, credit);
+  meta.append(license, sep, credit);
+  foot.append(meta);
 
   aside.append(createBrand(), nav.root, foot);
 
