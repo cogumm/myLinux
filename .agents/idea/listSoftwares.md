@@ -1,41 +1,4 @@
-# Fonte de verdade https://snapcraft.io
+# Source of truth https://snapcraft.io
 # Last update: 17 November 2026
 
-- Steam
-- Epic
-- GOG
-- Firefox
-- Discord
-- Desktop Telegram
-- Desktop WhatsApp
-- Git
-- VSCode
-- Cursor
-- BattleNet
-- Zem Browser
-- Notion
-- Anki
-- Spotify
-- Docker Desktop
-- SSH Client - Terminus
-- Thunderbird
-- OBS Studio
-- LibreOffice
-- OnlyOffice
-- OperaGX
-- 1Password
-- Proton Mail
-- Proton VPN
-- Vivaldi
-- Bitwarden
-- Nodejs
-- NPM
-- PNPM
-- Yarn
-- Bun
-- NordVPN
-- Insomnia
-- Brave
-- Postman
-- Audacity
-- Navidrome
+Wishlist and waves live in `memory-bank/TODO.md` (section **v2.0.1 — catalog enrichment**).

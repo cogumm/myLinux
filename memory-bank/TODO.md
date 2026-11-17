@@ -65,45 +65,54 @@ Wave 1–2 engine **done**. Wave 3 **cancelled** (UI is Electron 2.0).
 ## v2.0.1 — catalog enrichment (planned)
 
 Policy stays **apt → Flatpak/Flathub → Snap**. Thin installers + 1.x menus + 2.0 tiles + helper allowlist + `locales`.  
-Source lists: `.agents/idea/listSoftwares.md`, chat catalog plan. Promote into `softwares.md` as items ship.
+**Catalog tracker:** this section (v2.0.1). Research note: [`.agents/idea/listSoftwares.md`](../.agents/idea/listSoftwares.md) → [Snap Store](https://snapcraft.io/store). Promote into `softwares.md` as each item ships.
 
-### Wave A — wishlist (first)
+### Already in Carcará (match wishlist)
 
-- [ ] **Firefox** (Browsers) — apt / Flatpak / Snap
-- [ ] **WhatsApp Desktop** (Social) — Snap / Flatpak
-- [ ] **Cursor** (Development) — official `.deb` / vendor path (not Snap-first)
-- [ ] **Termius** (Development) — Snap `termius-app` or `.deb` ([termius.com](https://termius.com))
-- [ ] **Anki** (Productivity) — Flatpak (not legacy `.deb` from `old/`)
-- [ ] **Steam** (Games) — Flatpak preferred / apt
-- [ ] **Notion** (Productivity) — Snap / Flatpak (verify quality)
-- [ ] Replace **Insomnia** → **Bruno** or **Postman** (Development); remove Insomnia from menus when ready
-- [ ] Update `.agents/idea/softwares.md` + `listSoftwares.md` as each lands
+- [x] Git · VS Code · Docker Engine (`docker.sh`) · Insomnia · Discord · Telegram · Spotify  
+  - Note: wishlist **Docker Desktop** ≠ Engine — decide later if Desktop gets its own tile.
 
-### Wave B — new categories
+### Wave A — core wishlist (ship first)
 
-- [ ] Menu/rail category **Browsers** (Firefox + Chromium/Chrome; Zem only if still used)
-- [ ] Menu/rail category **Games** (Steam + Wine/winetricks and/or Lutris; Battle.net via Wine/Lutris — no fragile vendor script)
-- [ ] Optional: **Heroic** (Epic/GOG) Flatpak
+- [ ] **Firefox** (Browsers)
+- [ ] **WhatsApp Desktop** (Social)
+- [ ] **Cursor** (Development) — vendor `.deb` / AppImage
+- [ ] **Termius** (Development) — SSH client (“Terminus” in list)
+- [ ] **Anki** (Productivity) — Flatpak
+- [ ] **Steam** (Games) — Flatpak preferred
+- [ ] **Notion** (Productivity)
+- [ ] **Brave** (Browsers)
+- [ ] **Postman** (Development) — keep Insomnia unless you drop it from the list
+- [ ] **Thunderbird** (Productivity / mail)
+- [ ] **OBS Studio** (Media)
+- [ ] Update `softwares.md` as each lands
 
-### Wave C — depth / polish
+### Wave B — new categories + storefronts
 
-- [ ] **OBS Studio**, **GIMP** / Inkscape, **Audacity** (Media / Utilities)
-- [ ] Archive tools (`p7zip` / `unrar` / …) — idea from `old/installZIP`
-- [ ] **Bitwarden** or **KeePassXC** (passwords)
-- [ ] **LibreOffice** and/or **OnlyOffice** (Productivity)
-- [ ] **Slack** / **Signal** (Social) if needed
-- [ ] **GitHub CLI (`gh`)** apt
-- [ ] Presets: *Dev box* / *Social box* / *Gaming light* (orchestrate existing installers)
+- [ ] Category **Browsers**: Firefox, Brave, Vivaldi, Opera GX, Zem Browser
+- [ ] Category **Games**: Steam; **Epic** + **GOG** via **Heroic** (Flatpak); **Battle.net** via Wine/Lutris (no fragile vendor script)
+- [ ] Category **Media** (optional split from Utilities): OBS, Audacity, **Navidrome**
+
+### Wave C — depth (remainder of the wishlist)
+
+- [ ] **LibreOffice** · **OnlyOffice** (Productivity)
+- [ ] **1Password** · **Bitwarden** (passwords) — pick one default or offer both
+- [ ] **Proton Mail** · **Proton VPN** (Social / Utilities)
+- [ ] **NordVPN** (Utilities)
+- [ ] **Node.js** toolchain: Node + npm + **pnpm** + **Yarn** + **Bun** (Development; prefer mise/fnm or NodeSource — no `curl|bash` unless owner asks)
+- [ ] **Audacity** · **Navidrome** (if not already under Media in Wave B)
+- [ ] **Docker Desktop** tile only if Engine is not enough (clarify vs `docker.sh`)
+- [ ] Presets: *Dev box* / *Social box* / *Gaming light*
 - [x] 2.0 Software **pagination** (6/page, Anterior/Próxima) (17 de Novembro de 2026)
 - [ ] 2.0 UX: search/filter tiles; backend badge (`apt` · `flatpak` · `snap`)
 - [ ] Sobre/health: distro + arch + flatpak/snap status
-- [ ] Expose more Sistema diagnostics if useful (disk, helper versions)
 
 ### Explicitly out of v2.0.1
 
-- Snap Store mirror / dozens of random snaps
+- Snap Store mirror / install-everything
 - LAMP PHP5 / RVM / Atom / dead PPAs from `old/`
 - Popcorn, Skype i386, Docky, Ubuntu-Tweak, tutum Docker helpers
+- Archive tools / GIMP / Slack / Signal / `gh` — only if added back to this v2.0.1 section
 
 ## Future agent skills (skills.sh) — install when modernizing that area
 
