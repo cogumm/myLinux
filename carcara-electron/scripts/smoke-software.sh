@@ -5,6 +5,7 @@
 #   (default)   static wiring + unprivileged runtime (ping, unknown action, pkexec probe)
 #   --pkexec    also exercise elevated apt-dry-run via pkexec|root bridge
 #   --live ACT… run real install/preset actions (needs root or working pkexec)
+#   --live-core curated baseline install set (needs root|pkexec) — not versioned by “wave”
 #----------------------------------------------------------------------------------------------------#
 set -euo pipefail
 
@@ -16,26 +17,66 @@ SOFTWARE_TS="${ELECTRON_ROOT}/src/renderer/views/software.ts"
 RUN_HELPER_NODE="${ELECTRON_ROOT}/src/run-helper-node.ts"
 RUN_HELPER_BUN="${ELECTRON_ROOT}/scripts/run-helper.ts"
 
+# Curated baseline live set (early thin installers). Extend this list — do not add smoke:waveN scripts.
+CORE_LIVE_ACTIONS=(
+	install-git
+	install-vscode
+	install-insomnia
+	install-firacode
+	install-vlc
+	install-discord
+	install-spotify
+	install-telegram
+	install-dropbox
+)
+
 PASS=0
 FAIL=0
 SKIP=0
 MODE_PKEXEC=0
 LIVE_ACTIONS=()
 
+# sudo secure_path drops ~/.bun/bin — same recovery as repo-root start.sh.
+_ensure_bun_on_path() {
+	if command -v bun >/dev/null 2>&1; then
+		return 0
+	fi
+	local candidates=() home="" c bun_bin=""
+	if [[ -n "${SUDO_USER:-}" && "${SUDO_USER}" != "root" ]]; then
+		home="$(getent passwd "${SUDO_USER}" | cut -d: -f6 || true)"
+		[[ -n "$home" ]] && candidates+=("${home}/.bun/bin/bun")
+	fi
+	[[ -n "${HOME:-}" && "${HOME}" != /root ]] && candidates+=("${HOME}/.bun/bin/bun")
+	candidates+=("/usr/local/bin/bun" "/usr/bin/bun")
+	for c in "${candidates[@]}"; do
+		if [[ -x "$c" ]]; then
+			bun_bin="$c"
+			break
+		fi
+	done
+	[[ -z "$bun_bin" ]] && return 1
+	export PATH="$(dirname "$bun_bin"):${PATH}"
+	_log "Bun recovered for sudo PATH: ${bun_bin}"
+	return 0
+}
+
 usage() {
 	cat <<'EOF'
-usage: smoke-software.sh [--pkexec] [--live <action>...] [--live-safe] [--help]
+usage: smoke-software.sh [--pkexec] [--live <action>...] [--live-safe] [--live-core] [--help]
 
   default       UI↔helper↔scripts wiring (incl. bash -n) + ping + pkexec probe
   --pkexec      also run apt-dry-run via bun helper bridge (root or pkexec)
   --live …      run install-* / preset-* for real (mutating; owner machine)
   --live-safe   shorthand: --live install-git (idempotent apt when git present)
+  --live-core   curated baseline set (git vscode insomnia firacode vlc discord
+                spotify telegram dropbox) — requires root or pkexec
 
 Examples:
   bun run smoke:software
   bun run smoke:software -- --pkexec
-  sudo bun run smoke:software -- --live-safe
-  sudo bun run smoke:software -- --live install-git install-vlc
+  # sudo drops ~/.bun/bin — preserve PATH or call the script with bash:
+  sudo env "PATH=$PATH" bun run smoke:software -- --live-core
+  sudo bash scripts/smoke-software.sh --live-core
 EOF
 }
 
@@ -44,6 +85,11 @@ while [[ $# -gt 0 ]]; do
 		--pkexec) MODE_PKEXEC=1; shift ;;
 		--live-safe)
 			LIVE_ACTIONS+=("install-git")
+			shift
+			;;
+		--live-core)
+			LIVE_ACTIONS+=("${CORE_LIVE_ACTIONS[@]}")
+			MODE_PKEXEC=1
 			shift
 			;;
 		--live)
@@ -228,6 +274,11 @@ _run_elevated_dry() {
 		return 0
 	fi
 
+	if ! _ensure_bun_on_path; then
+		_fail "bun not found for apt-dry-run under elevated PATH"
+		return 0
+	fi
+
 	_log "running apt-dry-run via bun helper bridge…"
 	set +e
 	(
@@ -243,9 +294,25 @@ _run_elevated_dry() {
 	fi
 }
 
+_elevation_ok() {
+	[[ "$(id -u)" -eq 0 ]] && return 0
+	command -v pkexec >/dev/null 2>&1 || return 1
+	[[ -n "${DISPLAY:-}${WAYLAND_DISPLAY:-}" ]] || return 1
+	return 0
+}
+
 _run_live() {
 	local action code
 	if [[ "${#LIVE_ACTIONS[@]}" -eq 0 ]]; then
+		return 0
+	fi
+	if ! _elevation_ok; then
+		_fail "live installs need root or pkexec+display (try: sudo env \"PATH=\$PATH\" bun run smoke:software -- --live-core)"
+		_log "queued (not run): ${LIVE_ACTIONS[*]}"
+		return 0
+	fi
+	if ! _ensure_bun_on_path; then
+		_fail "bun not found (sudo often hides ~/.bun/bin) — use: sudo env \"PATH=\$PATH\" bun run smoke:software -- --live-core"
 		return 0
 	fi
 	export CARCARA_REPO_ROOT="$REPO_ROOT"
