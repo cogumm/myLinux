@@ -10,8 +10,8 @@ export function createBrand(): HTMLElement {
   const mark = document.createElement("img");
   mark.className = "brand__mark";
   mark.src = "assets/logo_moderno_final.png";
-  mark.width = 96;
-  mark.height = 96;
+  mark.width = 72;
+  mark.height = 72;
   mark.alt = "";
   mark.decoding = "async";
 
