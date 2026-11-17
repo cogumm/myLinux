@@ -11,6 +11,7 @@ export type CarcaraApi = {
   openExternal?: (url: string) => Promise<OpenExternalResult>;
   onNavigate?: (callback: (view: string) => void) => void;
   getLicenseText?: () => Promise<string>;
+  getLang?: () => Promise<string>;
   quitApp?: () => Promise<void>;
 };
 

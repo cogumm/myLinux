@@ -31,6 +31,10 @@ export configYadB="--width=500
 		   --center
 		   --timeout 3"
 
+# UI strings (CARCARA_LANG=pt|en) — shared JSON under repo locales/
+# shellcheck source=i18n.sh
+. app/config/i18n.sh
+
 # Shared install API (apt / Flatpak / Snap) — Carcará 1.x engine for 2.0
 # shellcheck source=install_backends.sh
 . app/config/install_backends.sh

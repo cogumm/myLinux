@@ -5,6 +5,7 @@ import { createRail } from "./components/rail.js";
 import { createStageHeader } from "./components/stage-header.js";
 import { bindTiles, setTilesDisabled } from "./components/tile.js";
 import { carcaraApi } from "./lib/api.js";
+import { t } from "./lib/i18n.js";
 import type { AppContext, ViewId } from "./lib/types.js";
 import { getView, views } from "./views/index.js";
 
@@ -12,7 +13,7 @@ export function mountApp(root: HTMLElement): void {
   const skip = document.createElement("a");
   skip.className = "skip-link";
   skip.href = "#main";
-  skip.textContent = "Ir ao conteúdo";
+  skip.textContent = t("skip.link");
 
   const shell = document.createElement("div");
   shell.className = "shell";
@@ -33,7 +34,7 @@ export function mountApp(root: HTMLElement): void {
   }
 
   const console = createActivityConsole(() => {
-    header.setStatus("Pronto", "idle");
+    header.setStatus(t("status.ready"), "idle");
   });
   const dialog = createConfirmDialog();
 
@@ -46,13 +47,13 @@ export function mountApp(root: HTMLElement): void {
       if (confirmMsg) {
         const ok = await dialog.ask(confirmMsg);
         if (!ok) {
-          header.setStatus("Cancelado", "idle");
+          header.setStatus(t("status.cancelled"), "idle");
           return;
         }
       }
 
       ctx.setBusy(true);
-      header.setStatus("Executando…", "busy");
+      header.setStatus(t("status.busy"), "busy");
       console.append(`$ carcara ${action}\n`, "cmd");
 
       try {
@@ -61,12 +62,12 @@ export function mountApp(root: HTMLElement): void {
         if (result.stderr) console.append(result.stderr, "error");
         const code = result.code ?? 1;
         console.append(`[exit ${code}]\n`);
-        if (code === 0) header.setStatus("Concluído", "ok");
-        else header.setStatus(`Falhou (${code})`, "err");
+        if (code === 0) header.setStatus(t("status.ok"), "ok");
+        else header.setStatus(`${t("status.err")} (${code})`, "err");
       } catch (err) {
         const msg = err instanceof Error ? err.message : String(err);
         console.append(`[erro] ${msg}\n`, "error");
-        header.setStatus("Erro", "err");
+        header.setStatus(t("status.err"), "err");
       } finally {
         ctx.setBusy(false);
       }
@@ -79,7 +80,7 @@ export function mountApp(root: HTMLElement): void {
 
   function navigate(id: ViewId): void {
     const view = getView(id);
-    header.setMeta(view.meta);
+    header.setMeta(view.getMeta());
     showPanel(panels, id);
     rail.setActive(id);
   }
@@ -90,8 +91,9 @@ export function mountApp(root: HTMLElement): void {
   shell.append(rail.root, stage);
   root.replaceChildren(skip, shell, dialog.root);
 
+  header.setStatus(t("status.ready"), "idle");
   navigate("sistema");
-  console.append("Carcará 2.0 pronto.\n", "info");
+  console.append(t("ready.log"), "info");
 
   carcaraApi().onNavigate?.((view) => {
     if (

@@ -7,37 +7,41 @@
 # E-mail: gabriel[at]cogumm[dot]net
 # Telegram: http://t.me/CoGUMm
 # Script: menu
-# Descrição: Menu principal 1.x — só ações reais (sem stubs “em desenvolvimento”).
-# Variáveis: $menu $configYad $configYadB $dirSys $menuSof
+# Descrição: Menu principal 1.x — i18n via t(); IDs estáveis no Zenity.
+# Variáveis: $menu $configYad $dirSys $menuSof ; CARCARA_LANG
 #----------------------------------------------------------------------------------------------------#
 
 while true; do
-	menu=$(zenity --width=330 --height=460 --list --column "Escolha uma das opções" --title="Carcará" \
-			"Atualizar sistema" \
-			"Instalar programas" \
-			"Correção do sistema" \
-			"Limpeza do sistema" \
-			"Dotfiles" \
-			"Sair" )
+	menu=$(zenity --width=330 --height=460 --list \
+		--title="$(t app.name)" \
+		--column="id" --column="$(t menu.choose)" \
+		--hide-column=1 --print-column=1 \
+		update "$(t menu.update)" \
+		install "$(t menu.install)" \
+		fix "$(t menu.fix)" \
+		clean "$(t menu.clean)" \
+		dotfiles "$(t menu.dotfiles)" \
+		exit "$(t menu.exit)") || menu="exit"
+
 	case "$menu" in
-		"Atualizar sistema" )
+		update)
 			bash "$dirSys/updateDistro.sh"
 			;;
-		"Instalar programas" )
+		install)
 			bash "$menuSof"
 			;;
-		"Limpeza do sistema" )
+		clean)
 			bash "$dirSys/cleanDistro.sh"
 			;;
-		"Correção do sistema" )
+		fix)
 			bash "$dirSys/fixSystem.sh"
 			;;
-		"Dotfiles" )
+		dotfiles)
 			bash "$dirSys/applyDotfiles.sh"
 			;;
-		* )
+		*)
 			# shellcheck disable=SC2086
-			yad --text "Saindo do programa ..." $configYad
+			yad --text "$(t menu.exiting)" $configYad
 			break
 			;;
 	esac

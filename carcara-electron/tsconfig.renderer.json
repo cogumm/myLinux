@@ -12,5 +12,5 @@
     "verbatimModuleSyntax": true,
     "types": []
   },
-  "include": ["src/renderer/**/*.ts"]
+  "include": ["src/renderer/**/*.ts", "../locales/*.json"]
 }

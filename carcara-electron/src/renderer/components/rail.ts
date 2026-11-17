@@ -1,6 +1,7 @@
 import { createBrand } from "./brand.js";
 import { createNavList } from "./nav-list.js";
 import { icons } from "./icons.js";
+import { t } from "../lib/i18n.js";
 import type { ViewId } from "../lib/types.js";
 
 export type RailItem = {
@@ -9,13 +10,6 @@ export type RailItem = {
   icon: keyof typeof icons;
 };
 
-const DEFAULT_ITEMS: RailItem[] = [
-  { id: "sistema", label: "Sistema", icon: "sistema" },
-  { id: "software", label: "Software", icon: "software" },
-  { id: "dotfiles", label: "Dotfiles", icon: "dotfiles" },
-  { id: "sobre", label: "Sobre", icon: "sobre" },
-];
-
 export type RailHandle = {
   root: HTMLElement;
   setActive: (id: ViewId) => void;
@@ -23,11 +17,17 @@ export type RailHandle = {
 
 export function createRail(
   onNavigate: (id: ViewId) => void,
-  items: RailItem[] = DEFAULT_ITEMS,
 ): RailHandle {
+  const items: RailItem[] = [
+    { id: "sistema", label: t("rail.sistema"), icon: "sistema" },
+    { id: "software", label: t("rail.software"), icon: "software" },
+    { id: "dotfiles", label: t("rail.dotfiles"), icon: "dotfiles" },
+    { id: "sobre", label: t("rail.sobre"), icon: "sobre" },
+  ];
+
   const aside = document.createElement("aside");
   aside.className = "rail";
-  aside.setAttribute("aria-label", "Navegação");
+  aside.setAttribute("aria-label", "Navigation");
 
   const nav = createNavList(
     items.map((item) => ({
@@ -36,7 +36,7 @@ export function createRail(
       iconHtml: icons[item.icon](),
     })),
     (id) => onNavigate(id as ViewId),
-    { label: "Principal", className: "nav-list rail__nav" },
+    { label: t("app.name"), className: "nav-list rail__nav" },
   );
 
   const foot = document.createElement("footer");

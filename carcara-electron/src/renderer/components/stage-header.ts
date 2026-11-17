@@ -30,7 +30,7 @@ export function createStageHeader(): StageHeaderHandle {
   status.className = "pill";
   status.setAttribute("role", "status");
   status.setAttribute("aria-live", "polite");
-  status.textContent = "Pronto";
+  status.textContent = "";
 
   header.append(copy, status);
 

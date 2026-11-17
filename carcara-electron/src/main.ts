@@ -126,6 +126,8 @@ app.whenReady().then(() => {
     return readFile(LICENSE_PATH, "utf8");
   });
 
+  ipcMain.handle("app:lang", () => env.CARCARA_LANG);
+
   ipcMain.handle("app:quit", () => {
     app.quit();
   });

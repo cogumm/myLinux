@@ -11,6 +11,12 @@ const flag01 = z
   .transform((v) => v === "1");
 
 const envSchema = z.object({
+  CARCARA_LANG: z
+    .string()
+    .trim()
+    .toLowerCase()
+    .default("pt")
+    .transform((v) => (v.startsWith("en") ? "en" : "pt")),
   CARCARA_TEST_HOST: z.string().trim().min(1).default("8.8.8.8"),
   CARCARA_TEST_COUNT: z.coerce.number().int().min(1).max(20).default(3),
   CARCARA_REQUIRE_ROOT: flag01,
@@ -35,6 +41,7 @@ function parseEnv(): CarcaraEnv {
   }
 
   // Keep shell/helper consumers in sync with validated values.
+  process.env.CARCARA_LANG = parsed.data.CARCARA_LANG;
   process.env.CARCARA_TEST_HOST = parsed.data.CARCARA_TEST_HOST;
   process.env.CARCARA_TEST_COUNT = String(parsed.data.CARCARA_TEST_COUNT);
   if (parsed.data.LIBGL_ALWAYS_SOFTWARE === true) {

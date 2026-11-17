@@ -1,11 +1,14 @@
 import { openExternal } from "../lib/api.js";
+import { t } from "../lib/i18n.js";
 import type { ViewMeta } from "../lib/types.js";
 
-export const sobreMeta: ViewMeta = {
-  eyebrow: "myLinux",
-  title: "Sobre",
-  lede: "Toolkit pessoal para Debian/Ubuntu e WSL2.",
-};
+export function getSobreMeta(): ViewMeta {
+  return {
+    eyebrow: "myLinux",
+    title: t("view.sobre.title"),
+    lede: t("view.sobre.lede"),
+  };
+}
 
 type Fact = { label: string; value: string };
 

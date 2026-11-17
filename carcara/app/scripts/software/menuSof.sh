@@ -7,35 +7,36 @@
 # E-mail: gabriel[at]cogumm[dot]net
 # Telegram: http://t.me/CoGUMm
 # Script: menuSof
-# Descrição: Menu de instalação dos aplicativos de software.
-# Variáveis: $menu $configYad $configYadB $dirSof $menuSof $menuApp
+# Descrição: Menu de software — i18n (t) + IDs Zenity.
 #----------------------------------------------------------------------------------------------------#
 
 while true; do
-	menu=$(zenity --width=330 --height=500 --list --column "Escolha uma das opções" --title="cGm" \
-		"Desenvolvimento" \
-		"Produção" \
-		"Social" \
-		"Utilidades" \
-		"Voltar")
+	menu=$(zenity --width=330 --height=500 --list \
+		--title="$(t app.name)" \
+		--column="id" --column="$(t menu.choose)" \
+		--hide-column=1 --print-column=1 \
+		development "$(t sof.development)" \
+		productivity "$(t sof.productivity)" \
+		social "$(t sof.social)" \
+		utilities "$(t sof.utilities)" \
+		back "$(t menu.back)") || menu="back"
+
 	case "$menu" in
-		"Desenvolvimento")
+		development)
 			bash app/scripts/software/development/_menu.sh
 			;;
-		"Produção")
+		productivity)
 			bash app/scripts/software/productivity/_menu.sh
 			;;
-		"Social")
+		social)
 			bash app/scripts/software/social/_menu.sh
 			;;
-		"Utilidades")
+		utilities)
 			bash app/scripts/software/utilities/_menu.sh
 			;;
-		"Voltar"|*)
-			# Return to parent menuGeral loop (this script was started with bash).
+		back|*)
 			break
 			;;
 	esac
 done
 # Fim
-

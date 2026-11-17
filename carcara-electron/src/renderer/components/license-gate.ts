@@ -1,3 +1,5 @@
+import { t } from "../lib/i18n.js";
+
 /**
  * Same policy as Carcará 1.x Zenity --text-info --checkbox="Continuar":
  * user must accept terms before the shell mounts.
@@ -21,12 +23,11 @@ export function createLicenseGate(licenseText: string): LicenseGateHandle {
   const title = document.createElement("h1");
   title.id = "license-title";
   title.className = "license-gate__title";
-  title.textContent = "Licença de uso";
+  title.textContent = t("license.title");
 
   const lede = document.createElement("p");
   lede.className = "license-gate__lede";
-  lede.textContent =
-    "Leia os termos (mesmo aviso do Carcará 1.x). Marque Continuar para abrir o aplicativo.";
+  lede.textContent = t("license.lede");
 
   const pre = document.createElement("pre");
   pre.className = "license-gate__body";
@@ -39,7 +40,7 @@ export function createLicenseGate(licenseText: string): LicenseGateHandle {
   check.type = "checkbox";
   check.id = "license-accept";
   const checkText = document.createElement("span");
-  checkText.textContent = "Continuar";
+  checkText.textContent = t("license.checkbox");
   checkLabel.append(check, checkText);
 
   const actions = document.createElement("div");
@@ -48,12 +49,12 @@ export function createLicenseGate(licenseText: string): LicenseGateHandle {
   const quit = document.createElement("button");
   quit.type = "button";
   quit.className = "btn";
-  quit.textContent = "Sair";
+  quit.textContent = t("license.quit");
 
   const ok = document.createElement("button");
   ok.type = "button";
   ok.className = "btn btn--accent";
-  ok.textContent = "Aceitar e continuar";
+  ok.textContent = t("license.accept");
   ok.disabled = true;
 
   check.addEventListener("change", () => {

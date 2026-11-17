@@ -1,5 +1,6 @@
 import { createLicenseGate } from "./components/license-gate.js";
 import { carcaraApi } from "./lib/api.js";
+import { resolveLang, setLang } from "./lib/i18n.js";
 import { mountApp } from "./app.js";
 
 async function loadLicenseText(): Promise<string> {
@@ -9,7 +10,7 @@ async function loadLicenseText(): Promise<string> {
   }
   const res = await fetch("license.txt");
   if (!res.ok) {
-    throw new Error(`Não foi possível carregar a licença (${res.status})`);
+    throw new Error(`license load failed (${res.status})`);
   }
   return res.text();
 }
@@ -20,12 +21,19 @@ async function boot(): Promise<void> {
     throw new Error("#app mount point missing");
   }
 
+  const api = carcaraApi();
+  if (api.getLang) {
+    setLang(resolveLang(await api.getLang()));
+  } else {
+    setLang(resolveLang(undefined));
+  }
+
   let text: string;
   try {
     text = await loadLicenseText();
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
-    root.textContent = `Erro ao carregar licença: ${msg}`;
+    root.textContent = msg;
     return;
   }
 
@@ -34,7 +42,6 @@ async function boot(): Promise<void> {
   const accepted = await gate.wait();
 
   if (!accepted) {
-    const api = carcaraApi();
     if (api.quitApp) {
       await api.quitApp();
     } else {

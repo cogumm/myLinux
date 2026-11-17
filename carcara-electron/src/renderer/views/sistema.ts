@@ -1,47 +1,46 @@
 import { createTileGrid } from "../components/tile-grid.js";
+import { t } from "../lib/i18n.js";
 import type { ViewMeta } from "../lib/types.js";
 import type { TileProps } from "../components/tile.js";
 
-export const sistemaMeta: ViewMeta = {
-  eyebrow: "Manutenção",
-  title: "Sistema",
-  lede: "Atualizar, corrigir, limpar e testar a rede.",
-};
-
-/** Core verbs only — same product surface as Carcará 1.x (no spike/dry-run). */
-const TILES: TileProps[] = [
-  {
-    kicker: "Apt",
-    title: "Atualizar sistema",
-    desc: "update → upgrade → full-upgrade",
-    action: "update-distro",
-    confirm:
-      "Atualizar o sistema (apt update + upgrade + full-upgrade)? Requer privilégios.",
-    accent: true,
-  },
-  {
-    kicker: "Reparar",
-    title: "Correção do sistema",
-    desc: "Dependências e configure -a",
-    action: "fix-system",
-    confirm: "Corrigir pacotes quebrados (apt -f + dpkg --configure -a)?",
-  },
-  {
-    kicker: "Limpar",
-    title: "Limpeza do sistema",
-    desc: "Caminho seguro, sem locks",
-    action: "clean-distro",
-    confirm:
-      "Limpeza do sistema (lixeira, tmp, apt clean/autoclean/autoremove, locks e listas apt)? Requer privilégios.",
-  },
-  {
-    kicker: "Rede",
-    title: "Testar conexão",
-    desc: "Teste de conexão → Google (ICMP)",
-    action: "ping",
-  },
-];
+export function getSistemaMeta(): ViewMeta {
+  return {
+    eyebrow: t("view.sistema.eyebrow"),
+    title: t("view.sistema.title"),
+    lede: t("view.sistema.lede"),
+  };
+}
 
 export function renderSistema(): HTMLElement {
-  return createTileGrid(TILES);
+  const tiles: TileProps[] = [
+    {
+      kicker: "Apt",
+      title: t("tile.update.title"),
+      desc: t("tile.update.desc"),
+      action: "update-distro",
+      confirm: t("tile.update.confirm"),
+      accent: true,
+    },
+    {
+      kicker: "Apt",
+      title: t("tile.fix.title"),
+      desc: t("tile.fix.desc"),
+      action: "fix-system",
+      confirm: t("tile.fix.confirm"),
+    },
+    {
+      kicker: "Apt",
+      title: t("tile.clean.title"),
+      desc: t("tile.clean.desc"),
+      action: "clean-distro",
+      confirm: t("tile.clean.confirm"),
+    },
+    {
+      kicker: "ICMP",
+      title: t("tile.ping.title"),
+      desc: t("tile.ping.desc"),
+      action: "ping",
+    },
+  ];
+  return createTileGrid(tiles);
 }
