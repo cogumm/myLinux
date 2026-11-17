@@ -40,10 +40,10 @@ function runHelper(action: string): Promise<RunResult> {
 
 function createWindow(): void {
   const win = new BrowserWindow({
-    width: 880,
-    height: 640,
-    minWidth: 640,
-    minHeight: 480,
+    width: 960,
+    height: 720,
+    minWidth: 720,
+    minHeight: 520,
     title: "Carcará 2.0",
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),

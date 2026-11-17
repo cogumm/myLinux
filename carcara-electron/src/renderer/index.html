@@ -74,7 +74,65 @@
           </section>
 
           <section id="view-software" class="view" hidden aria-labelledby="view-title">
-            <p class="hint">Instaladores (apt → Flatpak → Snap) serão listados por categoria — mesmo contrato da 1.x.</p>
+            <div class="category">
+              <h2 class="category-title">Desenvolvimento</h2>
+              <div class="action-grid">
+                <button type="button" class="card-action" data-action="install-git" data-confirm="Instalar Git e ferramentas GUI via apt?">
+                  <span class="card-action-title">Git</span>
+                  <span class="card-action-desc">apt: git, git-gui, git-doc, gitg</span>
+                </button>
+                <button type="button" class="card-action primary" data-action="install-vscode" data-confirm="Instalar Visual Studio Code (Microsoft apt → Snap)?">
+                  <span class="card-action-title">VS Code</span>
+                  <span class="card-action-desc">apt keyring Microsoft → Snap classic</span>
+                </button>
+                <button type="button" class="card-action" data-action="install-insomnia" data-confirm="Instalar Insomnia (Flatpak → Snap)?">
+                  <span class="card-action-title">Insomnia</span>
+                  <span class="card-action-desc">Flatpak → Snap</span>
+                </button>
+                <button type="button" class="card-action" data-action="install-firacode" data-confirm="Instalar fonte Fira Code (fonts-firacode)?">
+                  <span class="card-action-title">Fira Code</span>
+                  <span class="card-action-desc">apt: fonts-firacode</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="category">
+              <h2 class="category-title">Produção</h2>
+              <div class="action-grid">
+                <button type="button" class="card-action" data-action="install-dropbox" data-confirm="Instalar Dropbox (Flatpak → Snap)?">
+                  <span class="card-action-title">Dropbox</span>
+                  <span class="card-action-desc">Flatpak → Snap</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="category">
+              <h2 class="category-title">Social</h2>
+              <div class="action-grid">
+                <button type="button" class="card-action" data-action="install-discord" data-confirm="Instalar Discord (Flatpak → Snap)?">
+                  <span class="card-action-title">Discord</span>
+                  <span class="card-action-desc">Flatpak → Snap</span>
+                </button>
+                <button type="button" class="card-action" data-action="install-spotify" data-confirm="Instalar Spotify (apt keyring → Flatpak → Snap)?">
+                  <span class="card-action-title">Spotify</span>
+                  <span class="card-action-desc">apt keyring → Flatpak → Snap</span>
+                </button>
+                <button type="button" class="card-action" data-action="install-telegram" data-confirm="Instalar Telegram Desktop (Flatpak → Snap)?">
+                  <span class="card-action-title">Telegram</span>
+                  <span class="card-action-desc">Flatpak → Snap</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="category">
+              <h2 class="category-title">Utilidades</h2>
+              <div class="action-grid">
+                <button type="button" class="card-action" data-action="install-vlc" data-confirm="Instalar VLC (apt → Flatpak → Snap)?">
+                  <span class="card-action-title">VLC</span>
+                  <span class="card-action-desc">apt → Flatpak → Snap</span>
+                </button>
+              </div>
+            </div>
           </section>
 
           <section id="view-sobre" class="view" hidden aria-labelledby="view-title">

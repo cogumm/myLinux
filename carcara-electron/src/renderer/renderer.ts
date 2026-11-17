@@ -122,5 +122,5 @@ actionButtons.forEach((btn) => {
 
 showView("sistema");
 appendLog(
-  "Carcará 2.0 pronto. Sistema: Atualizar / Corrigir / Limpar (confirmação na UI).\n",
+  "Carcará 2.0 pronto. Sistema e Software usam o helper (confirmação na UI antes de instalar/alterar).\n",
 );

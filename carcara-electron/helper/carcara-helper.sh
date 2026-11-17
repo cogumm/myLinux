@@ -19,7 +19,10 @@ CARCARA_ROOT="${REPO_ROOT}/carcara"
 
 usage() {
 	echo "usage: carcara-helper.sh <action>" >&2
-	echo "actions: ping | apt-dry-run | update-distro | fix-system | clean-distro" >&2
+	echo "system:  ping | apt-dry-run | update-distro | fix-system | clean-distro" >&2
+	echo "install: install-vlc | install-discord | install-spotify | install-telegram |" >&2
+	echo "         install-git | install-vscode | install-insomnia | install-firacode |" >&2
+	echo "         install-dropbox" >&2
 }
 
 _run_carcara_script() {
@@ -65,6 +68,43 @@ case "$action" in
 		;;
 	clean-distro)
 		_run_carcara_script "app/scripts/system/cleanDistro.sh"
+		exit $?
+		;;
+	# --- software (Wave 2 thin installers) ---
+	install-vlc)
+		_run_carcara_script "app/scripts/software/utilities/vlc.sh"
+		exit $?
+		;;
+	install-discord)
+		_run_carcara_script "app/scripts/software/social/discord.sh"
+		exit $?
+		;;
+	install-spotify)
+		_run_carcara_script "app/scripts/software/social/spotify.sh"
+		exit $?
+		;;
+	install-telegram)
+		_run_carcara_script "app/scripts/software/social/telegram.sh"
+		exit $?
+		;;
+	install-git)
+		_run_carcara_script "app/scripts/software/development/git.sh"
+		exit $?
+		;;
+	install-vscode)
+		_run_carcara_script "app/scripts/software/development/vscode.sh"
+		exit $?
+		;;
+	install-insomnia)
+		_run_carcara_script "app/scripts/software/development/insomnia.sh"
+		exit $?
+		;;
+	install-firacode)
+		_run_carcara_script "app/scripts/software/development/firacode.sh"
+		exit $?
+		;;
+	install-dropbox)
+		_run_carcara_script "app/scripts/software/productivity/dropbox.sh"
 		exit $?
 		;;
 	""|-h|--help)

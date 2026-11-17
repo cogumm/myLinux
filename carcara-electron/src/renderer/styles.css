@@ -172,6 +172,23 @@ body {
   display: block;
 }
 
+.category {
+  margin: 0 0 var(--space-lg);
+}
+
+.category:last-child {
+  margin-bottom: 0;
+}
+
+.category-title {
+  margin: 0 0 var(--space-sm);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-muted-foreground);
+}
+
 .action-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
