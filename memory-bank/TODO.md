@@ -15,7 +15,6 @@ Also mirrored under “Still open” in `.agents/playbook/references/carcara-2.0
 | **2.0** | Package `.deb` (AppImage optional) | Packaging only |
 | **2.0** | Optional Dotfiles tab | Explicitly out of spike; later |
 | **1.x** | Live smoke-test Wave 2 installers | Same machine gate as 2.0 Software |
-| **1.x** | Dotfiles apply helper (`*.bak` backups) | User-level; no root required to *use* |
 | **1.x** | `dependences.sh` debt | Still fragile; do not paper over |
 | **1.x** | Port from `old/` only if needed | e.g. docker helper refresh |
 | **1.x** | i18n (en) menus | Low priority |
@@ -37,7 +36,7 @@ Wave 1–2 engine **done**. Wave 3 **cancelled** (UI is Electron 2.0).
 - [x] Wave 1 + Wave 2 engine work
 - [ ] Live smoke-test of Wave 2 installers (owner-requested machine)
 - [ ] Harden / rewrite `dependences.sh` (known debt in `AGENTS.md`)
-- [ ] Dotfiles apply helper with `*.bak` backups
+- [x] Dotfiles apply helper with `*.bak` backups (`dotfiles/apply.sh`) (17 de Novembro de 2026)
 - [ ] Replace dead patterns from `old/` only when needed (docker helper refresh?)
 - [ ] i18n optional (en) for menus — low priority
 

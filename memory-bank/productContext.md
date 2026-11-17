@@ -30,8 +30,8 @@ Policy: apt → Flatpak → Snap where applicable.
 
 ### D — Apply dotfiles
 
-1. Copy or symlink from `dotfiles/` into `$HOME` after backup
-2. See `docs/dotfiles.md`
+1. `cd dotfiles && ./apply.sh --dry-run --all` then `./apply.sh --aliases` (or `--all`)
+2. Backups as `*.bak`; never run as root — see `docs/dotfiles.md`
 
 ### E — WSL cleanup
 

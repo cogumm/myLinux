@@ -45,3 +45,4 @@ Append-only log. Do not delete completed history.
 - [x] Atividade log: merge stdout+stderr chronologically (apt vs [carcara] ordering) (2026-11-17)
 - [x] Carcará 2.0 env: `.env.example` + Zod/`dotenv` in `src/env.ts`; wired to main + run-helper (2026-11-17)
 - [x] `carcara_confirm`: root / NONINTERACTIVE → auto-yes (updateDistro + cleanDistro; no terminal y/N) (2026-11-17)
+- [x] Dotfiles apply helper: `dotfiles/apply.sh` (*.bak, --dry-run/--symlink/modules; no root) (2026-11-17)

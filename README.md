@@ -100,7 +100,13 @@ Plan: [`.agents/idea/carcara-2.0-electron.md`](.agents/idea/carcara-2.0-electron
 
 ### Dotfiles
 
-Copy or symlink files from [`dotfiles/`](dotfiles/) into `$HOME` after backing up what you already have. Details: [docs/dotfiles.md](docs/dotfiles.md).
+```bash
+cd dotfiles
+./apply.sh --dry-run --all   # preview (*.bak backups)
+./apply.sh --aliases         # default module
+```
+
+Details: [docs/dotfiles.md](docs/dotfiles.md). Do **not** run as root.
 
 ### WSL cleanup
 

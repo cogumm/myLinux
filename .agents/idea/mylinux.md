@@ -30,7 +30,7 @@ Web application, payments, multi-user SaaS, equal support for every distro.
 - **1.x engine** complete: `carcara/startApp.sh` + `install_backends.sh` + thin installers.
 - **2.0 UI** in progress: `carcara-electron/` (Electron + Bun); reuses 1.x backends via privilege helper.
 - **Chooser:** repo-root `./start.sh` — Electron or terminal.
-- Dotfiles installable without overwriting `$HOME` without confirmation.
+- Dotfiles: `dotfiles/apply.sh` with `*.bak` backups (no root; `--dry-run` / modules).
 
 ## Related ideas
 
