@@ -38,6 +38,18 @@
     "vlc": "Install VLC",
     "dropbox": "Install Dropbox"
   },
+  "desc": {
+    "git": "Distributed version control (CLI + gitg)",
+    "vscode": "Microsoft’s code editor",
+    "insomnia": "REST / GraphQL API client",
+    "firacode": "Monospace font with coding ligatures",
+    "docker": "Linux containers and images",
+    "discord": "Voice, chat, and communities",
+    "spotify": "Music and podcast streaming",
+    "telegram": "Fast messaging and channels",
+    "vlc": "Plays almost any media format",
+    "dropbox": "Cloud file sync across devices"
+  },
   "dotfiles": {
     "column": "Dotfiles (*.bak backup)",
     "title": "Carcará — Dotfiles",
@@ -93,7 +105,7 @@
     "software": {
       "eyebrow": "Catalog",
       "title": "Software",
-      "lede": "Curated installs — apt → Flatpak → Snap."
+      "lede": "Snap Store–style catalog — apt → Flatpak → Snap."
     },
     "dotfiles": {
       "eyebrow": "Home",
@@ -137,9 +149,25 @@
   },
   "cat": {
     "development": "Development",
-    "productivity": "Productivity",
+    "games": "Games",
     "social": "Social",
-    "utilities": "Utilities"
+    "productivity": "Productivity",
+    "utilities": "Utilities",
+    "musicAndAudio": "Music and Audio",
+    "artAndDesign": "Art and Design",
+    "photoAndVideo": "Photo and Video",
+    "serverAndCloud": "Server and Cloud",
+    "booksAndReference": "Books and Reference",
+    "devicesAndIot": "Devices and IoT",
+    "education": "Education",
+    "entertainment": "Entertainment",
+    "finance": "Finance",
+    "healthAndFitness": "Health and Fitness",
+    "newsAndWeather": "News and Weather",
+    "personalisation": "Personalisation",
+    "science": "Science",
+    "security": "Security",
+    "empty": "No apps in this category yet — see the v2.0.1 backlog."
   },
   "native": {
     "file": "File",

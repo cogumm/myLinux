@@ -22,9 +22,9 @@
   },
   "sof": {
     "development": "Desenvolvimento",
-    "productivity": "Produção",
+    "productivity": "Produtividade",
     "social": "Social",
-    "utilities": "Utilidades"
+    "utilities": "Utilitários"
   },
   "install": {
     "git": "Instalar o Git",
@@ -37,6 +37,18 @@
     "telegram": "Instalar o Telegram",
     "vlc": "Instalar o VLC",
     "dropbox": "Instalar o Dropbox"
+  },
+  "desc": {
+    "git": "Controle de versão distribuído (CLI + gitg)",
+    "vscode": "Editor de código da Microsoft",
+    "insomnia": "Cliente REST / GraphQL para APIs",
+    "firacode": "Fonte monoespaçada com ligaduras",
+    "docker": "Containers e imagens no Linux",
+    "discord": "Voz, chat e comunidades",
+    "spotify": "Streaming de música e podcasts",
+    "telegram": "Mensagens rápidas e canais",
+    "vlc": "Player multimídia para quase qualquer formato",
+    "dropbox": "Arquivos sincronizados na nuvem"
   },
   "dotfiles": {
     "column": "Dotfiles (backup *.bak)",
@@ -93,7 +105,7 @@
     "software": {
       "eyebrow": "Catálogo",
       "title": "Software",
-      "lede": "Instalações curadas — apt → Flatpak → Snap."
+      "lede": "Catálogo no estilo Snap Store — apt → Flatpak → Snap."
     },
     "dotfiles": {
       "eyebrow": "Casa",
@@ -114,7 +126,7 @@
     },
     "fix": {
       "title": "Correção do sistema",
-      "desc": "Dependências e configure -a",
+      "desc": "Dependências e configure-a",
       "confirm": "Corrigir pacotes quebrados (apt -f + dpkg --configure -a)?"
     },
     "clean": {
@@ -137,9 +149,25 @@
   },
   "cat": {
     "development": "Desenvolvimento",
-    "productivity": "Produção",
+    "games": "Jogos",
     "social": "Social",
-    "utilities": "Utilidades"
+    "productivity": "Produtividade",
+    "utilities": "Utilitários",
+    "musicAndAudio": "Música e áudio",
+    "artAndDesign": "Arte e design",
+    "photoAndVideo": "Foto e vídeo",
+    "serverAndCloud": "Servidor e nuvem",
+    "booksAndReference": "Livros e referência",
+    "devicesAndIot": "Dispositivos e IoT",
+    "education": "Educação",
+    "entertainment": "Entretenimento",
+    "finance": "Finanças",
+    "healthAndFitness": "Saúde e fitness",
+    "newsAndWeather": "Notícias e clima",
+    "personalisation": "Personalização",
+    "science": "Ciência",
+    "security": "Segurança",
+    "empty": "Nenhum app nesta categoria ainda — veja o backlog v2.0.1."
   },
   "native": {
     "file": "Arquivo",

@@ -23,6 +23,7 @@ type Category = {
   tiles: TileProps[];
 };
 
+/** Snap Store category order (https://snapcraft.io/store). */
 function categories(): Category[] {
   return [
     {
@@ -31,16 +32,16 @@ function categories(): Category[] {
       icon: "code",
       tiles: [
         {
-          kicker: "Apt",
+          kicker: "VCS",
           title: "Git",
-          desc: "gui / doc / gitg",
+          desc: t("desc.git"),
           action: "install-git",
           confirm: t("install.git") + "?",
         },
         {
-          kicker: "Editor",
+          kicker: "IDE",
           title: "VS Code",
-          desc: "apt keyring → Snap",
+          desc: t("desc.vscode"),
           action: "install-vscode",
           confirm: t("install.vscode") + "?",
           accent: true,
@@ -48,23 +49,43 @@ function categories(): Category[] {
         {
           kicker: "API",
           title: "Insomnia",
-          desc: "Flatpak → Snap",
+          desc: t("desc.insomnia"),
           action: "install-insomnia",
           confirm: t("install.insomnia") + "?",
         },
         {
           kicker: "Font",
           title: "Fira Code",
-          desc: "apt fonts-firacode",
+          desc: t("desc.firacode"),
           action: "install-firacode",
           confirm: t("install.firacode") + "?",
         },
+      ],
+    },
+    {
+      id: "games",
+      titleKey: "cat.games",
+      icon: "gamepad",
+      tiles: [],
+    },
+    {
+      id: "social",
+      titleKey: "cat.social",
+      icon: "users",
+      tiles: [
         {
-          kicker: "Runtime",
-          title: "Docker",
-          desc: "official apt → docker.io",
-          action: "install-docker",
-          confirm: t("tile.docker.confirm"),
+          kicker: "Chat",
+          title: "Discord",
+          desc: t("desc.discord"),
+          action: "install-discord",
+          confirm: t("install.discord") + "?",
+        },
+        {
+          kicker: "Msg",
+          title: "Telegram",
+          desc: t("desc.telegram"),
+          action: "install-telegram",
+          confirm: t("install.telegram") + "?",
         },
       ],
     },
@@ -76,37 +97,9 @@ function categories(): Category[] {
         {
           kicker: "Sync",
           title: "Dropbox",
-          desc: "Flatpak → Snap",
+          desc: t("desc.dropbox"),
           action: "install-dropbox",
           confirm: t("install.dropbox") + "?",
-        },
-      ],
-    },
-    {
-      id: "social",
-      titleKey: "cat.social",
-      icon: "users",
-      tiles: [
-        {
-          kicker: "Chat",
-          title: "Discord",
-          desc: "Flatpak → Snap",
-          action: "install-discord",
-          confirm: t("install.discord") + "?",
-        },
-        {
-          kicker: "Music",
-          title: "Spotify",
-          desc: "apt → Flatpak → Snap",
-          action: "install-spotify",
-          confirm: t("install.spotify") + "?",
-        },
-        {
-          kicker: "Msg",
-          title: "Telegram",
-          desc: "Flatpak → Snap",
-          action: "install-telegram",
-          confirm: t("install.telegram") + "?",
         },
       ],
     },
@@ -114,17 +107,125 @@ function categories(): Category[] {
       id: "utilities",
       titleKey: "cat.utilities",
       icon: "wrench",
+      tiles: [],
+    },
+    {
+      id: "music-and-audio",
+      titleKey: "cat.musicAndAudio",
+      icon: "music",
       tiles: [
         {
-          kicker: "Media",
+          kicker: "Stream",
+          title: "Spotify",
+          desc: t("desc.spotify"),
+          action: "install-spotify",
+          confirm: t("install.spotify") + "?",
+        },
+      ],
+    },
+    {
+      id: "art-and-design",
+      titleKey: "cat.artAndDesign",
+      icon: "palette",
+      tiles: [],
+    },
+    {
+      id: "photo-and-video",
+      titleKey: "cat.photoAndVideo",
+      icon: "camera",
+      tiles: [
+        {
+          kicker: "Player",
           title: "VLC",
-          desc: "apt → Flatpak → Snap",
+          desc: t("desc.vlc"),
           action: "install-vlc",
           confirm: t("install.vlc") + "?",
         },
       ],
     },
+    {
+      id: "server-and-cloud",
+      titleKey: "cat.serverAndCloud",
+      icon: "cloud",
+      tiles: [
+        {
+          kicker: "Containers",
+          title: "Docker",
+          desc: t("desc.docker"),
+          action: "install-docker",
+          confirm: t("tile.docker.confirm"),
+        },
+      ],
+    },
+    {
+      id: "books-and-reference",
+      titleKey: "cat.booksAndReference",
+      icon: "book",
+      tiles: [],
+    },
+    {
+      id: "devices-and-iot",
+      titleKey: "cat.devicesAndIot",
+      icon: "chip",
+      tiles: [],
+    },
+    {
+      id: "education",
+      titleKey: "cat.education",
+      icon: "education",
+      tiles: [],
+    },
+    {
+      id: "entertainment",
+      titleKey: "cat.entertainment",
+      icon: "film",
+      tiles: [],
+    },
+    {
+      id: "finance",
+      titleKey: "cat.finance",
+      icon: "finance",
+      tiles: [],
+    },
+    {
+      id: "health-and-fitness",
+      titleKey: "cat.healthAndFitness",
+      icon: "heart",
+      tiles: [],
+    },
+    {
+      id: "news-and-weather",
+      titleKey: "cat.newsAndWeather",
+      icon: "news",
+      tiles: [],
+    },
+    {
+      id: "personalisation",
+      titleKey: "cat.personalisation",
+      icon: "sparkles",
+      tiles: [],
+    },
+    {
+      id: "science",
+      titleKey: "cat.science",
+      icon: "flask",
+      tiles: [],
+    },
+    {
+      id: "security",
+      titleKey: "cat.security",
+      icon: "shield",
+      tiles: [],
+    },
   ];
+}
+
+function createEmptyCategory(): HTMLElement {
+  const empty = document.createElement("div");
+  empty.className = "soft-empty";
+  empty.setAttribute("role", "status");
+  empty.textContent = t("cat.empty");
+  return empty;
 }
 
 export function renderSoftware(): HTMLElement {
@@ -139,11 +240,14 @@ export function renderSoftware(): HTMLElement {
 
   const panels = new Map<string, HTMLElement>();
   for (const cat of cats) {
-    const paged = createPagedTiles(cat.tiles, { pageSize: SOFTWARE_PAGE_SIZE });
-    paged.root.hidden = true;
-    paged.root.dataset.category = cat.id;
-    panels.set(cat.id, paged.root);
-    pane.append(paged.root);
+    const panel =
+      cat.tiles.length > 0
+        ? createPagedTiles(cat.tiles, { pageSize: SOFTWARE_PAGE_SIZE }).root
+        : createEmptyCategory();
+    panel.hidden = true;
+    panel.dataset.category = cat.id;
+    panels.set(cat.id, panel);
+    pane.append(panel);
   }
 
   function showCategory(id: string): void {

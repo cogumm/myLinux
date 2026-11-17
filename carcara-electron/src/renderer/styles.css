@@ -409,7 +409,7 @@ button:disabled {
 /* Software — category rail + pane (same link style as main rail) */
 .soft-layout {
   display: grid;
-  grid-template-columns: minmax(160px, 200px) minmax(0, 1fr);
+  grid-template-columns: minmax(180px, 220px) minmax(0, 1fr);
   gap: 1rem;
   align-items: start;
   min-height: 100%;
@@ -418,10 +418,22 @@ button:disabled {
 .soft-layout__nav {
   position: sticky;
   top: 0;
+  max-height: calc(100vh - 8rem);
+  overflow: auto;
   padding: 0.35rem;
   border-radius: var(--radius);
   border: 1px solid var(--color-border);
   background: var(--color-card);
+}
+
+.soft-empty {
+  margin: 0;
+  padding: 1.25rem 1rem;
+  border-radius: var(--radius);
+  border: 1px dashed var(--color-border);
+  color: var(--color-muted-foreground);
+  font-size: 0.9rem;
+  line-height: 1.45;
 }
 
 .soft-layout__pane {
