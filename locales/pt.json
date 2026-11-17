@@ -247,7 +247,7 @@
     "link": "Ir ao conteúdo"
   },
   "ready": {
-    "log": "$ Carcará {version} pronto.\n"
+    "log": "$ Carcará {version} pronto\n"
   },
   "console": {
     "title": "Atividade",

@@ -1,28 +1,33 @@
 /* Carcará 2.0 — Flat Design (ui-ux-pro-max tokens) */
 
 :root {
-  --color-primary: #0d9488;
-  --color-on-primary: #000000;
-  --color-secondary: #14b8a6;
-  --color-on-secondary: #0f172a;
-  --color-accent: #ea580c;
-  --color-on-accent: #000000;
-  --color-background: #0f172a;
-  --color-foreground: #f8fafc;
-  --color-card: #111827;
-  --color-card-foreground: #f8fafc;
-  --color-muted: #1e293b;
-  --color-muted-foreground: #cbd5e1;
-  --color-border: #334155;
-  --color-destructive: #dc2626;
+  --color-primary: #0f766e;
+  --color-on-primary: #ffffff;
+  --color-secondary: #0d9488;
+  --color-on-secondary: #ffffff;
+  --color-accent: #c2410c;
+  --color-on-accent: #ffffff;
+  --color-background: #f4f6f5;
+  --color-foreground: #18232d;
+  --color-card: #ffffff;
+  --color-card-foreground: #18232d;
+  --color-muted: #edf1ef;
+  --color-muted-foreground: #5b6872;
+  --color-border: #d9e1de;
+  --color-destructive: #b42318;
   --color-on-destructive: #ffffff;
-  --color-ring: #0d9488;
+  --color-ring: #0f766e;
+  --primary: var(--color-primary);
+  --card: var(--color-card);
+  --border: var(--color-border);
+  --muted: var(--color-muted-foreground);
+  color-scheme: light;
 
   --font-heading: Inter, "Segoe UI", system-ui, sans-serif;
   --font-body: Inter, "Segoe UI", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-  /* Terminal (Dracula-like) */
+  /* Console Dracula: terminal escuro preservado como área funcional */
   --term-bg: #282a36;
   --term-fg: #f8f8f2;
   --term-info: #6272a4;
@@ -134,7 +139,7 @@ button:disabled {
   flex-direction: column;
   gap: 0;
   padding: 0 var(--space-md) var(--space-md);
-  background: var(--color-card);
+  background: #fbfaf7;
   border-right: 1px solid var(--color-border);
 }
 
@@ -151,6 +156,7 @@ button:disabled {
   margin: 0 calc(-1 * var(--space-md));
   padding: var(--shell-head-pad-y) var(--space-md);
   text-align: left;
+  background: linear-gradient(135deg, #f8f2e9 0%, #fbfaf7 78%);
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -397,13 +403,15 @@ button:disabled {
 }
 
 .pill.is-ok {
-  color: #6ee7b7;
-  border-color: #059669;
+  color: #16723b;
+  border-color: #8fc9a3;
+  background: #eef8f0;
 }
 
 .pill.is-err {
-  color: #fca5a5;
-  border-color: var(--color-destructive);
+  color: #a8211a;
+  border-color: #e2aaa5;
+  background: #fff2f0;
 }
 
 .stage__body {
@@ -822,7 +830,7 @@ button:disabled {
   display: flex;
   flex-direction: column;
   min-height: 0;
-  border-top: 1px solid #1d2128;
+  border-top: 1px solid var(--color-border);
   background: var(--term-bg);
   color: var(--term-fg);
 }
@@ -958,7 +966,7 @@ button:disabled {
   border: 1px solid var(--color-border);
   background: var(--color-card);
   color: var(--color-card-foreground);
-  box-shadow: 0 18px 40px rgb(0 0 0 / 0.35);
+  box-shadow: 0 18px 40px rgb(24 35 45 / 0.12);
 }
 
 .license-gate__title {
@@ -1148,5 +1156,39 @@ button:disabled {
 
   .lede {
     white-space: normal;
+  }
+}
+
+
+/* Assinatura Carcará: calor visual sutil, sem competir com o conteúdo */
+.brand__mark {
+  filter: drop-shadow(0 3px 6px rgb(96 59 22 / 0.14));
+}
+
+.stage__head {
+  background: rgb(255 255 255 / 0.72);
+}
+
+.tile {
+  box-shadow: 0 1px 2px rgb(24 35 45 / 0.04);
+}
+
+.tile:hover:not(:disabled) {
+  border-color: #b8d6d1;
+  background: #f2f8f7;
+  box-shadow: inset 3px 0 0 var(--color-accent), 0 5px 16px rgb(24 35 45 / 0.07);
+}
+
+.pill.is-busy {
+  background: #edf7f5;
+}
+
+.console {
+  border-top-color: #1d2128;
+}
+
+@media (max-width: 720px) {
+  .brand {
+    background: transparent;
   }
 }
