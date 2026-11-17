@@ -57,6 +57,7 @@ Last updated: 2026-11-17
 - `old/**` (archive — see playbook `legacy.md`)
 - `cleanup-zone-identifiers.sh`
 - `memory-bank/TODO.md` — **v2.0.1** catalog waves
+- `docs/releases/X.Y.Z.md` — per-version release notes (required before tag `vX.Y.Z`)
 
 ## Commands agents use for validation
 
@@ -77,9 +78,21 @@ bun run helper -- ping
 bun run helper -- sync-time   # privileged / owner-requested
 bun run helper -- dotfiles-dry-run
 bun run pack:deb              # → release/carcara_<ver>_amd64.deb (heavy; needs network)
+bun run smoke:software        # Software wiring + ping + pkexec probe
 ```
 
 Do **not** run live `sudo`, apt mutations, or `pkexec` flows unless the owner asks.
+
+## Release checklist (agents)
+
+Only when the owner asks to cut a release:
+
+1. Ensure `carcara-electron/package.json` `"version"` = `X.Y.Z`.
+2. Add `docs/releases/X.Y.Z.md` (novidades / install / limits).
+3. Commit → annotated tag `vX.Y.Z` on **that** commit (HEAD after the notes land).
+4. Publish GitHub Release for the tag (triggers `release-deb.yml` → attach `.deb`).
+
+See `systemPatterns.md` pattern 16.
 
 ## Packaging notes (agents)
 

@@ -15,6 +15,8 @@ Never **commit** or **push** unless I explicitly ask.
 
 Create local tags only if I ask (e.g. `vX.Y.Z` for a Carcará modernization). A tag does **not** authorize commit or push.
 
+**Release pattern** (when I ask to cut a version): write `docs/releases/X.Y.Z.md` → commit it → annotated tag `vX.Y.Z` on that commit. Do not tag HEAD if the release notes file is missing. Full GitHub Release / push only if I also ask to publish.
+
 Do not use `--no-verify`, force push, amend someone else’s commit, or change `git config`.
 
 ## Dotfiles git

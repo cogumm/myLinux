@@ -34,4 +34,4 @@
 - **Dotfiles:** `dotfiles/apply.sh` + menus in both UIs (`references/dotfiles.md`).
 - Optional: `cleanup-zone-identifiers.sh` for WSL ADS junk files.
 - **Catalog backlog:** `memory-bank/TODO.md` v2.0.1 waves.
-- **Releases:** tag `vX.Y.Z` → CI attaches `carcara_*_amd64.deb`.
+- **Releases:** write `docs/releases/X.Y.Z.md` → commit → annotated tag `vX.Y.Z` on that commit → GitHub Release → CI attaches `carcara_*_amd64.deb` (see memory-bank `systemPatterns` #16).

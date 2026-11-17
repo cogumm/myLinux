@@ -50,6 +50,13 @@ Dotfiles tree is user-space (`dotfiles/apply.sh`); Carcará menus only **invoke*
 13. **Brand version** — pill + `window.title` / `ready.log` = `package.json` `"version"` (`APP_VERSION` / `app.getVersion()`).
 14. **Packaging split** — `electron-builder.yml` next to the Electron app; GHA workflow only orchestrates. Packaged app must not require Bun.
 15. **Maintainer-script macros** — FPM/`electron-builder` eats `${LetterOnly}` in afterInstall; avoid brace macros with letter-only names.
+16. **Release notes + tag** — every Carcará/myLinux version release:
+    1. Bump `carcara-electron/package.json` `"version"` to `X.Y.Z` (must match the release).
+    2. Write **`docs/releases/X.Y.Z.md`** (highlights, install, known limits, links).
+    3. Commit that notes file (and any version bump) so HEAD contains the notes.
+    4. Create annotated git tag **`vX.Y.Z`** on that commit (`git tag -a vX.Y.Z -m "…"`).
+    5. Publish GitHub Release for `vX.Y.Z` (notes from the md) so `release-deb.yml` builds/attaches the `.deb`.
+    Do not tag a commit that lacks `docs/releases/X.Y.Z.md`. Do not push/tag unless the owner asked for the release.
 
 ## Patterns to fix when touching code
 
@@ -73,6 +80,7 @@ Dotfiles tree is user-space (`dotfiles/apply.sh`); Carcará menus only **invoke*
 - New agent docs → playbook `references/` or `docs/`.
 - New installer → thin script + 1.x `_menu` + helper allowlist + 2.0 tile + locale keys (both langs).
 - Packaging tweaks → `electron-builder.yml` / `build/deb/` / `paths.ts` / `run-helper-node.ts`; CI → `.github/workflows/release-deb.yml`.
+- New version release → `docs/releases/X.Y.Z.md` + annotated tag `vX.Y.Z` on the commit that includes that file (see pattern 16).
 
 ## Safety pattern
 
