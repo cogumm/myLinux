@@ -5,6 +5,11 @@
  */
 import { $ } from "bun";
 import path from "node:path";
+import { env } from "../src/env.ts";
+
+// Ensure validated ping defaults reach the Bash helper / testConnection.sh
+process.env.CARCARA_TEST_HOST = env.CARCARA_TEST_HOST;
+process.env.CARCARA_TEST_COUNT = String(env.CARCARA_TEST_COUNT);
 
 const action = process.argv[2] ?? "";
 

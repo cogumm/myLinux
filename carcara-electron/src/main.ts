@@ -2,6 +2,7 @@ import { app, BrowserWindow, ipcMain } from "electron";
 import { spawn } from "node:child_process";
 import path from "node:path";
 import { installAppMenu } from "./app-menu";
+import { env } from "./env";
 import { openExternalUrl } from "./open-external";
 
 /** Bun Shell bridge — privilege allowlist runs under Bun, not Electron's Node. */
@@ -9,6 +10,7 @@ const HELPER_BRIDGE = path.join(__dirname, "..", "scripts", "run-helper.ts");
 
 /** Same policy as Carcará 1.x `isRoot` — maintenance UI only as root. */
 function requireRoot(): void {
+  if (!env.CARCARA_REQUIRE_ROOT) return;
   const uid = typeof process.getuid === "function" ? process.getuid() : -1;
   if (uid === 0) return;
   console.error("");
@@ -60,10 +62,10 @@ function createWindow(): void {
     "logo_moderno_final.png",
   );
   const win = new BrowserWindow({
-    width: 1080,
-    height: 760,
-    minWidth: 780,
-    minHeight: 560,
+    width: env.CARCARA_WINDOW_WIDTH,
+    height: env.CARCARA_WINDOW_HEIGHT,
+    minWidth: env.CARCARA_WINDOW_MIN_WIDTH,
+    minHeight: env.CARCARA_WINDOW_MIN_HEIGHT,
     title: "Carcará 2.0",
     icon: logoPath,
     webPreferences: {

@@ -17,7 +17,8 @@
     "src/main.ts",
     "src/preload.ts",
     "src/open-external.ts",
-    "src/app-menu.ts"
+    "src/app-menu.ts",
+    "src/env.ts"
   ],
   "exclude": ["node_modules", "dist", "src/renderer"]
 }
