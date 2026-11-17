@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { env } from "./env";
+import { getLocalesDir } from "./paths";
 
 type LocaleTree = { [key: string]: string | LocaleTree };
 
@@ -20,16 +21,10 @@ function flattenLocale(
   return out;
 }
 
-/** Main-process `t` — loads nested `locales/{lang}.json`, flattens to dotted keys. */
+/** Main-process `t` — nested `locales/{lang}.json` (dev repo or packaged resources). */
 export function nativeT(key: string): string {
   try {
-    const file = path.join(
-      __dirname,
-      "..",
-      "..",
-      "locales",
-      `${env.CARCARA_LANG}.json`,
-    );
+    const file = path.join(getLocalesDir(), `${env.CARCARA_LANG}.json`);
     const tree = JSON.parse(readFileSync(file, "utf8")) as LocaleTree;
     const dict = flattenLocale(tree);
     return dict[key] ?? key;

@@ -1,25 +1,16 @@
 import { app, BrowserWindow, ipcMain } from "electron";
-import { spawn } from "node:child_process";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { installAppMenu } from "./app-menu";
 import { env } from "./env";
 import { nativeT } from "./native-i18n";
 import { openExternalUrl } from "./open-external";
-
-/** Same disclaimer file as Carcará 1.x Zenity license gate. */
-const LICENSE_PATH = path.join(
-  __dirname,
-  "..",
-  "..",
-  "carcara",
-  "app",
-  "config",
-  "license",
-);
-
-/** Bun Shell bridge — privilege allowlist runs under Bun, not Electron's Node. */
-const HELPER_BRIDGE = path.join(__dirname, "..", "scripts", "run-helper.ts");
+import {
+  getLicensePath,
+  getRendererDir,
+  getRepoRoot,
+} from "./paths";
+import { runHelperNode } from "./run-helper-node";
 
 /** Same policy as Carcará 1.x `isRoot` — maintenance UI only as root. */
 function requireRoot(): void {
@@ -34,46 +25,9 @@ function requireRoot(): void {
   app.exit(1);
 }
 
-type RunResult = {
-  code: number | null;
-  stdout: string;
-  stderr: string;
-};
-
-function runHelper(action: string): Promise<RunResult> {
-  return new Promise((resolve) => {
-    const child = spawn("bun", [HELPER_BRIDGE, action], {
-      env: process.env,
-    });
-
-    // Merge stdout+stderr in arrival order so Atividade stays chronological
-    // ([carcara] logs are stderr; apt is often stdout).
-    let combined = "";
-    const append = (chunk: Buffer): void => {
-      combined += chunk.toString();
-    };
-    child.stdout.on("data", append);
-    child.stderr.on("data", append);
-    child.on("error", (err) => {
-      combined += `${err.message}\n`;
-      if (err.message.includes("ENOENT")) {
-        combined += "Bun not found on PATH — install from https://bun.sh\n";
-      }
-      resolve({ code: 127, stdout: combined, stderr: "" });
-    });
-    child.on("close", (code) => {
-      resolve({ code, stdout: combined, stderr: "" });
-    });
-  });
-}
-
 function createWindow(): void {
-  const logoPath = path.join(
-    __dirname,
-    "renderer",
-    "assets",
-    "logo_moderno_final.png",
-  );
+  const rendererDir = getRendererDir();
+  const logoPath = path.join(rendererDir, "assets", "logo_moderno_final.png");
   const win = new BrowserWindow({
     width: env.CARCARA_WINDOW_WIDTH,
     height: env.CARCARA_WINDOW_HEIGHT,
@@ -89,7 +43,7 @@ function createWindow(): void {
     },
   });
 
-  void win.loadFile(path.join(__dirname, "renderer", "index.html"));
+  void win.loadFile(path.join(rendererDir, "index.html"));
 }
 
 const ALLOWED_EXTERNAL = new Set([
@@ -104,11 +58,17 @@ app.whenReady().then(() => {
   requireRoot();
   installAppMenu();
 
+  // Packaged helper resolves carcara/locales via resources/mylinux.
+  process.env.CARCARA_REPO_ROOT = getRepoRoot();
+  process.env.CARCARA_LANG = env.CARCARA_LANG;
+  process.env.CARCARA_TEST_HOST = env.CARCARA_TEST_HOST;
+  process.env.CARCARA_TEST_COUNT = String(env.CARCARA_TEST_COUNT);
+
   ipcMain.handle("helper:run", async (_event, action: string) => {
     if (typeof action !== "string" || !/^[a-z][a-z0-9-]*$/.test(action)) {
       return { code: 2, stdout: "", stderr: "invalid action\n" };
     }
-    return runHelper(action);
+    return runHelperNode(action, process.env);
   });
 
   ipcMain.handle("shell:openExternal", async (_event, url: string) => {
@@ -125,7 +85,7 @@ app.whenReady().then(() => {
   });
 
   ipcMain.handle("license:get", async () => {
-    return readFile(LICENSE_PATH, "utf8");
+    return readFile(getLicensePath(), "utf8");
   });
 
   ipcMain.handle("app:lang", () => env.CARCARA_LANG);

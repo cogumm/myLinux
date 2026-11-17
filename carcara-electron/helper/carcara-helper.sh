@@ -14,7 +14,12 @@ set -euo pipefail
 action="${1:-}"
 
 HELPER_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "${HELPER_DIR}/../.." && pwd)"
+# Packaged .deb may set CARCARA_REPO_ROOT (resources/mylinux). Dev: carcara-electron/helper → repo root.
+if [[ -n "${CARCARA_REPO_ROOT:-}" && -d "${CARCARA_REPO_ROOT}/carcara" ]]; then
+	REPO_ROOT="$(cd "${CARCARA_REPO_ROOT}" && pwd)"
+else
+	REPO_ROOT="$(cd "${HELPER_DIR}/../.." && pwd)"
+fi
 CARCARA_ROOT="${REPO_ROOT}/carcara"
 
 usage() {

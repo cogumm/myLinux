@@ -3,7 +3,11 @@ import path from "node:path";
 import { z } from "zod";
 
 const rootDir = path.join(__dirname, "..");
+// Dev: carcara-electron/.env. Packaged: optional beside resources (defaults via Zod).
 loadDotenv({ path: path.join(rootDir, ".env") });
+if (process.resourcesPath) {
+  loadDotenv({ path: path.join(process.resourcesPath, "mylinux", ".env") });
+}
 
 const flag01 = z
   .union([z.literal("0"), z.literal("1")])
