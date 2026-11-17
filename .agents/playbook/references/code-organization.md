@@ -11,7 +11,7 @@ carcara-electron/             # 2.0 Electron UI (sibling — do not nest under c
   src/renderer/views/         # one file per menu
   src/renderer/components/    # reusable factories
   helper/ + scripts/          # allowlist + Bun bridge
-dotfiles/
+dotfiles/                     # apply.sh + aliases/git/Hyper (user-space)
 old/                          # frozen legacy
 design-system/carcara-2-0/    # Flat Design tokens (ui-ux-pro-max)
 cleanup-zone-identifiers.sh
@@ -21,4 +21,4 @@ cleanup-zone-identifiers.sh
 - Category menus: `_menu.sh` / `menuSof.sh` (1.x); Software `nav-list` (2.0).
 - Always `. app/config/config.sh` from scripts with cwd `carcara/`.
 - **Header banner required** on every Carcará `.sh`: see `.agents/idea/carcara-modern-install.md` → “Script header convention”.
-- 2.0 detail: `references/carcara-2.0.md`.
+- Dotfiles: `references/dotfiles.md`. 2.0: `references/carcara-2.0.md`. Session dump: `memory-bank/activeContext.md`.

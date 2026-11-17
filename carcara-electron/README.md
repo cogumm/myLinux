@@ -12,6 +12,7 @@ Structure: `src/renderer/views/` (Sistema / Software / Sobre) + `src/renderer/co
 ## Requirements
 
 - **Root / sudo** — same policy as Carcará 1.x (`isRoot`). Prefer `sudo ./start.sh --electron` from the repo root.
+- **License gate** — same `carcara/app/config/license` text as 1.x; checkbox **Continuar** before the shell opens.
 - [Bun](https://bun.sh) ≥ 1.1 (usually `~/.bun/bin`; `start.sh` restores it under sudo’s `secure_path`)
 - Linux desktop (or WSLg) for the window
 - Already-root sessions skip `pkexec` for helper actions

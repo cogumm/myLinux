@@ -3,9 +3,7 @@
 ## Flow
 
 `startApp.sh` → `config.sh` (loads backends) → `dependences` → Zenity license → `menuGeral.sh` loop.  
-Main menu: Atualizar · Instalar · Correção · Limpeza · **Dotfiles** · Sair.
-
-Main options (trimmed 17 Nov 2026): “Atualizar sistema” · “Instalar programas” → `menuSof` · “Correção do sistema” · “Limpeza do sistema” · “Sair”.  
+Main menu (trimmed 17 Nov 2026): Atualizar · Instalar → `menuSof` · Correção · Limpeza · **Dotfiles** · Sair.  
 (Removed stubs: “programas diversos”, “Limpeza de memória”.)
 
 Software menu: “Desenvolvimento” / “Produção” / “Social” / “Utilidades” — all four wired (`development/_menu.sh`, `productivity/_menu.sh`, `social/_menu.sh`, `utilities/_menu.sh`).
@@ -25,7 +23,7 @@ Policy: apt (distro or keyring) → Flatpak/Flathub → Snap. Idempotent via `pk
 | development | `insomnia.sh` | Flatpak → Snap |
 | development | `firacode.sh` | apt `fonts-firacode` |
 | productivity | `dropbox.sh` | Flatpak → Snap |
-| system | update / fix / clean / `sync_time.sh` | (Wave 1) |
+| system | update / fix / clean / `applyDotfiles.sh` / `sync_time.sh` | Wave 1 + Dotfiles menu |
 
 ## Bootstrap (Wave 1 Step 1 — done)
 

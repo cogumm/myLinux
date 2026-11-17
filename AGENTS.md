@@ -62,10 +62,12 @@ Act as a **Linux systems analysis & development** specialist:
 
 - Legacy `old/scripts/*.sh` install obsolete stacks and unsafe defaults (`chmod 777 www`, hardcoded passwords)
 - Wave 1 + Wave 2 done (1.x engine). Wave 3 cancelled — product UI is Electron 2.0
-- Active: Carcará 2.0 alpha UI (`carcara-electron/`); see `.agents/idea/carcara-2.0-electron.md` + playbook `references/carcara-2.0.md`
-- 1.x `menuGeral` trimmed to real actions only (stubs “Limpeza de memória” / “programas diversos” removed 17 Nov 2026)
+- Active: Carcará 2.0 **usable alpha** (`carcara-electron/`) — license gate, Dotfiles rail, Zod env, Sistema smoke OK; see playbook `references/carcara-2.0.md` + `memory-bank/activeContext.md`
+- 1.x `menuGeral`: Atualizar / Instalar / Correção / Limpeza / **Dotfiles** / Sair
+- `dependences.sh` still treated as debt (harden when next touching bootstrap)
 - Wave 2 installers / 2.0 privileged actions not fully smoke-tested live (needs owner-requested apt/flatpak/snap + pkexec)
 - WSL: no `pkexec` → privileged helper runs unelevated (apt locks fail); use real desktop for elevation tests
+- Packaging `.deb` still open
 
 ## Project guidance
 

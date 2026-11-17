@@ -28,6 +28,8 @@ Wave 1–2 engine **done**. Wave 3 **cancelled** (UI is Electron 2.0).
 - [x] Cancel Wave 3 / start Electron 2.0 (17 de Novembro de 2026)
 - [x] Carcará 2.0 alpha UI (modular renderer, helper wiring, Flat Design) (17 de Novembro de 2026)
 - [x] Env Zod + `.env.example` in `carcara-electron/` (17 de Novembro de 2026)
+- [x] Dotfiles menus (1.x + 2.0) + license gate 2.0 (17 de Novembro de 2026)
+- [x] Session knowledge consolidated → memory-bank + playbook (17 de Novembro de 2026)
 - [ ] Continue [`.agents/idea/carcara-2.0-electron.md`](../.agents/idea/carcara-2.0-electron.md) — Software/pkexec smoke-test + packaging `.deb`
 
 ## Carcará / scripts (1.x)
@@ -50,6 +52,7 @@ Wave 1–2 engine **done**. Wave 3 **cancelled** (UI is Electron 2.0).
 - [x] Env: `.env.example` + Zod/`dotenv` (`src/env.ts`)
 - [x] Smoke-test Sistema as root (sudo+Bun PATH): ping / update / fix / clean → exit 0 (17 de Novembro de 2026)
 - [x] Dotfiles rail + helper `dotfiles-*` (unprivileged / as `$SUDO_USER`) (17 de Novembro de 2026)
+- [x] License gate (1.x parity; checkbox Continuar) (17 de Novembro de 2026)
 - [ ] Smoke-test Software installers (owner-requested)
 - [ ] Smoke-test with **pkexec** on real desktop / WSLg (unelevated user → elevates)
 - [ ] Package `.deb` for Carcará 2.0 (AppImage optional)

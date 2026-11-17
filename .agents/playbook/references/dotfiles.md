@@ -20,3 +20,12 @@
 - Skip when destination already matches source (copy or symlink).
 - Theme skipped if `~/.oh-my-zsh/themes` is absent.
 - Operator docs: `docs/dotfiles.md`.
+
+## Carcará menus
+
+| Track | Entry | How |
+|-------|--------|-----|
+| 1.x | `menuGeral` → **Dotfiles** | `applyDotfiles.sh` Zenity submenu → `sudo -u "$SUDO_USER" apply.sh …` |
+| 2.0 | Rail **Dotfiles** | Helper `dotfiles-*` (unprivileged) → `_run_dotfiles_apply` as `$SUDO_USER` |
+
+If `SUDO_USER` is missing while uid=0, fail clearly — do not write into `/root`.

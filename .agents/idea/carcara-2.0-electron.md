@@ -2,7 +2,7 @@
 
 Status: **in progress** (plan locked + spike started)  
 Saved: 16 de Novembro de 2026  
-Updated: 17 de Novembro de 2026 (session knowledge → playbook `carcara-2.0.md` + memory-bank)  
+Updated: 17 de Novembro de 2026 (env/Zod, Dotfiles rail, license gate, carcara_confirm → playbook + memory-bank)  
 Related: [mylinux.md](mylinux.md) · [carcara-modern-install.md](carcara-modern-install.md) (1.x engine — complete)
 
 ## Intent
@@ -143,6 +143,7 @@ flowchart LR
 - [x] Root gate for 2.0 UI + live Sistema smoke-test (update/fix/clean exit 0) (17 de Novembro de 2026)
 - [x] Env: `.env.example` + Zod/`dotenv` (`src/env.ts`) wired to main + helper (17 de Novembro de 2026)
 - [x] Dotfiles rail + helper `dotfiles-*` → `apply.sh` as `$SUDO_USER` (17 de Novembro de 2026)
+- [x] License gate (1.x parity: checkbox Continuar before shell) (17 de Novembro de 2026)
 - [ ] Package `.deb` (AppImage optional)
 - [ ] Software installer smoke-test via 2.0 UI
 - [x] Document dual entry in root README + `carcara-electron/README.md` (alpha)

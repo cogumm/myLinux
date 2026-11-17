@@ -13,15 +13,17 @@ Secondary: anyone who clones the MIT repo and accepts root risk.
 
 1. `./start.sh --terminal` or `cd carcara && sudo bash startApp.sh`
 2. Deps script ensures yad/curl/snap (and optional flatpak)
-3. Main menu: update, install software, fix, clean
-4. Yad shows progress; terminal shows apt detail
+3. Zenity **license** checkbox Continuar
+4. Main menu: update, install software, fix, clean, **Dotfiles**, Sair
+5. Yad shows progress; terminal shows apt detail; root scripts use `carcara_confirm` auto-yes
 
 ### B — Maintain / install via Carcará 2.0
 
 1. `./start.sh --electron` (needs Bun)
-2. Rail: **Sistema** · **Software** · **Dotfiles** · **Sobre**
-3. Confirm dialog → helper → activity console (Dracula terminal)
-4. Engine is still 1.x backends; UI never invents package policy
+2. License gate (same terms as 1.x) — checkbox Continuar or Sair
+3. Rail: **Sistema** · **Software** · **Dotfiles** · **Sobre**
+4. Confirm dialog → helper → activity console (Dracula terminal)
+5. Engine is still 1.x backends; UI never invents package policy
 
 ### C — Install curated apps (either UI)
 
@@ -40,12 +42,14 @@ Policy: apt → Flatpak → Snap where applicable.
 
 ## UX principles
 
-- Clear Portuguese menu labels / verbs (Atualizar, Instalar, Corrigir, Limpar)
+- Clear Portuguese menu labels / verbs (Atualizar, Instalar, Corrigir, Limpar, Dotfiles)
+- License gate every launch (1.x Zenity / 2.0 license-gate) — same `license` file
 - Root warning + disclaimer (1.x header; 2.0 Sobre + confirms)
-- Prefer confirmations before destructive clean/repair
-- Logs remain source of truth
+- Prefer confirmations before destructive clean/repair (UI dialog; no terminal y/N when already root)
+- Logs remain source of truth (Atividade merges stdout/stderr in order)
 - Brand-first rail (logo + Carcará + 2.0 pill)
 - Flat Design tokens from `ui-ux-pro-max` — do not freestyle a new palette
+- Tile hover = teal accent bar; orange only on confirm CTAs
 
 ## Non-goals
 

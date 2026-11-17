@@ -28,9 +28,10 @@ Web application, payments, multi-user SaaS, equal support for every distro.
 ## Modernization direction
 
 - **1.x engine** complete: `carcara/startApp.sh` + `install_backends.sh` + thin installers.
-- **2.0 UI** in progress: `carcara-electron/` (Electron + Bun); reuses 1.x backends via privilege helper.
+- **2.0 UI** usable alpha: `carcara-electron/` (Electron + Bun); license gate; Dotfiles rail; Zod env; reuses 1.x backends via helper.
 - **Chooser:** repo-root `./start.sh` — Electron or terminal.
-- Dotfiles: `dotfiles/apply.sh` with `*.bak` backups (no root; `--dry-run` / modules).
+- Dotfiles: `dotfiles/apply.sh` + menus in 1.x/2.0 (`*.bak`; always as `$SUDO_USER`).
+- Agent state: `memory-bank/activeContext.md` + playbook `references/carcara-2.0.md`.
 
 ## Related ideas
 

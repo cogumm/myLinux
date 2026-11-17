@@ -4,39 +4,80 @@ Last updated: 2026-11-17
 
 ## Current focus
 
-**Carcará 2.0 UI is usable alpha** under `carcara-electron/` (Electron + Bun + modular vanilla renderer).  
-1.x Bash engine (Waves 1–2) remains the install/maintenance **engine** and CLI/fallback.  
-Wave 3 (1.x polish) stays **cancelled**.
+**Carcará 2.0 is usable alpha** (`carcara-electron/`: Electron + Bun + modular vanilla renderer).  
+**1.x** (`carcara/`) remains the install/maintenance **engine** and CLI/fallback (Waves 1–2 done; Wave 3 cancelled).
 
-Session knowledge dump (17 Nov 2026) lives in:
+Canonical agent how-to for this state:
 
-- `.agents/playbook/references/carcara-2.0.md` (operator + agent how-to)
-- `.agents/idea/carcara-2.0-electron.md` (locked decisions + checklist)
-- `design-system/carcara-2-0/` (tokens + app-shell)
+| Doc | Role |
+|-----|------|
+| `.agents/playbook/references/carcara-2.0.md` | 2.0 operator + agent how-to (full) |
+| `.agents/playbook/references/carcara.md` | 1.x menus, backends, `carcara_confirm` |
+| `.agents/playbook/references/dotfiles.md` | `apply.sh` + menu wiring |
+| `.agents/idea/carcara-2.0-electron.md` | Locked decisions + checklist |
+| `design-system/carcara-2-0/pages/app-shell.md` | Rail / tiles / license / hover rules |
+| `memory-bank/TODO.md` | Still-open inbox |
 
-## Recent decisions (session)
+## Session knowledge dump (17 Nov 2026) — late session
 
-- **UI rebuild** via `ui-ux-pro-max` Flat Design; brand-first rail; logo `logo_moderno_final.png`.
-- **Modular renderer:** `views/{sistema,software,sobre}.ts` + reusable `components/` (factories); Bun IIFE bundle.
-- **Software** uses the same nav-link pattern as the main rail (`createNavList` / `.rail__link`) for categories.
-- **Terminal (Atividade):** Dracula palette + JetBrains Mono (vendored woff2) + line numbers + highlight.
-- **Sobre:** README facts + allowlisted external links; no logo variant gallery.
-- **WSL:** `openExternal` → PowerShell `Start-Process`; `ping` does not warn about missing `pkexec`.
-- **Root required for 2.0 UI** (same as 1.x): `sudo ./start.sh --electron` + `requireRoot()` in Electron main.
-- **Env (Zod):** `carcara-electron/.env.example` → `.env`; schema in `src/env.ts` (window, root gate, ping host/count).
-- **Dotfiles menus:** 1.x `menuGeral` + 2.0 rail; both call `dotfiles/apply.sh` as `$SUDO_USER`.
-- **Images** only under repo `assets/img/` (shared 1.x/2.0).
+### Env (Zod)
 
-## Next useful engineering work
+- `carcara-electron/.env.example` → copy to `.env` (gitignored; `!.env.example` kept).
+- Schema: `src/env.ts` (`dotenv` + **Zod 4**). Use `z.prettifyError()` — **not** deprecated `error.flatten()`.
+- Wired: `main.ts` (window size, `CARCARA_REQUIRE_ROOT`), `scripts/run-helper.ts` (ping host/count → Bash).
+- Keys: `CARCARA_TEST_HOST` / `CARCARA_TEST_COUNT`, window dims, `CARCARA_REQUIRE_ROOT`, `LIBGL_ALWAYS_SOFTWARE`.
 
-1. Package `.deb` for Carcará 2.0 (optional AppImage).
-2. Smoke-test **Software** installers via 2.0 UI (owner-requested).
-3. Harden `dependences.sh` (1.x debt) or pkexec smoke on real desktop.
+### UI polish (tiles)
+
+- Featured/orange permanent tile borders removed.
+- Extra teal left bar + stronger border = **hover only** (`.tile:hover`).
+- Accent orange `#EA580C` reserved for **confirm CTA** buttons (`btn--accent`), not tile chrome.
+- Rail order: Sistema · Software · **Dotfiles** · Sobre.
+
+### License gate (2.0 = 1.x parity)
+
+- Same file: `carcara/app/config/license`.
+- Gate before shell: checkbox **Continuar** → **Aceitar e continuar**; **Sair** → IPC `app:quit`.
+- Component: `src/renderer/components/license-gate.ts`; boot in `main.ts` (renderer).
+- IPC: `license:get`, `app:quit`; build also copies `license.txt` into `dist/renderer/`.
+
+### Confirms as root (`carcara_confirm`)
+
+- Shared in `install_backends.sh`: **root** or `CARCARA_NONINTERACTIVE=1` → auto-yes (log `auto-yes:`); no terminal `[y/N]`.
+- Used by `updateDistro.sh` / `cleanDistro.sh` (incl. locks + apt lists when root/NI).
+- UI/menu choice is the user confirmation; 2.0 still uses `<dialog>` before mutating helper actions.
+- `testConnection.sh` retry uses Yad buttons (no terminal `read` under sudo).
+
+### Dotfiles
+
+- CLI: `dotfiles/apply.sh` — **never root**; `*.bak` / `*.bak.<timestamp>`; `--dry-run` / `--symlink` / modules.
+- `--all` = aliases + git + hyper + theme (**not** bashrc). `--bashrc` opt-in.
+- **1.x:** `menuGeral` → Dotfiles → `applyDotfiles.sh` (Zenity submenu) → `sudo -u "$SUDO_USER" apply.sh …`.
+- **2.0:** rail Dotfiles → tiles → helper `dotfiles-*` (unprivileged set in `run-helper.ts`) → `_run_dotfiles_apply` as `$SUDO_USER`.
+- Docs: `docs/dotfiles.md` + playbook `references/dotfiles.md`.
+
+### Earlier same-day decisions (still in force)
+
+- Root required for 2.0 UI (`start.sh` sudo + `requireRoot()`); Bun PATH recovered under sudo `secure_path`.
+- WSL: PowerShell `openExternal`; GPU flags + `LIBGL_ALWAYS_SOFTWARE`; `ping` unprivileged.
+- Atividade: merge stdout+stderr chronologically; Dracula + JetBrains Mono.
+- Images only under repo `assets/img/`.
+- Modular renderer: `views/` + `components/` factories; Bun IIFE bundle.
 
 ## Validated
 
-- Sistema as root (`sudo ./start.sh --electron`): update-distro / fix-system / clean-distro → exit 0 (17 Nov 2026). `carcara_confirm` auto-yes when root/NI (incl. clean locks/lists); empty trash path is OK.
+- Sistema as root: update / fix / clean → exit 0 (17 Nov 2026).
+- `bun run helper -- dotfiles-dry-run` OK (as user).
+- `bun run typecheck` + `bun run build` OK after license/env/dotfiles work.
+
+## Still open (see `TODO.md`)
+
+1. Package `.deb` (AppImage optional).
+2. Smoke-test Software installers + pkexec on real desktop (owner-requested).
+3. Harden `dependences.sh` (1.x debt in `AGENTS.md`).
+4. Optional: i18n EN; port from `old/` only if needed.
 
 ## Blockers / notes
 
-- App runs as root → helper skips `pkexec` (expected). GPU/`--no-sandbox` warnings under WSL are environmental.
+- Running as root → helper skips `pkexec` (expected). Test elevation on a real desktop, not already-root WSL sessions.
+- GPU / `--no-sandbox` noise under WSLg is environmental.

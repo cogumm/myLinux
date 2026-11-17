@@ -2,7 +2,8 @@
 
 Canonical plan: `.agents/idea/carcara-2.0-electron.md`  
 Design: `design-system/carcara-2-0/` (`MASTER.md`, `pages/app-shell.md`, `tokens.css`)  
-Skill: `.agents/skills/ui-ux-pro-max`
+Skill: `.agents/skills/ui-ux-pro-max`  
+Memory dump: `memory-bank/activeContext.md` (session 17 Nov 2026)
 
 ## Entry
 
@@ -12,20 +13,28 @@ Skill: `.agents/skills/ui-ux-pro-max`
 | `sudo ./start.sh --electron` | Carcará 2.0 — **requires root** (re-exec via sudo like 1.x) |
 | `sudo ./start.sh --terminal` | Carcará 1.x |
 | `cd carcara-electron && bun run build` | `tsc` + Bun IIFE renderer (build OK as user) |
-| `bun run helper -- ping` | Runs `carcara/app/config/testConnection.sh` (Google DNS IP `8.8.8.8`; override `CARCARA_TEST_HOST` / `CARCARA_TEST_COUNT`) |
+| `bun run helper -- ping` | `testConnection.sh` (Google DNS IP `8.8.8.8`) |
+| `bun run helper -- dotfiles-dry-run` | Preview `dotfiles/apply.sh --dry-run --all` as user |
 
-**Root policy:** Electron main calls `requireRoot()` (uid must be 0), mirroring 1.x `isRoot`. `start.sh --electron` elevates with `sudo` and preserves `DISPLAY`/`WAYLAND_DISPLAY`/`XAUTHORITY`.  
-**Bun under sudo:** Linux `secure_path` drops `~/.bun/bin`. `ensure_bun_on_path` in `start.sh` recovers `$SUDO_USER/.bun/bin` when you run `sudo ./start.sh` directly (not a WSL bug).
+**Root policy:** Electron main `requireRoot()` (uid 0), mirroring 1.x `isRoot`. `start.sh --electron` elevates with `sudo` and preserves `DISPLAY` / `WAYLAND_DISPLAY` / `XAUTHORITY`.  
+**Bun under sudo:** `secure_path` drops `~/.bun/bin`. `ensure_bun_on_path` in `start.sh` recovers `$SUDO_USER/.bun/bin`.
+
+## Boot sequence
+
+1. `requireRoot()` (unless `CARCARA_REQUIRE_ROOT=0` in `.env`)
+2. **License gate** — same text as 1.x `carcara/app/config/license`; checkbox Continuar → Aceitar; Sair → `app:quit`
+3. Shell mounts (rail + stage + Atividade)
 
 ## Architecture
 
 ```
-Renderer (views + components)
+Renderer (license-gate → views + components)
   → preload IPC
-  → Electron main (spawn bun)
+  → Electron main (spawn bun | license:get | app:quit | openExternal)
   → scripts/run-helper.ts (Bun.$)
   → helper/carcara-helper.sh (allowlist)
   → carcara/ 1.x scripts (CARCARA_NONINTERACTIVE=1)
+     or dotfiles/apply.sh as $SUDO_USER
 ```
 
 - **Never** reimplement apt/flatpak/snap in the renderer.
@@ -35,41 +44,43 @@ Renderer (views + components)
 
 ```
 src/renderer/
-  main.ts          # mount #app
-  app.ts           # shell, routing, runAction
-  views/           # one file per menu: sistema | software | sobre
-  components/      # createRail, createTile, createNavList, createActivityConsole, …
-  lib/             # types, api, log-highlight
-  styles.css       # Flat Design tokens + terminal theme
-  index.html       # CSP + #app
+  main.ts              # license gate → mountApp
+  app.ts               # shell, routing, runAction
+  views/               # sistema | software | dotfiles | sobre
+  components/          # rail, tile, license-gate, confirm-dialog, activity-console, …
+  lib/                 # types, api, log-highlight
+  styles.css           # Flat tokens + terminal + license-gate
+  index.html           # CSP + #app
+src/env.ts             # Zod + dotenv
 ```
 
-- `tsconfig.json` — main + preload + `open-external.ts` only  
-- `tsconfig.renderer.json` — typecheck renderer (`moduleResolution: bundler`)  
-- Build bundles renderer to `dist/renderer/renderer.js` (IIFE)
+- `tsconfig.json` — main + preload + open-external + app-menu + **env**
+- `tsconfig.renderer.json` — typecheck renderer (`moduleResolution: bundler`)
+- Build: Bun IIFE → `dist/renderer/renderer.js`; copies CSS/HTML/`license.txt`/assets
 
 ## UI patterns (ui-ux-pro-max)
 
 | Piece | Rule |
 |-------|------|
-| Style | Flat Design, dark; primary `#0D9488`, accent `#EA580C`, card `#111827` |
-| Brand | `assets/img/logo_moderno_final.png`; wordmark + `2.0` pill **beside** name |
-| Rail | Sistema / Software / Sobre; footer `MIT · 2010–YYYY · @CoGUMm` (one line) |
+| Style | Flat Design, dark; primary `#0D9488`, accent `#EA580C` (CTA only), card `#111827` |
+| Brand | `assets/img/logo_moderno_final.png`; wordmark + `2.0` pill beside name |
+| Rail | Sistema / Software / **Dotfiles** / Sobre; footer `MIT · 2010–YYYY · cogumm.net` |
+| Tiles | Resting = neutral border; **hover** = teal left inset + primary border (no permanent orange outline) |
 | Software | Secondary `nav-list` (same `.rail__link`) for categories → tiles |
-| Confirms | `<dialog>` before mutating actions |
-| Terminal | Dracula-like; JetBrains Mono 13px (local woff2); line numbers; token colors |
-| Sobre | Facts from root README (no logo gallery); link buttons |
+| Confirms | `<dialog>` before mutating helper actions |
+| Terminal | Dracula-like; JetBrains Mono 13px (local woff2); line numbers; stdout+stderr merged chronologically |
+| Sobre | Facts from root README; allowlisted external links |
+| License | Full-screen gate before shell (`license-gate.ts`) |
 
 When changing visuals: run skill `--design-system`; read `pages/app-shell.md` first.
 
 ## Privilege / WSL
 
-- **App must run as root** (same as 1.x). Gate: `start.sh` sudo re-exec + `main.ts` `requireRoot()`.
-- When already root, helper skips `pkexec` (direct allowlist script).
-- **Unprivileged helper actions:** `ping` (ICMP) + `dotfiles-*` (apply as `$SUDO_USER` / current user — never root `$HOME`).
-- **External URLs (Sobre):** allowlist in `main.ts`; on WSL open via Windows PowerShell `Start-Process` (`src/open-external.ts`), fallback `cmd start`, then `shell.openExternal`. If all fail, UI copies URL.
-- Electron as root needs `--no-sandbox`. On WSL also `--disable-gpu` + `--disable-dev-shm-usage` (+ `LIBGL_ALWAYS_SOFTWARE=1` in `start.sh`) to avoid DRI3/`MESA: Failed to attach to x11 shm` under WSLg sudo.
-- Native menubar: **Arquivo → Sair** and **Sobre → Sobre o Carcará** (IPC → view Sobre) — see `src/app-menu.ts`.
+- App runs as **root**. When already root, helper skips `pkexec`.
+- **Unprivileged helper actions** (no pkexec): `ping`, `dotfiles-*` (always target real user `$HOME` via `$SUDO_USER`).
+- **External URLs (Sobre):** allowlist in `main.ts`; WSL → PowerShell `Start-Process`, then `cmd start`, then `shell.openExternal`; else copy URL.
+- Electron as root: `--no-sandbox`. WSL: also `--disable-gpu` / `--disable-dev-shm-usage` + `LIBGL_ALWAYS_SOFTWARE=1` (start.sh) to cut DRI3/MESA noise.
+- Native menubar: **Arquivo → Sair**, **Sobre → Sobre o projeto** (IPC → view Sobre).
 
 ## Helper allowlist
 
@@ -79,17 +90,25 @@ When changing visuals: run skill `--design-system`; read `pages/app-shell.md` fi
 
 ## Environment (Zod)
 
-- Example: `carcara-electron/.env.example` → copy to `.env` (gitignored)
-- Schema/load: `src/env.ts` (`dotenv` + **Zod**)
-- Used by Electron `main.ts` (window + root gate) and `scripts/run-helper.ts` (ping host/count → Bash)
+- Example: `carcara-electron/.env.example` → `.env` (gitignored)
+- Schema: `src/env.ts` — Zod 4 + `dotenv`; errors via **`z.prettifyError()`** (not deprecated `.flatten()`)
+- Consumed by `main.ts` (window, root gate) and `run-helper.ts` (ping host/count)
+
+## Dotfiles (2.0)
+
+- View tiles map 1:1 to helper actions → `dotfiles/apply.sh` as `$SUDO_USER`
+- Engine docs: `references/dotfiles.md` + `docs/dotfiles.md`
+- Never write into root’s home
 
 ## Assets
 
-- Images: repo `assets/img/*` → build copies to `dist/renderer/assets/`
+- Images: repo `assets/img/*` → `dist/renderer/assets/`
 - Font: `carcara-electron/assets/fonts/JetBrainsMono-Regular.woff2`
+- License copy: `dist/renderer/license.txt` (IPC prefers live `carcara/app/config/license`)
 - CSP: `default-src 'self'`; `font-src 'self'` (no Google Fonts CDN)
 
 ## Still open
 
 1. Package `.deb` (AppImage optional)
-2. Live smoke-test system + software with pkexec on real desktop / WSLg (owner-approved)
+2. Live smoke-test Software + pkexec on real desktop / WSLg (owner-approved)
+3. See `memory-bank/TODO.md` for 1.x leftovers (`dependences.sh`, i18n, …)

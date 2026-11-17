@@ -29,4 +29,4 @@ Maintain a personal, scriptable **Linux workstation toolkit**: Carcará (interac
 3. **Installer refresh** — backends + thin installers — Wave 2 done.
 4. **Dotfiles install path** — `dotfiles/apply.sh` + `docs/dotfiles.md` — done.
 5. **Dual entrypoint** — root `./start.sh` chooses Electron 2.0 or terminal 1.x — done.
-6. **Carcará 2.0 alpha UI** — modular Electron shell + helper — done (packaging / pkexec smoke open).
+6. **Carcará 2.0 alpha UI** — modular Electron shell + helper + license gate + Dotfiles rail + Zod env — done (packaging / Software+pkexec smoke open).

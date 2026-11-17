@@ -27,9 +27,11 @@
 
 ## Interaction
 
+- **License gate** first (same text as 1.x): checkbox Continuar → Aceitar; Sair quits.
 - Visible focus ring (`--color-ring`); `cursor: pointer` on all controls.
 - Min hit target 44×44px; 8px+ gaps.
 - Confirm mutating actions in an accessible `<dialog>` (not hover-only).
+- Tile hover: teal left bar + primary border (no permanent featured outline).
 - Busy state: disable actions + status “Executando…”.
 - Transitions 150–200ms; honor `prefers-reduced-motion`.
 - SVG icons only (no emoji).
