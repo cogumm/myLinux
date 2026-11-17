@@ -208,6 +208,12 @@ run_with_progress() {
 
 	carcara_log "run_with_progress: $title → $*"
 
+	# Electron / pkexec / headless: keep full logs, no Yad pipe.
+	if [[ -n "${CARCARA_NONINTERACTIVE:-}" ]] || [[ ! -t 1 ]]; then
+		"$@"
+		return $?
+	fi
+
 	if command -v yad >/dev/null 2>&1; then
 		# shellcheck disable=SC2086
 		"$@" 2>&1 | yad --progress \

@@ -1,5 +1,5 @@
 #!/bin/bash
-clear
+[[ -n "${CARCARA_NONINTERACTIVE:-}" ]] || clear
 . app/config/config.sh
 #-------------------------------------------------------------------------------#
 # Data criação: 20 de Setembro de 2017
@@ -9,13 +9,14 @@ clear
 # Telegram: http://t.me/CoGUMm
 # Script: fixSystem
 # Descrição: Corrige dependências e reconfigura pacotes (apt -f / dpkg --configure -a).
-# Variáveis: $configYad : flags Yad; usa run_with_progress / carcara_log de install_backends
+# Variáveis: $configYad ; CARCARA_NONINTERACTIVE=1 (Electron/helper)
 #-------------------------------------------------------------------------------#
+# shellcheck disable=SC2154 # configYad exported by config.sh when sourced
 
 _fix_notify() {
 	local title="$1"
 	local text="$2"
-	if command -v yad >/dev/null 2>&1; then
+	if [[ -z "${CARCARA_NONINTERACTIVE:-}" ]] && command -v yad >/dev/null 2>&1; then
 		# shellcheck disable=SC2086
 		yad --title "$title" --text "$text" $configYad
 	else

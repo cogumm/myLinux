@@ -1,5 +1,5 @@
 #!/bin/bash
-clear
+[[ -n "${CARCARA_NONINTERACTIVE:-}" ]] || clear
 . app/config/config.sh
 #----------------------------------------------------------------------------------------------------#
 # Data criação: 05 de Dezembro de 2015
@@ -9,12 +9,18 @@ clear
 # Telegram: http://t.me/CoGUMm
 # Script: cleanDistro
 # Descrição: Limpeza segura (lixeira, tmp, apt clean/autoclean/autoremove); lock só com confirmação.
-# Variáveis: $SUDO_USER $configYad ; usa run_with_progress / carcara_log de install_backends
+# Variáveis: $SUDO_USER $configYad ; CARCARA_NONINTERACTIVE=1 skips locks/lists (safe path)
 #----------------------------------------------------------------------------------------------------#
+# shellcheck disable=SC2154 # configYad exported by config.sh when sourced
 
 _clean_confirm() {
 	local prompt="$1"
 	local answer
+	# Destructive steps stay opt-in even for Electron — never auto-yes locks/lists.
+	if [[ -n "${CARCARA_NONINTERACTIVE:-}" ]]; then
+		carcara_log "auto-skip (noninteractive): $prompt"
+		return 1
+	fi
 	read -r -p "$prompt [y/N]: " answer
 	[[ "$answer" == [Yy]* ]]
 }
@@ -22,7 +28,7 @@ _clean_confirm() {
 _clean_notify() {
 	local title="$1"
 	local text="$2"
-	if command -v yad >/dev/null 2>&1; then
+	if [[ -z "${CARCARA_NONINTERACTIVE:-}" ]] && command -v yad >/dev/null 2>&1; then
 		# shellcheck disable=SC2086
 		yad --title "$title" --text "$text" $configYad
 	else

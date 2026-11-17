@@ -1,5 +1,5 @@
 #!/bin/bash
-clear
+[[ -n "${CARCARA_NONINTERACTIVE:-}" ]] || clear
 #---------------------------------------------------------------------------#
 # Data criação: 06 de Setembro de 2017
 # Última alteração: 17 de Novembro de 2026
