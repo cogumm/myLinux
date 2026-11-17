@@ -53,6 +53,6 @@ Dotfiles remain a separate, user-space tree.
 
 ## Safety pattern
 
-Destructive operations: announce → confirm → run → report status (terminal log is source of truth).  
-Cleaning home trash uses `$SUDO_USER` when elevated.  
-`CARCARA_NONINTERACTIVE=1`: no Yad; clean skips locks/lists.
+Destructive operations: UI/menu confirm (2.0 dialog / 1.x choosing the item) → run → report status (terminal log is source of truth).  
+`carcara_confirm`: when already **root** or `CARCARA_NONINTERACTIVE=1`, auto-yes (`-y`) — no terminal `[y/N]` (Carcará always elevates via `isRoot`).  
+Cleaning home trash uses `$SUDO_USER` when elevated.

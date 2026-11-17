@@ -34,7 +34,7 @@ Session knowledge dump (17 Nov 2026) lives in:
 
 ## Validated
 
-- Sistema as root (`sudo ./start.sh --electron`): update-distro / fix-system / clean-distro → exit 0 (17 Nov 2026). Noninteractive skips locks/lists as designed; empty trash path is OK.
+- Sistema as root (`sudo ./start.sh --electron`): update-distro / fix-system / clean-distro → exit 0 (17 Nov 2026). `carcara_confirm` auto-yes when root/NI (incl. clean locks/lists); empty trash path is OK.
 
 ## Blockers / notes
 
