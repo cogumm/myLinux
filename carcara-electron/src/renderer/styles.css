@@ -22,7 +22,7 @@
   --font-body: Inter, "Segoe UI", system-ui, sans-serif;
   --font-mono: ui-monospace, "Cascadia Code", "SFMono-Regular", Menlo, Consolas, monospace;
 
-  --rail-w: 220px;
+  --rail-w: 240px;
   --radius: 10px;
   --ease: 180ms ease;
   --focus: 0 0 0 2px var(--color-background), 0 0 0 4px var(--color-ring);
@@ -179,9 +179,11 @@ button:disabled {
 
 .rail__foot {
   margin: 0;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
+  line-height: 1.2;
   color: var(--color-muted-foreground);
   text-align: center;
+  white-space: nowrap;
 }
 
 /* Stage */

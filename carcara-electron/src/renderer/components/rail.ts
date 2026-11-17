@@ -46,7 +46,8 @@ export function createRail(
 
   const foot = document.createElement("p");
   foot.className = "rail__foot";
-  foot.textContent = "Motor 1.x · UI Electron";
+  const year = new Date().getFullYear();
+  foot.textContent = `MIT license 2010 - ${year} @CoGUMm`;
 
   aside.append(createBrand(), nav, foot);
 
