@@ -42,7 +42,7 @@ Policy: apt (or official keyring) → Flatpak → Snap where applicable. Catalog
 
 ## UX principles
 
-- Clear Portuguese menu labels / verbs (Atualizar, Instalar, Corrigir, Limpar, Dotfiles)
+- Menu labels via i18n (`CARCARA_LANG=pt|en`); verbs stay consistent across 1.x/2.0
 - License gate every launch (1.x Zenity / 2.0 license-gate) — same `license` file
 - Root warning + disclaimer (1.x header; 2.0 Sobre + confirms)
 - Prefer confirmations before destructive clean/repair (UI dialog; no terminal y/N when already root)

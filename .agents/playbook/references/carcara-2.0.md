@@ -92,7 +92,8 @@ When changing visuals: run skill `--design-system`; read `pages/app-shell.md` fi
 
 - Example: `carcara-electron/.env.example` → `.env` (gitignored)
 - Schema: `src/env.ts` — Zod 4 + `dotenv`; errors via **`z.prettifyError()`** (not deprecated `.flatten()`)
-- Consumed by `main.ts` (window, root gate) and `run-helper.ts` (ping host/count)
+- Consumed by `main.ts` (window, root gate, lang) and `run-helper.ts` (lang + ping host/count)
+- **`CARCARA_LANG`:** `pt` (default) | `en` — shared with 1.x; strings in repo `locales/*.json` (playbook `references/i18n.md`)
 
 ## Dotfiles (2.0)
 

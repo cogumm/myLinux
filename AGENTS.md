@@ -55,7 +55,7 @@ Act as a **Linux systems analysis & development** specialist:
 - Detect distro via `/etc/os-release` (improve on `old/scripts/checkDistro.sh`); do not hardcode Ubuntu 14.04-era packages (PHP5, MySQL 5.6, dead PPAs).
 - **Never `git commit` or `git push` unless the owner asks in that message.** Do not change `git config`.
 - No secrets in the repo. `dotfiles/git/.gitconfig` may contain empty github token placeholders — keep them empty; never fill real tokens.
-- i18n of menus: Portuguese is historical default; new user-facing strings may stay PT unless asked otherwise.
+- i18n: Portuguese default; English via `CARCARA_LANG=en` — shared `locales/*.json` (see playbook `references/i18n.md`).
 - Read `memory-bank/activeContext.md` + `memory-bank/progress.md` before coding.
 
 ## Known debt (do not paper over)

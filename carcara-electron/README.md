@@ -24,7 +24,7 @@ cd carcara-electron
 cp .env.example .env   # edit as needed
 ```
 
-Validated with **Zod** in `src/env.ts` (loads `.env` via `dotenv`). Notable keys: `CARCARA_TEST_HOST` / `CARCARA_TEST_COUNT`, window size, `CARCARA_REQUIRE_ROOT`, `LIBGL_ALWAYS_SOFTWARE`.
+Validated with **Zod** in `src/env.ts` (loads `.env` via `dotenv`). Notable keys: `CARCARA_LANG` (`pt`|`en`), `CARCARA_TEST_HOST` / `CARCARA_TEST_COUNT`, window size, `CARCARA_REQUIRE_ROOT`, `LIBGL_ALWAYS_SOFTWARE`. Shared strings: repo `locales/*.json` (see playbook `references/i18n.md`).
 
 ## Dev
 

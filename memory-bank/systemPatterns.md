@@ -40,6 +40,7 @@ Dotfiles tree is user-space (`dotfiles/apply.sh`); Carcará menus only **invoke*
 8. **WSL-aware externals** — PowerShell `Start-Process` before Linux `xdg-open`.
 9. **Zod env** — validate in `src/env.ts`; `z.prettifyError` for failures.
 10. **Dotfiles as user** — always `$SUDO_USER` / non-root `$HOME`; never apply as root.
+11. **Shared i18n** — `locales/{pt,en}.json` + `CARCARA_LANG`; 1.x `t` / Zenity IDs; 2.0 renderer `t()` (playbook `references/i18n.md`).
 
 ## Patterns to fix when touching code
 

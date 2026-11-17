@@ -17,10 +17,12 @@
 │  Software    ├────────────────────────────────┤
 │  Dotfiles    │  Activity log + live status    │
 │  Sobre       │                                │
+│  [PT] [EN]   │                                │
 └──────────────┴────────────────────────────────┘
 ```
 
 - Brand (logo + name) is the strongest signal in the first viewport of the rail.
+- Rail footer: compact **PT | EN** language switch (`CARCARA_LANG` default; `localStorage` override).
 - One job per view: Sistema = maintenance; Software = installs; Dotfiles = `$HOME` apply; Sobre = identity.
 - Activity log is always visible (source of truth for apt/flatpak/snap).
 - No marketing “Product Demo + Features” section order from MASTER.

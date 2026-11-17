@@ -14,7 +14,6 @@ Also mirrored under “Still open” in `.agents/playbook/references/carcara-2.0
 | **2.0** | Smoke-test privileged actions with **pkexec** | Real Linux desktop / WSLg (not already-root) |
 | **2.0** | Package `.deb` (AppImage optional) | Packaging only |
 | **1.x** | Live smoke-test Wave 2 installers | Same machine gate as 2.0 Software |
-| **1.x** | i18n (en) menus | Low priority |
 | Skills | `bash-scripting`, `debian-linux-triage` | Install when rewriting that area |
 
 Wave 1–2 engine **done**. Wave 3 **cancelled** (UI is Electron 2.0).
@@ -38,7 +37,7 @@ Wave 1–2 engine **done**. Wave 3 **cancelled** (UI is Electron 2.0).
 - [x] Dotfiles apply helper with `*.bak` backups (`dotfiles/apply.sh`) (17 de Novembro de 2026)
 - [x] Menu 1.x **Dotfiles** → `applyDotfiles.sh` as `$SUDO_USER` (17 de Novembro de 2026)
 - [x] Port Docker from `old/scripts/docker.sh` → modern `development/docker.sh` (+ 1.x/2.0 menus) (17 de Novembro de 2026)
-- [ ] i18n optional (en) for menus — low priority
+- [x] i18n menus pt/en (`locales/*.json`, `CARCARA_LANG`) for 1.x + 2.0 (17 de Novembro de 2026)
 
 ## Carcará 2.0
 

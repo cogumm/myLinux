@@ -14,6 +14,7 @@ Canonical agent how-to for this state:
 | `.agents/playbook/references/carcara-2.0.md` | 2.0 operator + agent how-to (full) |
 | `.agents/playbook/references/carcara.md` | 1.x menus, backends, `carcara_confirm` |
 | `.agents/playbook/references/dotfiles.md` | `apply.sh` + menu wiring |
+| `.agents/playbook/references/i18n.md` | Shared `locales` + `CARCARA_LANG` |
 | `.agents/idea/carcara-2.0-electron.md` | Locked decisions + checklist |
 | `design-system/carcara-2-0/pages/app-shell.md` | Rail / tiles / license / hover rules |
 | `memory-bank/TODO.md` | Still-open inbox |
@@ -24,8 +25,8 @@ Canonical agent how-to for this state:
 
 - `carcara-electron/.env.example` → copy to `.env` (gitignored; `!.env.example` kept).
 - Schema: `src/env.ts` (`dotenv` + **Zod 4**). Use `z.prettifyError()` — **not** deprecated `error.flatten()`.
-- Wired: `main.ts` (window size, `CARCARA_REQUIRE_ROOT`), `scripts/run-helper.ts` (ping host/count → Bash).
-- Keys: `CARCARA_TEST_HOST` / `CARCARA_TEST_COUNT`, window dims, `CARCARA_REQUIRE_ROOT`, `LIBGL_ALWAYS_SOFTWARE`.
+- Wired: `main.ts` (window size, `CARCARA_REQUIRE_ROOT`, lang), `scripts/run-helper.ts` (lang + ping → Bash).
+- Keys: `CARCARA_LANG` (`pt`|`en`), `CARCARA_TEST_HOST` / `CARCARA_TEST_COUNT`, window dims, `CARCARA_REQUIRE_ROOT`, `LIBGL_ALWAYS_SOFTWARE`.
 
 ### UI polish (tiles)
 
@@ -74,7 +75,11 @@ Canonical agent how-to for this state:
 
 1. Package `.deb` (AppImage optional).
 2. Smoke-test Software installers + pkexec on real desktop (owner-requested).
-3. Optional: i18n EN menus.
+
+### i18n (done)
+
+- Shared `locales/{pt,en}.json`; `CARCARA_LANG=pt|en` (1.x `i18n.sh` / 2.0 Zod + renderer).
+- Zenity menus use stable IDs; Electron rail/views/license/native menu use `t()`.
 
 ### Docker port (done)
 

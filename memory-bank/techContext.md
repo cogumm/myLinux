@@ -41,6 +41,8 @@ Last updated: 2026-11-17
 
 - `dotfiles/apply.sh` — non-root apply with `*.bak`
 - `docs/dotfiles.md`
+- `locales/{pt,en}.json` — shared UI i18n (`CARCARA_LANG`)
+- `carcara/app/config/i18n.sh` — Bash `t`
 - `start.sh` — dual entry (+ Bun PATH + WSL GPU)
 - `old/**` (archive)
 - `cleanup-zone-identifiers.sh`
