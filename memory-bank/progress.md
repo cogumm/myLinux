@@ -39,3 +39,5 @@ Append-only log. Do not delete completed history.
 - [x] Sobre: README facts + allowlisted links; WSL openExternal via PowerShell (2026-11-17)
 - [x] Helper bridge: `ping` unprivileged (no pkexec warning); privileged actions keep clear WSL warning (2026-11-17)
 - [x] Session knowledge consolidated: playbook `references/carcara-2.0.md` + memory-bank (active/tech/system/product/TODO) + AGENTS/idea (2026-11-17)
+- [x] Carcará 2.0 exige root como 1.x: `start.sh --electron` via sudo + `requireRoot()` no Electron main (2026-11-17)
+- [x] Live smoke-test Sistema (2.0 as root): update-distro / fix-system / clean-distro all exit 0; NI skips locks/lists (2026-11-17)

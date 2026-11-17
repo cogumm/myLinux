@@ -18,7 +18,7 @@ Ship **Carcará 2.0** as a desktop app with a modern UI using **Electron**.
 | Toolchain | **[Bun](https://bun.sh/docs)** — install, scripts, and Shell (`$`) bridge ([runtime/shell](https://bun.sh/docs/runtime/shell)) |
 | UI kit | **Vanilla** HTML/CSS + TypeScript renderer (no React for first ship) |
 | UI/UX | Skill **`ui-ux-pro-max`** → `design-system/carcara-2-0/` (Flat Design, dark utility) |
-| Privilege | **Allowlisted helper** + `pkexec` via Bun bridge `scripts/run-helper.ts` |
+| Privilege | App runs as **root** (like 1.x `isRoot`); helper allowlist via Bun bridge (pkexec only if somehow non-root) |
 | Packaging | Later: `.deb` first; AppImage optional — not part of the spike |
 | Engine | **Reuse** `carcara/app/config/install_backends.sh` and existing system/app scripts — never reimplement apt/flatpak/snap in the renderer |
 
@@ -140,5 +140,7 @@ flowchart LR
 - [x] Terminal theme (Dracula + JetBrains Mono + line highlight); brand rail polish; Software category rail (17 de Novembro de 2026)
 - [x] Sobre from README + WSL-safe `openExternal`; `ping` unprivileged (no pkexec noise) (17 de Novembro de 2026)
 - [x] Session knowledge consolidated in playbook + memory-bank (17 de Novembro de 2026)
+- [x] Root gate for 2.0 UI + live Sistema smoke-test (update/fix/clean exit 0) (17 de Novembro de 2026)
 - [ ] Package `.deb` (AppImage optional)
+- [ ] Software installer smoke-test via 2.0 UI
 - [x] Document dual entry in root README + `carcara-electron/README.md` (alpha)

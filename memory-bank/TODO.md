@@ -10,7 +10,7 @@ Unscheduled ideas (promote into active work deliberately):
 - [x] Wave 2 — thin installers on backends (17 de Novembro de 2026)
 - [x] Cancel Wave 3 / start Electron 2.0 (17 de Novembro de 2026)
 - [x] Carcará 2.0 alpha UI (modular renderer, helper wiring, Flat Design) (17 de Novembro de 2026)
-- [ ] Continue [`.agents/idea/carcara-2.0-electron.md`](../.agents/idea/carcara-2.0-electron.md) — packaging `.deb` (+ pkexec smoke-test)
+- [ ] Continue [`.agents/idea/carcara-2.0-electron.md`](../.agents/idea/carcara-2.0-electron.md) — packaging `.deb` (+ software install smoke-test)
 
 ## Carcará / scripts (1.x)
 
@@ -27,7 +27,8 @@ Unscheduled ideas (promote into active work deliberately):
 - [x] System + software helper actions wired
 - [x] Dual entry via root `start.sh` + README
 - [x] WSL openExternal + quieter `ping`
-- [ ] Validate privileged actions on desktop / WSLg with pkexec
+- [x] Smoke-test Sistema as root: update / fix / clean → exit 0 (17 de Novembro de 2026)
+- [ ] Smoke-test Software installers (owner-requested)
 - [ ] Package `.deb` for Carcará 2.0
 
 ## Future agent skills (skills.sh) — install when modernizing that area
