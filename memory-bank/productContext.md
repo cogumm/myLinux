@@ -1,6 +1,6 @@
 # Product context — myLinux
 
-Last updated: 2026-11-16
+Last updated: 2026-11-17
 
 ## Users
 
@@ -9,38 +9,44 @@ Secondary: anyone who clones the MIT repo and accepts root risk.
 
 ## Journeys
 
-### A — Maintain system (Carcará)
+### A — Maintain system (Carcará 1.x)
 
-1. Clone repo, `cd carcara`, `sudo bash startApp.sh`
-2. Deps script tries to ensure yad/curl/snap
+1. `./start.sh --terminal` or `cd carcara && sudo bash startApp.sh`
+2. Deps script ensures yad/curl/snap (and optional flatpak)
 3. Main menu: update, install software, fix, clean
 4. Yad shows progress; terminal shows apt detail
 
-### B — Install curated apps
+### B — Maintain / install via Carcará 2.0
 
-1. Main menu → software categories
-2. Social/Utilities menus call per-app scripts
-3. Dev/Productivity menus historically stubbed — scripts already exist on disk
+1. `./start.sh --electron` (needs Bun)
+2. Rail: **Sistema** (update/fix/clean/dry-run/ping) · **Software** (categories + tiles) · **Sobre**
+3. Confirm dialog → helper → activity console (Dracula terminal)
+4. Engine is still 1.x backends; UI never invents package policy
 
-### C — Apply dotfiles
+### C — Install curated apps (either UI)
 
-1. Copy or symlink from `dotfiles/` into `$HOME`
-2. Source aliases from `.bash_aliases`
-3. Optional oh-my-zsh theme setup per README in `.oh-my-zsh/`
+Same catalog: Git, VS Code, Insomnia, Fira Code, Dropbox, Discord, Spotify, Telegram, VLC.  
+Policy: apt → Flatpak → Snap where applicable.
 
-### D — WSL cleanup
+### D — Apply dotfiles
 
-1. Run `./cleanup-zone-identifiers.sh [dir] [--force]`
+1. Copy or symlink from `dotfiles/` into `$HOME` after backup
+2. See `docs/dotfiles.md`
+
+### E — WSL cleanup
+
+1. `./cleanup-zone-identifiers.sh [dir] [--force]`
 2. Removes Windows ADS leftover `*:Zone.Identifier` files
 
 ## UX principles
 
-- Clear Portuguese menu labels
-- Root warning + disclaimer header
+- Clear Portuguese menu labels / verbs (Atualizar, Instalar, Corrigir, Limpar)
+- Root warning + disclaimer (1.x header; 2.0 Sobre + confirms)
 - Prefer confirmations before destructive clean/repair
-- Incomplete features labeled honestly
+- Logs remain source of truth
+- Brand-first rail (logo + Carcará + 2.0 pill)
+- Flat Design tokens from `ui-ux-pro-max` — do not freestyle a new palette
 
 ## Non-goals
 
-- Not a web product, not a payment platform, not multi-tenant SaaS
-- Agents must not invent browser dashboards for this repo
+See `.agents/idea/mylinux.md` and product rules — not a SaaS, not a full distro installer.

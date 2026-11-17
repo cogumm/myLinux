@@ -9,7 +9,8 @@ Unscheduled ideas (promote into active work deliberately):
 - [x] Wave 1 Steps 1–5 — engine complete (17 de Novembro de 2026)
 - [x] Wave 2 — thin installers on backends (17 de Novembro de 2026)
 - [x] Cancel Wave 3 / start Electron 2.0 (17 de Novembro de 2026)
-- [ ] Continue [`.agents/idea/carcara-2.0-electron.md`](../.agents/idea/carcara-2.0-electron.md) — packaging `.deb` (+ smoke-test)
+- [x] Carcará 2.0 alpha UI (modular renderer, helper wiring, Flat Design) (17 de Novembro de 2026)
+- [ ] Continue [`.agents/idea/carcara-2.0-electron.md`](../.agents/idea/carcara-2.0-electron.md) — packaging `.deb` (+ pkexec smoke-test)
 
 ## Carcará / scripts (1.x)
 
@@ -22,10 +23,11 @@ Unscheduled ideas (promote into active work deliberately):
 ## Carcará 2.0
 
 - [x] Plan + scaffold `carcara-electron/` spike (helper + apt dry-run UI)
-- [ ] Validate spike on desktop / WSLg (incl. system actions + pkexec)
-- [x] Helper actions for update / fix / clean
-- [x] Helper actions for software installers + Software UI
+- [x] Modular views/components + ui-ux-pro-max Flat shell
+- [x] System + software helper actions wired
 - [x] Dual entry via root `start.sh` + README
+- [x] WSL openExternal + quieter `ping`
+- [ ] Validate privileged actions on desktop / WSLg with pkexec
 - [ ] Package `.deb` for Carcará 2.0
 
 ## Future agent skills (skills.sh) — install when modernizing that area
@@ -35,6 +37,7 @@ Incremental modernization; do **not** install everything at once. Playbook stays
 | Priority | Skill | Install | When it helps |
 |----------|--------|---------|----------------|
 | Done | `shellcheck-configuration` (`wshobson/agents`) | installed → `.agents/skills/shellcheck-configuration` | Lint/harden Carcará Bash during script rewrites |
+| Done | `ui-ux-pro-max` | installed → `.agents/skills/ui-ux-pro-max` | Carcará 2.0 design-system / Flat Design |
 | Next | `bash-scripting` (`sickn33/agentic-awesome-skills`) | `npx skills add sickn33/agentic-awesome-skills@bash-scripting` | Defensive scripting patterns when rewriting installers / menus |
 | Later | `debian-linux-triage` (`github/awesome-copilot`) | `npx skills add github/awesome-copilot@debian-linux-triage` | Safer apt/dpkg/systemd flows in `updateDistro` / `fixSystem` / `cleanDistro` |
 

@@ -2,7 +2,7 @@
 
 Status: **in progress** (plan locked + spike started)  
 Saved: 16 de Novembro de 2026  
-Updated: 17 de Novembro de 2026  
+Updated: 17 de Novembro de 2026 (session knowledge → playbook `carcara-2.0.md` + memory-bank)  
 Related: [mylinux.md](mylinux.md) · [carcara-modern-install.md](carcara-modern-install.md) (1.x engine — complete)
 
 ## Intent
@@ -137,5 +137,8 @@ flowchart LR
 - [x] Renderer modular: `views/{sistema,software,sobre}.ts` + reusable `components/` (Bun IIFE bundle) — 17 de Novembro de 2026
 - [x] Port system actions (update / fix / clean) through helper → 1.x scripts (17 de Novembro de 2026)
 - [x] Port software categories / installers through helper (17 de Novembro de 2026)
+- [x] Terminal theme (Dracula + JetBrains Mono + line highlight); brand rail polish; Software category rail (17 de Novembro de 2026)
+- [x] Sobre from README + WSL-safe `openExternal`; `ping` unprivileged (no pkexec noise) (17 de Novembro de 2026)
+- [x] Session knowledge consolidated in playbook + memory-bank (17 de Novembro de 2026)
 - [ ] Package `.deb` (AppImage optional)
 - [x] Document dual entry in root README + `carcara-electron/README.md` (alpha)

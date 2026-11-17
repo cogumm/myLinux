@@ -14,7 +14,8 @@ description: >-
 1. Read `AGENTS.md`.
 2. Read all of `memory-bank/` (at least `activeContext.md` + `progress.md` + `projectbrief.md`).
 3. Read `.agents/idea/mylinux.md` if scope is unclear.
-4. For TUI work, read `design-system/carcara/MASTER.md`.
+4. For 1.x TUI work, read `design-system/carcara/MASTER.md`.
+5. For 2.0 Electron UI, read `design-system/carcara-2-0/pages/app-shell.md` (then `MASTER.md`) and `references/carcara-2.0.md`.
 
 ## References
 
@@ -23,7 +24,8 @@ description: >-
 | `references/stack.md` | Runtime, tools, entrypoints |
 | `references/product.md` | Scope and non-goals |
 | `references/code-organization.md` | Where scripts live |
-| `references/carcara.md` | Menus, config, installers |
+| `references/carcara.md` | 1.x menus, config, installers |
+| `references/carcara-2.0.md` | Electron UI, Bun, helper, WSL, renderer modules |
 | `references/dotfiles.md` | Aliases, zsh, git, Hyper |
 | `references/legacy.md` | What `old/` means |
 

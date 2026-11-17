@@ -3,7 +3,8 @@
 > Overrides `MASTER.md` for the Electron desktop utility (not a marketing landing).
 
 **Style:** Flat Design · Dark · Tokens in `tokens.css`  
-**Skill:** `ui-ux-pro-max` (regenerated 17 de Novembro de 2026)
+**Skill:** `ui-ux-pro-max` (regenerated 17 de Novembro de 2026)  
+**Agent ops:** `.agents/playbook/references/carcara-2.0.md`
 
 ## Layout
 

@@ -1,6 +1,6 @@
 # Project brief — myLinux
 
-Last updated: 2026-11-16
+Last updated: 2026-11-17
 
 ## Mission
 
@@ -8,7 +8,8 @@ Maintain a personal, scriptable **Linux workstation toolkit**: Carcará (interac
 
 ## In scope
 
-- Bash + Zenity/Yad installer UX (`carcara/`)
+- Bash + Zenity/Yad installer UX (`carcara/`) — **engine + CLI/fallback**
+- Electron + Bun desktop UI (`carcara-electron/`) — **Carcará 2.0 product UI**
 - System update / fix / clean scripts
 - Curated software installers (dev, social, utilities, productivity)
 - Dotfiles for Bash/Zsh/git/Hyper
@@ -23,8 +24,9 @@ Maintain a personal, scriptable **Linux workstation toolkit**: Carcará (interac
 
 ## Phases (modernization)
 
-1. **Agent docs** — AGENTS/memory-bank/rules describe myLinux (this wave).
-2. **Carcará repair** — deps check, menu wiring, config source paths.
-3. **Installer refresh** — current packages, idempotent installs.
-4. **Dotfiles install path** — documented, non-destructive apply.
-5. **Dual entrypoint** — root `./start.sh` chooses Electron 2.0 or terminal 1.x (`startApp.sh`).
+1. **Agent docs** — AGENTS/memory-bank/rules describe myLinux — done.
+2. **Carcará repair** — deps check, menu wiring, config source paths — Wave 1 done.
+3. **Installer refresh** — backends + thin installers — Wave 2 done.
+4. **Dotfiles install path** — documented, non-destructive apply — open.
+5. **Dual entrypoint** — root `./start.sh` chooses Electron 2.0 or terminal 1.x — done.
+6. **Carcará 2.0 alpha UI** — modular Electron shell + helper — done (packaging / pkexec smoke open).

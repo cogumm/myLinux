@@ -34,3 +34,8 @@ Append-only log. Do not delete completed history.
 - [x] Images for 1.x + 2.0 live under repo `assets/img/` (no copy under `carcara/app/assets`) (2026-11-17)
 - [x] Carcará 2.0 UI rebuilt from scratch with `ui-ux-pro-max` (Flat tokens, rail/tiles/dialog, brand logo_moderno_final; design-system + renderer) (2026-11-17)
 - [x] Carcará 2.0 renderer modularizado: views Sistema/Software/Sobre + components reutilizáveis; Bun bundle IIFE (2026-11-17)
+- [x] Terminal Atividade: Dracula colors + JetBrains Mono (vendored) + line numbers/highlight (2026-11-17)
+- [x] Brand rail polish (logo hero, 2.0 pill beside name, MIT footer); Software category nav-list (2026-11-17)
+- [x] Sobre: README facts + allowlisted links; WSL openExternal via PowerShell (2026-11-17)
+- [x] Helper bridge: `ping` unprivileged (no pkexec warning); privileged actions keep clear WSL warning (2026-11-17)
+- [x] Session knowledge consolidated: playbook `references/carcara-2.0.md` + memory-bank (active/tech/system/product/TODO) + AGENTS/idea (2026-11-17)

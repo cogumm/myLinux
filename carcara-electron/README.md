@@ -49,4 +49,5 @@ From the **repo root**:
 | 1.x CLI/TUI | `cd carcara && sudo bash startApp.sh` |
 | 2.0 UI | `cd carcara-electron && bun run dev` |
 
-Plan: `.agents/idea/carcara-2.0-electron.md`
+Plan: `.agents/idea/carcara-2.0-electron.md`  
+Agent how-to: `.agents/playbook/references/carcara-2.0.md`

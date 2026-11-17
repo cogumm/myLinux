@@ -62,15 +62,18 @@ Act as a **Linux systems analysis & development** specialist:
 
 - Legacy `old/scripts/*.sh` install obsolete stacks and unsafe defaults (`chmod 777 www`, hardcoded passwords)
 - Wave 1 + Wave 2 done (1.x engine). Wave 3 cancelled — product UI is Electron 2.0
-- Active: `carcara-electron/` spike (helper + apt dry-run); see `.agents/idea/carcara-2.0-electron.md`
+- Active: Carcará 2.0 alpha UI (`carcara-electron/`); see `.agents/idea/carcara-2.0-electron.md` + playbook `references/carcara-2.0.md`
 - Several 1.x menus still say “Ainda em desenvolvimento” — only “Limpeza de memória” / “programas diversos” stubs remain in `menuGeral`
-- Wave 2 installers not yet smoke-tested live (needs owner-requested apt/flatpak/snap run)
+- Wave 2 installers / 2.0 privileged actions not fully smoke-tested live (needs owner-requested apt/flatpak/snap + pkexec)
+- WSL: no `pkexec` → privileged helper runs unelevated (apt locks fail); use real desktop for elevation tests
 
 ## Project guidance
 
 | Doc | When |
 |------|------|
 | `.agents/playbook/` | **Default** for every task in this repo |
+| `.agents/playbook/references/carcara-2.0.md` | Electron 2.0 UI, Bun, helper, WSL |
+| `.agents/skills/ui-ux-pro-max/` | 2.0 visual direction / design-system |
 | `.agents/skills/shellcheck-configuration/` | When linting or hardening Bash under `carcara/` |
 | `.agents/skills/` (other) | Only if installed and relevant; backlog in `memory-bank/TODO.md` |
 

@@ -80,11 +80,12 @@ All software category menus (`development`, `productivity`, `social`, `utilities
 
 ## Carcará 2.0 (Electron)
 
-Active UI track: sibling app `carcara-electron/` (Electron + **Bun**) — see `.agents/idea/carcara-2.0-electron.md`.  
+Full reference: **`references/carcara-2.0.md`**.  
+Plan: `.agents/idea/carcara-2.0-electron.md`.  
 1.x remains CLI/fallback (`startApp.sh`). Chooser: `./start.sh`.  
-Helper allowlist: system + `install-{vlc,discord,spotify,telegram,git,vscode,insomnia,firacode,dropbox}` (`CARCARA_NONINTERACTIVE=1`). Software UI mirrors 1.x categories.
+Alpha UI: modular views/components, Flat Design, helper allowlist + `CARCARA_NONINTERACTIVE=1`.
 
 ## Fix priorities (remaining)
 
-1. Continue Electron 2.0 (system actions → software installers → packaging).
-2. Live install smoke-test on a disposable machine (owner-requested).
+1. Package Carcará 2.0 `.deb` (+ optional AppImage).
+2. Live install / pkexec smoke-test on a disposable machine (owner-requested).
