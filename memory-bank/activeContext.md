@@ -24,6 +24,7 @@ Session knowledge dump (17 Nov 2026) lives in:
 - **WSL:** `openExternal` → PowerShell `Start-Process`; `ping` does not warn about missing `pkexec`.
 - **Root required for 2.0 UI** (same as 1.x): `sudo ./start.sh --electron` + `requireRoot()` in Electron main.
 - **Env (Zod):** `carcara-electron/.env.example` → `.env`; schema in `src/env.ts` (window, root gate, ping host/count).
+- **Dotfiles menus:** 1.x `menuGeral` + 2.0 rail; both call `dotfiles/apply.sh` as `$SUDO_USER`.
 - **Images** only under repo `assets/img/` (shared 1.x/2.0).
 
 ## Next useful engineering work

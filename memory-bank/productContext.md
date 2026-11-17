@@ -19,7 +19,7 @@ Secondary: anyone who clones the MIT repo and accepts root risk.
 ### B — Maintain / install via Carcará 2.0
 
 1. `./start.sh --electron` (needs Bun)
-2. Rail: **Sistema** (update/fix/clean/test connection) · **Software** (categories + tiles) · **Sobre**
+2. Rail: **Sistema** · **Software** · **Dotfiles** · **Sobre**
 3. Confirm dialog → helper → activity console (Dracula terminal)
 4. Engine is still 1.x backends; UI never invents package policy
 
@@ -30,8 +30,8 @@ Policy: apt → Flatpak → Snap where applicable.
 
 ### D — Apply dotfiles
 
-1. `cd dotfiles && ./apply.sh --dry-run --all` then `./apply.sh --aliases` (or `--all`)
-2. Backups as `*.bak`; never run as root — see `docs/dotfiles.md`
+1. Carcará 1.x menu **Dotfiles** or 2.0 rail **Dotfiles**, or CLI `cd dotfiles && ./apply.sh --dry-run --all`
+2. Backups as `*.bak`; always as `$SUDO_USER` / your user — see `docs/dotfiles.md`
 
 ### E — WSL cleanup
 

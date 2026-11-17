@@ -66,7 +66,7 @@ When changing visuals: run skill `--design-system`; read `pages/app-shell.md` fi
 
 - **App must run as root** (same as 1.x). Gate: `start.sh` sudo re-exec + `main.ts` `requireRoot()`.
 - When already root, helper skips `pkexec` (direct allowlist script).
-- **Unprivileged helper action:** `ping` (ICMP) — no pkexec warning if somehow run as non-root via `bun run helper`.
+- **Unprivileged helper actions:** `ping` (ICMP) + `dotfiles-*` (apply as `$SUDO_USER` / current user — never root `$HOME`).
 - **External URLs (Sobre):** allowlist in `main.ts`; on WSL open via Windows PowerShell `Start-Process` (`src/open-external.ts`), fallback `cmd start`, then `shell.openExternal`. If all fail, UI copies URL.
 - Electron as root needs `--no-sandbox`. On WSL also `--disable-gpu` + `--disable-dev-shm-usage` (+ `LIBGL_ALWAYS_SOFTWARE=1` in `start.sh`) to avoid DRI3/`MESA: Failed to attach to x11 shm` under WSLg sudo.
 - Native menubar: **Arquivo → Sair** and **Sobre → Sobre o Carcará** (IPC → view Sobre) — see `src/app-menu.ts`.
@@ -74,6 +74,7 @@ When changing visuals: run skill `--design-system`; read `pages/app-shell.md` fi
 ## Helper allowlist
 
 `ping` · `apt-dry-run` · `update-distro` · `fix-system` · `clean-distro` ·  
+`dotfiles-{dry-run,aliases,all,git,hyper,theme,bashrc}` ·  
 `install-{vlc,discord,spotify,telegram,git,vscode,insomnia,firacode,dropbox}`
 
 ## Environment (Zod)

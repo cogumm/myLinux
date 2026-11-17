@@ -15,12 +15,13 @@
 │              │  Primary content (one job)     │
 │  Sistema     │  action tiles / installers     │
 │  Software    ├────────────────────────────────┤
-│  Sobre       │  Activity log + live status    │
+│  Dotfiles    │  Activity log + live status    │
+│  Sobre       │                                │
 └──────────────┴────────────────────────────────┘
 ```
 
 - Brand (logo + name) is the strongest signal in the first viewport of the rail.
-- One job per view: Sistema = maintenance; Software = installs; Sobre = identity.
+- One job per view: Sistema = maintenance; Software = installs; Dotfiles = `$HOME` apply; Sobre = identity.
 - Activity log is always visible (source of truth for apt/flatpak/snap).
 - No marketing “Product Demo + Features” section order from MASTER.
 

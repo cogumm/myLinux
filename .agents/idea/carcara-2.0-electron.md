@@ -37,7 +37,7 @@ Ship **Carcará 2.0** as a desktop app with a modern UI using **Electron**.
 | Actions | Update / repair / clean / install curated apps (same categories as 1.x) |
 | Install engine | Invoke 1.x scripts/backends through `helper/carcara-helper.sh` |
 | Privilege | Explicit elevation per dangerous action; stream logs into the UI |
-| Dotfiles | Optional later tab — not in spike |
+| Dotfiles | Rail view → helper `dotfiles-*` → `dotfiles/apply.sh` as `$SUDO_USER` |
 | WSL | Detect limited GUI/polkit; show CLI fallback hints |
 
 ## Stack
@@ -142,6 +142,7 @@ flowchart LR
 - [x] Session knowledge consolidated in playbook + memory-bank (17 de Novembro de 2026)
 - [x] Root gate for 2.0 UI + live Sistema smoke-test (update/fix/clean exit 0) (17 de Novembro de 2026)
 - [x] Env: `.env.example` + Zod/`dotenv` (`src/env.ts`) wired to main + helper (17 de Novembro de 2026)
+- [x] Dotfiles rail + helper `dotfiles-*` → `apply.sh` as `$SUDO_USER` (17 de Novembro de 2026)
 - [ ] Package `.deb` (AppImage optional)
 - [ ] Software installer smoke-test via 2.0 UI
 - [x] Document dual entry in root README + `carcara-electron/README.md` (alpha)

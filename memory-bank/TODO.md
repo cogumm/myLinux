@@ -13,7 +13,6 @@ Also mirrored under “Still open” in `.agents/playbook/references/carcara-2.0
 | **2.0** | Smoke-test Software installers via UI | Owner-requested apt/flatpak/snap |
 | **2.0** | Smoke-test privileged actions with **pkexec** | Real Linux desktop / WSLg (not already-root) |
 | **2.0** | Package `.deb` (AppImage optional) | Packaging only |
-| **2.0** | Optional Dotfiles tab | Explicitly out of spike; later |
 | **1.x** | Live smoke-test Wave 2 installers | Same machine gate as 2.0 Software |
 | **1.x** | `dependences.sh` debt | Still fragile; do not paper over |
 | **1.x** | Port from `old/` only if needed | e.g. docker helper refresh |
@@ -37,6 +36,7 @@ Wave 1–2 engine **done**. Wave 3 **cancelled** (UI is Electron 2.0).
 - [ ] Live smoke-test of Wave 2 installers (owner-requested machine)
 - [ ] Harden / rewrite `dependences.sh` (known debt in `AGENTS.md`)
 - [x] Dotfiles apply helper with `*.bak` backups (`dotfiles/apply.sh`) (17 de Novembro de 2026)
+- [x] Menu 1.x **Dotfiles** → `applyDotfiles.sh` as `$SUDO_USER` (17 de Novembro de 2026)
 - [ ] Replace dead patterns from `old/` only when needed (docker helper refresh?)
 - [ ] i18n optional (en) for menus — low priority
 
@@ -49,10 +49,10 @@ Wave 1–2 engine **done**. Wave 3 **cancelled** (UI is Electron 2.0).
 - [x] WSL openExternal + quieter `ping`
 - [x] Env: `.env.example` + Zod/`dotenv` (`src/env.ts`)
 - [x] Smoke-test Sistema as root (sudo+Bun PATH): ping / update / fix / clean → exit 0 (17 de Novembro de 2026)
+- [x] Dotfiles rail + helper `dotfiles-*` (unprivileged / as `$SUDO_USER`) (17 de Novembro de 2026)
 - [ ] Smoke-test Software installers (owner-requested)
 - [ ] Smoke-test with **pkexec** on real desktop / WSLg (unelevated user → elevates)
 - [ ] Package `.deb` for Carcará 2.0 (AppImage optional)
-- [ ] Optional later: Dotfiles tab in 2.0 UI (not in spike)
 
 ## Future agent skills (skills.sh) — install when modernizing that area
 

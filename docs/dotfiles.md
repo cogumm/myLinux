@@ -23,6 +23,11 @@ cd dotfiles
 ./apply.sh --bashrc           # opt-in: replaces ~/.bashrc after .bak
 ```
 
+### From Carcará menus
+
+- **1.x:** menu principal → **Dotfiles** → submenu (roda `apply.sh` como `$SUDO_USER`)
+- **2.0:** rail **Dotfiles** → tiles (helper `dotfiles-*`, unprivileged / `$SUDO_USER`)
+
 | Flag | What it installs |
 |------|------------------|
 | `--aliases` | `~/.bash_aliases`, `~/.aliases/*` |

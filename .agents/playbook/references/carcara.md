@@ -2,7 +2,8 @@
 
 ## Flow
 
-`startApp.sh` → `config.sh` (loads backends) → `dependences` → Zenity license → `menuGeral.sh` loop.
+`startApp.sh` → `config.sh` (loads backends) → `dependences` → Zenity license → `menuGeral.sh` loop.  
+Main menu: Atualizar · Instalar · Correção · Limpeza · **Dotfiles** · Sair.
 
 Main options (trimmed 17 Nov 2026): “Atualizar sistema” · “Instalar programas” → `menuSof` · “Correção do sistema” · “Limpeza do sistema” · “Sair”.  
 (Removed stubs: “programas diversos”, “Limpeza de memória”.)
@@ -62,6 +63,7 @@ snap_install code --classic
 - `updateDistro.sh` — `carcara_confirm` + `apt-get update|upgrade|full-upgrade` via `run_with_progress`.
 - `fixSystem.sh` — `apt-get -f install` + `dpkg --configure -a`.
 - `cleanDistro.sh` — trash/`/var/tmp`/clean/autoclean/autoremove; locks & apt lists via `carcara_confirm`.
+- `applyDotfiles.sh` — Zenity submenu → `dotfiles/apply.sh` as `$SUDO_USER` (never root `$HOME`).
 - `carcara_confirm` (in `install_backends.sh`): **root** or `CARCARA_NONINTERACTIVE=1` → auto-yes (no terminal `[y/N]`).
 
 ## Menus (Wave 1 Step 4 — done)
