@@ -12,7 +12,7 @@ type Fact = { label: string; value: string };
 const FACTS: Fact[] = [
   { label: "Produto", value: "Carcará 2.0 — Electron + Bun sobre o motor Bash 1.x" },
   { label: "Alvo",    value: "Ubuntu, Debian, Linux Mint (apt), x86_64" },
-  { label: "Entrada", value: "./start.sh  ·  --electron | --terminal" },
+  { label: "Entrada", value: "sudo ./start.sh --electron | --terminal" },
   { label: "Autor",   value: "Gabriel F. Vilar (CoGUMm)" },
   { label: "Licença", value: "MIT · Copyright (c) 2010 CoGUMm" },
   { label: "Repo",    value: "github.com/cogumm/myLinux" },
