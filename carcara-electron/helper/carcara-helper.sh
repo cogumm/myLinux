@@ -19,10 +19,37 @@ CARCARA_ROOT="${REPO_ROOT}/carcara"
 
 usage() {
 	echo "usage: carcara-helper.sh <action>" >&2
-	echo "system:  ping | apt-dry-run | update-distro | fix-system | clean-distro" >&2
-	echo "install: install-vlc | install-discord | install-spotify | install-telegram |" >&2
-	echo "         install-git | install-vscode | install-insomnia | install-firacode |" >&2
-	echo "         install-dropbox" >&2
+	echo "system:   ping | apt-dry-run | update-distro | fix-system | clean-distro" >&2
+	echo "dotfiles: dotfiles-dry-run | dotfiles-aliases | dotfiles-all | dotfiles-git |" >&2
+	echo "          dotfiles-hyper | dotfiles-theme | dotfiles-bashrc" >&2
+	echo "install:  install-vlc | install-discord | install-spotify | install-telegram |" >&2
+	echo "          install-git | install-vscode | install-insomnia | install-firacode |" >&2
+	echo "          install-dropbox" >&2
+}
+
+# Run repo dotfiles/apply.sh as the real desktop user (never as root home).
+_run_dotfiles_apply() {
+	local apply="${REPO_ROOT}/dotfiles/apply.sh"
+	if [[ ! -f "$apply" ]]; then
+		echo "[carcara-helper:error] missing $apply" >&2
+		return 1
+	fi
+	# Prefer SUDO_USER / pkexec caller when helper is elevated.
+	if [[ -z "${SUDO_USER:-}" && -n "${PKEXEC_UID:-}" ]]; then
+		SUDO_USER="$(getent passwd "${PKEXEC_UID}" | cut -d: -f1 || true)"
+		export SUDO_USER
+	fi
+	if [[ "$(id -u)" -eq 0 ]]; then
+		if [[ -z "${SUDO_USER:-}" || "${SUDO_USER}" == "root" ]]; then
+			echo "[carcara-helper:error] SUDO_USER ausente — dotfiles precisa do usuário real" >&2
+			return 1
+		fi
+		echo "[carcara-helper] dotfiles as ${SUDO_USER}: apply.sh $*"
+		sudo -u "${SUDO_USER}" -H bash "$apply" "$@"
+		return $?
+	fi
+	echo "[carcara-helper] dotfiles: apply.sh $*"
+	bash "$apply" "$@"
 }
 
 _run_carcara_script() {
@@ -68,6 +95,35 @@ case "$action" in
 		;;
 	clean-distro)
 		_run_carcara_script "app/scripts/system/cleanDistro.sh"
+		exit $?
+		;;
+	# --- dotfiles (user home; unprivileged) ---
+	dotfiles-dry-run)
+		_run_dotfiles_apply --dry-run --all
+		exit $?
+		;;
+	dotfiles-aliases)
+		_run_dotfiles_apply --aliases
+		exit $?
+		;;
+	dotfiles-all)
+		_run_dotfiles_apply --all
+		exit $?
+		;;
+	dotfiles-git)
+		_run_dotfiles_apply --git
+		exit $?
+		;;
+	dotfiles-hyper)
+		_run_dotfiles_apply --hyper
+		exit $?
+		;;
+	dotfiles-theme)
+		_run_dotfiles_apply --theme
+		exit $?
+		;;
+	dotfiles-bashrc)
+		_run_dotfiles_apply --bashrc
 		exit $?
 		;;
 	# --- software (Wave 2 thin installers) ---

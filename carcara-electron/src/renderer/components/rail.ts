@@ -12,6 +12,7 @@ export type RailItem = {
 const DEFAULT_ITEMS: RailItem[] = [
   { id: "sistema", label: "Sistema", icon: "sistema" },
   { id: "software", label: "Software", icon: "software" },
+  { id: "dotfiles", label: "Dotfiles", icon: "dotfiles" },
   { id: "sobre", label: "Sobre", icon: "sobre" },
 ];
 

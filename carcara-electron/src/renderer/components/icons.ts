@@ -11,6 +11,10 @@ export const icons = {
     svg(
       `<rect x="4" y="5" width="16" height="14" rx="2" /><path stroke-linecap="round" d="M8 9h8M8 13h5" />`,
     ),
+  dotfiles: () =>
+    svg(
+      `<path stroke-linecap="round" stroke-linejoin="round" d="M4 20h16M6 20V9l6-5 6 5v11M10 20v-6h4v6" />`,
+    ),
   sobre: () =>
     svg(
       `<circle cx="12" cy="12" r="8" /><path stroke-linecap="round" d="M12 11v5M12 8h.01" />`,

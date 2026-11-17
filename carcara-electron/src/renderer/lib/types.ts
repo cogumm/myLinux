@@ -14,7 +14,7 @@ export type CarcaraApi = {
 
 export type StatusKind = "idle" | "busy" | "ok" | "err";
 
-export type ViewId = "sistema" | "software" | "sobre";
+export type ViewId = "sistema" | "software" | "dotfiles" | "sobre";
 
 export type ViewMeta = {
   eyebrow: string;

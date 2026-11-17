@@ -12,11 +12,12 @@
 #----------------------------------------------------------------------------------------------------#
 
 while true; do
-	menu=$(zenity --width=330 --height=420 --list --column "Escolha uma das opções" --title="Carcará" \
+	menu=$(zenity --width=330 --height=460 --list --column "Escolha uma das opções" --title="Carcará" \
 			"Atualizar sistema" \
 			"Instalar programas" \
 			"Correção do sistema" \
 			"Limpeza do sistema" \
+			"Dotfiles" \
 			"Sair" )
 	case "$menu" in
 		"Atualizar sistema" )
@@ -30,6 +31,9 @@ while true; do
 			;;
 		"Correção do sistema" )
 			bash "$dirSys/fixSystem.sh"
+			;;
+		"Dotfiles" )
+			bash "$dirSys/applyDotfiles.sh"
 			;;
 		* )
 			# shellcheck disable=SC2086

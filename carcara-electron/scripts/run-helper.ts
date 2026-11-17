@@ -19,7 +19,16 @@ if (!/^[a-z][a-z0-9-]*$/.test(action)) {
 }
 
 /** Actions that do not need root / pkexec. */
-const UNPRIVILEGED = new Set(["ping"]);
+const UNPRIVILEGED = new Set([
+  "ping",
+  "dotfiles-dry-run",
+  "dotfiles-aliases",
+  "dotfiles-all",
+  "dotfiles-git",
+  "dotfiles-hyper",
+  "dotfiles-theme",
+  "dotfiles-bashrc",
+]);
 
 const helper = path.join(import.meta.dir, "..", "helper", "carcara-helper.sh");
 const uid = typeof process.getuid === "function" ? process.getuid() : -1;
