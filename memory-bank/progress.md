@@ -78,3 +78,4 @@ Append-only log. Do not delete completed history.
 - [x] Owner live `--live-core` smoke passed (`sudo env "PATH=$PATH" bun run smoke:software -- --live-core`) (2026-11-17)
 - [x] Passwordless smoke elevation: `smoke-elevated.sh` + `/etc/sudoers.d/carcara-smoke`; `--live-extended` set; prefer over pkexec on WSL (2026-11-17)
 - [x] Docs hygiene for **v2.0.2**: TODO inbox empty, activeContext/playbook/AGENTS/release notes cleared of stale “Still open” (2026-11-17)
+- [ ] **v2.0.2** filed: Electron/`bun run dev` must not run as root — `sudo ./start.sh --electron` X11/D-Bus/GLES fail on native Linux (yavin); elevate only via helper (2026-11-17)

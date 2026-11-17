@@ -4,17 +4,18 @@ Last updated: 2026-11-17
 
 ## Current focus
 
-**Carcará 2.0.1 closed** — ready for **v2.0.2** work when scoped in `memory-bank/TODO.md`.
+**v2.0.1 closed.** First **v2.0.2** item scoped: Electron must run as the desktop user (not root).
 
 | Surface | State |
 |---------|--------|
-| **2.0** (`carcara-electron/`, package **`2.0.1`**) | Usable alpha: UI, helper, license, Dotfiles, i18n, Software catalog, smoke |
+| **2.0** (`carcara-electron/`, package **`2.0.1`**) | Usable alpha; `sudo ./start.sh --electron` broken on native Linux GUI (yavin) |
 | **1.x** (`carcara/`) | Install/maintenance **engine** + CLI/fallback |
 | **Packaging** | `.deb` + AppImage; GHA `release-deb.yml` on Release / `workflow_dispatch` |
 | **Default branch** | `main` |
 | **Smoke** | `smoke:software` + `smoke:elevated` (after one-time `smoke:nopasswd-install`) |
 
-Next release: bump version → `docs/releases/2.0.2.md` → tag `v2.0.2` (see `systemPatterns` #16).
+**Next (2.0.2):** stop elevating the Electron process in `start.sh`; privilege only via helper/pkexec. Detail: `memory-bank/TODO.md`.  
+Release when ready: bump version → `docs/releases/2.0.2.md` → tag `v2.0.2`.
 
 ## Canonical agent how-to
 
@@ -50,6 +51,7 @@ Next release: bump version → `docs/releases/2.0.2.md` → tag `v2.0.2` (see `s
 
 - Already-root → helper skips `pkexec` (expected). Prefer `smoke:elevated` on WSL.
 - Never bare `sudo bun` — use `sudo env "PATH=$PATH" bun …` or `smoke:elevated`.
+- **Do not** launch Electron as root on native Linux — X11 auth / GLES / D-Bus fail (filed under v2.0.2).
 - Bash i18n flatten needs **python3**.
 - `electron-builder.yml` stays under `carcara-electron/` (not `.github/workflows/`).
 - FPM: avoid `${LetterOnly}` macros in afterInstall scripts.
