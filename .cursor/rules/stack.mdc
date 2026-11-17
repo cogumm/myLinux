@@ -14,6 +14,7 @@ Do not swap this stack without a strong technical reason and owner approval.
 - **Config hub (1.x):** `carcara/app/config/config.sh` — source this; do not duplicate `isRoot` / Yad flags in every script. Install API: `install_backends.sh`.
 - **Dotfiles:** plain files under `dotfiles/` (aliases, bashrc, oh-my-zsh themes, git, Hyper). No Ansible/Nix requirement unless the owner asks.
 - **Legacy:** `old/` is archive (dialog + ancient Ubuntu). New 1.x work lands in `carcara/` or `dotfiles/`; 2.0 UI in `carcara-electron/`.
+- **Git default branch:** `main` (bootstrap / raw GitHub URLs use `main`, not `master`).
 - **WSL:** supported for maintenance helpers (`cleanup-zone-identifiers.sh`); do not assume systemd or full desktop on every host.
 - **Shellcheck** mindset: quote expansions, check commands with `command -v`, avoid `eval`.
 

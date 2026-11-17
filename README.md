@@ -11,7 +11,7 @@
 <p align="center">
   <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/cogumm/mylinux?color=%2304D361">
   <img alt="Repository size" src="https://img.shields.io/github/repo-size/cogumm/mylinux">
-  <a href="https://github.com/cogumm/mylinux/commits/master">
+  <a href="https://github.com/cogumm/mylinux/commits/main">
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/cogumm/mylinux">
   </a>
   <a href="#memo-license">
@@ -74,10 +74,10 @@ git config --global user.email 'you@example.com'
 Clones into `~/myLinux` (or `$MYLINUX_DIR`) if needed, then opens the chooser:
 
 ```bash
-sudo curl -L https://raw.githubusercontent.com/cogumm/myLinux/master/start.sh | bash
+sudo curl -L https://raw.githubusercontent.com/cogumm/myLinux/main/start.sh | bash
 ```
 
-Requires `git`. The published `master` script clones/updates `~/myLinux` (override with `MYLINUX_DIR`) and reopens the menu (drops back to your user if started with `sudo`). Review remote scripts before piping to bash; prefer a local clone when you can.
+Requires `git`. The published `main` script clones/updates `~/myLinux` (override with `MYLINUX_DIR`) and reopens the menu (drops back to your user if started with `sudo`). Review remote scripts before piping to bash; prefer a local clone when you can.
 
 ### Carcará (choose UI)
 

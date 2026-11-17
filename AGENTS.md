@@ -26,7 +26,7 @@ Playbook: `.agents/playbook/SKILL.md`
 | `.cursor/rules/` | Cursor rules adapter (points at `.agents/`) |
 | `.claude/rules/` | Claude Code rules (same policies as `.cursor/rules/`) |
 
-Root entry: `./start.sh` (choose Electron vs terminal). Optional bootstrap: `curl …/master/start.sh | bash` (clones then re-execs; owner-requested UX). Direct: `cd carcara && sudo bash startApp.sh` or `cd carcara-electron && bun run dev`.
+Root entry: `./start.sh` (choose Electron vs terminal). Optional bootstrap: `curl …/main/start.sh | bash` (clones then re-execs; owner-requested UX). Direct: `cd carcara && sudo bash startApp.sh` or `cd carcara-electron && bun run dev`. Default git branch: **`main`**.
 
 ## Target environment
 

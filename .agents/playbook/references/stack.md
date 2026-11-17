@@ -27,6 +27,7 @@
 
 ## Shared
 
+- **Default branch:** `main` (bootstrap `MYLINUX_REPO_BRANCH` / raw.githubusercontent.com paths use `main`).
 - **Chooser:** repo-root `./start.sh` — Electron 2.0 or terminal 1.x (`--electron` / `--terminal`).
 - **i18n:** nested `locales/{pt,en}.json` + `CARCARA_LANG` (`references/i18n.md`); 1.x needs python3 to flatten.
 - **Images:** `assets/img/` for 1.x and 2.0 (Electron build copies into `dist/renderer/assets/`).

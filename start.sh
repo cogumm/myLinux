@@ -13,7 +13,7 @@
 set -euo pipefail
 
 REPO_URL="${MYLINUX_REPO_URL:-https://github.com/cogumm/myLinux.git}"
-REPO_BRANCH="${MYLINUX_REPO_BRANCH:-master}"
+REPO_BRANCH="${MYLINUX_REPO_BRANCH:-main}"
 
 is_repo_root() {
 	local dir="$1"
@@ -135,7 +135,7 @@ Aliases: electron | 2.0 | gui   →  Carcará 2.0
          terminal | cli | tui | 1.x  →  terminal
 
 Bootstrap (sem clone local):
-  sudo curl -L https://raw.githubusercontent.com/cogumm/myLinux/master/start.sh | bash
+  sudo curl -L https://raw.githubusercontent.com/cogumm/myLinux/main/start.sh | bash
   # clona em ~/myLinux (ou $MYLINUX_DIR) e abre o menu
 EOF
 }

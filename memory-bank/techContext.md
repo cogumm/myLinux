@@ -14,7 +14,7 @@ Last updated: 2026-11-17
 | Packaging | **electron-builder** → `.deb`; GHA `release-deb.yml` on Release |
 | Runtime (.deb) | Node `run-helper-node` + Bash helper — **no Bun** |
 | Packages | apt-get, dpkg, Flatpak/Flathub, snap |
-| VCS | Git |
+| VCS | Git — default branch **`main`** |
 | Host | Linux apt-family; WSL2 supported for helpers + Electron with caveats |
 
 ## Key paths
