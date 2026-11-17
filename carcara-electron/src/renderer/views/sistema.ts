@@ -42,7 +42,7 @@ const TILES: TileProps[] = [
   {
     kicker: "Rede",
     title: "Testar conexão",
-    desc: "testConnection → Google (ICMP)",
+    desc: "Teste de conexão → Google (ICMP)",
     action: "ping",
   },
 ];
