@@ -24,7 +24,7 @@ usage() {
 	echo "          dotfiles-hyper | dotfiles-theme | dotfiles-bashrc" >&2
 	echo "install:  install-vlc | install-discord | install-spotify | install-telegram |" >&2
 	echo "          install-git | install-vscode | install-insomnia | install-firacode |" >&2
-	echo "          install-dropbox" >&2
+	echo "          install-docker | install-dropbox" >&2
 }
 
 # Run repo dotfiles/apply.sh as the real desktop user (never as root home).
@@ -157,6 +157,10 @@ case "$action" in
 		;;
 	install-firacode)
 		_run_carcara_script "app/scripts/software/development/firacode.sh"
+		exit $?
+		;;
+	install-docker)
+		_run_carcara_script "app/scripts/software/development/docker.sh"
 		exit $?
 		;;
 	install-dropbox)

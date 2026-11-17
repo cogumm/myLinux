@@ -52,6 +52,14 @@ const CATEGORIES: Category[] = [
         action: "install-firacode",
         confirm: "Instalar fonte Fira Code?",
       },
+      {
+        kicker: "Runtime",
+        title: "Docker",
+        desc: "repo oficial → docker.io",
+        action: "install-docker",
+        confirm:
+          "Instalar Docker Engine (apt oficial ou docker.io) e adicionar seu usuário ao grupo docker?",
+      },
     ],
   },
   {

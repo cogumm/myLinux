@@ -12,11 +12,12 @@
 #----------------------------------------------------------------------------------------------------#
 
 while true; do
-	menu=$(zenity --width=330 --height=500 --list --column "Escolha uma das opções" --title="cGm" \
+	menu=$(zenity --width=330 --height=520 --list --column "Escolha uma das opções" --title="cGm" \
 		"Instalar o Git" \
 		"Instalar o VS Code" \
 		"Instalar o Insomnia" \
 		"Instalar a Fira Code" \
+		"Instalar o Docker" \
 		"Voltar")
 	case "$menu" in
 		"Instalar o Git")
@@ -30,6 +31,9 @@ while true; do
 			;;
 		"Instalar a Fira Code")
 			bash app/scripts/software/development/firacode.sh
+			;;
+		"Instalar o Docker")
+			bash app/scripts/software/development/docker.sh
 			;;
 		"Voltar"|*)
 			# Return to parent menuSof loop (this script was started with bash).
