@@ -46,9 +46,26 @@ bun run dev
 | `bun run dev` | build + local `electron . --no-sandbox` |
 | `bun run start` | last build |
 | `bun run helper -- ping` | `testConnection.sh` → ping Google DNS IP (−c 3) |
+| `bun run smoke:software` | Software wiring + ping + pkexec probe (safe default) |
+| `bun run smoke:software -- --pkexec` | also `apt-dry-run` via helper (root or pkexec) |
+| `bun run smoke:software -- --live install-git …` | mutating installs (owner machine) |
 | `bun run typecheck` | `tsc --noEmit` |
 | `bun run pack:deb` | build + **electron-builder** → `release/*.deb` |
 | `bun run pack:dir` | unpacked dir under `release/` (debug packaging) |
+
+### Smoke (Software / pkexec)
+
+Default mode does **not** install packages: it checks UI tiles ↔ helper allowlist ↔ 1.x scripts, unknown-action exit 2, unprivileged `ping`, and whether `pkexec`+display exist.
+
+```bash
+cd carcara-electron
+bun run smoke:software
+# On a real desktop with policykit (or already-root):
+bun run smoke:software -- --pkexec
+sudo bun run smoke:software -- --live install-git install-vlc
+```
+
+On **WSL** without `policykit-1`, pkexec probes **SKIP** — use root (`sudo ./start.sh --electron`) or a native desktop for elevation.
 
 ## Packaging (`.deb`)
 

@@ -150,5 +150,6 @@ flowchart LR
 - [x] License gate (1.x parity: checkbox Continuar before shell) (17 de Novembro de 2026)
 - [x] Package `.deb` (`electron-builder.yml` + `bun run pack:deb` + Release workflow) (17 de Novembro de 2026)
 - [ ] AppImage optional
-- [ ] Software installer smoke-test via 2.0 UI
+- [x] Software / pkexec smoke harness (`bun run smoke:software`; wiring + ping + probe) — 17 de Novembro de 2026
+- [ ] Live Software `--live` + live `pkexec` on owner desktop (policykit / root)
 - [x] Document dual entry in root README + `carcara-electron/README.md` (alpha)

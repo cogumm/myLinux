@@ -146,7 +146,18 @@ Workflows orchestrate CI; builder config stays next to the Electron app (relativ
 
 AppImage remains optional / not required for v2.0.1.
 
+## Smoke
+
+```bash
+cd carcara-electron
+bun run smoke:software              # wiring + ping + pkexec probe
+bun run smoke:software -- --pkexec  # + apt-dry-run (root|pkexec)
+# sudo bun run smoke:software -- --live install-git   # mutating
+```
+
+Harness: `scripts/smoke-software.sh`. Bun bridge passes `CARCARA_*` via `pkexec env` (same as Node).
+
 ## Still open
 
-1. Live smoke-test Software + pkexec on real desktop / WSLg (owner-approved)
+1. Live `--live` installs + live pkexec on real desktop / WSLg (owner-approved; needs policykit)
 2. Optional AppImage target

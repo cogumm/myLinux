@@ -69,3 +69,4 @@ Append-only log. Do not delete completed history.
 - [x] v2.0.1 **Wave C**: LibreOffice/OnlyOffice, Bitwarden/1Password, Proton Mail/VPN, NordVPN, Node toolchain, presets; Software search+badges; Sobre host health; Docker Desktop skipped (2026-11-17)
 - [x] TODO hygiene: Still-open table trimmed (Waves A–C + skills removed from open); catalog section marked done (2026-11-17)
 - [x] Installed + configured skills `bash-scripting` + `debian-linux-triage` → `.agents/skills/` + `skills-lock.json`; README constraints + AGENTS guidance (2026-11-17)
+- [x] Software/pkexec smoke harness: `carcara-electron/scripts/smoke-software.sh` + `bun run smoke:software`; Bun `run-helper.ts` pkexec env parity with Node; wiring 45 PASS / pkexec SKIP on WSL without policykit (2026-11-17)

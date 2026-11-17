@@ -11,12 +11,12 @@ Also mirrored under “Still open” in `.agents/playbook/references/carcara-2.0
 
 | Track | Open item | Notes |
 |-------|-----------|--------|
-| **2.0** | Smoke-test Software installers via UI | Owner-requested apt/flatpak/snap |
-| **2.0** | Smoke-test privileged actions with **pkexec** | Real Linux desktop / WSLg (not already-root) |
+| **2.0** | Live Software installs (`--live`) | Harness ready; needs root/pkexec + owner apt/flatpak/snap |
+| **2.0** | Live **pkexec** elevation | Needs `policykit-1` on real desktop / WSLg (this WSL host: SKIP) |
 | **2.0** | Optional AppImage | `.deb` + Release CI **done** |
 | **1.x** | Live smoke-test Wave 2 installers | Same machine gate as 2.0 Software |
 
-**Done recently:** Waves A–C catalog; `.deb` + Release CI; skills `bash-scripting` + `debian-linux-triage` installed.  
+**Done recently:** Waves A–C; `.deb` + Release CI; skills; Software wiring smoke (`bun run smoke:software`).  
 Wave 1–2 engine **done**. Wave 3 **cancelled** (UI is Electron 2.0).  
 **v2.0.0** = usable alpha. **v2.0.1** = richer catalog + polish (waves below — catalog shipped).
 
@@ -31,7 +31,7 @@ Wave 1–2 engine **done**. Wave 3 **cancelled** (UI is Electron 2.0).
 - [x] Session knowledge consolidated → memory-bank + playbook (17 de Novembro de 2026)
 - [x] i18n + rail PT\|EN switch (17 de Novembro de 2026)
 - [x] Sistema tile **Sincronizar horário** → `sync_time.sh` (17 de Novembro de 2026)
-- [ ] Continue [`.agents/idea/carcara-2.0-electron.md`](../.agents/idea/carcara-2.0-electron.md) — Software/pkexec smoke-test (owner machine)
+- [x] Continue [`.agents/idea/carcara-2.0-electron.md`](../.agents/idea/carcara-2.0-electron.md) — Software/pkexec smoke harness (`smoke:software`; wiring PASS on WSL; live/pkexec still host-gated) (17 de Novembro de 2026)
 - [x] Package `.deb` + GitHub Actions Release workflow (17 de Novembro de 2026)
 - [x] **v2.0.1** Wave A catalog (11 apps + `install_deb_url`) (17 de Novembro de 2026)
 - [x] **v2.0.1** Wave B (Heroic/Lutris/browsers/Audacity/Navidrome + 1.x folders) (17 de Novembro de 2026)
@@ -61,8 +61,9 @@ Wave 1–2 engine **done**. Wave 3 **cancelled** (UI is Electron 2.0).
 - [x] License gate (1.x parity; checkbox Continuar) (17 de Novembro de 2026)
 - [x] Rail language switch PT\|EN (`localStorage` override; env default) (17 de Novembro de 2026)
 - [x] Sistema **sync-time** → `sync_time.sh` (17 de Novembro de 2026)
-- [ ] Smoke-test Software installers (owner-requested)
-- [ ] Smoke-test with **pkexec** on real desktop / WSLg (unelevated user → elevates)
+- [x] Software smoke harness (`scripts/smoke-software.sh` / `bun run smoke:software`) — UI↔helper↔scripts + ping + pkexec probe (17 de Novembro de 2026)
+- [ ] Live Software installs via harness `--live` (owner-requested root/pkexec)
+- [ ] Live **pkexec** elevation on real desktop / WSLg (`--pkexec`; needs policykit-1)
 - [x] Package `.deb` for Carcará 2.0 (`electron-builder` + `pack:deb`; AppImage optional later) (17 de Novembro de 2026)
 - [x] CI: `.github/workflows/release-deb.yml` — Release published → attach `carcara_*_amd64.deb` (17 de Novembro de 2026)
 - [x] Locale `{version}` for `window.title` / `ready.log` ← `package.json` (17 de Novembro de 2026)
