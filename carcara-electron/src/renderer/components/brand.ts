@@ -1,8 +1,10 @@
+import { t } from "../lib/i18n.js";
+
 /** Brand block for the app rail — hero-level mark + name (ui-ux-pro-max). */
 export function createBrand(): HTMLElement {
   const brand = document.createElement("header");
   brand.className = "brand";
-  brand.setAttribute("aria-label", "Carcará 2.0");
+  brand.setAttribute("aria-label", t("window.title"));
 
   const mark = document.createElement("img");
   mark.className = "brand__mark";
@@ -17,7 +19,7 @@ export function createBrand(): HTMLElement {
 
   const name = document.createElement("p");
   name.className = "brand__name";
-  name.textContent = "Carcará";
+  name.textContent = t("app.name");
 
   const ver = document.createElement("span");
   ver.className = "brand__ver";

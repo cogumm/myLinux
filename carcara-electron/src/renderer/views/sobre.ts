@@ -12,23 +12,27 @@ export function getSobreMeta(): ViewMeta {
 
 type Fact = { label: string; value: string };
 
-const FACTS: Fact[] = [
-  { label: "Produto", value: "Carcará 2.0 — Electron + Bun sobre o motor Bash 1.x" },
-  { label: "Alvo",    value: "Ubuntu, Debian, Linux Mint (apt), x86_64" },
-  { label: "Entrada", value: "sudo ./start.sh --electron | --terminal" },
-  { label: "Autor",   value: "Gabriel F. Vilar (CoGUMm)" },
-  { label: "Licença", value: "MIT · Copyright (c) 2010 CoGUMm" },
-  { label: "Repo",    value: "github.com/cogumm/myLinux" },
-];
+function facts(): Fact[] {
+  return [
+    { label: t("sobre.fact.product"), value: t("sobre.fact.product.value") },
+    { label: t("sobre.fact.target"), value: t("sobre.fact.target.value") },
+    { label: t("sobre.fact.entry"), value: t("sobre.fact.entry.value") },
+    { label: t("sobre.fact.author"), value: t("sobre.fact.author.value") },
+    { label: t("sobre.fact.license"), value: t("sobre.fact.license.value") },
+    { label: t("sobre.fact.repo"), value: t("sobre.fact.repo.value") },
+  ];
+}
 
 type LinkItem = { label: string; href: string };
 
-const LINKS: LinkItem[] = [
-  { label: "Ko-fi",       href: "https://ko-fi.com/cogumm" },
-  { label: "Telegram",    href: "https://t.me/CoGUMm" },
-  { label: "Licença MIT", href: "https://cogumm.mit-license.org/" },
-  { label: "GitHub",      href: "https://github.com/cogumm/myLinux" },
-];
+function links(): LinkItem[] {
+  return [
+    { label: "Ko-fi", href: "https://ko-fi.com/cogumm" },
+    { label: "Telegram", href: "https://t.me/CoGUMm" },
+    { label: t("sobre.link.mit"), href: "https://cogumm.mit-license.org/" },
+    { label: "GitHub", href: "https://github.com/cogumm/myLinux" },
+  ];
+}
 
 function el<K extends keyof HTMLElementTagNameMap>(
   tag: K,
@@ -48,30 +52,21 @@ export function renderSobre(): HTMLElement {
   hero.src = "assets/logo_moderno_final.png";
   hero.width = 128;
   hero.height = 128;
-  hero.alt = "Carcará";
+  hero.alt = t("app.name");
 
   const body = el("div", "about__body");
 
-  const lead = el(
-    "p",
-    "about__lead",
-    "Personal Linux workstation toolkit — instaladores, manutenção e dotfiles. A UI 2.0 reutiliza os backends 1.x (apt → Flatpak → Snap).",
-  );
-
+  const lead = el("p", "about__lead", t("sobre.lead"));
   const list = el("dl", "about__facts");
-  for (const fact of FACTS) {
+  for (const fact of facts()) {
     list.append(el("dt", undefined, fact.label), el("dd", undefined, fact.value));
   }
 
-  const note = el(
-    "p",
-    "muted",
-    "Muitos scripts precisam de root e alteram o sistema. Revise antes de executar. O autor não se responsabiliza por mau uso.",
-  );
+  const note = el("p", "muted", t("sobre.note"));
 
-  const links = el("div", "about__links");
-  links.setAttribute("role", "list");
-  for (const item of LINKS) {
+  const linkRow = el("div", "about__links");
+  linkRow.setAttribute("role", "list");
+  for (const item of links()) {
     const btn = el("button", "about__link") as HTMLButtonElement;
     btn.type = "button";
     btn.setAttribute("role", "listitem");
@@ -80,10 +75,11 @@ export function renderSobre(): HTMLElement {
     btn.addEventListener("click", () => {
       void openExternal(item.href).then((result) => {
         if (!result.ok) {
-          btn.title = `${item.href} — falhou: ${result.error ?? "sem browser"}`;
+          const detail = result.error ?? t("sobre.link.noBrowser");
+          btn.title = `${item.href} — ${t("sobre.link.failed")}: ${detail}`;
           try {
             void navigator.clipboard.writeText(item.href);
-            btn.textContent = `${item.label} (copiado)`;
+            btn.textContent = `${item.label} ${t("sobre.link.copied")}`;
             window.setTimeout(() => {
               btn.textContent = item.label;
             }, 1800);
@@ -93,10 +89,10 @@ export function renderSobre(): HTMLElement {
         }
       });
     });
-    links.append(btn);
+    linkRow.append(btn);
   }
 
-  body.append(lead, list, note, links);
+  body.append(lead, list, note, linkRow);
   about.append(hero, body);
   return about;
 }

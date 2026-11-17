@@ -1,4 +1,5 @@
 import { highlightLogLine, type LogKind } from "../lib/log-highlight.js";
+import { t } from "../lib/i18n.js";
 
 export type ActivityConsoleHandle = {
   root: HTMLElement;
@@ -18,14 +19,14 @@ export function createActivityConsole(
 
   const heading = document.createElement("h2");
   heading.id = "log-title";
-  heading.textContent = "Atividade";
+  heading.textContent = t("console.title");
 
   const clearBtn = document.createElement("button");
   clearBtn.type = "button";
   clearBtn.className = "console__clear";
   clearBtn.id = "btn-clear-log";
-  clearBtn.setAttribute("aria-label", "Limpar log");
-  clearBtn.textContent = "Limpar";
+  clearBtn.setAttribute("aria-label", t("console.clearAria"));
+  clearBtn.textContent = t("console.clear");
 
   const scroll = document.createElement("div");
   scroll.className = "console__scroll";

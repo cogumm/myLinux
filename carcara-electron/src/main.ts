@@ -4,6 +4,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { installAppMenu } from "./app-menu";
 import { env } from "./env";
+import { nativeT } from "./native-i18n";
 import { openExternalUrl } from "./open-external";
 
 /** Same disclaimer file as Carcará 1.x Zenity license gate. */
@@ -26,9 +27,9 @@ function requireRoot(): void {
   const uid = typeof process.getuid === "function" ? process.getuid() : -1;
   if (uid === 0) return;
   console.error("");
-  console.error("[carcara] Você precisa ter poderes administrativos (root)");
-  console.error("[carcara] O aplicativo está sendo finalizado.");
-  console.error("[carcara] Use: sudo ./start.sh --electron");
+  console.error(`[carcara] ${nativeT("main.requireRoot")}`);
+  console.error(`[carcara] ${nativeT("main.exiting")}`);
+  console.error(`[carcara] ${nativeT("main.useSudo")}`);
   console.error("");
   app.exit(1);
 }
@@ -78,7 +79,7 @@ function createWindow(): void {
     height: env.CARCARA_WINDOW_HEIGHT,
     minWidth: env.CARCARA_WINDOW_MIN_WIDTH,
     minHeight: env.CARCARA_WINDOW_MIN_HEIGHT,
-    title: "Carcará 2.0",
+    title: nativeT("window.title"),
     icon: logoPath,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
@@ -111,7 +112,7 @@ app.whenReady().then(() => {
 
   ipcMain.handle("shell:openExternal", async (_event, url: string) => {
     if (typeof url !== "string" || !ALLOWED_EXTERNAL.has(url)) {
-      return { ok: false as const, error: "URL não permitida" };
+      return { ok: false as const, error: nativeT("main.urlDenied") };
     }
     try {
       await openExternalUrl(url);

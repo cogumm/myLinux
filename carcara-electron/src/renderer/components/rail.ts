@@ -27,7 +27,7 @@ export function createRail(
 
   const aside = document.createElement("aside");
   aside.className = "rail";
-  aside.setAttribute("aria-label", "Navigation");
+  aside.setAttribute("aria-label", t("rail.navAria"));
 
   const nav = createNavList(
     items.map((item) => ({

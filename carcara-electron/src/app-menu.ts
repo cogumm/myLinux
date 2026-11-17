@@ -1,23 +1,5 @@
 import { BrowserWindow, Menu, type MenuItemConstructorOptions } from "electron";
-import { readFileSync } from "node:fs";
-import path from "node:path";
-import { env } from "./env";
-
-function nativeT(key: string): string {
-  try {
-    const file = path.join(
-      __dirname,
-      "..",
-      "..",
-      "locales",
-      `${env.CARCARA_LANG}.json`,
-    );
-    const dict = JSON.parse(readFileSync(file, "utf8")) as Record<string, string>;
-    return dict[key] ?? key;
-  } catch {
-    return key;
-  }
-}
+import { nativeT } from "./native-i18n";
 
 /**
  * Native menu — File + About only (no Edit / View / Window / Help chrome).
