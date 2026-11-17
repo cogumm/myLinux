@@ -90,10 +90,10 @@ Any new 2.0 screen: read page override under `pages/` first, else MASTER. Re-run
 ## Privilege helper contract
 
 - Renderer → preload IPC → Electron main → `bun scripts/run-helper.ts <action>` → Bun `$` → `pkexec` (or direct) `helper/carcara-helper.sh`.
-- Helper **only** runs allowlisted actions (e.g. `apt-dry-run`, later `update-distro`, `install-app <id>`).
+- Helper allowlist: `ping`, `apt-dry-run`, `update-distro`, `fix-system`, `clean-distro` (+ later `install-app <id>`).
+- System actions run 1.x scripts under `CARCARA_NONINTERACTIVE=1` (no Yad; update auto-yes; clean skips locks/lists).
+- UI confirms before update / fix / clean; then streams helper stdout/stderr into Atividade.
 - Unknown actions → exit 2. No arbitrary shell from the UI.
-- Bun Shell escapes interpolations by default (injection-resistant argv).
-- stdout/stderr streamed back to the renderer as log lines; exit code is the action result.
 
 ## Relationship to 1.x
 
@@ -123,7 +123,7 @@ flowchart LR
 - [x] Write detailed 2.0 plan (stack, folder layout, privilege helper)
 - [x] Spike scaffold: `carcara-electron/` + Bun bridge (`bun run build` / `bun scripts/run-helper.ts ping` OK; GUI/`pkexec` validation pending)
 - [x] UI direction via `ui-ux-pro-max` → `design-system/carcara-2-0/` + app-shell renderer
-- [ ] Port system actions (update / fix / clean) through helper → 1.x scripts
+- [x] Port system actions (update / fix / clean) through helper → 1.x scripts (17 de Novembro de 2026)
 - [ ] Port software categories / installers through helper
 - [ ] Package `.deb` (AppImage optional)
 - [x] Document dual entry in root README + `carcara-electron/README.md` (alpha)

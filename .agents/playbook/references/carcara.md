@@ -81,7 +81,8 @@ All software category menus (`development`, `productivity`, `social`, `utilities
 ## Carcará 2.0 (Electron)
 
 Active UI track: sibling app `carcara-electron/` (Electron + **Bun**) — see `.agents/idea/carcara-2.0-electron.md`.  
-1.x remains CLI/fallback (`startApp.sh`). Spike: `Bun.$` bridge → helper allowlist + apt dry-run (`bun run dev`).
+1.x remains CLI/fallback (`startApp.sh`). Chooser: `./start.sh`.  
+Helper allowlist: `ping`, `apt-dry-run`, `update-distro`, `fix-system`, `clean-distro` (`CARCARA_NONINTERACTIVE=1` for system scripts).
 
 ## Fix priorities (remaining)
 

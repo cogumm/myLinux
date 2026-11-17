@@ -22,8 +22,8 @@ Unscheduled ideas (promote into active work deliberately):
 ## Carcará 2.0
 
 - [x] Plan + scaffold `carcara-electron/` spike (helper + apt dry-run UI)
-- [ ] Validate spike on desktop / WSLg
-- [ ] Helper actions for update / fix / clean
+- [ ] Validate spike on desktop / WSLg (incl. system actions + pkexec)
+- [x] Helper actions for update / fix / clean
 - [ ] Helper actions for software installers
 - [x] Dual entry via root `start.sh` + README
 - [ ] Package `.deb` for Carcará 2.0

@@ -19,9 +19,9 @@ Wave 3 polish was **cancelled / removed**.
 
 ## Next useful engineering work
 
-1. Wire system actions (update / fix / clean) through helper → 1.x scripts.
-2. Port software installers via helper allowlist.
-3. Later: `.deb` packaging for 2.0.
+1. Port software installers via helper allowlist (categories UI).
+2. Later: `.deb` packaging for 2.0.
+3. Optional: live smoke-test of system actions with pkexec.
 
 ## Blockers
 
