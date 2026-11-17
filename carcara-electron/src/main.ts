@@ -31,23 +31,23 @@ function runHelper(action: string): Promise<RunResult> {
       env: process.env,
     });
 
-    let stdout = "";
-    let stderr = "";
-    child.stdout.on("data", (chunk: Buffer) => {
-      stdout += chunk.toString();
-    });
-    child.stderr.on("data", (chunk: Buffer) => {
-      stderr += chunk.toString();
-    });
+    // Merge stdout+stderr in arrival order so Atividade stays chronological
+    // ([carcara] logs are stderr; apt is often stdout).
+    let combined = "";
+    const append = (chunk: Buffer): void => {
+      combined += chunk.toString();
+    };
+    child.stdout.on("data", append);
+    child.stderr.on("data", append);
     child.on("error", (err) => {
-      stderr += `${err.message}\n`;
+      combined += `${err.message}\n`;
       if (err.message.includes("ENOENT")) {
-        stderr += "Bun not found on PATH — install from https://bun.sh\n";
+        combined += "Bun not found on PATH — install from https://bun.sh\n";
       }
-      resolve({ code: 127, stdout, stderr });
+      resolve({ code: 127, stdout: combined, stderr: "" });
     });
     child.on("close", (code) => {
-      resolve({ code, stdout, stderr });
+      resolve({ code, stdout: combined, stderr: "" });
     });
   });
 }
