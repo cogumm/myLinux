@@ -1,0 +1,5 @@
+# Carcará / myLinux — Bash scripts
+shell=bash
+
+# External sources are wired at runtime from carcara/ cwd
+disable=SC1091
