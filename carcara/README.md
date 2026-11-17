@@ -1,5 +1,5 @@
 <div align="center">
-    <img alt="#Delicinha" title="Project Carcará" src="./app/assets/img/logo.png" width="120px" />
+    <img alt="#Delicinha" title="Project Carcará" src="../assets/img/logo.png" width="120px" />
     <h1>Project Carcará</h1>
 </div>
 
@@ -32,11 +32,8 @@ This project has the following structure:
 ```
 .
 ├── app
-│   ├── assets
-│   │   └── img
-│   │       ├── logo.png
-│   │       └── wat-dog.jpg
 │   ├── config
+
 │   │   ├── config.sh
 │   │   ├── dependences.sh
 │   │   ├── license

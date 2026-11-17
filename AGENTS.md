@@ -12,6 +12,7 @@ Playbook: `.agents/playbook/SKILL.md`
 | Path | Role |
 |------|------|
 | `start.sh` | Dual entry: choose Electron 2.0 or terminal 1.x (`--electron` / `--terminal`) |
+| `assets/` | Images for 1.x + 2.0 (`img/logo.png`) |
 | `carcara/` | 1.x install engine + CLI/TUI (Bash + Zenity/Yad). Entry: `sudo bash startApp.sh` from `carcara/` |
 | `carcara-electron/` | 2.0 desktop UI (Electron + Bun). Entry: `cd carcara-electron && bun run dev` |
 | `dotfiles/` | Shell aliases, Bash/Zsh themes, git config, Hyper |

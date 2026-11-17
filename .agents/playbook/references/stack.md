@@ -19,5 +19,6 @@
 ## Shared
 
 - **Chooser:** repo-root `./start.sh` — Electron 2.0 or terminal 1.x (`--electron` / `--terminal`).
+- **Images:** `assets/img/` for 1.x and 2.0 (Electron build copies logo into `dist/`).
 - Dotfiles are static config, not generated.
 - Optional: `cleanup-zone-identifiers.sh` for WSL ADS junk files.

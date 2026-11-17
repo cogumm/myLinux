@@ -103,6 +103,7 @@ See [docs/wsl-cleanup.md](docs/wsl-cleanup.md).
 ```
 .
 ├── start.sh                      # Choose Electron 2.0 or terminal 1.x
+├── assets/                       # Images for 1.x + 2.0 (img/logo.png)
 ├── carcara/                      # 1.x engine + TUI (entry: startApp.sh)
 ├── carcara-electron/             # 2.0 Electron + Bun (entry: bun run dev)
 ├── dotfiles/                     # Aliases, bashrc, oh-my-zsh, git, Hyper

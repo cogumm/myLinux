@@ -51,13 +51,14 @@ Ship **Carcará 2.0** as a desktop app with a modern UI using **Electron**.
 ## Repo layout
 
 ```
+assets/img/                   # logo.png (1.x docs + 2.0 UI)
 carcara-electron/
   package.json                # packageManager: bun
   bun.lock
   tsconfig.json
   helper/carcara-helper.sh    # pkexec-facing allowlist
   scripts/
-    build.ts                  # Bun.$ → tsc + copy static
+    build.ts                  # Bun.$ → tsc + copy static + assets/img/logo.png
     run-helper.ts             # Bun.$ → pkexec|helper
   src/
     main.ts                   # BrowserWindow + IPC → spawn bun bridge

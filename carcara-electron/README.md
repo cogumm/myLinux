@@ -5,6 +5,8 @@ Toolchain and privilege bridge use **[Bun](https://bun.sh/docs)** (including [`B
 
 Electron’s main process still runs Chromium’s Node; it spawns `bun scripts/run-helper.ts`, which uses `$` to call the allowlisted `helper/carcara-helper.sh` (via `pkexec` when needed).
 
+Logo: repo **`assets/img/logo.png`** (build copies into `dist/renderer/assets/` for the window).
+
 ## Requirements
 
 - [Bun](https://bun.sh) ≥ 1.1 (`curl -fsSL https://bun.sh/install | bash`)
@@ -21,17 +23,13 @@ bun run dev
 
 | Script | What it does |
 |--------|----------------|
-| `bun run build` | `tsc` + copy renderer assets (via `Bun.$`) |
+| `bun run build` | `tsc` + copy renderer + logo (via `Bun.$`) |
 | `bun run dev` | build + local `electron . --no-sandbox` |
 | `bun run start` | last build |
-
-`--no-sandbox` is required on many WSL/Linux setups where `chrome-sandbox` is not root-owned (SUID). Prefer fixing sandbox ownership on a real desktop install when packaging.
 | `bun run helper -- ping` | test Bun bridge without UI |
 | `bun run typecheck` | `tsc --noEmit` |
 
-## Spike
-
-Window with **Ping helper** and **Apt dry-run** (`apt-get update` + `apt-get -s upgrade`). No package changes on dry-run.
+`--no-sandbox` is required on many WSL/Linux setups where `chrome-sandbox` is not root-owned (SUID). Prefer fixing sandbox ownership on a real desktop install when packaging.
 
 ## Dual entry
 
