@@ -31,8 +31,9 @@ const logEl = document.getElementById("log") as HTMLPreElement;
 const statusEl = document.getElementById("status") as HTMLParagraphElement;
 const titleEl = document.getElementById("view-title") as HTMLHeadingElement;
 const ledeEl = document.getElementById("view-lede") as HTMLParagraphElement;
-const btnPing = document.getElementById("btn-ping") as HTMLButtonElement;
-const btnDry = document.getElementById("btn-dry") as HTMLButtonElement;
+const actionButtons = Array.from(
+  document.querySelectorAll<HTMLButtonElement>("[data-action]"),
+);
 const navItems = Array.from(document.querySelectorAll<HTMLButtonElement>(".nav-item"));
 
 function appendLog(text: string): void {
@@ -49,8 +50,9 @@ function setStatus(text: string, kind: "idle" | "busy" | "ok" | "err"): void {
 }
 
 function setBusy(busy: boolean): void {
-  btnPing.disabled = busy;
-  btnDry.disabled = busy;
+  actionButtons.forEach((btn) => {
+    btn.disabled = busy;
+  });
   setStatus(busy ? "Executando…" : "Pronto", busy ? "busy" : "idle");
 }
 
@@ -93,25 +95,32 @@ async function runAction(action: string): Promise<void> {
     logEl.classList.add("err");
     setStatus("Erro IPC", "err");
   } finally {
-    btnPing.disabled = false;
-    btnDry.disabled = false;
+    actionButtons.forEach((btn) => {
+      btn.disabled = false;
+    });
   }
 }
 
 navItems.forEach((btn) => {
   btn.addEventListener("click", () => {
-    const view = btn.dataset.view ?? "sistema";
-    showView(view);
+    showView(btn.dataset.view ?? "sistema");
   });
 });
 
-btnPing.addEventListener("click", () => {
-  void runAction("ping");
-});
-
-btnDry.addEventListener("click", () => {
-  void runAction("apt-dry-run");
+actionButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const action = btn.dataset.action;
+    if (!action) return;
+    const confirmMsg = btn.dataset.confirm;
+    if (confirmMsg && !window.confirm(confirmMsg)) {
+      appendLog(`\n--- ${action} cancelado pelo usuário ---\n`);
+      return;
+    }
+    void runAction(action);
+  });
 });
 
 showView("sistema");
-appendLog("Carcará 2.0 pronto. Use Sistema → Ping ou Apt dry-run.\n");
+appendLog(
+  "Carcará 2.0 pronto. Sistema: Atualizar / Corrigir / Limpar (confirmação na UI).\n",
+);

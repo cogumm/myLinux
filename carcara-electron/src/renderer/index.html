@@ -50,16 +50,27 @@
         <main class="main">
           <section id="view-sistema" class="view is-visible" aria-labelledby="view-title">
             <div class="action-grid">
-              <button type="button" class="card-action" id="btn-ping">
-                <span class="card-action-title">Ping helper</span>
-                <span class="card-action-desc">Verifica o bridge Bun sem alterar o sistema.</span>
+              <button type="button" class="card-action primary" data-action="update-distro" data-confirm="Atualizar o sistema (apt update + upgrade + full-upgrade)? Requer privilégios.">
+                <span class="card-action-title">Atualizar sistema</span>
+                <span class="card-action-desc">update → upgrade → full-upgrade (scripts 1.x).</span>
               </button>
-              <button type="button" class="card-action primary" id="btn-dry">
+              <button type="button" class="card-action" data-action="fix-system" data-confirm="Corrigir pacotes quebrados (apt -f + dpkg --configure -a)?">
+                <span class="card-action-title">Correção do sistema</span>
+                <span class="card-action-desc">Repara dependências e configurações pendentes.</span>
+              </button>
+              <button type="button" class="card-action" data-action="clean-distro" data-confirm="Limpeza segura (lixeira, tmp, apt clean/autoclean/autoremove)? Locks e listas apt NÃO serão removidos neste modo.">
+                <span class="card-action-title">Limpeza do sistema</span>
+                <span class="card-action-desc">Caminho seguro; sem remoção automática de locks.</span>
+              </button>
+              <button type="button" class="card-action" data-action="apt-dry-run">
                 <span class="card-action-title">Apt dry-run</span>
-                <span class="card-action-desc">Simula upgrade (`apt-get -s`) sem instalar.</span>
+                <span class="card-action-desc">Simula upgrade sem alterar pacotes.</span>
+              </button>
+              <button type="button" class="card-action" data-action="ping">
+                <span class="card-action-title">Ping helper</span>
+                <span class="card-action-desc">Testa o bridge Bun sem mudar o sistema.</span>
               </button>
             </div>
-            <p class="hint">Atualizar / Corrigir / Limpar entram aqui quando o helper permitir.</p>
           </section>
 
           <section id="view-software" class="view" hidden aria-labelledby="view-title">
@@ -69,7 +80,8 @@
           <section id="view-sobre" class="view" hidden aria-labelledby="view-title">
             <p class="hint">
               Motor de instalação: scripts Bash 1.x. UI: Electron + Bun.
-              Design: Flat Design (`ui-ux-pro-max` → <code>design-system/carcara-2-0</code>).
+              Design: Flat Design (<code>design-system/carcara-2-0</code>).
+              Ações de sistema usam <code>CARCARA_NONINTERACTIVE=1</code> via helper.
             </p>
           </section>
         </main>
