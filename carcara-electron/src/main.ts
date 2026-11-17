@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain } from "electron";
+import { app, BrowserWindow, ipcMain, shell } from "electron";
 import { spawn } from "node:child_process";
 import path from "node:path";
 
@@ -63,12 +63,26 @@ function createWindow(): void {
   void win.loadFile(path.join(__dirname, "renderer", "index.html"));
 }
 
+const ALLOWED_EXTERNAL = new Set([
+  "https://ko-fi.com/cogumm",
+  "https://t.me/CoGUMm",
+  "https://cogumm.mit-license.org/",
+  "https://github.com/cogumm/myLinux",
+]);
+
 app.whenReady().then(() => {
   ipcMain.handle("helper:run", async (_event, action: string) => {
     if (typeof action !== "string" || !/^[a-z][a-z0-9-]*$/.test(action)) {
       return { code: 2, stdout: "", stderr: "invalid action\n" };
     }
     return runHelper(action);
+  });
+
+  ipcMain.handle("shell:openExternal", async (_event, url: string) => {
+    if (typeof url !== "string" || !ALLOWED_EXTERNAL.has(url)) {
+      throw new Error("URL não permitida");
+    }
+    await shell.openExternal(url);
   });
 
   createWindow();

@@ -9,4 +9,6 @@ export type HelperResult = {
 contextBridge.exposeInMainWorld("carcara", {
   runHelper: (action: string): Promise<HelperResult> =>
     ipcRenderer.invoke("helper:run", action),
+  openExternal: (url: string): Promise<void> =>
+    ipcRenderer.invoke("shell:openExternal", url),
 });

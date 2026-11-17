@@ -6,6 +6,7 @@ export type HelperResult = {
 
 export type CarcaraApi = {
   runHelper: (action: string) => Promise<HelperResult>;
+  openExternal?: (url: string) => Promise<void>;
 };
 
 export type StatusKind = "idle" | "busy" | "ok" | "err";
