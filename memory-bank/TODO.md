@@ -14,7 +14,7 @@ Also mirrored under “Still open” in `.agents/playbook/references/carcara-2.0
 | **2.0** | Smoke-test Software installers via UI | Owner-requested apt/flatpak/snap |
 | **2.0** | Smoke-test privileged actions with **pkexec** | Real Linux desktop / WSLg (not already-root) |
 | **2.0** | Optional AppImage | `.deb` + Release CI **done** |
-| **2.0.1** | Catalog wave **C** (below) | Waves A+B **done** |
+| **2.0.1** | Catalog waves A–C | **done** (smoke still owner-gated) |
 | **1.x** | Live smoke-test Wave 2 installers | Same machine gate as 2.0 Software |
 | Skills | `bash-scripting`, `debian-linux-triage` | Install when rewriting that area |
 
@@ -36,7 +36,7 @@ Wave 1–2 engine **done**. Wave 3 **cancelled** (UI is Electron 2.0).
 - [x] Package `.deb` + GitHub Actions Release workflow (17 de Novembro de 2026)
 - [x] **v2.0.1** Wave A catalog (11 apps + `install_deb_url`) (17 de Novembro de 2026)
 - [x] **v2.0.1** Wave B (Heroic/Lutris/browsers/Audacity/Navidrome + 1.x folders) (17 de Novembro de 2026)
-- [ ] **v2.0.1** catalog wave C (see section below)
+- [x] **v2.0.1** Wave C (office, passwords, Proton/Nord, Node toolchain, presets, search/badges, Sobre health) (17 de Novembro de 2026)
 
 ## Carcará / scripts (1.x)
 
@@ -106,17 +106,17 @@ Categories mirror [Snap Store](https://snapcraft.io/store): Development, Games, 
 
 ### Wave C — depth (remainder of the wishlist)
 
-- [ ] **LibreOffice** · **OnlyOffice** (Productivity)
-- [ ] **1Password** · **Bitwarden** (passwords) — pick one default or offer both
-- [ ] **Proton Mail** · **Proton VPN** (Social / Utilities)
-- [ ] **NordVPN** (Utilities)
-- [ ] **Node.js** toolchain: Node + npm + **pnpm** + **Yarn** + **Bun** (Development; prefer mise/fnm or NodeSource — no `curl|bash` unless owner asks)
+- [x] **LibreOffice** · **OnlyOffice** (Productivity) (17 de Novembro de 2026)
+- [x] **1Password** · **Bitwarden** (both offered; `security/`) (17 de Novembro de 2026)
+- [x] **Proton Mail** · **Proton VPN** (Social / Utilities) (17 de Novembro de 2026)
+- [x] **NordVPN** (Utilities) (17 de Novembro de 2026)
+- [x] **Node.js** toolchain: NodeSource/apt + npm -g pnpm/yarn + Bun GitHub zip (no curl\|bash) (17 de Novembro de 2026)
 - [x] **Audacity** · **Navidrome** (shipped in Wave B `music/`) (17 de Novembro de 2026)
-- [ ] **Docker Desktop** tile only if Engine is not enough (clarify vs `docker.sh`)
-- [ ] Presets: *Dev box* / *Social box* / *Gaming light*
+- [x] **Docker Desktop** — skipped; Engine (`docker.sh`) is enough (17 de Novembro de 2026)
+- [x] Presets: *Dev box* / *Social box* / *Gaming light* (`presets/`) (17 de Novembro de 2026)
 - [x] 2.0 Software **pagination** (6/page, Anterior/Próxima) (17 de Novembro de 2026)
-- [ ] 2.0 UX: search/filter tiles; backend badge (`apt` · `flatpak` · `snap`)
-- [ ] Sobre/health: distro + arch + flatpak/snap status
+- [x] 2.0 UX: category search + backend badges on tiles (17 de Novembro de 2026)
+- [x] Sobre/health: distro + arch + flatpak/snap via `host:info` IPC (17 de Novembro de 2026)
 
 ### Explicitly out of v2.0.1
 

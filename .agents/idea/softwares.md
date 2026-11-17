@@ -3,36 +3,33 @@
 Status: living list (Carcará 1.x + 2.0 Software view)  
 Updated: 17 de Novembro de 2026
 
-Install policy: **apt (distro or official keyring) → Flatpak/Flathub → Snap**. Idempotent via `pkg_present`.  
-Vendor `.deb` downloads use `install_deb_url` (no `curl | bash`).
+Install policy: **apt (distro or official keyring) → Flatpak/Flathub → Snap**.  
+Vendor `.deb` / AppImage / zip via `install_deb_url` / `install_appimage_url` / GitHub (no `curl | bash`).
 
-**Backlog / waves:** `memory-bank/TODO.md` § v2.0.1.  
+**Backlog:** smoke-tests only — waves A–C shipped (`memory-bank/TODO.md`).  
 **Research pointer:** `.agents/idea/listSoftwares.md` → [Snap Store](https://snapcraft.io/store).
 
-## 1.x menu folders (Wave B taxonomy)
+## 1.x menu folders
 
-`development` · `games` · `browsers` · `social` · `productivity` · `music` · `utilities`  
-(Not all 19 Snap categories — enough to match shipped installers.)
+`development` · `games` · `browsers` · `social` · `productivity` · `music` · `security` · `utilities` · `presets`
 
-## Shipped (Wave 2 + A + B)
+## Shipped (Waves 2 + A + B + C)
 
-| App | Script | Path |
-|-----|--------|------|
-| Git / VS Code / Cursor / Insomnia / Postman / Termius / Fira Code / Docker | `development/*` | see Wave A |
-| **Steam** / **Heroic** / **Lutris** | `games/*` | Flatpak → Snap/apt |
-| **Firefox** / **Brave** / **Vivaldi** / **Opera** / **Zen** | `browsers/*` | apt/keyring/Flatpak/Snap |
-| Discord / Spotify / Telegram / WhatsApp | `social/*` | Flatpak / Snap |
-| Dropbox / Anki / Notion / Thunderbird | `productivity/*` | Flatpak / Snap / apt |
-| **Audacity** / **Navidrome** | `music/*` | apt/Flatpak/Snap |
-| VLC / OBS | `utilities/*` | apt → Flatpak → Snap |
+| Area | Apps |
+|------|------|
+| development | Git, VS Code, Cursor, Insomnia, Postman, Termius, Fira Code, **Node toolchain**, Docker Engine, **Dev box** preset |
+| games | Steam, Heroic, Lutris, **Gaming light** preset |
+| browsers | Firefox, Brave, Vivaldi, Opera, Zen (GitHub AppImage) |
+| social | Discord, Spotify, Telegram, WhatsApp, **Proton Mail**, **Social box** preset |
+| productivity | Dropbox, Anki, Notion, Thunderbird, **LibreOffice**, **OnlyOffice** |
+| music | Audacity, Navidrome |
+| security | **Bitwarden**, **1Password** |
+| utilities | VLC, OBS, **Proton VPN**, **NordVPN** |
 
-Wishlist **Zem** → **Zen Browser** (`browsers/zen.sh`) via [GitHub Releases](https://github.com/zen-browser/desktop/releases) AppImage (`install_appimage_url`).  
-**Opera GX** tile installs Linux **Opera** (Snap/Flatpak); dedicated GX package is not consistently available.
+**Docker Desktop** intentionally not shipped — Engine is enough.  
+**Zen** → [GitHub Releases](https://github.com/zen-browser/desktop/releases) AppImage.  
+**Bun** (in Node toolchain) → GitHub `bun-linux-x64.zip` → `/opt/bun` + `/usr/local/bin/bun`.
 
 ## Intentionally not ported from `old/`
 
 - `curl \| bash` get.docker.com, tutum helpers, LAMP/PHP5, dead PPAs
-
-## Note
-
-Docker Desktop ≠ Engine — Wave C only if needed.

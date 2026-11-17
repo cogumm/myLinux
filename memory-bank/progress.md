@@ -66,3 +66,4 @@ Append-only log. Do not delete completed history.
 - [x] Session knowledge re-consolidated (packaging CI, FPM macro trap, paths/helper, version i18n) → memory-bank + playbook + AGENTS (2026-11-17)
 - [x] v2.0.1 **Wave A**: 11 thin installers (Firefox, Brave, WhatsApp, Cursor, Termius, Postman, Anki, Notion, Thunderbird, Steam, OBS) + menus/helper/2.0 tiles/locales; `install_deb_url` backend (2026-11-17)
 - [x] v2.0.1 **Wave B**: Heroic, Lutris, Vivaldi, Opera, Zen, Audacity, Navidrome; 1.x folders games/browsers/music; moved steam/firefox/brave; helper + 2.0 tiles + locales (2026-11-17)
+- [x] v2.0.1 **Wave C**: LibreOffice/OnlyOffice, Bitwarden/1Password, Proton Mail/VPN, NordVPN, Node toolchain, presets; Software search+badges; Sobre host health; Docker Desktop skipped (2026-11-17)

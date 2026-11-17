@@ -7,8 +7,8 @@ Last updated: 2026-11-17
 **Carcará 2.0 usable alpha** (`carcara-electron/`, package **`2.0.1`**).  
 **1.x** (`carcara/`) = install/maintenance **engine** + CLI/fallback.  
 **Packaging shipped:** `.deb` via `electron-builder` + GHA Release workflow.  
-**v2.0.1 Waves A+B shipped:** catalog apps through Heroic/Lutris/Zen/Audacity/Navidrome; 1.x taxonomy folders.  
-**Next:** owner smoke (Software / pkexec) + **Wave C** — `memory-bank/TODO.md`.
+**v2.0.1 Waves A–C shipped:** full curated catalog + presets + Software search/badges + Sobre host health.  
+**Next:** owner smoke (Software / pkexec); optional AppImage — `memory-bank/TODO.md`.
 
 Canonical agent how-to:
 
@@ -70,18 +70,19 @@ Canonical agent how-to:
 - Zod env + `z.prettifyError`; tile hover-only teal; `carcara_confirm` auto-yes when root/NI.
 - `dependences.sh` hardened; Docker CE → `docker.io`; root + Bun PATH under sudo; WSL openExternal + GPU flags.
 
-### Waves A+B catalog — done
+### Waves A–C catalog — done
 
 - Thin installers + helper + 2.0 tiles + locales (pt/en parity).
-- `install_deb_url` (Cursor); Heroic/Lutris/Vivaldi/Opera/Zen/Audacity/Navidrome.
-- 1.x `menuSof`: development · games · browsers · social · productivity · music · utilities.
-- Wishlist “Zem” → Zen Browser; Opera GX tile → Opera Snap/Flatpak on Linux.
+- Zen AppImage (GitHub); Cursor deb; Node toolchain (NodeSource + Bun zip).
+- 1.x folders include `security/` + `presets/`.
+- Wave C UX: Software category search; tile backend badges; Sobre `host:info`.
+- Docker Desktop skipped (Engine enough).
 
 ### Catalog planning — v2.0.1 (open)
 
-- Tracker: `TODO.md` § **v2.0.1** wave **C** (A+B complete).
-- `listSoftwares.md` = Snap Store pointer only.
-- Policy: **apt → Flatpak → Snap** (+ `install_deb_url` for vendor debs).
+- Tracker: smoke + optional AppImage only (`TODO.md`).
+- `listSoftwares.md` = Snap Store pointer.
+- Policy: **apt → Flatpak → Snap** (+ deb/AppImage/zip helpers).
 
 ### `old/` reuse (settled)
 
@@ -95,10 +96,9 @@ Canonical agent how-to:
 
 ## Still open
 
-1. Smoke-test Software installers incl. Wave A (owner-requested apt/flatpak/snap).
+1. Smoke-test Software installers / presets (owner-requested apt/flatpak/snap).
 2. Smoke-test **pkexec** on real desktop / WSLg (unelevated → elevates).
-3. **v2.0.1** Wave C.
-4. Optional AppImage.
+3. Optional Electron AppImage.
 
 ## Blockers / notes
 

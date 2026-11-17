@@ -6,7 +6,7 @@
 Main menu (trimmed 17 Nov 2026): Atualizar · Instalar → `menuSof` · Correção · Limpeza · **Dotfiles** · Sair.  
 (Removed stubs: “programas diversos”, “Limpeza de memória”.)
 
-Software menu (Wave B): Desenvolvimento · Jogos · Navegadores · Social · Produtividade · Música · Utilidades (`development/`, `games/`, `browsers/`, `social/`, `productivity/`, `music/`, `utilities/`).
+Software menu (Wave C): Desenvolvimento · Jogos · Navegadores · Social · Produtividade · Música · Segurança · Utilidades · Presets.
 
 ## Installers present (Wave 2 + Wave A — thin / backends)
 
@@ -14,14 +14,16 @@ Policy: apt (distro or keyring) → Flatpak/Flathub → Snap. Vendor `.deb` via 
 
 | Area | Script | Preferred path |
 |------|--------|----------------|
-| utilities | `vlc.sh` / `obs.sh` | apt → Flatpak → Snap |
-| browsers | `firefox` / `brave` / `vivaldi` / `opera` / `zen` | apt/keyring/Flatpak/Snap |
+| utilities | `vlc` / `obs` / `proton-vpn` / `nordvpn` | apt/Flatpak/Snap |
+| browsers | `firefox` / `brave` / `vivaldi` / `opera` / `zen` | apt/keyring/Snap/AppImage |
 | games | `steam` / `heroic` / `lutris` | Flatpak → Snap/apt |
 | music | `audacity` / `navidrome` | apt/Flatpak/Snap |
-| social | `discord` / `spotify` / `telegram` / `whatsapp` | Flatpak / Snap / apt |
-| development | `git` / `vscode` / `cursor` / `insomnia` / `postman` / `termius` / `firacode` / `docker` | see Wave A |
-| productivity | `dropbox` / `anki` / `notion` / `thunderbird` | Flatpak/Snap/apt |
-| system | update / fix / clean / `applyDotfiles.sh` / `sync_time.sh` | Wave 1 + Dotfiles; **sync-time** also on 2.0 Sistema |
+| social | `discord` / `spotify` / `telegram` / `whatsapp` / `proton-mail` | Flatpak/Snap |
+| security | `bitwarden` / `onepassword` | Flatpak / vendor deb |
+| development | Wave A + `nodejs.sh` (NodeSource + pnpm/yarn + Bun zip) | mixed |
+| productivity | Wave A + `libreoffice` / `onlyoffice` | apt/Flatpak |
+| presets | `dev-box` / `social-box` / `gaming-light` | chains thin installers |
+| system | update / fix / clean / `applyDotfiles.sh` / `sync_time.sh` | Wave 1 + Dotfiles |
 
 ## Bootstrap (Wave 1 Step 1 — done)
 
@@ -66,13 +68,13 @@ snap_install code --classic
 
 ## Menus (Wave 1 Step 4 — done)
 
-- Desenvolvimento → git / VS Code / Cursor / Insomnia / Postman / Termius / Fira Code / Docker
-- Jogos → Steam / Heroic / Lutris
-- Navegadores → Firefox / Brave / Vivaldi / Opera / Zen
-- Produção → Dropbox / Anki / Notion / Thunderbird
-- Social → Discord / Spotify / Telegram / WhatsApp
-- Música → Audacity / Navidrome
-- Utilidades → VLC / OBS
+- Desenvolvimento → … + Node toolchain
+- Jogos / Navegadores / Música — Wave B
+- Produção → … + LibreOffice / OnlyOffice
+- Social → … + Proton Mail
+- Segurança → Bitwarden / 1Password
+- Utilidades → VLC / OBS / Proton VPN / NordVPN
+- Presets → Dev box / Social box / Gaming light
 - Voltar breaks back to parent (no nested `bash $menuSof`)
 
 ## QA (Wave 1 Step 5 — done)
@@ -94,5 +96,5 @@ Alpha UI: modular views/components, Flat Design, helper allowlist + `CARCARA_NON
 
 ## Fix priorities (remaining)
 
-1. Live install / pkexec smoke-test on a disposable machine (owner-requested) — Waves A–B + Wave 2.
-2. Wave C catalog / optional AppImage.
+1. Live install / pkexec smoke-test on a disposable machine (owner-requested) — Waves A–C + Wave 2.
+2. Optional Electron AppImage packaging.

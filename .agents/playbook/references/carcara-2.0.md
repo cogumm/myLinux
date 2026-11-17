@@ -93,7 +93,8 @@ When changing visuals: run skill `--design-system`; read `pages/app-shell.md` fi
 
 `ping` · `apt-dry-run` · `update-distro` · `fix-system` · `clean-distro` · `sync-time` ·  
 `dotfiles-{dry-run,aliases,all,git,hyper,theme,bashrc}` ·  
-`install-{vlc,obs,firefox,brave,vivaldi,opera,zen,steam,heroic,lutris,audacity,navidrome,discord,spotify,telegram,whatsapp,git,vscode,cursor,insomnia,postman,termius,firacode,docker,dropbox,anki,notion,thunderbird}`
+`install-*` (full catalog Waves A–C) · `preset-{dev,social,gaming}` — see `helper/carcara-helper.sh` usage().  
+Software UX: category search + tile `backend` badges; Sobre `host:info` (distro/arch/flatpak/snap).
 
 ## Environment (Zod)
 
@@ -148,5 +149,4 @@ AppImage remains optional / not required for v2.0.1.
 ## Still open
 
 1. Live smoke-test Software + pkexec on real desktop / WSLg (owner-approved)
-2. **v2.0.1** catalog waves A→C — see `memory-bank/TODO.md`
-3. Optional AppImage target
+2. Optional AppImage target

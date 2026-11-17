@@ -28,9 +28,9 @@ Secondary: anyone who clones the MIT repo and accepts root risk.
 
 ### C — Install curated apps (either UI)
 
-**Shipped today:** Wave 2 + **A + B** — see `.agents/idea/softwares.md` (Heroic, Lutris, Vivaldi, Opera, Zen, Audacity, Navidrome, …).  
-**v2.0.1 backlog:** wave **C** in `memory-bank/TODO.md`.  
-Policy: apt (or official keyring) → Flatpak → Snap; vendor `.deb` via `install_deb_url`.
+**Shipped today:** Wave 2 + **A–C** — see `.agents/idea/softwares.md` (office, passwords, Proton/Nord, Node toolchain, presets, …).  
+**Backlog:** live smoke + optional AppImage (`memory-bank/TODO.md`).  
+Policy: apt → Flatpak → Snap; vendor deb/AppImage/zip helpers (no curl\|bash).
 
 ### D — Apply dotfiles
 

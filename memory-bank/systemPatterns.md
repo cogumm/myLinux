@@ -37,7 +37,7 @@ Dotfiles tree is user-space (`dotfiles/apply.sh`); Carcará menus only **invoke*
 
 1. **Central config (1.x)** — Yad flags and dirs in `config.sh`; shared API in `install_backends.sh`.
 2. **One script per app** — thin installers on backends (`install_deb_url` for vendor `.deb` when needed).
-3. **Category menus** — 2.0 Software follows **Snap Store** taxonomy (19 cats); 1.x Wave B folders: development / games / browsers / social / productivity / music / utilities.
+3. **Category menus** — 2.0 Software follows **Snap Store** taxonomy (19 cats) + search/badges; 1.x folders: development / games / browsers / social / productivity / music / security / utilities / presets.
 4. **Disclaimer + root gate** — 1.x Zenity license + `isRoot`; 2.0 license-gate + `requireRoot()` + action confirms; `.deb` launcher elevates via pkexec.
 5. **Archive, don’t delete history** — `old/` stays for reference; port *ideas*, not dead scripts.
 6. **2.0 component factories** — `createTile` / `createRail` / `createLicenseGate` / `createActivityConsole` / `createPagedTiles` / `createLangSwitch`; one view file per menu.
