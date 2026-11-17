@@ -5,9 +5,10 @@ import type { TileProps } from "../components/tile.js";
 export const sistemaMeta: ViewMeta = {
   eyebrow: "Manutenção",
   title: "Sistema",
-  lede: "Atualizar, corrigir e limpar via helper privilegiado.",
+  lede: "Atualizar, corrigir, limpar e testar a rede.",
 };
 
+/** Core verbs only — same product surface as Carcará 1.x (no spike/dry-run). */
 const TILES: TileProps[] = [
   {
     kicker: "Apt",
@@ -32,12 +33,6 @@ const TILES: TileProps[] = [
     action: "clean-distro",
     confirm:
       "Limpeza segura (lixeira, tmp, apt clean/autoclean/autoremove)? Locks e listas apt não serão removidos.",
-  },
-  {
-    kicker: "Simular",
-    title: "Apt dry-run",
-    desc: "Sem alterar pacotes",
-    action: "apt-dry-run",
   },
   {
     kicker: "Rede",
