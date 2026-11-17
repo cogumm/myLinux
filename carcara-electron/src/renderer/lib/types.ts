@@ -4,9 +4,11 @@ export type HelperResult = {
   stderr: string;
 };
 
+export type OpenExternalResult = { ok: boolean; error?: string };
+
 export type CarcaraApi = {
   runHelper: (action: string) => Promise<HelperResult>;
-  openExternal?: (url: string) => Promise<void>;
+  openExternal?: (url: string) => Promise<OpenExternalResult>;
 };
 
 export type StatusKind = "idle" | "busy" | "ok" | "err";

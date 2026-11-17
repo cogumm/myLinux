@@ -75,7 +75,20 @@ export function renderSobre(): HTMLElement {
     btn.textContent = item.label;
     btn.title = item.href;
     btn.addEventListener("click", () => {
-      void openExternal(item.href);
+      void openExternal(item.href).then((result) => {
+        if (!result.ok) {
+          btn.title = `${item.href} — falhou: ${result.error ?? "sem browser"}`;
+          try {
+            void navigator.clipboard.writeText(item.href);
+            btn.textContent = `${item.label} (copiado)`;
+            window.setTimeout(() => {
+              btn.textContent = item.label;
+            }, 1800);
+          } catch {
+            /* ignore */
+          }
+        }
+      });
     });
     links.append(btn);
   }

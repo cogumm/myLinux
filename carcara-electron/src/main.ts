@@ -1,6 +1,7 @@
-import { app, BrowserWindow, ipcMain, shell } from "electron";
+import { app, BrowserWindow, ipcMain } from "electron";
 import { spawn } from "node:child_process";
 import path from "node:path";
+import { openExternalUrl } from "./open-external";
 
 /** Bun Shell bridge — privilege allowlist runs under Bun, not Electron's Node. */
 const HELPER_BRIDGE = path.join(__dirname, "..", "scripts", "run-helper.ts");
@@ -80,9 +81,15 @@ app.whenReady().then(() => {
 
   ipcMain.handle("shell:openExternal", async (_event, url: string) => {
     if (typeof url !== "string" || !ALLOWED_EXTERNAL.has(url)) {
-      throw new Error("URL não permitida");
+      return { ok: false as const, error: "URL não permitida" };
     }
-    await shell.openExternal(url);
+    try {
+      await openExternalUrl(url);
+      return { ok: true as const };
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      return { ok: false as const, error: message };
+    }
   });
 
   createWindow();
