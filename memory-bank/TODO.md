@@ -14,7 +14,7 @@ Also mirrored under “Still open” in `.agents/playbook/references/carcara-2.0
 | **2.0** | Smoke-test Software installers via UI | Owner-requested apt/flatpak/snap |
 | **2.0** | Smoke-test privileged actions with **pkexec** | Real Linux desktop / WSLg (not already-root) |
 | **2.0** | Optional AppImage | `.deb` + Release CI **done** |
-| **2.0.1** | Catalog waves **B→C** (below) | Wave A **done**; curated installers + categories |
+| **2.0.1** | Catalog wave **C** (below) | Waves A+B **done** |
 | **1.x** | Live smoke-test Wave 2 installers | Same machine gate as 2.0 Software |
 | Skills | `bash-scripting`, `debian-linux-triage` | Install when rewriting that area |
 
@@ -35,7 +35,8 @@ Wave 1–2 engine **done**. Wave 3 **cancelled** (UI is Electron 2.0).
 - [ ] Continue [`.agents/idea/carcara-2.0-electron.md`](../.agents/idea/carcara-2.0-electron.md) — Software/pkexec smoke-test (owner machine)
 - [x] Package `.deb` + GitHub Actions Release workflow (17 de Novembro de 2026)
 - [x] **v2.0.1** Wave A catalog (11 apps + `install_deb_url`) (17 de Novembro de 2026)
-- [ ] **v2.0.1** catalog waves B → C (see section below)
+- [x] **v2.0.1** Wave B (Heroic/Lutris/browsers/Audacity/Navidrome + 1.x folders) (17 de Novembro de 2026)
+- [ ] **v2.0.1** catalog wave C (see section below)
 
 ## Carcará / scripts (1.x)
 
@@ -98,10 +99,10 @@ Policy stays **apt → Flatpak/Flathub → Snap**. Thin installers + 1.x menus +
 
 Categories mirror [Snap Store](https://snapcraft.io/store): Development, Games, Social, Productivity, Utilities, Music and Audio, Art and Design, Photo and Video, Server and Cloud, Books and Reference, Devices and IoT, Education, Entertainment, Finance, Health and Fitness, News and Weather, Personalisation, Science, Security.
 
-- [ ] **Games**: Steam; Epic + GOG via Heroic; Battle.net via Wine/Lutris
-- [ ] **Browsers** (map into Utilities or Personalisation until a dedicated slot — or Productivity): Firefox, Brave, Vivaldi, Opera GX, Zem
-- [ ] **Photo and Video / Music**: OBS, Audacity, Navidrome (beyond VLC / Spotify already placed)
-- [ ] Wire 1.x `menuSof` folders to the same taxonomy when installers land (today 1.x still has 4 folders)
+- [x] **Games**: Steam; Heroic (Epic+GOG); Lutris (Wine/Battle.net) (17 de Novembro de 2026)
+- [x] **Browsers**: Firefox, Brave, Vivaldi, Opera (GX tile), Zen (“Zem”) — 2.0 under Utilities; 1.x `browsers/` (17 de Novembro de 2026)
+- [x] **Photo and Video / Music**: OBS (utilities); Audacity + Navidrome (`music/`); VLC/Spotify already shipped (17 de Novembro de 2026)
+- [x] Wire 1.x `menuSof` → development / games / browsers / social / productivity / music / utilities (17 de Novembro de 2026)
 
 ### Wave C — depth (remainder of the wishlist)
 
@@ -110,7 +111,7 @@ Categories mirror [Snap Store](https://snapcraft.io/store): Development, Games, 
 - [ ] **Proton Mail** · **Proton VPN** (Social / Utilities)
 - [ ] **NordVPN** (Utilities)
 - [ ] **Node.js** toolchain: Node + npm + **pnpm** + **Yarn** + **Bun** (Development; prefer mise/fnm or NodeSource — no `curl|bash` unless owner asks)
-- [ ] **Audacity** · **Navidrome** (if not already under Media in Wave B)
+- [x] **Audacity** · **Navidrome** (shipped in Wave B `music/`) (17 de Novembro de 2026)
 - [ ] **Docker Desktop** tile only if Engine is not enough (clarify vs `docker.sh`)
 - [ ] Presets: *Dev box* / *Social box* / *Gaming light*
 - [x] 2.0 Software **pagination** (6/page, Anterior/Próxima) (17 de Novembro de 2026)

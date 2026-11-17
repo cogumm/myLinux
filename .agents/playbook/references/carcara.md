@@ -6,7 +6,7 @@
 Main menu (trimmed 17 Nov 2026): Atualizar · Instalar → `menuSof` · Correção · Limpeza · **Dotfiles** · Sair.  
 (Removed stubs: “programas diversos”, “Limpeza de memória”.)
 
-Software menu: “Desenvolvimento” / “Produção” / “Social” / “Utilidades” — all four wired (`development/_menu.sh`, `productivity/_menu.sh`, `social/_menu.sh`, `utilities/_menu.sh`).
+Software menu (Wave B): Desenvolvimento · Jogos · Navegadores · Social · Produtividade · Música · Utilidades (`development/`, `games/`, `browsers/`, `social/`, `productivity/`, `music/`, `utilities/`).
 
 ## Installers present (Wave 2 + Wave A — thin / backends)
 
@@ -14,23 +14,13 @@ Policy: apt (distro or keyring) → Flatpak/Flathub → Snap. Vendor `.deb` via 
 
 | Area | Script | Preferred path |
 |------|--------|----------------|
-| utilities | `vlc.sh` | apt `vlc` → Flatpak → Snap |
-| utilities | `firefox.sh` | apt → Flatpak → Snap |
-| utilities | `brave.sh` | Brave apt keyring → Snap |
-| utilities | `steam.sh` | Flatpak → apt `steam-installer` |
-| utilities | `obs.sh` | apt → Flatpak → Snap |
-| social | `discord.sh` | Flatpak → Snap |
-| social | `spotify.sh` | Spotify apt keyring → Flatpak → Snap |
-| social | `telegram.sh` | Flatpak → Snap (`telegram-desktop` only) |
-| social | `whatsapp.sh` | Flatpak → Snap |
-| development | `git.sh` | apt `git` + gui/doc/gitg |
-| development | `vscode.sh` | Microsoft apt → Snap `--classic` |
-| development | `cursor.sh` | vendor amd64 `.deb` (`install_deb_url`) |
-| development | `insomnia.sh` / `postman.sh` | Flatpak → Snap |
-| development | `termius.sh` | Snap → Flatpak |
-| development | `firacode.sh` | apt `fonts-firacode` |
-| development | `docker.sh` | Docker CE apt → `docker.io` (+ group `$SUDO_USER`) |
-| productivity | `dropbox.sh` / `anki.sh` / `notion.sh` / `thunderbird.sh` | Flatpak/Snap/apt chains |
+| utilities | `vlc.sh` / `obs.sh` | apt → Flatpak → Snap |
+| browsers | `firefox` / `brave` / `vivaldi` / `opera` / `zen` | apt/keyring/Flatpak/Snap |
+| games | `steam` / `heroic` / `lutris` | Flatpak → Snap/apt |
+| music | `audacity` / `navidrome` | apt/Flatpak/Snap |
+| social | `discord` / `spotify` / `telegram` / `whatsapp` | Flatpak / Snap / apt |
+| development | `git` / `vscode` / `cursor` / `insomnia` / `postman` / `termius` / `firacode` / `docker` | see Wave A |
+| productivity | `dropbox` / `anki` / `notion` / `thunderbird` | Flatpak/Snap/apt |
 | system | update / fix / clean / `applyDotfiles.sh` / `sync_time.sh` | Wave 1 + Dotfiles; **sync-time** also on 2.0 Sistema |
 
 ## Bootstrap (Wave 1 Step 1 — done)
@@ -52,7 +42,8 @@ Library: `carcara/app/config/install_backends.sh` (sourced from `config.sh`).
 | `ensure_flatpak_flathub` | Install flatpak + add Flathub |
 | `flatpak_install <app-id>` | Idempotent Flathub install |
 | `snap_install <name> [--classic …]` | Idempotent snap install (installs snapd if needed) |
-| `install_deb_url <dpkg-name> <url>` | curl `.deb` → dpkg -i → `apt-get -f` (Wave A Cursor; reusable) |
+| `install_deb_url <dpkg-name> <url>` | curl `.deb` → dpkg -i → `apt-get -f` (Cursor; reusable) |
+| `install_appimage_url <name> <url> [dir]` | curl AppImage → `/opt/<name>/` + `/usr/local/bin/<name>` (Zen) |
 | `run_with_progress <title> <cmd…>` | Optional Yad pulsate; preserves `PIPESTATUS[0]` |
 
 Logs go to stderr as `[carcara] …` / `[carcara:error] …` for CLI and future Electron.
@@ -76,9 +67,12 @@ snap_install code --classic
 ## Menus (Wave 1 Step 4 — done)
 
 - Desenvolvimento → git / VS Code / Cursor / Insomnia / Postman / Termius / Fira Code / Docker
+- Jogos → Steam / Heroic / Lutris
+- Navegadores → Firefox / Brave / Vivaldi / Opera / Zen
 - Produção → Dropbox / Anki / Notion / Thunderbird
 - Social → Discord / Spotify / Telegram / WhatsApp
-- Utilidades → VLC / Firefox / Brave / Steam / OBS
+- Música → Audacity / Navidrome
+- Utilidades → VLC / OBS
 - Voltar breaks back to parent (no nested `bash $menuSof`)
 
 ## QA (Wave 1 Step 5 — done)
@@ -100,5 +94,5 @@ Alpha UI: modular views/components, Flat Design, helper allowlist + `CARCARA_NON
 
 ## Fix priorities (remaining)
 
-1. Live install / pkexec smoke-test on a disposable machine (owner-requested) — Wave A + Wave 2.
-2. Wave B category rewire / Heroic / optional AppImage.
+1. Live install / pkexec smoke-test on a disposable machine (owner-requested) — Waves A–B + Wave 2.
+2. Wave C catalog / optional AppImage.

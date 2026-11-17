@@ -93,7 +93,7 @@ When changing visuals: run skill `--design-system`; read `pages/app-shell.md` fi
 
 `ping` · `apt-dry-run` · `update-distro` · `fix-system` · `clean-distro` · `sync-time` ·  
 `dotfiles-{dry-run,aliases,all,git,hyper,theme,bashrc}` ·  
-`install-{vlc,firefox,brave,steam,obs,discord,spotify,telegram,whatsapp,git,vscode,cursor,insomnia,postman,termius,firacode,docker,dropbox,anki,notion,thunderbird}`
+`install-{vlc,obs,firefox,brave,vivaldi,opera,zen,steam,heroic,lutris,audacity,navidrome,discord,spotify,telegram,whatsapp,git,vscode,cursor,insomnia,postman,termius,firacode,docker,dropbox,anki,notion,thunderbird}`
 
 ## Environment (Zod)
 

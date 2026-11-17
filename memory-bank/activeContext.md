@@ -7,8 +7,8 @@ Last updated: 2026-11-17
 **Carcará 2.0 usable alpha** (`carcara-electron/`, package **`2.0.1`**).  
 **1.x** (`carcara/`) = install/maintenance **engine** + CLI/fallback.  
 **Packaging shipped:** `.deb` via `electron-builder` + GHA Release workflow.  
-**v2.0.1 Wave A shipped:** 11 catalog apps (Firefox…OBS) + `install_deb_url`.  
-**Next:** owner smoke (Software / pkexec) + **Wave B→C** — `memory-bank/TODO.md`.
+**v2.0.1 Waves A+B shipped:** catalog apps through Heroic/Lutris/Zen/Audacity/Navidrome; 1.x taxonomy folders.  
+**Next:** owner smoke (Software / pkexec) + **Wave C** — `memory-bank/TODO.md`.
 
 Canonical agent how-to:
 
@@ -70,16 +70,17 @@ Canonical agent how-to:
 - Zod env + `z.prettifyError`; tile hover-only teal; `carcara_confirm` auto-yes when root/NI.
 - `dependences.sh` hardened; Docker CE → `docker.io`; root + Bun PATH under sudo; WSL openExternal + GPU flags.
 
-### Wave A catalog — done
+### Waves A+B catalog — done
 
-- Thin installers + 1.x menus + helper + 2.0 tiles + locales (pt/en parity).
-- `install_deb_url` in `install_backends.sh` (Cursor amd64 `.deb`).
-- 1.x still 4 folders (browsers/Steam/OBS under utilities until Wave B).
+- Thin installers + helper + 2.0 tiles + locales (pt/en parity).
+- `install_deb_url` (Cursor); Heroic/Lutris/Vivaldi/Opera/Zen/Audacity/Navidrome.
+- 1.x `menuSof`: development · games · browsers · social · productivity · music · utilities.
+- Wishlist “Zem” → Zen Browser; Opera GX tile → Opera Snap/Flatpak on Linux.
 
 ### Catalog planning — v2.0.1 (open)
 
-- Tracker: `TODO.md` § **v2.0.1** waves **B / C** (Wave A complete).
-- `listSoftwares.md` = Snap Store pointer only (no duplicate wishlist).
+- Tracker: `TODO.md` § **v2.0.1** wave **C** (A+B complete).
+- `listSoftwares.md` = Snap Store pointer only.
 - Policy: **apt → Flatpak → Snap** (+ `install_deb_url` for vendor debs).
 
 ### `old/` reuse (settled)
@@ -96,7 +97,7 @@ Canonical agent how-to:
 
 1. Smoke-test Software installers incl. Wave A (owner-requested apt/flatpak/snap).
 2. Smoke-test **pkexec** on real desktop / WSLg (unelevated → elevates).
-3. **v2.0.1** Wave B→C.
+3. **v2.0.1** Wave C.
 4. Optional AppImage.
 
 ## Blockers / notes
