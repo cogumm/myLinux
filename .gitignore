@@ -2,3 +2,6 @@
 
 # Scripts de testes
 carcara/teste/*
+
+# Local tooling binaries (e.g. downloaded shellcheck)
+.tools/
