@@ -75,6 +75,7 @@ Canonical agent how-to for this state:
 
 1. Package `.deb` (AppImage optional).
 2. Smoke-test Software installers + pkexec on real desktop (owner-requested).
+3. **v2.0.1** catalog waves A→C (Firefox, WhatsApp, Cursor, Termius, Anki, Steam, …).
 
 ### i18n (done)
 

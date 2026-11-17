@@ -52,3 +52,5 @@ Append-only log. Do not delete completed history.
 - [x] Hardened `dependences.sh`: apt-family detect, apt update on demand, iputils-ping, snapd socket, Flathub via backends, NI-safe notify (2026-11-17)
 - [x] Ported Docker installer from `old/scripts/docker.sh` → `development/docker.sh` (CE apt → docker.io; no curl|bash/tutum); wired 1.x + 2.0 (2026-11-17)
 - [x] i18n pt/en: shared `locales/*.json`; 1.x `i18n.sh`+Zenity IDs; 2.0 renderer + native menu via `CARCARA_LANG` (2026-11-17)
+- [x] Rail PT|EN language switch (`localStorage` override; env default) (2026-11-17)
+- [x] Rescued `sync_time.sh` (timedatectl → ntpdate, NI) + 2.0 Sistema tile `sync-time`; TODO v2.0.1 waves A–C (2026-11-17)

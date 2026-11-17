@@ -13,10 +13,12 @@ Also mirrored under “Still open” in `.agents/playbook/references/carcara-2.0
 | **2.0** | Smoke-test Software installers via UI | Owner-requested apt/flatpak/snap |
 | **2.0** | Smoke-test privileged actions with **pkexec** | Real Linux desktop / WSLg (not already-root) |
 | **2.0** | Package `.deb` (AppImage optional) | Packaging only |
+| **2.0.1** | Catalog waves A→C (below) | Curated installers + categories |
 | **1.x** | Live smoke-test Wave 2 installers | Same machine gate as 2.0 Software |
 | Skills | `bash-scripting`, `debian-linux-triage` | Install when rewriting that area |
 
-Wave 1–2 engine **done**. Wave 3 **cancelled** (UI is Electron 2.0).
+Wave 1–2 engine **done**. Wave 3 **cancelled** (UI is Electron 2.0).  
+**v2.0.0** = usable alpha. **v2.0.1** = richer catalog + polish (waves below).
 
 ## Planned ideas
 
@@ -27,7 +29,10 @@ Wave 1–2 engine **done**. Wave 3 **cancelled** (UI is Electron 2.0).
 - [x] Env Zod + `.env.example` in `carcara-electron/` (17 de Novembro de 2026)
 - [x] Dotfiles menus (1.x + 2.0) + license gate 2.0 (17 de Novembro de 2026)
 - [x] Session knowledge consolidated → memory-bank + playbook (17 de Novembro de 2026)
+- [x] i18n + rail PT\|EN switch (17 de Novembro de 2026)
+- [x] Sistema tile **Sincronizar horário** → `sync_time.sh` (17 de Novembro de 2026)
 - [ ] Continue [`.agents/idea/carcara-2.0-electron.md`](../.agents/idea/carcara-2.0-electron.md) — Software/pkexec smoke-test + packaging `.deb`
+- [ ] **v2.0.1** catalog waves A → B → C (see section below)
 
 ## Carcará / scripts (1.x)
 
@@ -38,6 +43,7 @@ Wave 1–2 engine **done**. Wave 3 **cancelled** (UI is Electron 2.0).
 - [x] Menu 1.x **Dotfiles** → `applyDotfiles.sh` as `$SUDO_USER` (17 de Novembro de 2026)
 - [x] Port Docker from `old/scripts/docker.sh` → modern `development/docker.sh` (+ 1.x/2.0 menus) (17 de Novembro de 2026)
 - [x] i18n menus pt/en (`locales/*.json`, `CARCARA_LANG`) for 1.x + 2.0 (17 de Novembro de 2026)
+- [x] Harden `sync_time.sh` (timedatectl → ntpdate; NI / `carcara_confirm`) (17 de Novembro de 2026)
 
 ## Carcará 2.0
 
@@ -50,9 +56,53 @@ Wave 1–2 engine **done**. Wave 3 **cancelled** (UI is Electron 2.0).
 - [x] Smoke-test Sistema as root (sudo+Bun PATH): ping / update / fix / clean → exit 0 (17 de Novembro de 2026)
 - [x] Dotfiles rail + helper `dotfiles-*` (unprivileged / as `$SUDO_USER`) (17 de Novembro de 2026)
 - [x] License gate (1.x parity; checkbox Continuar) (17 de Novembro de 2026)
+- [x] Rail language switch PT\|EN (`localStorage` override; env default) (17 de Novembro de 2026)
+- [x] Sistema **sync-time** → `sync_time.sh` (17 de Novembro de 2026)
 - [ ] Smoke-test Software installers (owner-requested)
 - [ ] Smoke-test with **pkexec** on real desktop / WSLg (unelevated user → elevates)
 - [ ] Package `.deb` for Carcará 2.0 (AppImage optional)
+
+## v2.0.1 — catalog enrichment (planned)
+
+Policy stays **apt → Flatpak/Flathub → Snap**. Thin installers + 1.x menus + 2.0 tiles + helper allowlist + `locales`.  
+Source lists: `.agents/idea/listSoftwares.md`, chat catalog plan. Promote into `softwares.md` as items ship.
+
+### Wave A — wishlist (first)
+
+- [ ] **Firefox** (Browsers) — apt / Flatpak / Snap
+- [ ] **WhatsApp Desktop** (Social) — Snap / Flatpak
+- [ ] **Cursor** (Development) — official `.deb` / vendor path (not Snap-first)
+- [ ] **Termius** (Development) — Snap `termius-app` or `.deb` ([termius.com](https://termius.com))
+- [ ] **Anki** (Productivity) — Flatpak (not legacy `.deb` from `old/`)
+- [ ] **Steam** (Games) — Flatpak preferred / apt
+- [ ] **Notion** (Productivity) — Snap / Flatpak (verify quality)
+- [ ] Replace **Insomnia** → **Bruno** or **Postman** (Development); remove Insomnia from menus when ready
+- [ ] Update `.agents/idea/softwares.md` + `listSoftwares.md` as each lands
+
+### Wave B — new categories
+
+- [ ] Menu/rail category **Browsers** (Firefox + Chromium/Chrome; Zem only if still used)
+- [ ] Menu/rail category **Games** (Steam + Wine/winetricks and/or Lutris; Battle.net via Wine/Lutris — no fragile vendor script)
+- [ ] Optional: **Heroic** (Epic/GOG) Flatpak
+
+### Wave C — depth / polish
+
+- [ ] **OBS Studio**, **GIMP** / Inkscape, **Audacity** (Media / Utilities)
+- [ ] Archive tools (`p7zip` / `unrar` / …) — idea from `old/installZIP`
+- [ ] **Bitwarden** or **KeePassXC** (passwords)
+- [ ] **LibreOffice** and/or **OnlyOffice** (Productivity)
+- [ ] **Slack** / **Signal** (Social) if needed
+- [ ] **GitHub CLI (`gh`)** apt
+- [ ] Presets: *Dev box* / *Social box* / *Gaming light* (orchestrate existing installers)
+- [ ] 2.0 UX: search/filter tiles; backend badge (`apt` · `flatpak` · `snap`)
+- [ ] Sobre/health: distro + arch + flatpak/snap status
+- [ ] Expose more Sistema diagnostics if useful (disk, helper versions)
+
+### Explicitly out of v2.0.1
+
+- Snap Store mirror / dozens of random snaps
+- LAMP PHP5 / RVM / Atom / dead PPAs from `old/`
+- Popcorn, Skype i386, Docky, Ubuntu-Tweak, tutum Docker helpers
 
 ## Future agent skills (skills.sh) — install when modernizing that area
 

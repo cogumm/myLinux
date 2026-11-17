@@ -84,7 +84,7 @@ When changing visuals: run skill `--design-system`; read `pages/app-shell.md` fi
 
 ## Helper allowlist
 
-`ping` · `apt-dry-run` · `update-distro` · `fix-system` · `clean-distro` ·  
+`ping` · `apt-dry-run` · `update-distro` · `fix-system` · `clean-distro` · `sync-time` ·  
 `dotfiles-{dry-run,aliases,all,git,hyper,theme,bashrc}` ·  
 `install-{vlc,discord,spotify,telegram,git,vscode,insomnia,firacode,docker,dropbox}`
 
@@ -112,4 +112,4 @@ When changing visuals: run skill `--design-system`; read `pages/app-shell.md` fi
 
 1. Package `.deb` (AppImage optional)
 2. Live smoke-test Software + pkexec on real desktop / WSLg (owner-approved)
-3. See `memory-bank/TODO.md` for 1.x leftovers (smoke-test installers, i18n, …)
+3. **v2.0.1** catalog waves A→C — see `memory-bank/TODO.md`
