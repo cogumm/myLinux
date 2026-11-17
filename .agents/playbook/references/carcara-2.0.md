@@ -68,6 +68,7 @@ When changing visuals: run skill `--design-system`; read `pages/app-shell.md` fi
 - **Unprivileged helper action:** `ping` (ICMP) — no pkexec warning if somehow run as non-root via `bun run helper`.
 - **External URLs (Sobre):** allowlist in `main.ts`; on WSL open via Windows PowerShell `Start-Process` (`src/open-external.ts`), fallback `cmd start`, then `shell.openExternal`. If all fail, UI copies URL.
 - GPU/`--no-sandbox` noise on WSL is expected; Electron as root typically needs `--no-sandbox` (already in `package.json`).
+- Native menubar: **Arquivo → Sair** and **Sobre → Sobre o Carcará** (IPC → view Sobre) — see `src/app-menu.ts`.
 
 ## Helper allowlist
 

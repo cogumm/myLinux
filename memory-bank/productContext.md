@@ -19,7 +19,7 @@ Secondary: anyone who clones the MIT repo and accepts root risk.
 ### B — Maintain / install via Carcará 2.0
 
 1. `./start.sh --electron` (needs Bun)
-2. Rail: **Sistema** (update/fix/clean/dry-run/ping) · **Software** (categories + tiles) · **Sobre**
+2. Rail: **Sistema** (update/fix/clean/test connection) · **Software** (categories + tiles) · **Sobre**
 3. Confirm dialog → helper → activity console (Dracula terminal)
 4. Engine is still 1.x backends; UI never invents package policy
 

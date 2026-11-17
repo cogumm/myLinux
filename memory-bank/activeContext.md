@@ -29,7 +29,7 @@ Session knowledge dump (17 Nov 2026) lives in:
 
 1. Package `.deb` for Carcará 2.0 (optional AppImage).
 2. Smoke-test **Software** installers via 2.0 UI (owner-requested).
-3. Optional: polish remaining 1.x stubs (“Limpeza de memória”) only if still wanted.
+3. Optional: 1.x menu stubs removed; further polish only if requested.
 
 ## Validated
 

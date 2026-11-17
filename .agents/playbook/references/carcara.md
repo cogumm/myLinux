@@ -4,7 +4,8 @@
 
 `startApp.sh` → `config.sh` (loads backends) → `dependences` → Zenity license → `menuGeral.sh` loop.
 
-Main options (UI labels as shipped): “Atualizar sistema” · “Instalar programas de desenvolvimento” · “Instalar programas diversos” · “Correção do sistema” · “Limpeza do sistema” · “Limpeza de memória” (stub) · “Sair”.
+Main options (trimmed 17 Nov 2026): “Atualizar sistema” · “Instalar programas” → `menuSof` · “Correção do sistema” · “Limpeza do sistema” · “Sair”.  
+(Removed stubs: “programas diversos”, “Limpeza de memória”.)
 
 Software menu: “Desenvolvimento” / “Produção” / “Social” / “Utilidades” — all four wired (`development/_menu.sh`, `productivity/_menu.sh`, `social/_menu.sh`, `utilities/_menu.sh`).
 
