@@ -96,5 +96,4 @@ Alpha UI: modular views/components, Flat Design, helper allowlist + `CARCARA_NON
 
 ## Fix priorities (remaining)
 
-1. Live install / pkexec via `carcara-electron` `bun run smoke:software -- --pkexec` / `--live` (owner-requested; Waves A–C + Wave 2).
-2. Optional Electron AppImage packaging.
+1. Live install / pkexec via `carcara-electron` `bun run smoke:software -- --pkexec` / `--live-safe` (owner-requested; Waves A–C + Wave 2).

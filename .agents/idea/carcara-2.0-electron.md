@@ -19,7 +19,7 @@ Ship **Carcará 2.0** as a desktop app with a modern UI using **Electron**.
 | UI kit | **Vanilla** HTML/CSS + TypeScript renderer (no React for first ship) |
 | UI/UX | Skill **`ui-ux-pro-max`** → `design-system/carcara-2-0/` (Flat Design, dark utility) |
 | Privilege | App runs as **root** (like 1.x `isRoot`); helper allowlist via Bun bridge (pkexec only if somehow non-root) |
-| Packaging | `.deb` via `electron-builder` + GHA on Release; AppImage optional later |
+| Packaging | `.deb` + AppImage via `electron-builder` + GHA on Release |
 | Engine | **Reuse** `carcara/app/config/install_backends.sh` and existing system/app scripts — never reimplement apt/flatpak/snap in the renderer |
 
 ## Why Electron + Bun
@@ -45,7 +45,7 @@ Ship **Carcará 2.0** as a desktop app with a modern UI using **Electron**.
 - **Bun** ≥ 1.1 (package manager + script runner + Shell)
 - Electron (current stable) + TypeScript (main/preload compiled with `tsc` for Electron’s Node)
 - Vanilla renderer (PT labels, same verbs as 1.x); version from `package.json` (`{version}` in locales)
-- Scripts: `bun run dev` / `build` / `start` / `helper` / `pack:deb`
+- Scripts: `bun run dev` / `build` / `start` / `helper` / `pack:deb` / `pack:appimage` / `pack:linux`
 - Helper: Bash allowlist + Node `run-helper-node.ts` (runtime) + Bun `run-helper.ts` (dev)
 - Packaging: `electron-builder.yml` + `build/deb/after-install.sh` + `.github/workflows/release-deb.yml`
 
@@ -149,7 +149,7 @@ flowchart LR
 - [x] Dotfiles rail + helper `dotfiles-*` → `apply.sh` as `$SUDO_USER` (17 de Novembro de 2026)
 - [x] License gate (1.x parity: checkbox Continuar before shell) (17 de Novembro de 2026)
 - [x] Package `.deb` (`electron-builder.yml` + `bun run pack:deb` + Release workflow) (17 de Novembro de 2026)
-- [ ] AppImage optional
+- [x] AppImage target (`pack:appimage` / CI `pack:linux`) — 17 de Novembro de 2026
 - [x] Software / pkexec smoke harness (`bun run smoke:software`; wiring + ping + probe) — 17 de Novembro de 2026
 - [ ] Live Software `--live` + live `pkexec` on owner desktop (policykit / root)
 - [x] Document dual entry in root README + `carcara-electron/README.md` (alpha)

@@ -14,6 +14,8 @@ Memory dump: `memory-bank/activeContext.md` (session 17 Nov 2026)
 | `sudo ./start.sh --terminal` | Carcará 1.x |
 | `cd carcara-electron && bun run build` | `tsc` + Bun IIFE renderer (build OK as user) |
 | `bun run pack:deb` | electron-builder → `release/carcara_<ver>_amd64.deb` |
+| `bun run pack:appimage` | → `release/carcara_<ver>_amd64.AppImage` |
+| `bun run pack:linux` | `.deb` + AppImage (CI) |
 | `bun run helper -- ping` | Dev Bun bridge → `testConnection.sh` |
 | `bun run helper -- dotfiles-dry-run` | Preview `dotfiles/apply.sh --dry-run --all` as user |
 | Install `.deb` + `carcara` | Packaged path (pkexec wrapper; **no Bun**) — owner-requested only |
@@ -136,7 +138,7 @@ Workflows orchestrate CI; builder config stays next to the Electron app (relativ
 
 1. Set `carcara-electron/package.json` `"version"` (or let CI sync from tag).
 2. Publish GitHub Release with tag `vX.Y.Z`.
-3. Workflow builds amd64 `.deb` and attaches it to that Release.
+3. Workflow builds amd64 `.deb` + AppImage (`pack:linux`) and attaches both to that Release.
 
 ### afterInstall / FPM gotchas
 
@@ -144,20 +146,19 @@ Workflows orchestrate CI; builder config stays next to the Electron app (relativ
 - Avoid `${REAL}`, `${Name}`, etc. Use `$VAR`, names with underscores, or `'heredoc'` + `sed` placeholder (`__CARCARA_BIN__`).
 - Wrapper must elevate like 1.x when uid ≠ 0 (`pkexec` + display session env).
 
-AppImage remains optional / not required for v2.0.1.
+AppImage: `bun run pack:appimage` (portable; no afterInstall — use root/pkexec to launch). CI attaches AppImage with the `.deb`.
 
 ## Smoke
 
 ```bash
 cd carcara-electron
-bun run smoke:software              # wiring + ping + pkexec probe
+bun run smoke:software              # wiring + bash -n + ping + pkexec probe
 bun run smoke:software -- --pkexec  # + apt-dry-run (root|pkexec)
-# sudo bun run smoke:software -- --live install-git   # mutating
+# sudo bun run smoke:software -- --live-safe   # mutating (install-git)
 ```
 
 Harness: `scripts/smoke-software.sh`. Bun bridge passes `CARCARA_*` via `pkexec env` (same as Node).
 
 ## Still open
 
-1. Live `--live` installs + live pkexec on real desktop / WSLg (owner-approved; needs policykit)
-2. Optional AppImage target
+1. Live `--live` / `--live-safe` installs + live pkexec on real desktop / WSLg (owner-approved; needs policykit)

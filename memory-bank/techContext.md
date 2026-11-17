@@ -78,7 +78,9 @@ bun run helper -- ping
 bun run helper -- sync-time   # privileged / owner-requested
 bun run helper -- dotfiles-dry-run
 bun run pack:deb              # → release/carcara_<ver>_amd64.deb (heavy; needs network)
-bun run smoke:software        # Software wiring + ping + pkexec probe
+bun run pack:appimage         # → release/carcara_<ver>_amd64.AppImage
+bun run pack:linux            # both (CI)
+bun run smoke:software        # Software wiring + bash -n + ping + pkexec probe
 ```
 
 Do **not** run live `sudo`, apt mutations, or `pkexec` flows unless the owner asks.

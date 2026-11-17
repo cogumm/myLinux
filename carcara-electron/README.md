@@ -51,6 +51,8 @@ bun run dev
 | `bun run smoke:software -- --live install-git …` | mutating installs (owner machine) |
 | `bun run typecheck` | `tsc --noEmit` |
 | `bun run pack:deb` | build + **electron-builder** → `release/*.deb` |
+| `bun run pack:appimage` | build → `release/*.AppImage` (portable; no postinst wrapper) |
+| `bun run pack:linux` | `.deb` + AppImage in one pass (CI) |
 | `bun run pack:dir` | unpacked dir under `release/` (debug packaging) |
 
 ### Smoke (Software / pkexec)
@@ -67,11 +69,12 @@ sudo bun run smoke:software -- --live install-git install-vlc
 
 On **WSL** without `policykit-1`, pkexec probes **SKIP** — use root (`sudo ./start.sh --electron`) or a native desktop for elevation.
 
-## Packaging (`.deb`)
+## Packaging (`.deb` + AppImage)
 
-- Config: `electron-builder.yml` — Linux `deb` + `extraResources` → `resources/mylinux/{carcara,locales,dotfiles,assets,carcara-electron/helper}`.
-- Postinst: `build/deb/after-install.sh` wraps `/usr/bin/carcara` with **pkexec** (1.x root parity) and `--no-sandbox`.
-- CI: `.github/workflows/release-deb.yml` — on **Release published** (or `workflow_dispatch`), builds amd64 `.deb` and attaches it to the release.
+- Config: `electron-builder.yml` — Linux `deb` + `AppImage` + `extraResources` → `resources/mylinux/{carcara,locales,dotfiles,assets,carcara-electron/helper}`.
+- Postinst (`.deb` only): `build/deb/after-install.sh` wraps `/usr/bin/carcara` with **pkexec** (1.x root parity) and `--no-sandbox`.
+- AppImage: portable; **no** afterInstall — run as root or `pkexec ./carcara_*.AppImage` (helper still elevates privileged actions when pkexec exists).
+- CI: `.github/workflows/release-deb.yml` — on **Release published** (or `workflow_dispatch`), builds amd64 `.deb` + AppImage and attaches both.
 
 ```bash
 cd carcara-electron
@@ -79,6 +82,11 @@ bun run pack:deb
 # → release/carcara_<version>_amd64.deb
 sudo apt install ./release/carcara_*.deb
 carcara   # elevates via pkexec when not root
+
+bun run pack:appimage
+# → release/carcara_<version>_amd64.AppImage
+chmod +x release/carcara_*.AppImage
+pkexec ./release/carcara_*.AppImage   # or sudo
 ```
 
 `--no-sandbox` is required on many WSL/Linux setups where `chrome-sandbox` is not root-owned (SUID).  

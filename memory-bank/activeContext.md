@@ -9,8 +9,9 @@ Last updated: 2026-11-17
 **Packaging shipped:** `.deb` via `electron-builder` + GHA Release workflow.  
 **v2.0.1 Waves A–C shipped:** full curated catalog + presets + Software search/badges + Sobre host health.  
 **Release:** cutting **v2.0.1** — notes in `docs/releases/2.0.1.md`; every future release needs that md + tag `vX.Y.Z` on the notes commit (`systemPatterns` #16).  
-**Next:** live `--live` / pkexec on host with policykit or root; optional AppImage — `memory-bank/TODO.md`.  
-**Smoke harness:** `cd carcara-electron && bun run smoke:software` (wiring PASS; pkexec SKIP on this WSL).  
+**Packaging:** `.deb` + **AppImage** (`pack:appimage` / CI `pack:linux`).  
+**Next:** live `--live` / pkexec on host with policykit or root — `memory-bank/TODO.md`.  
+**Smoke harness:** `cd carcara-electron && bun run smoke:software` (wiring + bash -n; pkexec SKIP without policykit).  
 **Skills installed:** `bash-scripting`, `debian-linux-triage` (+ existing shellcheck / ui-ux-pro-max) — see `.agents/skills/README.md`.
 
 Canonical agent how-to:
@@ -41,7 +42,7 @@ Canonical agent how-to:
 - **Postinst:** `build/deb/after-install.sh` renames `/opt/Carcara/carcara` → `carcara.bin`, writes `/usr/bin/carcara` wrapper with **pkexec** + `--no-sandbox` (1.x root parity).
 - **FPM trap:** electron-builder expands `${LetterOnly}` in maintainer scripts as macros — never use `${REAL}`, `${Name}`, etc. Prefer `$VAR`, underscore names, or quoted heredocs + `sed` placeholders (`__CARCARA_BIN__`).
 - **Package name:** `extraMetadata.name: carcara` (workspace npm name stays `carcara-electron`). Artifact: `carcara_${version}_${arch}.deb`.
-- **AppImage:** optional later — not required for v2.0.1.
+- **AppImage:** `bun run pack:appimage` / CI `pack:linux` (validated locally `carcara_2.0.1_x86_64.AppImage` ~109 MB).
 - Do **not** live-install the `.deb` / run pkexec smoke unless the owner asks.
 
 ### Version in UI strings — done

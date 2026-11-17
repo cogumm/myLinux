@@ -73,3 +73,4 @@ Append-only log. Do not delete completed history.
 - [x] Release process: `docs/releases/2.0.1.md` + memory-bank pattern (notes md → commit → annotated tag `vX.Y.Z`) (2026-11-17)
 - [x] Fix Release `.deb` CI: electron-builder `--publish never` + `publish: null` + `repository` in package.json; workflow_dispatch can attach to existing tag; checkout@v5 (2026-11-17)
 - [x] Default branch rename: docs/scripts use `main` (`start.sh` bootstrap, README, AGENTS, `.env.example`) (2026-11-17)
+- [x] AppImage packaging: `electron-builder` AppImage target + `pack:appimage` / `pack:linux`; CI attaches AppImage with `.deb`; smoke `bash -n` + `--live-safe` (2026-11-17)
