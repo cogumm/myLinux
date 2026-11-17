@@ -74,7 +74,13 @@ Canonical agent how-to for this state:
 
 1. Package `.deb` (AppImage optional).
 2. Smoke-test Software installers + pkexec on real desktop (owner-requested).
-3. Optional: i18n EN; port from `old/` only if needed.
+3. Optional: i18n EN menus.
+
+### Docker port (done)
+
+- Modern `carcara/.../development/docker.sh` replaces useful part of `old/scripts/docker.sh`.
+- Official Docker apt → fallback `docker.io`; adds `$SUDO_USER` to `docker` group.
+- Not ported: curl|bash, mass clean, tutum/apache-php helpers.
 
 ### dependences.sh (done this session)
 

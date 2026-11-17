@@ -100,7 +100,7 @@ Any new 2.0 screen: read page override under `pages/` first, else MASTER. Re-run
 ## Privilege helper contract
 
 - Renderer → preload IPC → Electron main → `bun scripts/run-helper.ts <action>` → Bun `$` → `pkexec` (or direct) `helper/carcara-helper.sh`.
-- Helper allowlist: system (`ping`, `apt-dry-run`, `update-distro`, `fix-system`, `clean-distro`) + installs (`install-vlc|discord|spotify|telegram|git|vscode|insomnia|firacode|dropbox`).
+- Helper allowlist: system (`ping`, `apt-dry-run`, `update-distro`, `fix-system`, `clean-distro`) + installs (`install-vlc|discord|spotify|telegram|git|vscode|insomnia|firacode|docker|dropbox`) + `dotfiles-*`.
 - System/install actions run 1.x scripts under `CARCARA_NONINTERACTIVE=1` (no Yad; `carcara_confirm` auto-yes when root/NI).
 - UI confirms before mutating actions; streams helper stdout/stderr into Atividade.
 - Unknown actions → exit 2. No arbitrary shell from the UI.

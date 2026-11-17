@@ -22,6 +22,7 @@ Policy: apt (distro or keyring) → Flatpak/Flathub → Snap. Idempotent via `pk
 | development | `vscode.sh` | Microsoft apt → Snap `--classic` |
 | development | `insomnia.sh` | Flatpak → Snap |
 | development | `firacode.sh` | apt `fonts-firacode` |
+| development | `docker.sh` | Docker CE apt → `docker.io` (+ group `$SUDO_USER`) |
 | productivity | `dropbox.sh` | Flatpak → Snap |
 | system | update / fix / clean / `applyDotfiles.sh` / `sync_time.sh` | Wave 1 + Dotfiles menu |
 

@@ -27,8 +27,8 @@ Secondary: anyone who clones the MIT repo and accepts root risk.
 
 ### C — Install curated apps (either UI)
 
-Same catalog: Git, VS Code, Insomnia, Fira Code, Dropbox, Discord, Spotify, Telegram, VLC.  
-Policy: apt → Flatpak → Snap where applicable.
+Same catalog: Git, VS Code, Insomnia, Fira Code, **Docker**, Dropbox, Discord, Spotify, Telegram, VLC.  
+Policy: apt (or official keyring) → Flatpak → Snap where applicable. Catalog notes: `.agents/idea/softwares.md`.
 
 ### D — Apply dotfiles
 

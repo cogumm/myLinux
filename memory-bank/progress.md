@@ -50,3 +50,4 @@ Append-only log. Do not delete completed history.
 - [x] Carcará 2.0 license gate (same `carcara/app/config/license` + Continuar checkbox as 1.x) (2026-11-17)
 - [x] Session knowledge re-consolidated (env/Zod, tiles hover, carcara_confirm, Dotfiles menus, license gate) → memory-bank + playbook `carcara-2.0`/`carcara`/`dotfiles` + AGENTS (2026-11-17)
 - [x] Hardened `dependences.sh`: apt-family detect, apt update on demand, iputils-ping, snapd socket, Flathub via backends, NI-safe notify (2026-11-17)
+- [x] Ported Docker installer from `old/scripts/docker.sh` → `development/docker.sh` (CE apt → docker.io; no curl|bash/tutum); wired 1.x + 2.0 (2026-11-17)

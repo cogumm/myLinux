@@ -86,7 +86,7 @@ When changing visuals: run skill `--design-system`; read `pages/app-shell.md` fi
 
 `ping` · `apt-dry-run` · `update-distro` · `fix-system` · `clean-distro` ·  
 `dotfiles-{dry-run,aliases,all,git,hyper,theme,bashrc}` ·  
-`install-{vlc,discord,spotify,telegram,git,vscode,insomnia,firacode,dropbox}`
+`install-{vlc,discord,spotify,telegram,git,vscode,insomnia,firacode,docker,dropbox}`
 
 ## Environment (Zod)
 
