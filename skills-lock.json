@@ -1,6 +1,20 @@
 {
   "version": 2,
   "skills": {
+    "bash-scripting": {
+      "source": "sickn33/agentic-awesome-skills",
+      "commit": "15888d3e32930f28b63d83f9e77f976604ccae99",
+      "sourceType": "github",
+      "skillPath": "skills/bash-scripting/SKILL.md",
+      "computedHash": "65eb8decc0f08c2761e9219ce9c266fb771c1850e881290866b5d524fc3474c9"
+    },
+    "debian-linux-triage": {
+      "source": "github/awesome-copilot",
+      "commit": "a06ba06d11f41b996f8c246e2a452e1bf3a17950",
+      "sourceType": "github",
+      "skillPath": "skills/debian-linux-triage/SKILL.md",
+      "computedHash": "7f87a1977e850e2062ab0e5d30edf2e11dc2e58897f0d5e570be012f8370e5a5"
+    },
     "shellcheck-configuration": {
       "source": "wshobson/agents",
       "commit": "9c61ab243def98f72da12abd41cfcf5bcd91af9d",
