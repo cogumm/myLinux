@@ -8,7 +8,8 @@ Last updated: 2026-11-17
 **1.x** (`carcara/`) = install/maintenance **engine** + CLI/fallback.  
 **Packaging shipped:** `.deb` via `electron-builder` + GHA Release workflow.  
 **v2.0.1 Waves A–C shipped:** full curated catalog + presets + Software search/badges + Sobre host health.  
-**Next:** owner smoke (Software / pkexec); optional AppImage — `memory-bank/TODO.md`.
+**Next:** owner smoke (Software / pkexec); optional AppImage — `memory-bank/TODO.md`.  
+**Skills installed:** `bash-scripting`, `debian-linux-triage` (+ existing shellcheck / ui-ux-pro-max) — see `.agents/skills/README.md`.
 
 Canonical agent how-to:
 

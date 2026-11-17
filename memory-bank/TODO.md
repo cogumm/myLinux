@@ -14,12 +14,11 @@ Also mirrored under “Still open” in `.agents/playbook/references/carcara-2.0
 | **2.0** | Smoke-test Software installers via UI | Owner-requested apt/flatpak/snap |
 | **2.0** | Smoke-test privileged actions with **pkexec** | Real Linux desktop / WSLg (not already-root) |
 | **2.0** | Optional AppImage | `.deb` + Release CI **done** |
-| **2.0.1** | Catalog waves A–C | **done** (smoke still owner-gated) |
 | **1.x** | Live smoke-test Wave 2 installers | Same machine gate as 2.0 Software |
-| Skills | `bash-scripting`, `debian-linux-triage` | Install when rewriting that area |
 
+**Done recently:** Waves A–C catalog; `.deb` + Release CI; skills `bash-scripting` + `debian-linux-triage` installed.  
 Wave 1–2 engine **done**. Wave 3 **cancelled** (UI is Electron 2.0).  
-**v2.0.0** = usable alpha. **v2.0.1** = richer catalog + polish (waves below).
+**v2.0.0** = usable alpha. **v2.0.1** = richer catalog + polish (waves below — catalog shipped).
 
 ## Planned ideas
 
@@ -70,7 +69,7 @@ Wave 1–2 engine **done**. Wave 3 **cancelled** (UI is Electron 2.0).
 - [x] Session knowledge re-consolidated (packaging + version + helper paths) → memory-bank + playbook (17 de Novembro de 2026)
 - [ ] Optional AppImage target
 
-## v2.0.1 — catalog enrichment (planned)
+## v2.0.1 — catalog enrichment (done)
 
 Policy stays **apt → Flatpak/Flathub → Snap**. Thin installers + 1.x menus + 2.0 tiles + helper allowlist + `locales`.  
 **Catalog tracker:** this section (v2.0.1). Research note: [`.agents/idea/listSoftwares.md`](../.agents/idea/listSoftwares.md) → [Snap Store](https://snapcraft.io/store). Promote into `softwares.md` as each item ships.
@@ -78,7 +77,7 @@ Policy stays **apt → Flatpak/Flathub → Snap**. Thin installers + 1.x menus +
 ### Already in Carcará (match wishlist)
 
 - [x] Git · VS Code · Docker Engine (`docker.sh`) · Insomnia · Discord · Telegram · Spotify  
-  - Note: wishlist **Docker Desktop** ≠ Engine — decide later if Desktop gets its own tile.
+  - Note: wishlist **Docker Desktop** ≠ Engine — skipped for v2.0.1 (Engine is enough).
 
 ### Wave A — core wishlist (ship first)
 
@@ -125,16 +124,16 @@ Categories mirror [Snap Store](https://snapcraft.io/store): Development, Games, 
 - Popcorn, Skype i386, Docky, Ubuntu-Tweak, tutum Docker helpers
 - Archive tools / GIMP / Slack / Signal / `gh` — only if added back to this v2.0.1 section
 
-## Future agent skills (skills.sh) — install when modernizing that area
+## Agent skills (skills.sh)
 
-Incremental modernization; do **not** install everything at once. Playbook stays canonical: `.agents/playbook/`.
+Playbook stays canonical: `.agents/playbook/`. Usage notes: `.agents/skills/README.md`. Lockfile: `skills-lock.json`.
 
-| Priority | Skill | Install | When it helps |
-|----------|--------|---------|----------------|
-| Done | `shellcheck-configuration` (`wshobson/agents`) | installed → `.agents/skills/shellcheck-configuration` | Lint/harden Carcará Bash during script rewrites |
-| Done | `ui-ux-pro-max` | installed → `.agents/skills/ui-ux-pro-max` | Carcará 2.0 design-system / Flat Design |
-| Next | `bash-scripting` (`sickn33/agentic-awesome-skills`) | `npx skills add sickn33/agentic-awesome-skills@bash-scripting` | Defensive scripting patterns when rewriting installers / menus |
-| Later | `debian-linux-triage` (`github/awesome-copilot`) | `npx skills add github/awesome-copilot@debian-linux-triage` | Safer apt/dpkg/systemd flows in `updateDistro` / `fixSystem` / `cleanDistro` |
+| Status | Skill | Path | When it helps |
+|--------|--------|------|----------------|
+| Done | `shellcheck-configuration` (`wshobson/agents`) | `.agents/skills/shellcheck-configuration` | Lint/harden Carcará Bash |
+| Done | `ui-ux-pro-max` | `.agents/skills/ui-ux-pro-max` | Carcará 2.0 design-system / Flat Design |
+| Done | `bash-scripting` (`sickn33/agentic-awesome-skills`) | `.agents/skills/bash-scripting` (17 de Novembro de 2026) | Defensive scripting when rewriting installers / menus |
+| Done | `debian-linux-triage` (`github/awesome-copilot`) | `.agents/skills/debian-linux-triage` (17 de Novembro de 2026) | Safer apt/dpkg/systemd design for `updateDistro` / `fixSystem` / `cleanDistro` |
 
 Links:
 

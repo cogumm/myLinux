@@ -6,7 +6,7 @@ Canonical guidance for **any** coding agent (Cursor, Claude Code, Codex, etc.).
 |------|------|
 | `idea/mylinux.md` | Product idea (source of truth for scope) |
 | `playbook/` | How to work in this repo (`SKILL.md` + `references/`) |
-| `skills/` | Optional installed skills (`npx skills`); usually empty |
+| `skills/` | Optional installed skills (`npx skills`); see `skills/README.md` + root `skills-lock.json` |
 
 Also read at repo root:
 

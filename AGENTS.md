@@ -80,6 +80,8 @@ Act as a **Linux systems analysis & development** specialist:
 | `.agents/playbook/references/carcara-2.0.md` | Electron 2.0 UI, Bun, helper, WSL |
 | `.agents/skills/ui-ux-pro-max/` | 2.0 visual direction / design-system |
 | `.agents/skills/shellcheck-configuration/` | When linting or hardening Bash under `carcara/` |
-| `.agents/skills/` (other) | Only if installed and relevant; backlog in `memory-bank/TODO.md` |
+| `.agents/skills/bash-scripting/` | Defensive Bash checklist (pair with shellcheck + shell-safety) |
+| `.agents/skills/debian-linux-triage/` | apt/dpkg/systemd triage plans (no unsolicited live remediations) |
+| `.agents/skills/README.md` | Installed skills + myLinux constraints |
 
 `skills-lock.json` tracks installed optional skills.

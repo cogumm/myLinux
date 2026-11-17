@@ -67,3 +67,5 @@ Append-only log. Do not delete completed history.
 - [x] v2.0.1 **Wave A**: 11 thin installers (Firefox, Brave, WhatsApp, Cursor, Termius, Postman, Anki, Notion, Thunderbird, Steam, OBS) + menus/helper/2.0 tiles/locales; `install_deb_url` backend (2026-11-17)
 - [x] v2.0.1 **Wave B**: Heroic, Lutris, Vivaldi, Opera, Zen, Audacity, Navidrome; 1.x folders games/browsers/music; moved steam/firefox/brave; helper + 2.0 tiles + locales (2026-11-17)
 - [x] v2.0.1 **Wave C**: LibreOffice/OnlyOffice, Bitwarden/1Password, Proton Mail/VPN, NordVPN, Node toolchain, presets; Software search+badges; Sobre host health; Docker Desktop skipped (2026-11-17)
+- [x] TODO hygiene: Still-open table trimmed (Waves A–C + skills removed from open); catalog section marked done (2026-11-17)
+- [x] Installed + configured skills `bash-scripting` + `debian-linux-triage` → `.agents/skills/` + `skills-lock.json`; README constraints + AGENTS guidance (2026-11-17)

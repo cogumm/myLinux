@@ -9,4 +9,4 @@
 - **old/** — archive only
 
 Not a multi-tenant SaaS, not a payment platform, not a web application.  
-Apt-family first. Still open: live Software/pkexec smoke-tests + v2.0.1 catalog + optional AppImage — see `memory-bank/TODO.md`.
+Apt-family first. Still open: live Software/pkexec smoke-tests + optional AppImage — see `memory-bank/TODO.md` (v2.0.1 Waves A–C catalog shipped).
