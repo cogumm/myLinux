@@ -19,9 +19,8 @@ Wave 3 polish was **cancelled / removed**.
 
 ## Next useful engineering work
 
-1. Port software installers via helper allowlist (categories UI).
-2. Later: `.deb` packaging for 2.0.
-3. Optional: live smoke-test of system actions with pkexec.
+1. Package `.deb` for Carcará 2.0 (optional AppImage).
+2. Live smoke-test of system + software actions with pkexec on a real/WSLg desktop.
 
 ## Blockers
 

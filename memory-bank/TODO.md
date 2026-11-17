@@ -9,7 +9,7 @@ Unscheduled ideas (promote into active work deliberately):
 - [x] Wave 1 Steps 1–5 — engine complete (17 de Novembro de 2026)
 - [x] Wave 2 — thin installers on backends (17 de Novembro de 2026)
 - [x] Cancel Wave 3 / start Electron 2.0 (17 de Novembro de 2026)
-- [ ] Continue [`.agents/idea/carcara-2.0-electron.md`](../.agents/idea/carcara-2.0-electron.md) — system actions, software menus, packaging
+- [ ] Continue [`.agents/idea/carcara-2.0-electron.md`](../.agents/idea/carcara-2.0-electron.md) — packaging `.deb` (+ smoke-test)
 
 ## Carcará / scripts (1.x)
 
@@ -24,7 +24,7 @@ Unscheduled ideas (promote into active work deliberately):
 - [x] Plan + scaffold `carcara-electron/` spike (helper + apt dry-run UI)
 - [ ] Validate spike on desktop / WSLg (incl. system actions + pkexec)
 - [x] Helper actions for update / fix / clean
-- [ ] Helper actions for software installers
+- [x] Helper actions for software installers + Software UI
 - [x] Dual entry via root `start.sh` + README
 - [ ] Package `.deb` for Carcará 2.0
 

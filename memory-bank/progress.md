@@ -30,3 +30,4 @@ Append-only log. Do not delete completed history.
 - [x] Installed skill `ui-ux-pro-max`; persisted `design-system/carcara-2-0/`; app-shell UI (sidebar + pane + log) applied to Electron renderer (2026-11-17)
 - [x] Root `start.sh` dual entry: interactive / `--electron` / `--terminal` (2026-11-17)
 - [x] Carcará 2.0 system actions: helper `update-distro` / `fix-system` / `clean-distro` → 1.x scripts + `CARCARA_NONINTERACTIVE`; Sistema UI with confirms (2026-11-17)
+- [x] Carcará 2.0 software installers via helper allowlist + Software UI categories (development/productivity/social/utilities) (2026-11-17)

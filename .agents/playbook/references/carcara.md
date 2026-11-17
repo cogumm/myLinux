@@ -82,7 +82,7 @@ All software category menus (`development`, `productivity`, `social`, `utilities
 
 Active UI track: sibling app `carcara-electron/` (Electron + **Bun**) — see `.agents/idea/carcara-2.0-electron.md`.  
 1.x remains CLI/fallback (`startApp.sh`). Chooser: `./start.sh`.  
-Helper allowlist: `ping`, `apt-dry-run`, `update-distro`, `fix-system`, `clean-distro` (`CARCARA_NONINTERACTIVE=1` for system scripts).
+Helper allowlist: system + `install-{vlc,discord,spotify,telegram,git,vscode,insomnia,firacode,dropbox}` (`CARCARA_NONINTERACTIVE=1`). Software UI mirrors 1.x categories.
 
 ## Fix priorities (remaining)
 
