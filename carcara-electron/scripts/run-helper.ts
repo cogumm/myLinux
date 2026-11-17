@@ -13,15 +13,19 @@ if (!/^[a-z][a-z0-9-]*$/.test(action)) {
   process.exit(2);
 }
 
+/** Actions that do not need root / pkexec. */
+const UNPRIVILEGED = new Set(["ping"]);
+
 const helper = path.join(import.meta.dir, "..", "helper", "carcara-helper.sh");
 const uid = typeof process.getuid === "function" ? process.getuid() : -1;
+const needsElevation = !UNPRIVILEGED.has(action);
 const hasPkexec = Boolean(Bun.which("pkexec"));
 const hasDisplay = Boolean(process.env.DISPLAY || process.env.WAYLAND_DISPLAY);
-const usePkexec = uid !== 0 && hasPkexec && hasDisplay;
+const usePkexec = needsElevation && uid !== 0 && hasPkexec && hasDisplay;
 
-if (uid !== 0 && !hasPkexec && hasDisplay) {
+if (needsElevation && uid !== 0 && !hasPkexec) {
   console.error(
-    "[carcara-helper-bridge] pkexec not found — running helper without elevation",
+    "[carcara-helper-bridge] pkexec ausente — ação privilegiada sem elevação (comum no WSL). Em desktop Linux instale policykit-1; ou rode já como root.",
   );
 }
 
