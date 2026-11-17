@@ -2,7 +2,26 @@
 
 Last updated: 2026-11-17
 
-Unscheduled ideas (promote into active work deliberately):
+Unscheduled ideas (promote into active work deliberately).  
+Canonical product ideas: `.agents/idea/mylinux.md`, `.agents/idea/carcara-2.0-electron.md`.  
+Also mirrored under “Still open” in `.agents/playbook/references/carcara-2.0.md` and `references/carcara.md`.
+
+## Still open (summary)
+
+| Track | Open item | Notes |
+|-------|-----------|--------|
+| **2.0** | Smoke-test Software installers via UI | Owner-requested apt/flatpak/snap |
+| **2.0** | Smoke-test privileged actions with **pkexec** | Real Linux desktop / WSLg (not already-root) |
+| **2.0** | Package `.deb` (AppImage optional) | Packaging only |
+| **2.0** | Optional Dotfiles tab | Explicitly out of spike; later |
+| **1.x** | Live smoke-test Wave 2 installers | Same machine gate as 2.0 Software |
+| **1.x** | Dotfiles apply helper (`*.bak` backups) | User-level; no root required to *use* |
+| **1.x** | `dependences.sh` debt | Still fragile; do not paper over |
+| **1.x** | Port from `old/` only if needed | e.g. docker helper refresh |
+| **1.x** | i18n (en) menus | Low priority |
+| Skills | `bash-scripting`, `debian-linux-triage` | Install when rewriting that area |
+
+Wave 1–2 engine **done**. Wave 3 **cancelled** (UI is Electron 2.0).
 
 ## Planned ideas
 
@@ -10,12 +29,14 @@ Unscheduled ideas (promote into active work deliberately):
 - [x] Wave 2 — thin installers on backends (17 de Novembro de 2026)
 - [x] Cancel Wave 3 / start Electron 2.0 (17 de Novembro de 2026)
 - [x] Carcará 2.0 alpha UI (modular renderer, helper wiring, Flat Design) (17 de Novembro de 2026)
-- [ ] Continue [`.agents/idea/carcara-2.0-electron.md`](../.agents/idea/carcara-2.0-electron.md) — packaging `.deb` (+ software install smoke-test)
+- [x] Env Zod + `.env.example` in `carcara-electron/` (17 de Novembro de 2026)
+- [ ] Continue [`.agents/idea/carcara-2.0-electron.md`](../.agents/idea/carcara-2.0-electron.md) — Software/pkexec smoke-test + packaging `.deb`
 
 ## Carcará / scripts (1.x)
 
 - [x] Wave 1 + Wave 2 engine work
 - [ ] Live smoke-test of Wave 2 installers (owner-requested machine)
+- [ ] Harden / rewrite `dependences.sh` (known debt in `AGENTS.md`)
 - [ ] Dotfiles apply helper with `*.bak` backups
 - [ ] Replace dead patterns from `old/` only when needed (docker helper refresh?)
 - [ ] i18n optional (en) for menus — low priority
@@ -27,9 +48,12 @@ Unscheduled ideas (promote into active work deliberately):
 - [x] System + software helper actions wired
 - [x] Dual entry via root `start.sh` + README
 - [x] WSL openExternal + quieter `ping`
+- [x] Env: `.env.example` + Zod/`dotenv` (`src/env.ts`)
 - [x] Smoke-test Sistema as root (sudo+Bun PATH): ping / update / fix / clean → exit 0 (17 de Novembro de 2026)
 - [ ] Smoke-test Software installers (owner-requested)
-- [ ] Package `.deb` for Carcará 2.0
+- [ ] Smoke-test with **pkexec** on real desktop / WSLg (unelevated user → elevates)
+- [ ] Package `.deb` for Carcará 2.0 (AppImage optional)
+- [ ] Optional later: Dotfiles tab in 2.0 UI (not in spike)
 
 ## Future agent skills (skills.sh) — install when modernizing that area
 
