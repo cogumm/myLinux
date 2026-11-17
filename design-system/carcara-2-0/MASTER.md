@@ -7,8 +7,11 @@
 ---
 
 **Project:** Carcara 2.0
-**Generated:** 2026-11-17 09:58:41
+**Generated:** 2026-11-17 10:41:15
 **Category:** Productivity Tool
+**Token files:** `tokens.json` (W3C Design Tokens Community Group JSON).
+**CSS variables:** `tokens.css` (`:root` custom properties).
+Token files are master-level only; `--page` overrides do not emit tokens.
 
 ---
 

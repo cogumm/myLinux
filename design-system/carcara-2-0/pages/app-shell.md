@@ -1,46 +1,38 @@
-# App Shell Page Overrides
+# App Shell — Carcará 2.0
 
-> **PROJECT:** Carcara 2.0  
-> **Page Type:** Desktop utility shell (Electron)  
-> Overrides `design-system/carcara-2-0/MASTER.md`. Source: skill `ui-ux-pro-max`.
+> Overrides `MASTER.md` for the Electron desktop utility (not a marketing landing).
 
----
+**Style:** Flat Design · Dark · Tokens in `tokens.css`  
+**Skill:** `ui-ux-pro-max` (regenerated 17 de Novembro de 2026)
 
-## Layout (desktop app — not a marketing landing)
-
-Do **not** use the MASTER “Product Demo + Features” section order for the running app.
+## Layout
 
 ```
-┌─────────────┬──────────────────────────────┐
-│ Brand       │ Top bar: section title       │
-│ (Carcará)   ├──────────────────────────────┤
-│             │ Primary pane                 │
-│ Nav:        │  (actions / installers)      │
-│  Sistema    │                              │
-│  Software   ├──────────────────────────────┤
-│  Sobre      │ Activity log (stdout/stderr) │
-└─────────────┴──────────────────────────────┘
+┌──────────────┬────────────────────────────────┐
+│   LOGO       │  Section title + one lede       │
+│   Carcará    ├────────────────────────────────┤
+│              │  Primary content (one job)     │
+│  Sistema     │  action tiles / installers     │
+│  Software    ├────────────────────────────────┤
+│  Sobre       │  Activity log + live status    │
+└──────────────┴────────────────────────────────┘
 ```
 
-- **Sidebar** (~220px): brand + primary nav; one job per selection.
-- **Primary pane**: verbs from 1.x — Atualizar, Corrigir, Limpar, Instalar…
-- **Log pane**: monospace; status via border color + text (not color alone).
-- **Max content width:** fluid inside window; no artificial 1200px marketing cap.
+- Brand (logo + name) is the strongest signal in the first viewport of the rail.
+- One job per view: Sistema = maintenance; Software = installs; Sobre = identity.
+- Activity log is always visible (source of truth for apt/flatpak/snap).
+- No marketing “Product Demo + Features” section order from MASTER.
 
 ## Interaction
 
 - Visible focus ring (`--color-ring`); `cursor: pointer` on all controls.
-- Min hit target ~44×44px; 8px+ gaps.
+- Min hit target 44×44px; 8px+ gaps.
+- Confirm mutating actions in an accessible `<dialog>` (not hover-only).
+- Busy state: disable actions + status “Executando…”.
 - Transitions 150–200ms; honor `prefers-reduced-motion`.
-- Loading: disable primary actions + status text while helper runs.
-- No emoji icons — inline SVG only.
+- SVG icons only (no emoji).
 
-## Typography / color
+## Brand
 
-- Follow MASTER tokens (teal primary, orange accent CTA, slate dark).
-- Fonts: Inter if bundled later; until then system stack `Inter, "Segoe UI", system-ui, sans-serif` (Electron CSP: no remote Google Fonts by default).
-
-## Flat Design constraints
-
-- No heavy gradients or deep shadows on chrome.
-- Hover = color/opacity/border shift, not layout-shifting scale.
+- Primary mark: `assets/img/logo_moderno_final.png`
+- Accent CTA `#EA580C` aligns with beak orange; teal `#0D9488` for focus/primary chrome.
