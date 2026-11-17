@@ -13,6 +13,7 @@
     "start": "electron . --no-sandbox --disable-gpu --disable-dev-shm-usage",
     "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.renderer.json",
     "helper": "bun scripts/run-helper.ts",
+    "smoke:software": "bash scripts/smoke-software.sh",
     "pack:deb": "bun run build && electron-builder --linux deb --config electron-builder.yml",
     "pack:dir": "bun run build && electron-builder --linux dir --config electron-builder.yml"
   },

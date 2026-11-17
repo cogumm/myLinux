@@ -46,8 +46,9 @@ if (needsElevation && uid !== 0 && !hasPkexec) {
 
 $.nothrow();
 
+// pkexec drops most env — pass Carcará vars explicitly (mirrors run-helper-node.ts).
 const result = usePkexec
-  ? await $`pkexec ${helper} ${action}`.quiet()
+  ? await $`pkexec env PATH=${process.env.PATH ?? "/usr/bin:/bin"} CARCARA_REPO_ROOT=${process.env.CARCARA_REPO_ROOT ?? ""} CARCARA_LANG=${process.env.CARCARA_LANG ?? "pt"} CARCARA_NONINTERACTIVE=1 CARCARA_TEST_HOST=${process.env.CARCARA_TEST_HOST ?? "8.8.8.8"} CARCARA_TEST_COUNT=${process.env.CARCARA_TEST_COUNT ?? "2"} DISPLAY=${process.env.DISPLAY ?? ""} WAYLAND_DISPLAY=${process.env.WAYLAND_DISPLAY ?? ""} XAUTHORITY=${process.env.XAUTHORITY ?? ""} ${helper} ${action}`.quiet()
   : await $`${helper} ${action}`.quiet();
 
 process.stdout.write(result.stdout);
