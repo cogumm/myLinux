@@ -120,11 +120,11 @@ Confirm Flathub app IDs / apt package names per-app when Wave 2 starts. Do not h
 - Helpers: `pkg_present`, `apt_install`, `ensure_apt_keyring_repo`, `ensure_flatpak_flathub`, `flatpak_install`, `snap_install`, `run_with_progress`.
 - stderr logs `[carcara]` / `[carcara:error]` for CLI and future Electron.
 
-### Step 3 — Modernize system scripts — **high value for 2.0**
+### Step 3 — Modernize system scripts — **done** (17 de Novembro de 2026)
 
-- `updateDistro.sh` — `apt-get update` then upgrade/`full-upgrade` with confirms; surface failures.
-- `fixSystem.sh` — keep `-f install` / `dpkg --configure -a`; safer lock messaging.
-- `cleanDistro.sh` — keep clean/autoclean/autoremove; dpkg-lock deletion only with **explicit confirm**.
+- `updateDistro.sh` — confirm + `update` / `upgrade` / `full-upgrade` via `run_with_progress`; reports failures.
+- `fixSystem.sh` — `apt-get -f install` + `dpkg --configure -a` with exit tracking.
+- `cleanDistro.sh` — trash/`tmp`/apt clean suite; **dpkg/apt locks and apt lists only with explicit confirm**.
 
 ### Step 4 — Wire menus — **minimal**
 
@@ -174,10 +174,10 @@ Explicitly **out** of Wave 3 now: Yad redesign, `gum` migration, nala-as-UI.
 
 - [x] Wave 1 Step 1 — deps / startApp / config sourcing (16 de Novembro de 2026)
 - [x] Wave 1 Step 2 — `install_backends.sh` (17 de Novembro de 2026)
-- [ ] Wave 1 Step 3 — system scripts
+- [x] Wave 1 Step 3 — system scripts (17 de Novembro de 2026)
 - [ ] Wave 1 Step 4 — minimal menu wiring
 - [ ] Wave 1 Step 5 — ShellCheck + docs
 - [ ] Wave 2 — thin installers onto backends
 - [ ] Wave 3 — optional CLI only / **skip** if 2.0 starts
 
-Next coding session when approved: **Wave 1 Step 3** (system scripts).
+Next coding session when approved: **Wave 1 Step 4** (minimal menus).

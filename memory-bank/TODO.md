@@ -6,8 +6,9 @@ Unscheduled ideas (promote into active work deliberately):
 
 ## Planned ideas (do not start until explicitly requested)
 
-- [ ] Continue [`.agents/idea/carcara-modern-install.md`](../.agents/idea/carcara-modern-install.md) — **1.x engine**: Step 3 system → Step 4 menus → lean Wave 2; **skip Yad polish / Wave 3 UI**
+- [ ] Continue [`.agents/idea/carcara-modern-install.md`](../.agents/idea/carcara-modern-install.md) — **1.x engine**: Step 4 menus → lean Wave 2; **skip Yad polish / Wave 3 UI**
 - [x] Wave 1 Step 2 — `install_backends.sh` (17 de Novembro de 2026)
+- [x] Wave 1 Step 3 — system scripts update/fix/clean (17 de Novembro de 2026)
 - [ ] Future: [`.agents/idea/carcara-2.0-electron.md`](../.agents/idea/carcara-2.0-electron.md) — Electron (**2.0**) after 1.x backends are stable
 
 ## Carcará / scripts

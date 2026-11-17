@@ -47,9 +47,14 @@ pkg_present command code && exit 0
 snap_install code --classic
 ```
 
+## System scripts (Wave 1 Step 3 — done)
+
+- `updateDistro.sh` — confirms + `apt-get update|upgrade|full-upgrade` via `run_with_progress`.
+- `fixSystem.sh` — `apt-get -f install` + `dpkg --configure -a`.
+- `cleanDistro.sh` — trash/`/var/tmp`/clean/autoclean/autoremove; locks & apt lists only if confirmed.
+
 ## Fix priorities (remaining)
 
-1. Wave 1 Step 3 — modernize `updateDistro` / `fixSystem` / `cleanDistro`.
-2. Wave 1 Step 4 — minimal menu wiring (Desenvolvimento / Produção).
-3. Wave 1 Step 5 — ShellCheck on touched tree.
-4. Wave 2 — thin installers onto backends (no Yad polish).
+1. Wave 1 Step 4 — minimal menu wiring (Desenvolvimento / Produção).
+2. Wave 1 Step 5 — ShellCheck on touched tree.
+3. Wave 2 — thin installers onto backends (no Yad polish).
