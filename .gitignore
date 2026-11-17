@@ -1,7 +1,56 @@
-#Vamos ignorar algumas coisas!
+# myLinux — ignore generated / local-only paths
 
-# Scripts de testes
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+*:Zone.Identifier
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json.example
+*.swp
+*.swo
+*~
+
+# --- Secrets / local env ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+
+# --- Logs / caches ---
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.cache/
+tmp/
+temp/
+*.tmp
+
+# --- Carcará 1.x ---
 carcara/teste/*
 
-# Local tooling binaries (e.g. downloaded shellcheck)
+# --- Local tooling (e.g. downloaded shellcheck) ---
 .tools/
+
+# --- Carcará 2.0 (Electron + Bun) ---
+carcara-electron/node_modules/
+carcara-electron/dist/
+carcara-electron/.turbo/
+carcara-electron/out/
+carcara-electron/release/
+carcara-electron/*.AppImage
+carcara-electron/*.deb
+# Keep bun.lock tracked; ignore accidental npm lock if recreated
+carcara-electron/package-lock.json
+carcara-electron/yarn.lock
+carcara-electron/pnpm-lock.yaml
+carcara-electron/bun.lock
+carcara-electron/bun.lockb
+
+# --- Optional coverage / test artifacts ---
+coverage/
+.nyc_output/
