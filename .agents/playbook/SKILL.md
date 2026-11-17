@@ -14,7 +14,8 @@ description: >-
 1. Read `AGENTS.md`.
 2. Read all of `memory-bank/` (at least `activeContext.md` + `progress.md` + `projectbrief.md`).
 3. Read `.agents/idea/mylinux.md` if scope is unclear.
-4. For TUI work, read `design-system/carcara/MASTER.md`.
+4. For 1.x TUI work, read `design-system/carcara/MASTER.md`.
+5. For 2.0 Electron UI, read `design-system/carcara-2-0/pages/app-shell.md` (then `MASTER.md`) and `references/carcara-2.0.md`.
 
 ## References
 
@@ -23,8 +24,10 @@ description: >-
 | `references/stack.md` | Runtime, tools, entrypoints |
 | `references/product.md` | Scope and non-goals |
 | `references/code-organization.md` | Where scripts live |
-| `references/carcara.md` | Menus, config, installers |
-| `references/dotfiles.md` | Aliases, zsh, git, Hyper |
+| `references/carcara.md` | 1.x menus, config, installers, `carcara_confirm` |
+| `references/carcara-2.0.md` | Electron UI, helper, **`.deb` packaging / Release CI**, license, Zod, WSL |
+| `references/dotfiles.md` | `apply.sh` + menus 1.x/2.0, aliases, zsh, git, Hyper |
+| `references/i18n.md` | Shared `locales/{pt,en}.json` + `CARCARA_LANG` + `{version}` |
 | `references/legacy.md` | What `old/` means |
 
 ## Working style
@@ -35,6 +38,10 @@ description: >-
 - Do not revive dead PPAs or PHP5-era stacks from `old/` without modernization.
 - Do not commit/push unless asked.
 
-## Closing a wave
+## Closing a wave / session dump
 
-Append `memory-bank/progress.md`, refresh `activeContext.md`, and update `TODO.md` if items remain.
+1. Append `memory-bank/progress.md` (never delete history).
+2. Refresh `activeContext.md` (may rewrite).
+3. Update `TODO.md`, `techContext.md` / `systemPatterns.md` / `productContext.md` if patterns or stack changed.
+4. Sync playbook `references/` (+ `AGENTS.md` known debt) for durable how-to.
+5. Keep `locales/pt.json` ↔ `en.json` nested shape in parity when adding strings.

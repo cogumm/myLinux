@@ -1,78 +1,116 @@
 #!/bin/bash
-#-----------------------------------------------------------#
-# Data: 19 de Agosto de 2025
+[[ -n "${CARCARA_NONINTERACTIVE:-}" ]] || clear
+. app/config/config.sh
+#-------------------------------------------------------------------------------#
+# Data criação: 19 de Agosto de 2025
+# Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
-# Telegram: http://t.me/CoGUMm
+# Telegram: https://t.me/CoGUMm
 # Script: sync_time
-# Descrição: Script de sincronização de horário.
-#-----------------------------------------------------------#
+# Descrição: Sincroniza o relógio (timedatectl NTP ou ntpdate).
+# Variáveis: $configYad ; CARCARA_NTP_HOST ; root / CARCARA_NONINTERACTIVE → auto-yes
+#-------------------------------------------------------------------------------#
+# shellcheck disable=SC2154
 
-YELLOW='\033[0;33m'
-NC='\033[0m'
-RED='\033[0;31m'
+TIME_SERVER="${CARCARA_NTP_HOST:-ntp.ubuntu.com}"
 
-TIME_SERVER=ntp.ubuntu.com
-
-for cmd in ntpdate; do
-    if ! command -v $cmd &> /dev/null; then
-        echo -e "${RED}$cmd is not installed.${NC}"
-        read -p "Do you want to install $cmd? (Y/N) [Y]: " install_choice
-        install_choice=${install_choice:-Y}
-        if [[ "$install_choice" =~ ^[Yy]$ ]]; then
-            echo -e "${YELLOW}Installing $cmd...${NC}"
-            sudo apt-get update
-            sudo apt-get install -y $cmd
-        else
-            echo -e "${RED}The script cannot continue without $cmd.${NC}"
-            exit 1
-        fi
-    fi
-done
-
-get_offset_from_server() {
-    ntpdate -q $TIME_SERVER
+_sync_notify() {
+	local title="$1"
+	local text="$2"
+	if [[ -z "${CARCARA_NONINTERACTIVE:-}" ]] && command -v yad >/dev/null 2>&1; then
+		# shellcheck disable=SC2086
+		yad --title "$title" --text "$text" $configYad
+	else
+		echo "[$title] $text"
+	fi
 }
 
-get_current_date() {
-    date "+%Y-%m-%d %H:%M:%S"
+_sync_via_timedatectl() {
+	command -v timedatectl >/dev/null 2>&1 || return 1
+	# WSL / containers often lack a real systemd manager.
+	if ! timedatectl set-ntp true 2>/dev/null; then
+		return 1
+	fi
+	carcara_log "sync_time: timedatectl set-ntp true"
+	timedatectl status || true
+	_sync_notify "Sincronizar horário" "NTP do systemd ativado (timedatectl)."
+	return 0
 }
 
-to_epoch() {
-    date -d "$1" +%s
+_ensure_ntpdate() {
+	if command -v ntpdate >/dev/null 2>&1; then
+		return 0
+	fi
+	carcara_log "sync_time: installing ntpdate"
+	if ! apt_install ntpdate; then
+		carcara_err "ntpdate ausente e apt_install falhou"
+		return 1
+	fi
+	command -v ntpdate >/dev/null 2>&1
 }
 
-sync_date() {
-    echo -e "${RED}sudo ntpdate $TIME_SERVER ${NC}"
-    echo
-    sudo ntpdate $TIME_SERVER
-    echo -e "${YELLOW}System clock synchronized.${NC}"
+_sync_via_ntpdate() {
+	local current_date offset_line server_guess time_diff current_epoch server_epoch
+
+	if ! _ensure_ntpdate; then
+		return 1
+	fi
+
+	current_date="$(date '+%Y-%m-%d %H:%M:%S')"
+	carcara_log "sync_time: querying ${TIME_SERVER}"
+	offset_line="$(ntpdate -q "$TIME_SERVER" 2>/dev/null | head -1 || true)"
+	if [[ -z "$offset_line" ]]; then
+		carcara_err "ntpdate -q ${TIME_SERVER} falhou (rede?)"
+		_sync_notify "Sincronizar horário" "Não foi possível consultar ${TIME_SERVER}."
+		return 1
+	fi
+
+	echo "[carcara] ntpdate -q: $offset_line"
+	echo "[carcara] system now: $current_date"
+
+	# Best-effort delta from query line ("offset X.XXX sec"); fall back to force sync.
+	if [[ "$offset_line" =~ offset[[:space:]]+(-?[0-9.]+) ]]; then
+		server_guess="$(date -d "${current_date} ${BASH_REMATCH[1]} sec" '+%Y-%m-%d %H:%M:%S' 2>/dev/null || true)"
+		if [[ -n "$server_guess" ]]; then
+			current_epoch="$(date -d "$current_date" +%s)"
+			server_epoch="$(date -d "$server_guess" +%s)"
+			time_diff=$((server_epoch - current_epoch))
+			time_diff="${time_diff#-}"
+			echo "[carcara] estimated server time: $server_guess (Δ ${time_diff}s)"
+			if ((time_diff <= 60)); then
+				_sync_notify "Sincronizar horário" "Relógio já dentro de 1 minuto (Δ ${time_diff}s)."
+				return 0
+			fi
+		fi
+	fi
+
+	if ! carcara_confirm "Sincronizar relógio com ${TIME_SERVER} (ntpdate)?"; then
+		_sync_notify "Sincronizar horário" "Sincronização ignorada."
+		return 0
+	fi
+
+	# Already root under Carcará helper / startApp — no nested sudo.
+	if ! ntpdate "$TIME_SERVER"; then
+		carcara_err "ntpdate ${TIME_SERVER} failed"
+		_sync_notify "Sincronizar horário" "Falha ao sincronizar. Veja o log."
+		return 1
+	fi
+
+	_sync_notify "Sincronizar horário" "Relógio sincronizado via ntpdate."
+	return 0
 }
 
-echo -e "${YELLOW}Checking system time...${NC}"
+sync_time() {
+	isRoot
+	carcara_log "sync_time: starting (server=${TIME_SERVER})"
+	_sync_notify "Sincronizar horário" "Verificando e sincronizando o relógio do sistema."
 
-current_date=$(get_current_date)
-offset=$(get_offset_from_server | head -1)
+	if _sync_via_timedatectl; then
+		return 0
+	fi
+	carcara_log "sync_time: timedatectl indisponível — tentando ntpdate"
+	_sync_via_ntpdate
+}
 
-server_date=$(date -d "$current_date $offset sec" "+%Y-%m-%d %H:%M:%S")
-
-current_epoch=$(to_epoch "$current_date")
-server_epoch=$(to_epoch "$server_date")
-
-echo -e "${YELLOW}Current system date and time: ${NC}$current_date"
-echo -e "${YELLOW}Date and time from time server: ${NC}$server_date"
-
-time_diff=$((server_epoch - current_epoch))
-time_diff=${time_diff#-}
-
-if [ "$time_diff" -gt 60 ]; then
-    read -p "There is a difference of more than one minute. Do you want to synchronize? (Y/N) [Y]: " choice
-    choice=${choice:-Y}
-    case "$choice" in 
-        Y|y ) sync_date;;
-        N|n ) echo -e "${YELLOW}Synchronization skipped.${NC}";;
-        * ) echo -e "${RED}Invalid option.${NC}";;
-    esac
-else
-    echo -e "${YELLOW}The time is synchronized within one minute.${NC}"
-fi
+sync_time

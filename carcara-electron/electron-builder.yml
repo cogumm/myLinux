@@ -1,0 +1,75 @@
+appId: net.cogumm.carcara
+productName: Carcara
+copyright: Copyright (c) 2010–2026 CoGUMm
+artifactName: carcara_${version}_${arch}.${ext}
+
+# Debian Package: field (package.json name stays carcara-electron for the workspace).
+extraMetadata:
+  name: carcara
+
+directories:
+  output: release
+  buildResources: build
+
+files:
+  - dist/**/*
+  - package.json
+  - "!**/*.ts"
+  - "!src"
+  - "!scripts"
+  - "!release"
+
+extraResources:
+  - from: ../carcara
+    to: mylinux/carcara
+    filter:
+      - "**/*"
+      - "!**/*.bak"
+  - from: ../locales
+    to: mylinux/locales
+  - from: ../dotfiles
+    to: mylinux/dotfiles
+    filter:
+      - "**/*"
+      - "!**/*.bak"
+  - from: ../assets
+    to: mylinux/assets
+  - from: helper
+    to: mylinux/carcara-electron/helper
+
+linux:
+  target:
+    - target: deb
+      arch:
+        - x64
+  category: System
+  synopsis: Carcará 2.0 — Linux maintenance UI (apt / Flatpak / Snap)
+  description: >-
+    Desktop UI for myLinux. System update, repair, clean, curated software installs,
+    and dotfiles. Engine remains the Bash Carcará 1.x backends.
+  executableName: carcara
+  icon: ../assets/img/logo_moderno_final.png
+  desktop:
+    Name: Carcará
+    GenericName: System maintenance
+    Comment: Update, repair, clean, and install curated apps
+    Categories: System;Utility;Settings;
+    Terminal: false
+    StartupWMClass: Carcara
+
+deb:
+  packageCategory: utils
+  priority: optional
+  afterInstall: build/deb/after-install.sh
+  depends:
+    - libgtk-3-0
+    - libnotify4
+    - libnss3
+    - libxss1
+    - libxtst6
+    - xdg-utils
+    - libatspi2.0-0
+    - libuuid1
+    - policykit-1
+    - libsecret-1-0
+    - libasound2 | libasound2t64

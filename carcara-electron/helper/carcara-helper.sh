@@ -1,0 +1,312 @@
+#!/bin/bash
+#----------------------------------------------------------------------------------------------------#
+# Data criação: 17 de Novembro de 2026
+# Última alteração: 17 de Novembro de 2026 (ping ICMP)
+# Nome: Gabriel F. Vilar (CoGUMm)
+# E-mail: gabriel[at]cogumm[dot]net
+# Telegram: https://t.me/CoGUMm
+# Script: carcara-helper
+# Descrição: Allowlist privilege helper for Carcará 2.0 (pkexec). No arbitrary shell.
+# Variáveis: $1 = action name ; CARCARA_ROOT resolved from this file’s path
+#----------------------------------------------------------------------------------------------------#
+set -euo pipefail
+
+action="${1:-}"
+
+HELPER_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Packaged .deb may set CARCARA_REPO_ROOT (resources/mylinux). Dev: carcara-electron/helper → repo root.
+if [[ -n "${CARCARA_REPO_ROOT:-}" && -d "${CARCARA_REPO_ROOT}/carcara" ]]; then
+	REPO_ROOT="$(cd "${CARCARA_REPO_ROOT}" && pwd)"
+else
+	REPO_ROOT="$(cd "${HELPER_DIR}/../.." && pwd)"
+fi
+CARCARA_ROOT="${REPO_ROOT}/carcara"
+
+usage() {
+	echo "usage: carcara-helper.sh <action>" >&2
+	echo "system:   ping | apt-dry-run | update-distro | fix-system | clean-distro | sync-time" >&2
+	echo "dotfiles: dotfiles-dry-run | dotfiles-aliases | dotfiles-all | dotfiles-git |" >&2
+	echo "          dotfiles-hyper | dotfiles-theme | dotfiles-bashrc" >&2
+	echo "install:  install-vlc | install-obs | install-firefox | install-brave | install-vivaldi |" >&2
+	echo "          install-opera | install-zen | install-steam | install-heroic | install-lutris |" >&2
+	echo "          install-audacity | install-navidrome |" >&2
+	echo "          install-discord | install-spotify | install-telegram | install-whatsapp |" >&2
+	echo "          install-proton-mail | install-proton-vpn | install-nordvpn |" >&2
+	echo "          install-git | install-vscode | install-cursor | install-insomnia |" >&2
+	echo "          install-postman | install-termius | install-firacode | install-nodejs |" >&2
+	echo "          install-docker | install-dropbox | install-anki | install-notion |" >&2
+	echo "          install-thunderbird | install-libreoffice | install-onlyoffice |" >&2
+	echo "          install-bitwarden | install-onepassword |" >&2
+	echo "presets:  preset-dev | preset-social | preset-gaming" >&2
+}
+
+# Run repo dotfiles/apply.sh as the real desktop user (never as root home).
+_run_dotfiles_apply() {
+	local apply="${REPO_ROOT}/dotfiles/apply.sh"
+	if [[ ! -f "$apply" ]]; then
+		echo "[carcara-helper:error] missing $apply" >&2
+		return 1
+	fi
+	# Prefer SUDO_USER / pkexec caller when helper is elevated.
+	if [[ -z "${SUDO_USER:-}" && -n "${PKEXEC_UID:-}" ]]; then
+		SUDO_USER="$(getent passwd "${PKEXEC_UID}" | cut -d: -f1 || true)"
+		export SUDO_USER
+	fi
+	if [[ "$(id -u)" -eq 0 ]]; then
+		if [[ -z "${SUDO_USER:-}" || "${SUDO_USER}" == "root" ]]; then
+			echo "[carcara-helper:error] SUDO_USER ausente — dotfiles precisa do usuário real" >&2
+			return 1
+		fi
+		echo "[carcara-helper] dotfiles as ${SUDO_USER}: apply.sh $*"
+		sudo -u "${SUDO_USER}" -H bash "$apply" "$@"
+		return $?
+	fi
+	echo "[carcara-helper] dotfiles: apply.sh $*"
+	bash "$apply" "$@"
+}
+
+_run_carcara_script() {
+	local rel="$1"
+	local script="${CARCARA_ROOT}/${rel}"
+	if [[ ! -f "$script" ]]; then
+		echo "[carcara-helper:error] missing script: $script" >&2
+		return 1
+	fi
+	echo "[carcara-helper] running ${rel} (CARCARA_NONINTERACTIVE=1)"
+	cd "${CARCARA_ROOT}"
+	export CARCARA_NONINTERACTIVE=1
+	export DEBIAN_FRONTEND=noninteractive
+	# Preserve invoking user for trash cleanup when elevated via pkexec/sudo.
+	if [[ -z "${SUDO_USER:-}" && -n "${PKEXEC_UID:-}" ]]; then
+		SUDO_USER="$(getent passwd "${PKEXEC_UID}" | cut -d: -f1 || true)"
+		export SUDO_USER
+	fi
+	bash "$script"
+}
+
+case "$action" in
+	ping)
+		# Reuses 1.x testConnection.sh (Google Public DNS IP; NI = full ping output).
+		_run_carcara_script "app/config/testConnection.sh"
+		exit $?
+		;;
+	apt-dry-run)
+		export DEBIAN_FRONTEND=noninteractive
+		echo "[carcara-helper] apt-get update (quiet)"
+		apt-get update -qq
+		echo "[carcara-helper] apt-get -s upgrade (dry-run)"
+		apt-get -s upgrade
+		exit 0
+		;;
+	update-distro)
+		_run_carcara_script "app/scripts/system/updateDistro.sh"
+		exit $?
+		;;
+	fix-system)
+		_run_carcara_script "app/scripts/system/fixSystem.sh"
+		exit $?
+		;;
+	clean-distro)
+		_run_carcara_script "app/scripts/system/cleanDistro.sh"
+		exit $?
+		;;
+	sync-time)
+		_run_carcara_script "app/scripts/system/sync_time.sh"
+		exit $?
+		;;
+	# --- dotfiles (user home; unprivileged) ---
+	dotfiles-dry-run)
+		_run_dotfiles_apply --dry-run --all
+		exit $?
+		;;
+	dotfiles-aliases)
+		_run_dotfiles_apply --aliases
+		exit $?
+		;;
+	dotfiles-all)
+		_run_dotfiles_apply --all
+		exit $?
+		;;
+	dotfiles-git)
+		_run_dotfiles_apply --git
+		exit $?
+		;;
+	dotfiles-hyper)
+		_run_dotfiles_apply --hyper
+		exit $?
+		;;
+	dotfiles-theme)
+		_run_dotfiles_apply --theme
+		exit $?
+		;;
+	dotfiles-bashrc)
+		_run_dotfiles_apply --bashrc
+		exit $?
+		;;
+	# --- software (Wave 2 + Wave A thin installers) ---
+	install-vlc)
+		_run_carcara_script "app/scripts/software/utilities/vlc.sh"
+		exit $?
+		;;
+	install-firefox)
+		_run_carcara_script "app/scripts/software/browsers/firefox.sh"
+		exit $?
+		;;
+	install-brave)
+		_run_carcara_script "app/scripts/software/browsers/brave.sh"
+		exit $?
+		;;
+	install-vivaldi)
+		_run_carcara_script "app/scripts/software/browsers/vivaldi.sh"
+		exit $?
+		;;
+	install-opera)
+		_run_carcara_script "app/scripts/software/browsers/opera.sh"
+		exit $?
+		;;
+	install-zen)
+		_run_carcara_script "app/scripts/software/browsers/zen.sh"
+		exit $?
+		;;
+	install-steam)
+		_run_carcara_script "app/scripts/software/games/steam.sh"
+		exit $?
+		;;
+	install-heroic)
+		_run_carcara_script "app/scripts/software/games/heroic.sh"
+		exit $?
+		;;
+	install-lutris)
+		_run_carcara_script "app/scripts/software/games/lutris.sh"
+		exit $?
+		;;
+	install-obs)
+		_run_carcara_script "app/scripts/software/utilities/obs.sh"
+		exit $?
+		;;
+	install-audacity)
+		_run_carcara_script "app/scripts/software/music/audacity.sh"
+		exit $?
+		;;
+	install-navidrome)
+		_run_carcara_script "app/scripts/software/music/navidrome.sh"
+		exit $?
+		;;
+	install-discord)
+		_run_carcara_script "app/scripts/software/social/discord.sh"
+		exit $?
+		;;
+	install-spotify)
+		_run_carcara_script "app/scripts/software/social/spotify.sh"
+		exit $?
+		;;
+	install-telegram)
+		_run_carcara_script "app/scripts/software/social/telegram.sh"
+		exit $?
+		;;
+	install-whatsapp)
+		_run_carcara_script "app/scripts/software/social/whatsapp.sh"
+		exit $?
+		;;
+	install-git)
+		_run_carcara_script "app/scripts/software/development/git.sh"
+		exit $?
+		;;
+	install-vscode)
+		_run_carcara_script "app/scripts/software/development/vscode.sh"
+		exit $?
+		;;
+	install-cursor)
+		_run_carcara_script "app/scripts/software/development/cursor.sh"
+		exit $?
+		;;
+	install-insomnia)
+		_run_carcara_script "app/scripts/software/development/insomnia.sh"
+		exit $?
+		;;
+	install-postman)
+		_run_carcara_script "app/scripts/software/development/postman.sh"
+		exit $?
+		;;
+	install-termius)
+		_run_carcara_script "app/scripts/software/development/termius.sh"
+		exit $?
+		;;
+	install-firacode)
+		_run_carcara_script "app/scripts/software/development/firacode.sh"
+		exit $?
+		;;
+	install-nodejs)
+		_run_carcara_script "app/scripts/software/development/nodejs.sh"
+		exit $?
+		;;
+	install-docker)
+		_run_carcara_script "app/scripts/software/development/docker.sh"
+		exit $?
+		;;
+	install-dropbox)
+		_run_carcara_script "app/scripts/software/productivity/dropbox.sh"
+		exit $?
+		;;
+	install-anki)
+		_run_carcara_script "app/scripts/software/productivity/anki.sh"
+		exit $?
+		;;
+	install-notion)
+		_run_carcara_script "app/scripts/software/productivity/notion.sh"
+		exit $?
+		;;
+	install-thunderbird)
+		_run_carcara_script "app/scripts/software/productivity/thunderbird.sh"
+		exit $?
+		;;
+	install-libreoffice)
+		_run_carcara_script "app/scripts/software/productivity/libreoffice.sh"
+		exit $?
+		;;
+	install-onlyoffice)
+		_run_carcara_script "app/scripts/software/productivity/onlyoffice.sh"
+		exit $?
+		;;
+	install-proton-mail)
+		_run_carcara_script "app/scripts/software/social/proton-mail.sh"
+		exit $?
+		;;
+	install-proton-vpn)
+		_run_carcara_script "app/scripts/software/utilities/proton-vpn.sh"
+		exit $?
+		;;
+	install-nordvpn)
+		_run_carcara_script "app/scripts/software/utilities/nordvpn.sh"
+		exit $?
+		;;
+	install-bitwarden)
+		_run_carcara_script "app/scripts/software/security/bitwarden.sh"
+		exit $?
+		;;
+	install-onepassword)
+		_run_carcara_script "app/scripts/software/security/onepassword.sh"
+		exit $?
+		;;
+	preset-dev)
+		_run_carcara_script "app/scripts/software/presets/dev-box.sh"
+		exit $?
+		;;
+	preset-social)
+		_run_carcara_script "app/scripts/software/presets/social-box.sh"
+		exit $?
+		;;
+	preset-gaming)
+		_run_carcara_script "app/scripts/software/presets/gaming-light.sh"
+		exit $?
+		;;
+	""|-h|--help)
+		usage
+		exit 2
+		;;
+	*)
+		echo "[carcara-helper:error] unknown action: $action" >&2
+		usage
+		exit 2
+		;;
+esac

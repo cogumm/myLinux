@@ -1,0 +1,313 @@
+{
+  "lang": {
+    "name": "Português",
+    "switchAria": "Idioma"
+  },
+  "app": {
+    "name": "Carcará"
+  },
+  "window": {
+    "title": "Carcará {version}"
+  },
+  "menu": {
+    "choose": "Escolha uma das opções",
+    "update": "Atualizar sistema",
+    "install": "Instalar programas",
+    "fix": "Correção do sistema",
+    "clean": "Limpeza do sistema",
+    "dotfiles": "Dotfiles",
+    "exit": "Sair",
+    "back": "Voltar",
+    "exiting": "Saindo do programa …"
+  },
+  "sof": {
+    "development": "Desenvolvimento",
+    "games": "Jogos",
+    "browsers": "Navegadores",
+    "productivity": "Produtividade",
+    "social": "Social",
+    "music": "Música e áudio",
+    "security": "Segurança",
+    "utilities": "Utilitários",
+    "presets": "Presets"
+  },
+  "install": {
+    "git": "Instalar o Git",
+    "vscode": "Instalar o VS Code",
+    "cursor": "Instalar o Cursor",
+    "insomnia": "Instalar o Insomnia",
+    "postman": "Instalar o Postman",
+    "termius": "Instalar o Termius",
+    "firacode": "Instalar a Fira Code",
+    "docker": "Instalar o Docker",
+    "nodejs": "Instalar Node.js (toolchain)",
+    "discord": "Instalar o Discord",
+    "spotify": "Instalar o Spotify",
+    "telegram": "Instalar o Telegram",
+    "whatsapp": "Instalar o WhatsApp",
+    "protonMail": "Instalar o Proton Mail",
+    "protonVpn": "Instalar o Proton VPN",
+    "nordvpn": "Instalar o NordVPN",
+    "vlc": "Instalar o VLC",
+    "firefox": "Instalar o Firefox",
+    "brave": "Instalar o Brave",
+    "vivaldi": "Instalar o Vivaldi",
+    "opera": "Instalar o Opera",
+    "zen": "Instalar o Zen Browser",
+    "steam": "Instalar o Steam",
+    "heroic": "Instalar o Heroic",
+    "lutris": "Instalar o Lutris",
+    "obs": "Instalar o OBS Studio",
+    "audacity": "Instalar o Audacity",
+    "navidrome": "Instalar o Navidrome",
+    "dropbox": "Instalar o Dropbox",
+    "anki": "Instalar o Anki",
+    "notion": "Instalar o Notion",
+    "thunderbird": "Instalar o Thunderbird",
+    "libreoffice": "Instalar o LibreOffice",
+    "onlyoffice": "Instalar o OnlyOffice",
+    "bitwarden": "Instalar o Bitwarden",
+    "onepassword": "Instalar o 1Password",
+    "presetDev": "Preset Dev box",
+    "presetSocial": "Preset Social box",
+    "presetGaming": "Preset Gaming light"
+  },
+  "desc": {
+    "git": "Controle de versão distribuído (CLI + gitg)",
+    "vscode": "Editor de código da Microsoft",
+    "cursor": "IDE com IA (vendor .deb amd64)",
+    "insomnia": "Cliente REST / GraphQL para APIs",
+    "postman": "Cliente de API e coleções",
+    "termius": "Cliente SSH moderno",
+    "firacode": "Fonte monoespaçada com ligaduras",
+    "docker": "Containers e imagens no Linux",
+    "nodejs": "Node 22 + npm + pnpm + Yarn + Bun",
+    "discord": "Voz, chat e comunidades",
+    "spotify": "Streaming de música e podcasts",
+    "telegram": "Mensagens rápidas e canais",
+    "whatsapp": "WhatsApp Desktop (Flatpak / Snap)",
+    "protonMail": "Cliente de e-mail Proton",
+    "protonVpn": "VPN da Proton",
+    "nordvpn": "VPN NordVPN (Snap)",
+    "vlc": "Player multimídia para quase qualquer formato",
+    "firefox": "Navegador da Mozilla",
+    "brave": "Navegador com bloqueio de anúncios",
+    "vivaldi": "Navegador com abas e painéis avançados",
+    "opera": "Navegador Opera (incl. builds estilo GX no Linux)",
+    "zen": "Zen Browser (AppImage das releases no GitHub)",
+    "steam": "Loja e cliente de jogos da Valve",
+    "heroic": "Epic Games + GOG (Heroic Launcher)",
+    "lutris": "Wine / Battle.net e outros runners",
+    "obs": "Gravação e transmissão ao vivo",
+    "audacity": "Editor de áudio multipista",
+    "navidrome": "Servidor de streaming de música própria",
+    "dropbox": "Arquivos sincronizados na nuvem",
+    "anki": "Cartões de memória (spaced repetition)",
+    "notion": "Notas e wikis no desktop",
+    "thunderbird": "Cliente de e-mail da Mozilla",
+    "libreoffice": "Suíte office livre",
+    "onlyoffice": "Editores OnlyOffice Desktop",
+    "bitwarden": "Gerenciador de senhas open source",
+    "onepassword": "Gerenciador de senhas 1Password",
+    "presetDev": "Git, VS Code, Fira, Node, Docker, Insomnia",
+    "presetSocial": "Discord, Telegram, WhatsApp, Spotify",
+    "presetGaming": "Steam, Heroic, Lutris"
+  },
+  "soft": {
+    "searchPlaceholder": "Filtrar apps nesta categoria…",
+    "searchAria": "Buscar software",
+    "noMatch": "Nenhum app corresponde à busca."
+  },
+  "dotfiles": {
+    "column": "Dotfiles (backup *.bak)",
+    "title": "Carcará — Dotfiles",
+    "dryrun": "Preview (dry-run)",
+    "aliases": "Aliases",
+    "all": "Tudo (exceto bashrc)",
+    "git": "Git",
+    "hyper": "Hyper",
+    "theme": "Tema zsh",
+    "bashrc": "Bashrc",
+    "notify": {
+      "dryrun": "Preview concluído (nada foi escrito).",
+      "aliases": "Aliases aplicados (veja *.bak se havia arquivos).",
+      "all": "Pacote --all aplicado.",
+      "git": "Git config aplicado (tokens vazios no template).",
+      "hyper": "Hyper aplicado.",
+      "theme": "Tema cgm (se oh-my-zsh existir).",
+      "bashrc": "bashrc aplicado (backup *.bak)."
+    }
+  },
+  "license": {
+    "title": "Licença de uso",
+    "lede": "Leia os termos (mesmo aviso do Carcará 1.x). Marque Continuar para abrir o aplicativo.",
+    "checkbox": "Continuar",
+    "accept": "Aceitar e continuar",
+    "quit": "Sair"
+  },
+  "rail": {
+    "sistema": "Sistema",
+    "software": "Software",
+    "dotfiles": "Dotfiles",
+    "sobre": "Sobre",
+    "navAria": "Navegação"
+  },
+  "status": {
+    "ready": "Pronto",
+    "busy": "Executando…",
+    "ok": "Concluído",
+    "err": "Erro",
+    "cancelled": "Cancelado"
+  },
+  "confirm": {
+    "title": "Confirmar",
+    "cancel": "Cancelar",
+    "ok": "Continuar"
+  },
+  "view": {
+    "sistema": {
+      "eyebrow": "Manutenção",
+      "title": "Sistema",
+      "lede": "Atualizar, corrigir, limpar, testar a rede e sincronizar o horário."
+    },
+    "software": {
+      "eyebrow": "Catálogo",
+      "title": "Software",
+      "lede": "Catálogo no estilo Snap Store — apt → Flatpak → Snap."
+    },
+    "dotfiles": {
+      "eyebrow": "Casa",
+      "title": "Dotfiles",
+      "lede": "Aplica aliases, git, Hyper e temas no seu $HOME (backup *.bak; sem root)."
+    },
+    "sobre": {
+      "eyebrow": "Projeto",
+      "title": "Sobre",
+      "lede": "Identidade, licença e links do myLinux."
+    }
+  },
+  "tile": {
+    "update": {
+      "title": "Atualizar sistema",
+      "desc": "update → upgrade → full-upgrade",
+      "confirm": "Atualizar o sistema (apt update + upgrade + full-upgrade)? Requer privilégios."
+    },
+    "fix": {
+      "title": "Correção do sistema",
+      "desc": "Dependências e configure-a",
+      "confirm": "Corrigir pacotes quebrados (apt -f + dpkg --configure -a)?"
+    },
+    "clean": {
+      "title": "Limpeza do sistema",
+      "desc": "Lixeira, tmp, apt clean e locks",
+      "confirm": "Limpeza do sistema (lixeira, tmp, apt clean/autoclean/autoremove, locks e listas apt)? Requer privilégios."
+    },
+    "ping": {
+      "title": "Testar conexão",
+      "desc": "Teste de conexão → Google (ICMP)"
+    },
+    "sync": {
+      "title": "Sincronizar horário",
+      "desc": "timedatectl NTP ou ntpdate",
+      "confirm": "Sincronizar o relógio do sistema (NTP / ntpdate)? Requer privilégios."
+    },
+    "docker": {
+      "confirm": "Instalar Docker Engine (apt oficial ou docker.io) e adicionar seu usuário ao grupo docker?"
+    }
+  },
+  "cat": {
+    "development": "Desenvolvimento",
+    "games": "Jogos",
+    "social": "Social",
+    "productivity": "Produtividade",
+    "utilities": "Utilitários",
+    "musicAndAudio": "Música e áudio",
+    "artAndDesign": "Arte e design",
+    "photoAndVideo": "Foto e vídeo",
+    "serverAndCloud": "Servidor e nuvem",
+    "booksAndReference": "Livros e referência",
+    "devicesAndIot": "Dispositivos e IoT",
+    "education": "Educação",
+    "entertainment": "Entretenimento",
+    "finance": "Finanças",
+    "healthAndFitness": "Saúde e fitness",
+    "newsAndWeather": "Notícias e clima",
+    "personalisation": "Personalização",
+    "science": "Ciência",
+    "security": "Segurança",
+    "empty": "Nenhum app nesta categoria ainda — veja o backlog v2.0.1."
+  },
+  "native": {
+    "file": "Arquivo",
+    "quit": "Sair",
+    "about": "Sobre",
+    "aboutItem": "Sobre o projeto"
+  },
+  "skip": {
+    "link": "Ir ao conteúdo"
+  },
+  "ready": {
+    "log": "$ Carcará {version} pronto.\n"
+  },
+  "console": {
+    "title": "Atividade",
+    "clear": "Limpar",
+    "clearAria": "Limpar log"
+  },
+  "host": {
+    "distro": "Distro",
+    "arch": "Arch",
+    "flatpak": "Flatpak",
+    "snap": "Snap",
+    "yes": "presente",
+    "no": "ausente"
+  },
+  "sobre": {
+    "lead": "Toolkit pessoal de workstation Linux — instaladores, manutenção e dotfiles. A UI 2.0 reutiliza os backends 1.x (apt → Flatpak → Snap).",
+    "note": "Muitos scripts precisam de root e alteram o sistema. Revise antes de executar. O autor não se responsabiliza por mau uso.",
+    "fact": {
+      "product": {
+        "label": "Produto",
+        "value": "Carcará 2.0 — Electron + Bun sobre o motor Bash 1.x"
+      },
+      "target": {
+        "label": "Alvo",
+        "value": "Ubuntu, Debian, Linux Mint (apt), x86_64"
+      },
+      "entry": {
+        "label": "Entrada",
+        "value": "sudo ./start.sh --electron | --terminal"
+      },
+      "author": {
+        "label": "Autor",
+        "value": "Gabriel F. Vilar (CoGUMm)"
+      },
+      "license": {
+        "label": "Licença",
+        "value": "MIT · Copyright (c) 2010 CoGUMm"
+      },
+      "repo": {
+        "label": "Repo",
+        "value": "github.com/cogumm/myLinux"
+      }
+    },
+    "link": {
+      "mit": "Licença MIT",
+      "copied": "(copiado)",
+      "failed": "falhou",
+      "noBrowser": "sem browser"
+    }
+  },
+  "main": {
+    "requireRoot": "Você precisa ter poderes administrativos (root)",
+    "exiting": "O aplicativo está sendo finalizado.",
+    "useSudo": "Use: sudo ./start.sh --electron",
+    "urlDenied": "URL não permitida"
+  },
+  "pager": {
+    "prev": "Anterior",
+    "next": "Próxima",
+    "status": "Página {current} de {total}",
+    "aria": "Paginação do catálogo"
+  }
+}

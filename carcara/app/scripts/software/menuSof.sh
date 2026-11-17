@@ -1,44 +1,40 @@
 #!/bin/bash
 . app/config/config.sh
 #----------------------------------------------------------------------------------------------------#
-# Data: 15 de Fevereiro de 2020
+# Data criação: 15 de Fevereiro de 2020
+# Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
-# E-mail: gabriel[at]cogumm[dot]net
-# Telegram: http://t.me/CoGUMm
-# Script: menu
-# Descrição: Menu de instalação dos aplicativos de software.
-# Variáveis: $menu		 : Carrega as opções do menu.
-#			 $configYad	 : Carrega as configurações do Yad (sem botões).
-#			 $configYadB : Carrega as configurações do Yad (com botões).
-#			 $dirSof	 : Carega o diretório padrão dos scripts dos software.
+# Script: menuSof
+# Descrição: Menu de software — Wave B folders + security + presets (Wave C).
 #----------------------------------------------------------------------------------------------------#
 
-while [ true ]; do
-	menu=$(zenity --width=330 --height=500 --list --column "Escolha uma das opções" --title="cGm" \
-			"Desenvolvimento" \
-			"Produção" \
-			"Social" \
-			"Utilidades"  \
-	    	"Voltar" )
+while true; do
+	menu=$(zenity --width=330 --height=600 --list \
+		--title="$(t app.name)" \
+		--column="id" --column="$(t menu.choose)" \
+		--hide-column=1 --print-column=1 \
+		development "$(t sof.development)" \
+		games "$(t sof.games)" \
+		browsers "$(t sof.browsers)" \
+		social "$(t sof.social)" \
+		productivity "$(t sof.productivity)" \
+		music "$(t sof.music)" \
+		security "$(t sof.security)" \
+		utilities "$(t sof.utilities)" \
+		presets "$(t sof.presets)" \
+		back "$(t menu.back)") || menu="back"
+
 	case "$menu" in
-		"Desenvolvimento" )
-			yad --text "Ainda em desenvolvimento!!!" $configYadB
-			# bash app/scripts/software/development/menu.sh
-		;;
-		"Produção" )
-			yad --text "Ainda em desenvolvimento!!!" $configYadB
-            # bash app/scripts/software/productivity/menu.sh
-		;;
-		"Social" )
-            bash app/scripts/software/social/_menu.sh
-		;;
-		"Utilidades" )
-			# yad --text "Ainda em desenvolvimento!!!" $configYadB
-            bash app/scripts/software/utilities/_menu.sh
-		;;
-        "Voltar" )
-			bash $menuApp
-		;;
+		development) bash app/scripts/software/development/_menu.sh ;;
+		games) bash app/scripts/software/games/_menu.sh ;;
+		browsers) bash app/scripts/software/browsers/_menu.sh ;;
+		social) bash app/scripts/software/social/_menu.sh ;;
+		productivity) bash app/scripts/software/productivity/_menu.sh ;;
+		music) bash app/scripts/software/music/_menu.sh ;;
+		security) bash app/scripts/software/security/_menu.sh ;;
+		utilities) bash app/scripts/software/utilities/_menu.sh ;;
+		presets) bash app/scripts/software/presets/_menu.sh ;;
+		back|*) break ;;
 	esac
 done
 # Fim

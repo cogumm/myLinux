@@ -1,24 +1,25 @@
 #!/bin/bash
-clear
-. app/config.sh
+. app/config/config.sh
 #----------------------------------------------------------------------------------------------------#
-# Data: 15 de Fevereiro de 2020
+# Data criação: 15 de Fevereiro de 2020
+# Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
-# Telegram: http://t.me/CoGUMm
+# Telegram: https://t.me/CoGUMm
 # Script: GIT
-# Descrição: Script para instalar o GIT
-# Variáveis: $configYad	 : Carrega as configurações do Yad (sem botões).
+# Descrição: Instala Git e ferramentas GUI via apt.
 #----------------------------------------------------------------------------------------------------#
 
-installGIT() {
-    yad --title "Instalando o GIT" \
-        --text "Bem vindo ao script de instalação do GIT" $configYad --timeout 5
+isRoot
 
-    sudo apt install -y git-core git-gui git-doc gitg
+if pkg_present command git && pkg_present dpkg git; then
+	carcara_log "Git already installed — refreshing related packages"
+fi
 
-    return
-}
+if run_with_progress "Git (apt)" apt_install git git-gui git-doc gitg; then
+	exit 0
+fi
 
-installGIT
+carcara_err "Git install failed"
+exit 1
 # Fim

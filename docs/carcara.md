@@ -20,12 +20,14 @@ See `carcara/README.md` tree. Config hub: `app/config/config.sh`. Menus: `menuGe
 | Menu | Status |
 |------|--------|
 | Atualizar sistema | `system/updateDistro.sh` |
-| Instalar programas de desenvolvimento | Menu stub; scripts in `software/development/` |
-| Instalar programas diversos | Stub |
+| Instalar programas | `software/menuSof.sh` (dev / produção / social / utilidades) |
 | Correção do sistema | `system/fixSystem.sh` |
 | Limpeza do sistema | `system/cleanDistro.sh` |
-| Limpeza de memória | Stub |
-| Social / Utilidades (via software menu) | Wired |
+| Sair | Encerra o loop |
+
+## Install backends (1.x engine)
+
+Shared helpers in `app/config/install_backends.sh` (loaded via `config.sh`): `apt_install`, `ensure_apt_keyring_repo`, `flatpak_install`, `snap_install`, `pkg_present`, `run_with_progress`.
 
 ## Safety
 

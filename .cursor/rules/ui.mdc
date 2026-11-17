@@ -3,17 +3,26 @@ description: TUI defaults for Carcará (Zenity / Yad) — not web UI
 alwaysApply: true
 ---
 
-# UI default — Carcará TUI
+# UI default — Carcará
 
-For **every** new or redesigned interactive flow, read `design-system/carcara/MASTER.md` and the playbook UI notes **before** coding.
+## 1.x TUI (`carcara/`)
+
+For Bash/Zenity/Yad flows, read `design-system/carcara/MASTER.md` before coding.
 
 1. Menus: **Zenity** `--list` (same pattern as `menuGeral.sh` / `menuSof.sh`).
 2. Progress / short notices: **Yad** with shared `$configYad` / `$configYadB` from `config.sh`.
 3. Keep window sizes readable (~330–500px width); center dialogs; short timeouts only for non-blocking notices.
 4. One job per menu level; “Voltar” / “Sair” always available.
-5. Do not introduce Electron or HTML installers for Carcará menus.
+5. Do **not** add Electron/HTML inside `carcara/` menus — 2.0 lives in `carcara-electron/`.
 6. Prefer Portuguese UI labels consistent with existing menus unless localizing the whole app.
 7. Keyboard: Zenity lists must work with Enter/Esc; never rely on hover-only affordances.
 8. Progress dialogs must not hide apt errors — surface non-zero exits after the pulse.
+
+## 2.0 Electron (`carcara-electron/`)
+
+- Plan: `.agents/idea/carcara-2.0-electron.md`
+- Toolchain: **Bun**; privilege via `scripts/run-helper.ts` (`Bun.$`) + allowlisted helper + `pkexec`
+- UI/UX: skill **`ui-ux-pro-max`** → `design-system/carcara-2-0/` (Flat Design app shell)
+- Vanilla HTML/CSS + TypeScript; same verbs (Atualizar, Instalar, Limpar, Corrigir); engine stays in 1.x backends
 
 Labeled primary actions may map to verbs (“Atualizar”, “Instalar”, “Limpar”, “Corrigir”) — see `design-system/carcara/MASTER.md`.

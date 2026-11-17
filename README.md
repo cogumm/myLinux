@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/img/logo_moderno_final.png" alt="Carcará" title="Carcará — myLinux" width="180" />
+</p>
+
 <h1 align="center">myLinux</h1>
 
 <p align="center">
@@ -36,7 +40,8 @@
 
 | Piece | Role |
 |-------|------|
-| **[Carcará](carcara/README.md)** | Interactive installer / maintenance UI (Bash + Zenity/Yad) |
+| **[Carcará 1.x](carcara/README.md)** | Install engine + CLI/TUI (Bash + Zenity/Yad) |
+| **[Carcará 2.0](carcara-electron/README.md)** | Electron desktop UI (alpha; reuses 1.x backends) |
 | **`dotfiles/`** | Shell aliases, Bash/Zsh themes, git template, Hyper |
 | **`old/`** | Frozen legacy scripts — archive only |
 | **`cleanup-zone-identifiers.sh`** | Remove Windows `*:Zone.Identifier` junk on WSL |
@@ -64,19 +69,46 @@ git config --global user.email 'you@example.com'
 
 ## Quick start
 
-### Carcará (installer / maintenance)
+### One-liner (bootstrap)
+
+Clones into `~/myLinux` (or `$MYLINUX_DIR`) if needed, then opens the chooser:
+
+```bash
+sudo curl -L https://raw.githubusercontent.com/cogumm/myLinux/master/start.sh | bash
+```
+
+Requires `git`. The published `master` script clones/updates `~/myLinux` (override with `MYLINUX_DIR`) and reopens the menu (drops back to your user if started with `sudo`). Review remote scripts before piping to bash; prefer a local clone when you can.
+
+### Carcará (choose UI)
+
+From a local clone, pick **Electron 2.0** or **terminal 1.x**:
 
 ```bash
 git clone https://github.com/cogumm/myLinux.git
-cd myLinux/carcara
-sudo bash startApp.sh
+cd myLinux
+./start.sh
 ```
 
-Main menu covers system update, software install, repair, and cleanup. See [carcara/README.md](carcara/README.md) for the tree and menu map.
+| Flag | Mode |
+|------|------|
+| `./start.sh` | Interactive menu (Zenity if available, else terminal prompt) |
+| `./start.sh --electron` | Carcará 2.0 (needs [Bun](https://bun.sh)) |
+| `./start.sh --terminal` | Carcará 1.x via `sudo bash carcara/startApp.sh` |
+
+Direct entries still work: `cd carcara && sudo bash startApp.sh` · `cd carcara-electron && bun run dev`.  
+Plan: [`.agents/idea/carcara-2.0-electron.md`](.agents/idea/carcara-2.0-electron.md).
+
+**`.deb` (2.0):** publish a GitHub Release (tag `vX.Y.Z`) — [`.github/workflows/release-deb.yml`](.github/workflows/release-deb.yml) builds and attaches `carcara_*_amd64.deb`. Local: `cd carcara-electron && bun run pack:deb`.
 
 ### Dotfiles
 
-Copy or symlink files from [`dotfiles/`](dotfiles/) into `$HOME` after backing up what you already have. Details: [docs/dotfiles.md](docs/dotfiles.md).
+```bash
+cd dotfiles
+./apply.sh --dry-run --all   # preview (*.bak backups)
+./apply.sh --aliases         # default module
+```
+
+Details: [docs/dotfiles.md](docs/dotfiles.md). Do **not** run as root.
 
 ### WSL cleanup
 
@@ -88,16 +120,34 @@ Copy or symlink files from [`dotfiles/`](dotfiles/) into `$HOME` after backing u
 
 See [docs/wsl-cleanup.md](docs/wsl-cleanup.md).
 
+## Brand
+
+Primary mark: [`assets/img/logo_moderno_final.png`](assets/img/logo_moderno_final.png) (used in this README, Carcará 1.x docs, and Electron 2.0).
+
+<p align="center">
+  <img src="assets/img/logo_moderno_final.png" alt="logo_moderno_final" width="96" />
+  &nbsp;
+  <img src="assets/img/logo_moderno.png" alt="logo_moderno" width="96" />
+  &nbsp;
+  <img src="assets/img/logo_redesenhado.png" alt="logo_redesenhado" width="96" />
+  &nbsp;
+  <img src="assets/img/logo.png" alt="logo" width="96" />
+</p>
+
 ## Repository layout
 
 ```
 .
-├── carcara/                      # Active TUI installer (entry: startApp.sh)
+├── start.sh                      # Choose Electron 2.0 or terminal 1.x
+├── assets/                       # Images for 1.x + 2.0 (img/logo_*.png)
+├── carcara/                      # 1.x engine + TUI (entry: startApp.sh)
+├── carcara-electron/             # 2.0 Electron + Bun (entry: bun run dev)
 ├── dotfiles/                     # Aliases, bashrc, oh-my-zsh, git, Hyper
 ├── old/                          # Legacy archive (do not extend)
 ├── cleanup-zone-identifiers.sh   # WSL helper
 ├── docs/                         # Operator docs
-├── design-system/carcara/        # TUI UX notes
+├── design-system/carcara/        # 1.x TUI UX notes
+├── design-system/carcara-2-0/    # 2.0 Flat Design tokens (ui-ux-pro-max)
 ├── AGENTS.md                     # Agent entry
 ├── .agents/                      # Agent-agnostic idea + playbook + skills
 ├── .cursor/rules/                # Cursor adapter
@@ -121,7 +171,7 @@ See [docs/wsl-cleanup.md](docs/wsl-cleanup.md).
 - Push: `git push origin my-feature`
 - Open a pull request
 
-Prefer improving `carcara/` or `dotfiles/` over adding new top-level trees. Leave `old/` as archive.
+Prefer improving `carcara/`, `carcara-electron/`, or `dotfiles/`. Leave `old/` as archive.
 
 ## :memo: License
 

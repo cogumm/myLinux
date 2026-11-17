@@ -1,0 +1,111 @@
+# Build Carcará 2.0 .deb and attach it to the GitHub Release that triggered the run.
+name: Release .deb
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Package version without v (e.g. 2.0.1). Empty = package.json."
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-deb-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-deb:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.4
+
+      - name: Resolve version
+        id: ver
+        run: |
+          set -euo pipefail
+          if [[ "${{ github.event_name }}" == "release" ]]; then
+            TAG="${{ github.event.release.tag_name }}"
+            VER="${TAG#v}"
+          elif [[ -n "${{ inputs.version }}" ]]; then
+            VER="${{ inputs.version }}"
+            VER="${VER#v}"
+            TAG="v${VER}"
+          else
+            VER="$(bun -e 'console.log(require("./carcara-electron/package.json").version)')"
+            TAG="v${VER}"
+          fi
+          if [[ ! "$VER" =~ ^[0-9]+\.[0-9]+\.[0-9]+([.-][A-Za-z0-9.]+)?$ ]]; then
+            echo "Invalid version: $VER" >&2
+            exit 1
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "version=$VER" >> "$GITHUB_OUTPUT"
+          echo "Resolved version=${VER} tag=${TAG}"
+
+      - name: Sync package.json version
+        working-directory: carcara-electron
+        run: |
+          set -euo pipefail
+          VER="${{ steps.ver.outputs.version }}"
+          bun -e "
+            const fs = require('fs');
+            const p = JSON.parse(fs.readFileSync('package.json','utf8'));
+            p.version = process.env.VER;
+            fs.writeFileSync('package.json', JSON.stringify(p, null, 2) + '\n');
+          "
+        env:
+          VER: ${{ steps.ver.outputs.version }}
+
+      - name: Install apt build deps
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq \
+            fakeroot dpkg-dev
+
+      - name: Install JS dependencies
+        working-directory: carcara-electron
+        run: bun install --frozen-lockfile
+
+      - name: Make helper + postinst executable
+        run: |
+          chmod +x carcara-electron/helper/carcara-helper.sh
+          chmod +x carcara-electron/build/deb/after-install.sh
+
+      - name: Build .deb
+        working-directory: carcara-electron
+        run: bun run pack:deb
+        env:
+          # electron-builder may hit GitHub API for Electron releases
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: List artifacts
+        run: ls -lah carcara-electron/release/*.deb
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: carcara_${{ steps.ver.outputs.version }}_amd64.deb
+          path: carcara-electron/release/*.deb
+          if-no-files-found: error
+
+      - name: Attach .deb to GitHub Release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: carcara-electron/release/*.deb
+          fail_on_unmatched_files: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

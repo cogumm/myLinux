@@ -11,7 +11,10 @@ Playbook: `.agents/playbook/SKILL.md`
 
 | Path | Role |
 |------|------|
-| `carcara/` | Active installer UI (Bash + Zenity/Yad). Entry: `sudo bash startApp.sh` from `carcara/` |
+| `start.sh` | Dual entry: choose Electron 2.0 or terminal 1.x (`--electron` / `--terminal`) |
+| `assets/` | Images for 1.x + 2.0 (`img/logo_moderno_final.png` + variants) |
+| `carcara/` | 1.x install engine + CLI/TUI (Bash + Zenity/Yad). Entry: `sudo bash startApp.sh` from `carcara/` |
+| `carcara-electron/` | 2.0 desktop UI (Electron + Bun). Entry: `cd carcara-electron && bun run dev` |
 | `dotfiles/` | Shell aliases, Bash/Zsh themes, git config, Hyper |
 | `old/` | Frozen legacy (dialog Ubuntu packagers, Docker helper). **Archive** — migrate useful bits into `carcara/`, do not grow this tree |
 | `cleanup-zone-identifiers.sh` | WSL/Windows `:Zone.Identifier` cleanup |
@@ -23,13 +26,13 @@ Playbook: `.agents/playbook/SKILL.md`
 | `.cursor/rules/` | Cursor rules adapter (points at `.agents/`) |
 | `.claude/rules/` | Claude Code rules (same policies as `.cursor/rules/`) |
 
-Root `README.md` documents Carcará as the entrypoint (`cd carcara && sudo bash startApp.sh`).
+Root entry: `./start.sh` (choose Electron vs terminal). Optional bootstrap: `curl …/master/start.sh | bash` (clones then re-execs; owner-requested UX). Direct: `cd carcara && sudo bash startApp.sh` or `cd carcara-electron && bun run dev`.
 
 ## Target environment
 
 - **Family:** Debian/Ubuntu apt-based (Ubuntu, Debian, Linux Mint); scripts assume `apt-get` / `dpkg` / optional `snap`
 - **Arch:** primarily `x86_64`
-- **UI deps (Carcará):** `yad`, `zenity`, `curl`, `snap` (see `carcara/app/config/dependences.sh` — checker is buggy; treat as debt)
+- **UI deps (Carcará):** `yad`, `zenity`, `curl`, `iputils-ping`; optional `snap` / `flatpak`+Flathub via hardened `dependences.sh`
 - **WSL2:** relevant for Zone.Identifier cleanup and mixed Windows/Linux paths
 - **Privilege:** system install/clean/fix scripts require **root** (`isRoot` in `config.sh`)
 
@@ -52,23 +55,33 @@ Act as a **Linux systems analysis & development** specialist:
 - Detect distro via `/etc/os-release` (improve on `old/scripts/checkDistro.sh`); do not hardcode Ubuntu 14.04-era packages (PHP5, MySQL 5.6, dead PPAs).
 - **Never `git commit` or `git push` unless the owner asks in that message.** Do not change `git config`.
 - No secrets in the repo. `dotfiles/git/.gitconfig` may contain empty github token placeholders — keep them empty; never fill real tokens.
-- i18n of menus: Portuguese is historical default; new user-facing strings may stay PT unless asked otherwise.
+- i18n: Portuguese default; English via `CARCARA_LANG=en` — shared `locales/*.json` (see playbook `references/i18n.md`).
 - Read `memory-bank/activeContext.md` + `memory-bank/progress.md` before coding.
 
 ## Known debt (do not paper over)
 
-- `dependences.sh` condition is broken (`dpkg | grep -c` piped incorrectly; `which -a dependencias`)
-- Several Carcará menus still say “Ainda em desenvolvimento”
-- Dev installers source `. app/config.sh` in some scripts vs `. app/config/config.sh` elsewhere
 - Legacy `old/scripts/*.sh` install obsolete stacks and unsafe defaults (`chmod 777 www`, hardcoded passwords)
-- (README entrypoint aligned with Carcará; optional future `init.sh` wrapper still open in `TODO.md` if desired)
+- Wave 1 + Wave 2 done (1.x engine). Wave 3 cancelled — product UI is Electron 2.0
+- Active: Carcará 2.0 **usable alpha** (`2.0.1`) — license gate, Dotfiles, Zod, nested i18n + rail PT\|EN, sync-time, Software pagination, **`.deb` + Release CI**, `{version}` in locales; see playbook `carcara-2.0` + `memory-bank/activeContext.md`
+- Next: live `--live` / pkexec smoke on owner desktop + optional AppImage (`memory-bank/TODO.md`; harness `bun run smoke:software`; Waves A–C done)
+- 1.x `menuGeral`: Atualizar / Instalar / Correção / Limpeza / **Dotfiles** / Sair
+- `dependences.sh` hardened 17 Nov 2026 (apt-family detect, apt update, Flathub, NI-safe notify)
+- Wave 2 installers / 2.0 privileged actions not fully smoke-tested live (needs owner-requested apt/flatpak/snap + pkexec)
+- WSL: no `pkexec` → privileged helper runs unelevated (apt locks fail); use real desktop for elevation tests
+- Packaging `.deb` done (`pack:deb` + `release-deb.yml`); live Software/pkexec smoke + optional AppImage still open
+- `electron-builder.yml` lives under `carcara-electron/` — not under `.github/workflows/`
+- 1.x i18n flatten needs **python3** on the machine
 
 ## Project guidance
 
 | Doc | When |
 |------|------|
 | `.agents/playbook/` | **Default** for every task in this repo |
+| `.agents/playbook/references/carcara-2.0.md` | Electron 2.0 UI, Bun, helper, WSL |
+| `.agents/skills/ui-ux-pro-max/` | 2.0 visual direction / design-system |
 | `.agents/skills/shellcheck-configuration/` | When linting or hardening Bash under `carcara/` |
-| `.agents/skills/` (other) | Only if installed and relevant; backlog in `memory-bank/TODO.md` |
+| `.agents/skills/bash-scripting/` | Defensive Bash checklist (pair with shellcheck + shell-safety) |
+| `.agents/skills/debian-linux-triage/` | apt/dpkg/systemd triage plans (no unsolicited live remediations) |
+| `.agents/skills/README.md` | Installed skills + myLinux constraints |
 
 `skills-lock.json` tracks installed optional skills.

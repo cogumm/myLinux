@@ -27,8 +27,15 @@ Web application, payments, multi-user SaaS, equal support for every distro.
 
 ## Modernization direction
 
-- Single documented entrypoint: `carcara/startApp.sh` (README aligned; optional root `init.sh` wrapper only if desired).
-- Incomplete menus wired to existing installers (`development/`, `social/`, `utilities/`).
-- Correct, idempotent dependency detection.
-- Packages and PPAs brought up to date (no PHP5 / MySQL 5.6 / dead links).
-- Dotfiles installable without overwriting `$HOME` without confirmation.
+- **1.x engine** complete: `carcara/startApp.sh` + `install_backends.sh` + thin installers + i18n + `sync_time`.
+- **2.0 UI** usable alpha (`2.0.0-alpha.0`): Electron + Bun; license gate; Dotfiles; Zod env; nested i18n + rail PT\|EN; Software pagination; reuses 1.x backends via helper.
+- **Chooser:** repo-root `./start.sh` — Electron or terminal.
+- Dotfiles: `dotfiles/apply.sh` + menus in 1.x/2.0 (`*.bak`; always as `$SUDO_USER`).
+- **v2.0.1:** expand catalog (waves in `memory-bank/TODO.md`).
+- Agent state: `memory-bank/activeContext.md` + playbook `references/carcara-2.0.md` + `i18n.md`.
+
+## Related ideas
+
+- **[Carcará modern install (1.x)](carcara-modern-install.md)** — complete (Waves 1–2).
+- **[Carcará 2.0 Electron](carcara-2.0-electron.md)** — active product UI track.
+- **[softwares.md](softwares.md)** — shipped catalog; backlog in TODO v2.0.1.

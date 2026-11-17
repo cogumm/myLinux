@@ -1,42 +1,56 @@
 #!/bin/bash
-clear
+[[ -n "${CARCARA_NONINTERACTIVE:-}" ]] || clear
 . app/config/config.sh
 #-------------------------------------------------------------------------------#
-# Data: 20 de Setembro de 2017
+# Data criação: 20 de Setembro de 2017
+# Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
-# Telegram: http://t.me/CoGUMm
+# Telegram: https://t.me/CoGUMm
 # Script: fixSystem
-# Descrição: Script para correção do sistema.
-# Variáveis: $configYad	 : Carrega as configurações do Yad (sem botões).
+# Descrição: Corrige dependências e reconfigura pacotes (apt -f / dpkg --configure -a).
+# Variáveis: $configYad ; CARCARA_NONINTERACTIVE=1 (Electron/helper)
 #-------------------------------------------------------------------------------#
+# shellcheck disable=SC2154 # configYad exported by config.sh when sourced
 
-fixSystem()
-{
-	yad --title "Corrigindo o sistema" \
-		--text "Bem vindo ao script para corrigir e reparar problemas de dependências e pacotes do sistema Linux." $configYad --timeout 5
+_fix_notify() {
+	local title="$1"
+	local text="$2"
+	if [[ -z "${CARCARA_NONINTERACTIVE:-}" ]] && command -v yad >/dev/null 2>&1; then
+		# shellcheck disable=SC2086
+		yad --title "$title" --text "$text" $configYad
+	else
+		echo "[$title] $text"
+	fi
+}
 
-	# Forçando a instalação de pacotes quebrados.
-	sudo apt-get -f install -y | \
-	yad --progress \
-     	--title "Corrigindo o sistema" \
-	    --progress-text="Corrigindo problemas de dependências." \
-	    --pulsate $configYad
+fixSystem() {
+	local failed=0
 
-	# Reparando o dpkg
-	sudo dpkg --configure -a | \
-	yad --progress \
-     	--title "Corrigindo o sistema" \
-	    --progress-text="Reparando pacotes com problemas." \
-	    --pulsate $configYad
+	carcara_log "fixSystem: starting"
+	_fix_notify "Corrigindo o sistema" \
+		"Reparando dependências e pacotes interrompidos."
 
-    # echo "Pré-linkando as blibliotecas dos programas"
-    # if which -a prelink; then
-    #     sudo /etc/cron.daily/prelink
-    # else
-    #     echo "Você precisa instalar o Prelink\nPara ativar essa função\n 'sudo apt-get install prelink -y'"
-    # fi
-    yad --title "Corrigindo o sistema" --text "Correção realizada com sucesso!" $configYad
+	if ! run_with_progress "apt-get -f install" \
+		env DEBIAN_FRONTEND=noninteractive apt-get -f install -y; then
+		carcara_err "apt-get -f install failed"
+		failed=1
+	fi
+
+	if ! run_with_progress "dpkg --configure -a" \
+		dpkg --configure -a; then
+		carcara_err "dpkg --configure -a failed"
+		failed=1
+	fi
+
+	if ((failed)); then
+		_fix_notify "Corrigindo o sistema" \
+			"Correção terminou com erros. Veja o terminal ([carcara:error])."
+		return 1
+	fi
+
+	_fix_notify "Corrigindo o sistema" "Correção realizada com sucesso."
+	return 0
 }
 
 fixSystem

@@ -1,0 +1,35 @@
+{
+  "name": "carcara-electron",
+  "version": "2.0.1",
+  "private": true,
+  "description": "Carcará 2.0 — Electron UI over the 1.x install engine (Bun toolchain)",
+  "main": "dist/main.js",
+  "author": "Gabriel F. Vilar (CoGUMm) <gabriel@cogumm.net>",
+  "homepage": "https://github.com/cogumm/myLinux",
+  "license": "MIT",
+  "scripts": {
+    "build": "bun run scripts/build.ts",
+    "dev": "bun run build && electron . --no-sandbox --disable-gpu --disable-dev-shm-usage",
+    "start": "electron . --no-sandbox --disable-gpu --disable-dev-shm-usage",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.renderer.json",
+    "helper": "bun scripts/run-helper.ts",
+    "smoke:software": "bash scripts/smoke-software.sh",
+    "pack:deb": "bun run build && electron-builder --linux deb --config electron-builder.yml",
+    "pack:dir": "bun run build && electron-builder --linux dir --config electron-builder.yml"
+  },
+  "engines": {
+    "bun": ">=1.1.0"
+  },
+  "packageManager": "bun@1.3.4",
+  "devDependencies": {
+    "@types/bun": "^1.2.0",
+    "@types/node": "^22.10.0",
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.10",
+    "zod": "^4.6.7"
+  }
+}

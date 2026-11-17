@@ -1,12 +1,33 @@
 {
   "version": 2,
   "skills": {
+    "bash-scripting": {
+      "source": "sickn33/agentic-awesome-skills",
+      "commit": "15888d3e32930f28b63d83f9e77f976604ccae99",
+      "sourceType": "github",
+      "skillPath": "skills/bash-scripting/SKILL.md",
+      "computedHash": "65eb8decc0f08c2761e9219ce9c266fb771c1850e881290866b5d524fc3474c9"
+    },
+    "debian-linux-triage": {
+      "source": "github/awesome-copilot",
+      "commit": "a06ba06d11f41b996f8c246e2a452e1bf3a17950",
+      "sourceType": "github",
+      "skillPath": "skills/debian-linux-triage/SKILL.md",
+      "computedHash": "7f87a1977e850e2062ab0e5d30edf2e11dc2e58897f0d5e570be012f8370e5a5"
+    },
     "shellcheck-configuration": {
       "source": "wshobson/agents",
       "commit": "9c61ab243def98f72da12abd41cfcf5bcd91af9d",
       "sourceType": "github",
       "skillPath": "plugins/shell-scripting/skills/shellcheck-configuration/SKILL.md",
       "computedHash": "e4a65482cd932438bf6d98cc404814ad3cb8e21b13ad3589215489db1bd9df63"
+    },
+    "ui-ux-pro-max": {
+      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "commit": "e59ff376a41f7ca47b7541ad5c116495cbade3ee",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/ui-ux-pro-max/SKILL.md",
+      "computedHash": "9700c4f6c9460810a4158f3a6d3238d8ee58bc682e0aa7190c2c333cf6c666b1"
     }
   }
 }

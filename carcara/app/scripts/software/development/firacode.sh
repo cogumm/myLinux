@@ -1,45 +1,26 @@
 #!/bin/bash
-clear
-. app/config.sh
+. app/config/config.sh
 #----------------------------------------------------------------------------------------------------#
-# Data: 15 de Fevereiro de 2020
+# Data criação: 15 de Fevereiro de 2020
+# Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
-# Telegram: http://t.me/CoGUMm
+# Telegram: https://t.me/CoGUMm
 # Script: Font Fira Code
-# Descrição: Script para instalar a Font Fira Code
-# Variáveis: $configYad	 : Carrega as configurações do Yad (sem botões).
+# Descrição: Instala a fonte Fira Code via apt (fonts-firacode).
 #----------------------------------------------------------------------------------------------------#
 
-installFontFiraCode() {
-    yad --title "Instalando a Fonte do Fira Code" \
-		--text "Bem vindo ao script de instalação da Fonte do Fira Code" $configYad --timeout 5
+isRoot
 
+if pkg_present dpkg fonts-firacode; then
+	carcara_log "fonts-firacode already installed — skip"
+	exit 0
+fi
 
-    fonts_dir="${HOME}/.local/share/fonts"
-    if [ ! -d "${fonts_dir}" ]; then
-        echo "mkdir -p $fonts_dir"
-        mkdir -p "${fonts_dir}"
-    else
-        echo "Found fonts dir $fonts_dir"
-    fi
+if run_with_progress "Fira Code (apt)" apt_install fonts-firacode; then
+	exit 0
+fi
 
-    for type in Bold Light Medium Regular Retina; do
-        file_path="${HOME}/.local/share/fonts/FiraCode-${type}.ttf"
-        file_url="https://github.com/tonsky/FiraCode/blob/master/distr/ttf/FiraCode-${type}.ttf?raw=true"
-        if [ ! -e "${file_path}" ]; then
-            echo "wget -O $file_path $file_url"
-            wget -O "${file_path}" "${file_url}"
-        else
-        echo "Found existing file $file_path"
-        fi;
-    done
-
-    echo "fc-cache -f"
-    fc-cache -f
-
-    return
-}
-
-installFontFiraCode
+carcara_err "Fira Code install failed (fonts-firacode unavailable?)"
+exit 1
 # Fim

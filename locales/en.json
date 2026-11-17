@@ -1,0 +1,313 @@
+{
+  "lang": {
+    "name": "English",
+    "switchAria": "Language"
+  },
+  "app": {
+    "name": "Carcará"
+  },
+  "window": {
+    "title": "Carcará {version}"
+  },
+  "menu": {
+    "choose": "Choose an option",
+    "update": "Update system",
+    "install": "Install software",
+    "fix": "Repair system",
+    "clean": "Clean system",
+    "dotfiles": "Dotfiles",
+    "exit": "Quit",
+    "back": "Back",
+    "exiting": "Leaving the program …"
+  },
+  "sof": {
+    "development": "Development",
+    "games": "Games",
+    "browsers": "Browsers",
+    "productivity": "Productivity",
+    "social": "Social",
+    "music": "Music and audio",
+    "security": "Security",
+    "utilities": "Utilities",
+    "presets": "Presets"
+  },
+  "install": {
+    "git": "Install Git",
+    "vscode": "Install VS Code",
+    "cursor": "Install Cursor",
+    "insomnia": "Install Insomnia",
+    "postman": "Install Postman",
+    "termius": "Install Termius",
+    "firacode": "Install Fira Code",
+    "docker": "Install Docker",
+    "nodejs": "Install Node.js toolchain",
+    "discord": "Install Discord",
+    "spotify": "Install Spotify",
+    "telegram": "Install Telegram",
+    "whatsapp": "Install WhatsApp",
+    "protonMail": "Install Proton Mail",
+    "protonVpn": "Install Proton VPN",
+    "nordvpn": "Install NordVPN",
+    "vlc": "Install VLC",
+    "firefox": "Install Firefox",
+    "brave": "Install Brave",
+    "vivaldi": "Install Vivaldi",
+    "opera": "Install Opera",
+    "zen": "Install Zen Browser",
+    "steam": "Install Steam",
+    "heroic": "Install Heroic",
+    "lutris": "Install Lutris",
+    "obs": "Install OBS Studio",
+    "audacity": "Install Audacity",
+    "navidrome": "Install Navidrome",
+    "dropbox": "Install Dropbox",
+    "anki": "Install Anki",
+    "notion": "Install Notion",
+    "thunderbird": "Install Thunderbird",
+    "libreoffice": "Install LibreOffice",
+    "onlyoffice": "Install OnlyOffice",
+    "bitwarden": "Install Bitwarden",
+    "onepassword": "Install 1Password",
+    "presetDev": "Dev box preset",
+    "presetSocial": "Social box preset",
+    "presetGaming": "Gaming light preset"
+  },
+  "desc": {
+    "git": "Distributed version control (CLI + gitg)",
+    "vscode": "Microsoft’s code editor",
+    "cursor": "AI-assisted IDE (vendor amd64 .deb)",
+    "insomnia": "REST / GraphQL API client",
+    "postman": "API client and collections",
+    "termius": "Modern SSH client",
+    "firacode": "Monospace font with coding ligatures",
+    "docker": "Linux containers and images",
+    "nodejs": "Node 22 + npm + pnpm + Yarn + Bun",
+    "discord": "Voice, chat, and communities",
+    "spotify": "Music and podcast streaming",
+    "telegram": "Fast messaging and channels",
+    "whatsapp": "WhatsApp Desktop (Flatpak / Snap)",
+    "protonMail": "Proton Mail desktop client",
+    "protonVpn": "Proton VPN client",
+    "nordvpn": "NordVPN (Snap)",
+    "vlc": "Plays almost any media format",
+    "firefox": "Mozilla web browser",
+    "brave": "Browser with built-in ad blocking",
+    "vivaldi": "Browser with advanced tabs and panels",
+    "opera": "Opera browser (GX-style builds on Linux via Opera)",
+    "zen": "Zen Browser (AppImage from GitHub Releases)",
+    "steam": "Valve game store and client",
+    "heroic": "Epic Games + GOG (Heroic Launcher)",
+    "lutris": "Wine / Battle.net and other runners",
+    "obs": "Recording and live streaming",
+    "audacity": "Multi-track audio editor",
+    "navidrome": "Self-hosted music streaming server",
+    "dropbox": "Cloud file sync across devices",
+    "anki": "Spaced-repetition flashcards",
+    "notion": "Notes and wikis on the desktop",
+    "thunderbird": "Mozilla email client",
+    "libreoffice": "Free office suite",
+    "onlyoffice": "OnlyOffice Desktop editors",
+    "bitwarden": "Open-source password manager",
+    "onepassword": "1Password password manager",
+    "presetDev": "Git, VS Code, Fira, Node, Docker, Insomnia",
+    "presetSocial": "Discord, Telegram, WhatsApp, Spotify",
+    "presetGaming": "Steam, Heroic, Lutris"
+  },
+  "soft": {
+    "searchPlaceholder": "Filter apps in this category…",
+    "searchAria": "Search software",
+    "noMatch": "No apps match this search."
+  },
+  "dotfiles": {
+    "column": "Dotfiles (*.bak backup)",
+    "title": "Carcará — Dotfiles",
+    "dryrun": "Preview (dry-run)",
+    "aliases": "Aliases",
+    "all": "Everything (except bashrc)",
+    "git": "Git",
+    "hyper": "Hyper",
+    "theme": "Zsh theme",
+    "bashrc": "Bashrc",
+    "notify": {
+      "dryrun": "Preview finished (nothing written).",
+      "aliases": "Aliases applied (see *.bak if files existed).",
+      "all": "Package --all applied.",
+      "git": "Git config applied (empty tokens in template).",
+      "hyper": "Hyper applied.",
+      "theme": "cgm theme (if oh-my-zsh exists).",
+      "bashrc": "bashrc applied (*.bak backup)."
+    }
+  },
+  "license": {
+    "title": "License agreement",
+    "lede": "Read the terms (same notice as Carcará 1.x). Check Continue to open the app.",
+    "checkbox": "Continue",
+    "accept": "Accept and continue",
+    "quit": "Quit"
+  },
+  "rail": {
+    "sistema": "System",
+    "software": "Software",
+    "dotfiles": "Dotfiles",
+    "sobre": "About",
+    "navAria": "Navigation"
+  },
+  "status": {
+    "ready": "Ready",
+    "busy": "Running…",
+    "ok": "Done",
+    "err": "Error",
+    "cancelled": "Cancelled"
+  },
+  "confirm": {
+    "title": "Confirm",
+    "cancel": "Cancel",
+    "ok": "Continue"
+  },
+  "view": {
+    "sistema": {
+      "eyebrow": "Maintenance",
+      "title": "System",
+      "lede": "Update, repair, clean, test the network, and sync the clock."
+    },
+    "software": {
+      "eyebrow": "Catalog",
+      "title": "Software",
+      "lede": "Snap Store–style catalog — apt → Flatpak → Snap."
+    },
+    "dotfiles": {
+      "eyebrow": "Home",
+      "title": "Dotfiles",
+      "lede": "Apply aliases, git, Hyper, and themes to your $HOME (*.bak backup; no root)."
+    },
+    "sobre": {
+      "eyebrow": "Project",
+      "title": "About",
+      "lede": "Identity, license, and myLinux links."
+    }
+  },
+  "tile": {
+    "update": {
+      "title": "Update system",
+      "desc": "update → upgrade → full-upgrade",
+      "confirm": "Update the system (apt update + upgrade + full-upgrade)? Requires privileges."
+    },
+    "fix": {
+      "title": "Repair system",
+      "desc": "Dependencies and configure -a",
+      "confirm": "Fix broken packages (apt -f + dpkg --configure -a)?"
+    },
+    "clean": {
+      "title": "Clean system",
+      "desc": "Trash, tmp, apt clean and locks",
+      "confirm": "System cleanup (trash, tmp, apt clean/autoclean/autoremove, locks and apt lists)? Requires privileges."
+    },
+    "ping": {
+      "title": "Test connection",
+      "desc": "Connection test → Google (ICMP)"
+    },
+    "sync": {
+      "title": "Sync clock",
+      "desc": "timedatectl NTP or ntpdate",
+      "confirm": "Synchronize the system clock (NTP / ntpdate)? Requires privileges."
+    },
+    "docker": {
+      "confirm": "Install Docker Engine (official apt or docker.io) and add your user to the docker group?"
+    }
+  },
+  "cat": {
+    "development": "Development",
+    "games": "Games",
+    "social": "Social",
+    "productivity": "Productivity",
+    "utilities": "Utilities",
+    "musicAndAudio": "Music and Audio",
+    "artAndDesign": "Art and Design",
+    "photoAndVideo": "Photo and Video",
+    "serverAndCloud": "Server and Cloud",
+    "booksAndReference": "Books and Reference",
+    "devicesAndIot": "Devices and IoT",
+    "education": "Education",
+    "entertainment": "Entertainment",
+    "finance": "Finance",
+    "healthAndFitness": "Health and Fitness",
+    "newsAndWeather": "News and Weather",
+    "personalisation": "Personalisation",
+    "science": "Science",
+    "security": "Security",
+    "empty": "No apps in this category yet — see the v2.0.1 backlog."
+  },
+  "native": {
+    "file": "File",
+    "quit": "Quit",
+    "about": "About",
+    "aboutItem": "About this project"
+  },
+  "skip": {
+    "link": "Skip to content"
+  },
+  "ready": {
+    "log": "$ Carcará {version} ready.\n"
+  },
+  "console": {
+    "title": "Activity",
+    "clear": "Clear",
+    "clearAria": "Clear log"
+  },
+  "host": {
+    "distro": "Distro",
+    "arch": "Arch",
+    "flatpak": "Flatpak",
+    "snap": "Snap",
+    "yes": "present",
+    "no": "missing"
+  },
+  "sobre": {
+    "lead": "Personal Linux workstation toolkit — installers, maintenance, and dotfiles. The 2.0 UI reuses the 1.x backends (apt → Flatpak → Snap).",
+    "note": "Many scripts need root and change the system. Review before running. The author is not liable for misuse.",
+    "fact": {
+      "product": {
+        "label": "Product",
+        "value": "Carcará 2.0 — Electron + Bun on the Bash 1.x engine"
+      },
+      "target": {
+        "label": "Target",
+        "value": "Ubuntu, Debian, Linux Mint (apt), x86_64"
+      },
+      "entry": {
+        "label": "Entry",
+        "value": "sudo ./start.sh --electron | --terminal"
+      },
+      "author": {
+        "label": "Author",
+        "value": "Gabriel F. Vilar (CoGUMm)"
+      },
+      "license": {
+        "label": "License",
+        "value": "MIT · Copyright (c) 2010 CoGUMm"
+      },
+      "repo": {
+        "label": "Repo",
+        "value": "github.com/cogumm/myLinux"
+      }
+    },
+    "link": {
+      "mit": "MIT License",
+      "copied": "(copied)",
+      "failed": "failed",
+      "noBrowser": "no browser"
+    }
+  },
+  "main": {
+    "requireRoot": "You need administrative privileges (root)",
+    "exiting": "The application is exiting.",
+    "useSudo": "Use: sudo ./start.sh --electron",
+    "urlDenied": "URL not allowed"
+  },
+  "pager": {
+    "prev": "Previous",
+    "next": "Next",
+    "status": "Page {current} of {total}",
+    "aria": "Catalog pagination"
+  }
+}
