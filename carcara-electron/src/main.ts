@@ -39,7 +39,12 @@ function runHelper(action: string): Promise<RunResult> {
 }
 
 function createWindow(): void {
-  const logoPath = path.join(__dirname, "renderer", "assets", "logo.png");
+  const logoPath = path.join(
+    __dirname,
+    "renderer",
+    "assets",
+    "logo_moderno_final.png",
+  );
   const win = new BrowserWindow({
     width: 960,
     height: 720,

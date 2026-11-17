@@ -277,13 +277,32 @@ body {
   object-fit: contain;
   border-radius: 12px;
   border: 1px solid var(--color-border);
-  background: var(--color-card);
+  background: #000;
+}
+
+.about-copy {
+  flex: 1;
+  min-width: 12rem;
 }
 
 .about-hero .hint {
   margin: 0;
-  flex: 1;
-  min-width: 12rem;
+}
+
+.about-variants {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.about-variants img {
+  width: 3rem;
+  height: 3rem;
+  object-fit: contain;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  background: #000;
 }
 
 .hint code {
