@@ -7,23 +7,25 @@
 # E-mail: gabriel[at]cogumm[dot]net
 # Telegram: https://t.me/CoGUMm
 # Script: social/_menu
-# Descrição: Menu social — i18n.
+# Descrição: Menu social — i18n (+ Wave A WhatsApp).
 #----------------------------------------------------------------------------------------------------#
 
 while true; do
-	menu=$(zenity --width=330 --height=500 --list \
+	menu=$(zenity --width=330 --height=520 --list \
 		--title="$(t app.name)" \
 		--column="id" --column="$(t menu.choose)" \
 		--hide-column=1 --print-column=1 \
 		discord "$(t install.discord)" \
 		spotify "$(t install.spotify)" \
 		telegram "$(t install.telegram)" \
+		whatsapp "$(t install.whatsapp)" \
 		back "$(t menu.back)") || menu="back"
 
 	case "$menu" in
 		discord) bash app/scripts/software/social/discord.sh ;;
 		spotify) bash app/scripts/software/social/spotify.sh ;;
 		telegram) bash app/scripts/software/social/telegram.sh ;;
+		whatsapp) bash app/scripts/software/social/whatsapp.sh ;;
 		back|*) break ;;
 	esac
 done

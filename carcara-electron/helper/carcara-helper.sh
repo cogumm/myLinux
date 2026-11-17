@@ -27,9 +27,11 @@ usage() {
 	echo "system:   ping | apt-dry-run | update-distro | fix-system | clean-distro | sync-time" >&2
 	echo "dotfiles: dotfiles-dry-run | dotfiles-aliases | dotfiles-all | dotfiles-git |" >&2
 	echo "          dotfiles-hyper | dotfiles-theme | dotfiles-bashrc" >&2
-	echo "install:  install-vlc | install-discord | install-spotify | install-telegram |" >&2
-	echo "          install-git | install-vscode | install-insomnia | install-firacode |" >&2
-	echo "          install-docker | install-dropbox" >&2
+	echo "install:  install-vlc | install-firefox | install-brave | install-steam | install-obs |" >&2
+	echo "          install-discord | install-spotify | install-telegram | install-whatsapp |" >&2
+	echo "          install-git | install-vscode | install-cursor | install-insomnia |" >&2
+	echo "          install-postman | install-termius | install-firacode | install-docker |" >&2
+	echo "          install-dropbox | install-anki | install-notion | install-thunderbird" >&2
 }
 
 # Run repo dotfiles/apply.sh as the real desktop user (never as root home).
@@ -135,9 +137,25 @@ case "$action" in
 		_run_dotfiles_apply --bashrc
 		exit $?
 		;;
-	# --- software (Wave 2 thin installers) ---
+	# --- software (Wave 2 + Wave A thin installers) ---
 	install-vlc)
 		_run_carcara_script "app/scripts/software/utilities/vlc.sh"
+		exit $?
+		;;
+	install-firefox)
+		_run_carcara_script "app/scripts/software/utilities/firefox.sh"
+		exit $?
+		;;
+	install-brave)
+		_run_carcara_script "app/scripts/software/utilities/brave.sh"
+		exit $?
+		;;
+	install-steam)
+		_run_carcara_script "app/scripts/software/utilities/steam.sh"
+		exit $?
+		;;
+	install-obs)
+		_run_carcara_script "app/scripts/software/utilities/obs.sh"
 		exit $?
 		;;
 	install-discord)
@@ -152,6 +170,10 @@ case "$action" in
 		_run_carcara_script "app/scripts/software/social/telegram.sh"
 		exit $?
 		;;
+	install-whatsapp)
+		_run_carcara_script "app/scripts/software/social/whatsapp.sh"
+		exit $?
+		;;
 	install-git)
 		_run_carcara_script "app/scripts/software/development/git.sh"
 		exit $?
@@ -160,8 +182,20 @@ case "$action" in
 		_run_carcara_script "app/scripts/software/development/vscode.sh"
 		exit $?
 		;;
+	install-cursor)
+		_run_carcara_script "app/scripts/software/development/cursor.sh"
+		exit $?
+		;;
 	install-insomnia)
 		_run_carcara_script "app/scripts/software/development/insomnia.sh"
+		exit $?
+		;;
+	install-postman)
+		_run_carcara_script "app/scripts/software/development/postman.sh"
+		exit $?
+		;;
+	install-termius)
+		_run_carcara_script "app/scripts/software/development/termius.sh"
 		exit $?
 		;;
 	install-firacode)
@@ -174,6 +208,18 @@ case "$action" in
 		;;
 	install-dropbox)
 		_run_carcara_script "app/scripts/software/productivity/dropbox.sh"
+		exit $?
+		;;
+	install-anki)
+		_run_carcara_script "app/scripts/software/productivity/anki.sh"
+		exit $?
+		;;
+	install-notion)
+		_run_carcara_script "app/scripts/software/productivity/notion.sh"
+		exit $?
+		;;
+	install-thunderbird)
+		_run_carcara_script "app/scripts/software/productivity/thunderbird.sh"
 		exit $?
 		;;
 	""|-h|--help)

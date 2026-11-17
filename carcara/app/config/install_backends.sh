@@ -207,6 +207,49 @@ snap_install() {
 	snap install "$name" "$@"
 }
 
+# --- vendor .deb (download; no curl|bash) ---
+
+# install_deb_url <dpkg-name> <url>
+# Downloads a .deb to a temp file, dpkg -i, then apt-get -f install -y. Cleans temp.
+# dpkg-name is used for logging / post-check (pkg_present dpkg).
+install_deb_url() {
+	local pkg_name="${1:-}"
+	local url="${2:-}"
+	local tmp=""
+	local rc=0
+
+	if [[ -z "$pkg_name" || -z "$url" ]]; then
+		carcara_err "install_deb_url: usage: install_deb_url <dpkg-name> <url>"
+		return 2
+	fi
+	if ! command -v curl >/dev/null 2>&1; then
+		carcara_err "install_deb_url: curl is required"
+		return 1
+	fi
+
+	tmp="$(mktemp --suffix=".deb")" || return 1
+	carcara_log "install_deb_url: $pkg_name ← $url"
+	if ! curl -fsSL --location --output "$tmp" "$url"; then
+		carcara_err "install_deb_url: download failed"
+		rm -f "$tmp"
+		return 1
+	fi
+
+	if ! dpkg -i "$tmp"; then
+		carcara_log "dpkg -i reported issues — apt-get -f install"
+	fi
+	if ! DEBIAN_FRONTEND=noninteractive apt-get install -f -y; then
+		carcara_err "install_deb_url: apt-get -f install failed for $pkg_name"
+		rc=1
+	elif ! pkg_present dpkg "$pkg_name" && ! pkg_present command "$pkg_name"; then
+		# Some packages expose a different binary name (e.g. cursor).
+		carcara_log "install_deb_url: dpkg name '$pkg_name' not listed — check command separately"
+	fi
+
+	rm -f "$tmp"
+	return "$rc"
+}
+
 # --- progress wrapper ---
 
 # run_with_progress <title> <command> [args...]
