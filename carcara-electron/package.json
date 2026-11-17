@@ -6,8 +6,8 @@
   "main": "dist/main.js",
   "scripts": {
     "build": "bun run scripts/build.ts",
-    "dev": "bun run build && electron . --no-sandbox",
-    "start": "electron . --no-sandbox",
+    "dev": "bun run build && electron . --no-sandbox --disable-gpu --disable-dev-shm-usage",
+    "start": "electron . --no-sandbox --disable-gpu --disable-dev-shm-usage",
     "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.renderer.json",
     "helper": "bun scripts/run-helper.ts"
   },

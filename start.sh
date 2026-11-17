@@ -79,6 +79,41 @@ have_cmd() {
 	command -v "$1" >/dev/null 2>&1
 }
 
+# sudo's secure_path drops ~/.bun/bin — recover Bun for root / `sudo ./start.sh`.
+ensure_bun_on_path() {
+	if have_cmd bun; then
+		return 0
+	fi
+
+	local candidates=()
+	local home=""
+
+	if [[ -n "${SUDO_USER:-}" && "${SUDO_USER}" != "root" ]]; then
+		home="$(getent passwd "${SUDO_USER}" | cut -d: -f6 || true)"
+		[[ -n "$home" ]] && candidates+=("${home}/.bun/bin/bun")
+	fi
+	# Fallback when already root without SUDO_USER (rare) or login shell.
+	[[ -n "${HOME:-}" && "${HOME}" != /root ]] && candidates+=("${HOME}/.bun/bin/bun")
+	candidates+=("/usr/local/bin/bun" "/usr/bin/bun")
+
+	local bun_bin=""
+	local c
+	for c in "${candidates[@]}"; do
+		if [[ -x "$c" ]]; then
+			bun_bin="$c"
+			break
+		fi
+	done
+
+	if [[ -z "$bun_bin" ]]; then
+		return 1
+	fi
+
+	export PATH="$(dirname "$bun_bin"):${PATH}"
+	echo "[carcara] Bun encontrado fora do PATH do sudo: ${bun_bin}"
+	return 0
+}
+
 MYLINUX_ROOT="$(resolve_local_root || true)"
 if [[ -z "${MYLINUX_ROOT}" ]]; then
 	bootstrap_repo "$@"
@@ -141,14 +176,18 @@ run_electron() {
 		echo "[carcara:error] Pasta carcara-electron/ não encontrada." >&2
 		exit 1
 	fi
-	if ! have_cmd bun; then
-		echo "[carcara:error] Bun não está no PATH. Instale: https://bun.sh" >&2
-		exit 1
-	fi
 
 	# Re-exec via sudo before install/dev so deps and Electron share root (like 1.x).
+	# Prefer elevating *before* PATH fix so sudo injects Bun; still fix PATH when
+	# the user already ran `sudo ./start.sh` (secure_path hides ~/.bun/bin).
 	if [[ "$(id -u)" -ne 0 ]]; then
 		require_root_or_sudo "Electron 2.0" --electron
+	fi
+
+	if ! ensure_bun_on_path; then
+		echo "[carcara:error] Bun não está no PATH (nem em ~/.bun/bin do SUDO_USER)." >&2
+		echo "[carcara:error] Instale: https://bun.sh  — depois: sudo ./start.sh --electron" >&2
+		exit 1
 	fi
 
 	cd "${CARCARA_2X}"
@@ -156,6 +195,20 @@ run_electron() {
 		echo "[carcara] Dependências ausentes — executando bun install…"
 		bun install
 	fi
+
+	# WSLg + sudo: DRI3/MESA shm warnings are common — prefer software GL.
+	if [[ -r /proc/version ]] && grep -qi microsoft /proc/version; then
+		export LIBGL_ALWAYS_SOFTWARE="${LIBGL_ALWAYS_SOFTWARE:-1}"
+		# Root often lacks the invoking user's X cookie unless sudo preserved it.
+		if [[ -z "${XAUTHORITY:-}" && -n "${SUDO_USER:-}" ]]; then
+			_home="$(getent passwd "${SUDO_USER}" | cut -d: -f6 || true)"
+			if [[ -n "${_home}" && -f "${_home}/.Xauthority" ]]; then
+				export XAUTHORITY="${_home}/.Xauthority"
+			fi
+		fi
+		echo "[carcara] WSL detectado — Electron com GPU desligada (evita erros DRI3/MESA)."
+	fi
+
 	echo "[carcara] Iniciando UI (bun run dev) como root…"
 	exec bun run dev
 }
