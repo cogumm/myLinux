@@ -27,7 +27,9 @@ usage() {
 	echo "system:   ping | apt-dry-run | update-distro | fix-system | clean-distro | sync-time" >&2
 	echo "dotfiles: dotfiles-dry-run | dotfiles-aliases | dotfiles-all | dotfiles-git |" >&2
 	echo "          dotfiles-hyper | dotfiles-theme | dotfiles-bashrc" >&2
-	echo "install:  install-vlc | install-firefox | install-brave | install-steam | install-obs |" >&2
+	echo "install:  install-vlc | install-obs | install-firefox | install-brave | install-vivaldi |" >&2
+	echo "          install-opera | install-zen | install-steam | install-heroic | install-lutris |" >&2
+	echo "          install-audacity | install-navidrome |" >&2
 	echo "          install-discord | install-spotify | install-telegram | install-whatsapp |" >&2
 	echo "          install-git | install-vscode | install-cursor | install-insomnia |" >&2
 	echo "          install-postman | install-termius | install-firacode | install-docker |" >&2
@@ -143,19 +145,47 @@ case "$action" in
 		exit $?
 		;;
 	install-firefox)
-		_run_carcara_script "app/scripts/software/utilities/firefox.sh"
+		_run_carcara_script "app/scripts/software/browsers/firefox.sh"
 		exit $?
 		;;
 	install-brave)
-		_run_carcara_script "app/scripts/software/utilities/brave.sh"
+		_run_carcara_script "app/scripts/software/browsers/brave.sh"
+		exit $?
+		;;
+	install-vivaldi)
+		_run_carcara_script "app/scripts/software/browsers/vivaldi.sh"
+		exit $?
+		;;
+	install-opera)
+		_run_carcara_script "app/scripts/software/browsers/opera.sh"
+		exit $?
+		;;
+	install-zen)
+		_run_carcara_script "app/scripts/software/browsers/zen.sh"
 		exit $?
 		;;
 	install-steam)
-		_run_carcara_script "app/scripts/software/utilities/steam.sh"
+		_run_carcara_script "app/scripts/software/games/steam.sh"
+		exit $?
+		;;
+	install-heroic)
+		_run_carcara_script "app/scripts/software/games/heroic.sh"
+		exit $?
+		;;
+	install-lutris)
+		_run_carcara_script "app/scripts/software/games/lutris.sh"
 		exit $?
 		;;
 	install-obs)
 		_run_carcara_script "app/scripts/software/utilities/obs.sh"
+		exit $?
+		;;
+	install-audacity)
+		_run_carcara_script "app/scripts/software/music/audacity.sh"
+		exit $?
+		;;
+	install-navidrome)
+		_run_carcara_script "app/scripts/software/music/navidrome.sh"
 		exit $?
 		;;
 	install-discord)

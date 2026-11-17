@@ -250,6 +250,39 @@ install_deb_url() {
 	return "$rc"
 }
 
+# install_appimage_url <command-name> <url> [install-dir]
+# Downloads an AppImage to /opt/<command-name>/ (or install-dir), chmod +x,
+# symlink /usr/local/bin/<command-name>. No curl|bash — direct asset download.
+install_appimage_url() {
+	local cmd_name="${1:-}"
+	local url="${2:-}"
+	local install_dir="${3:-/opt/${cmd_name}}"
+	local dest=""
+	local link="/usr/local/bin/${cmd_name}"
+
+	if [[ -z "$cmd_name" || -z "$url" ]]; then
+		carcara_err "install_appimage_url: usage: install_appimage_url <command-name> <url> [install-dir]"
+		return 2
+	fi
+	if ! command -v curl >/dev/null 2>&1; then
+		carcara_err "install_appimage_url: curl is required"
+		return 1
+	fi
+
+	install -d -m 0755 "$install_dir" || return 1
+	dest="${install_dir}/${cmd_name}.AppImage"
+	carcara_log "install_appimage_url: $cmd_name ← $url"
+	if ! curl -fsSL --location --output "$dest" "$url"; then
+		carcara_err "install_appimage_url: download failed"
+		rm -f "$dest"
+		return 1
+	fi
+	chmod 0755 "$dest" || return 1
+	ln -sfn "$dest" "$link" || return 1
+	carcara_log "install_appimage_url: linked $link → $dest"
+	return 0
+}
+
 # --- progress wrapper ---
 
 # run_with_progress <title> <command> [args...]
