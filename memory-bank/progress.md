@@ -71,3 +71,4 @@ Append-only log. Do not delete completed history.
 - [x] Installed + configured skills `bash-scripting` + `debian-linux-triage` → `.agents/skills/` + `skills-lock.json`; README constraints + AGENTS guidance (2026-11-17)
 - [x] Software/pkexec smoke harness: `carcara-electron/scripts/smoke-software.sh` + `bun run smoke:software`; Bun `run-helper.ts` pkexec env parity with Node; wiring 45 PASS / pkexec SKIP on WSL without policykit (2026-11-17)
 - [x] Release process: `docs/releases/2.0.1.md` + memory-bank pattern (notes md → commit → annotated tag `vX.Y.Z`) (2026-11-17)
+- [x] Fix Release `.deb` CI: electron-builder `--publish never` + `publish: null` + `repository` in package.json; workflow_dispatch can attach to existing tag; checkout@v5 (2026-11-17)

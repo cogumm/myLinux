@@ -100,6 +100,8 @@ See `systemPatterns.md` pattern 16.
 - afterInstall: avoid `${LetterOnly}` — FPM treats them as macros (`Macro REAL is not defined`).
 - `extraMetadata.name: carcara` → Debian `Package:` field; artifact name still `carcara_${version}_amd64.deb`.
 - Bump version in `carcara-electron/package.json` before tagging `vX.Y.Z` (CI can sync from tag).
+- `pack:deb` / `pack:dir` use `--publish never` + `publish: null` in yml — softprops attaches the `.deb`. Tag + app cwd without `.git` must not trigger electron-builder publish.
+- `package.json` must declare `"repository"` (GitHub) for electron-builder metadata even when publish is off.
 
 ## Constraints
 

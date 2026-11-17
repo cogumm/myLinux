@@ -7,6 +7,10 @@ artifactName: carcara_${version}_${arch}.${ext}
 extraMetadata:
   name: carcara
 
+# Softprops/action-gh-release attaches the .deb — do not let electron-builder publish
+# when a git tag is present (CI cwd is carcara-electron/, so .git/config is missing).
+publish: null
+
 directories:
   output: release
   buildResources: build

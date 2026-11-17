@@ -25,7 +25,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -86,9 +86,11 @@ jobs:
 
       - name: Build .deb
         working-directory: carcara-electron
+        # --publish never: attach via softprops below; avoid electron-builder publish
+        # (tag present + no package.json repository / no .git in app cwd → hard fail)
         run: bun run pack:deb
         env:
-          # electron-builder may hit GitHub API for Electron releases
+          # Electron zip download / GitHub API rate limits only — not for publish
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: List artifacts
@@ -102,9 +104,13 @@ jobs:
           if-no-files-found: error
 
       - name: Attach .deb to GitHub Release
-        if: github.event_name == 'release'
+        # release event: tag from the published Release.
+        # workflow_dispatch: rebuild from current branch and upload onto an existing tag
+        # (needed when a tag was cut before a pack:deb fix landed on that commit).
+        if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ steps.ver.outputs.tag }}
           files: carcara-electron/release/*.deb
           fail_on_unmatched_files: true
         env:
