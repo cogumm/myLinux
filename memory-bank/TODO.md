@@ -40,9 +40,10 @@ Release notes: [`docs/releases/2.0.2.md`](../docs/releases/2.0.2.md). Before tag
 
 **Dev entry:** `./start.sh --electron` (no sudo). Accidental `sudo` → drop to `SUDO_USER`.
 
-### UX / Software (scoped — not started)
+### UX / Software
 
 - [x] Align rail brand block (logo + name + version) to the same height as the stage header band on the right (match top padding / divider with Sistema header) — `--shell-head-*` + compact mark
+- [x] Light shell palette (owner): warm rail / white cards / teal+accent tokens in `styles.css`; Activity console stays Dracula; design-system + playbook/idea/`docs/releases/2.0.2.md` mirrored
 - [ ] Software: add category **Todas** / **All** in `carcara-electron/src/renderer/views/software.ts` — filter searches across every category
 - [ ] Activity / “terminal” panel: user-resizable height (drag handle or similar)
 

@@ -51,7 +51,7 @@ Policy: apt → Flatpak → Snap; vendor deb/AppImage/zip helpers (no curl\|bash
 - Prefer confirmations before destructive clean/repair (UI dialog; no terminal y/N when already root)
 - Logs remain source of truth (Atividade merges stdout/stderr in order)
 - Brand-first rail (logo + Carcará + **package version** pill); window title / ready log use `{version}` from the same source
-- Flat Design tokens from `ui-ux-pro-max` — do not freestyle a new palette
+- Flat Design tokens from `ui-ux-pro-max` — light shell (runtime `styles.css`); do not freestyle a new palette without updating `design-system/carcara-2-0/`
 - Tile hover = teal accent bar; orange only on confirm CTAs
 
 ## Non-goals

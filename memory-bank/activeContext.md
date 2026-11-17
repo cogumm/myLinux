@@ -8,7 +8,7 @@ Last updated: 2026-11-17
 
 | Surface | State |
 |---------|--------|
-| **2.0** (`carcara-electron/`, package **`2.0.1`**) | `./start.sh --electron` as user; `CARCARA_REQUIRE_ROOT` default `0`; sudo → drop to `SUDO_USER` |
+| **2.0** (`carcara-electron/`, package **`2.0.1`**) | Desktop-user Electron; light shell + aligned brand band; `CARCARA_REQUIRE_ROOT` default `0` |
 | **1.x** (`carcara/`) | Install/maintenance **engine** + CLI/fallback (still root) |
 | **Packaging** | `.deb` + AppImage; GHA `release-deb.yml` on Release / `workflow_dispatch` |
 | **Default branch** | `main` |

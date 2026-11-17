@@ -70,7 +70,7 @@ src/native-i18n.ts     # main-process nested locale flatten + `{version}`
 
 | Piece | Rule |
 |-------|------|
-| Style | Flat Design, dark; primary `#0D9488`, accent `#EA580C` (CTA only), card `#111827` |
+| Style | Flat Design, **light** shell; primary `#0F766E`, accent `#C2410C`; warm rail; Activity console stays Dracula dark |
 | Brand | `assets/img/logo_moderno_final.png`; wordmark + **version pill** = `package.json` `"version"`; `window.title` / `ready.log` use `{version}` |
 | Rail | Sistema / Software / **Dotfiles** / Sobre; footer PT\|EN + `MIT · 2010–YYYY · cogumm.net` |
 | Lang | Env `CARCARA_LANG` default; rail switch → `localStorage` `carcara.lang` + remount |

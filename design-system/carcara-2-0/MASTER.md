@@ -21,30 +21,30 @@ Token files are master-level only; `--page` overrides do not emit tokens.
 
 | Role | Hex | CSS Variable |
 |------|-----|--------------|
-| Primary | `#0D9488` | `--color-primary` |
-| On Primary | `#000000` | `--color-on-primary` |
-| Secondary | `#14B8A6` | `--color-secondary` |
-| On Secondary | `#0F172A` | `--color-on-secondary` |
-| Accent/CTA | `#EA580C` | `--color-accent` |
-| On Accent/CTA | `#000000` | `--color-on-accent` |
-| Background | `#0F172A` | `--color-background` |
-| Foreground | `#F8FAFC` | `--color-foreground` |
-| Card | `#111827` | `--color-card` |
-| Card Foreground | `#F8FAFC` | `--color-card-foreground` |
-| Muted | `#1E293B` | `--color-muted` |
-| Muted Foreground | `#CBD5E1` | `--color-muted-foreground` |
-| Border | `#334155` | `--color-border` |
-| Destructive | `#DC2626` | `--color-destructive` |
+| Primary | `#0F766E` | `--color-primary` |
+| On Primary | `#FFFFFF` | `--color-on-primary` |
+| Secondary | `#0D9488` | `--color-secondary` |
+| On Secondary | `#FFFFFF` | `--color-on-secondary` |
+| Accent/CTA | `#C2410C` | `--color-accent` |
+| On Accent/CTA | `#FFFFFF` | `--color-on-accent` |
+| Background | `#F4F6F5` | `--color-background` |
+| Foreground | `#18232D` | `--color-foreground` |
+| Card | `#FFFFFF` | `--color-card` |
+| Card Foreground | `#18232D` | `--color-card-foreground` |
+| Muted | `#EDF1EF` | `--color-muted` |
+| Muted Foreground | `#5B6872` | `--color-muted-foreground` |
+| Border | `#D9E1DE` | `--color-border` |
+| Destructive | `#B42318` | `--color-destructive` |
 | On Destructive | `#FFFFFF` | `--color-on-destructive` |
-| Ring | `#0D9488` | `--color-ring` |
+| Ring | `#0F766E` | `--color-ring` |
 
-**Color Notes:** Teal focus + action orange [Accent adjusted from #F97316]
+**Color Notes:** Light utility shell (`color-scheme: light`). Warm rail `#FBFAF7` + brand wash `#F8F2E9→#FBFAF7`. Activity **console stays dark** (Dracula `--term-*`). Runtime: `carcara-electron/src/renderer/styles.css`.
 
 ### Typography
 
 - **Heading Font:** Inter
 - **Body Font:** Inter
-- **Mood:** dark, cinematic, technical, precision, clean, premium, developer, professional, high-end utility
+- **Mood:** light, warm, technical, precision, clean, premium, developer, professional utility
 - **Google Fonts:** [Inter + Inter](https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap)
 
 **CSS Import:**
@@ -82,8 +82,8 @@ Token files are master-level only; `--page` overrides do not emit tokens.
 ```css
 /* Primary Button */
 .btn-primary {
-  background: #EA580C;
-  color: #000000;
+  background: #C2410C;
+  color: #FFFFFF;
   padding: 12px 24px;
   border-radius: 8px;
   font-weight: 600;
@@ -99,8 +99,8 @@ Token files are master-level only; `--page` overrides do not emit tokens.
 /* Secondary Button */
 .btn-secondary {
   background: transparent;
-  color: #0D9488;
-  border: 2px solid #0D9488;
+  color: #0F766E;
+  border: 2px solid #0F766E;
   padding: 12px 24px;
   border-radius: 8px;
   font-weight: 600;
@@ -113,10 +113,11 @@ Token files are master-level only; `--page` overrides do not emit tokens.
 
 ```css
 .card {
-  background: #0F172A;
+  background: #FFFFFF;
+  border: 1px solid #D9E1DE;
   border-radius: 12px;
   padding: 24px;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-sm);
   transition: all 200ms ease;
   cursor: pointer;
 }
@@ -139,9 +140,9 @@ Token files are master-level only; `--page` overrides do not emit tokens.
 }
 
 .input:focus {
-  border-color: #0D9488;
+  border-color: #0F766E;
   outline: none;
-  box-shadow: 0 0 0 3px #0D948820;
+  box-shadow: 0 0 0 3px #0F766E20;
 }
 ```
 

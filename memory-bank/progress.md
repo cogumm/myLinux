@@ -82,3 +82,4 @@ Append-only log. Do not delete completed history.
 - [x] **v2.0.2** implement: `start.sh` drop-root for Electron; `CARCARA_REQUIRE_ROOT` default `0`; docs/playbook/idea; await native GUI confirm (2026-11-17)
 - [x] Release notes for desktop-user Electron live in `docs/releases/2.0.2.md` (2.0.1.md restored as shipped history) (2026-11-17)
 - [x] **v2.0.2** UX: rail brand band height synced with `stage__head` via `--shell-head-*` (ui-ux-pro-max) (2026-11-17)
+- [x] **v2.0.2** UX: owner light-shell palette in `styles.css` (warm rail `#FBFAF7`, cards white, primary `#0F766E`, accent `#C2410C`; console Dracula) + docs mirrored (`design-system/carcara-2-0`, playbook, idea, `docs/releases/2.0.2.md`, TODO) (2026-11-17)

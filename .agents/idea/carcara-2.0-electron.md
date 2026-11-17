@@ -17,7 +17,7 @@ Ship **Carcará 2.0** as a desktop app with a modern UI using **Electron**.
 | Repo layout | Sibling app: **`carcara-electron/`** (do not nest under Bash `carcara/`) |
 | Toolchain | **[Bun](https://bun.sh/docs)** — install, scripts, and Shell (`$`) bridge ([runtime/shell](https://bun.sh/docs/runtime/shell)) |
 | UI kit | **Vanilla** HTML/CSS + TypeScript renderer (no React for first ship) |
-| UI/UX | Skill **`ui-ux-pro-max`** → `design-system/carcara-2-0/` (Flat Design, dark utility) |
+| UI/UX | Skill **`ui-ux-pro-max`** → `design-system/carcara-2-0/` (Flat Design, light utility shell) |
 | Privilege | UI as **desktop user**; helper allowlist + **pkexec** for apt/install/fix/clean (`CARCARA_REQUIRE_ROOT=1` legacy only) |
 | Packaging | `.deb` + AppImage via `electron-builder` + GHA on Release |
 | Engine | **Reuse** `carcara/app/config/install_backends.sh` and existing system/app scripts — never reimplement apt/flatpak/snap in the renderer |
@@ -94,7 +94,7 @@ Shell overrides: [`design-system/carcara-2-0/pages/app-shell.md`](../../design-s
 | Decision | Choice |
 |----------|--------|
 | Skill | `.agents/skills/ui-ux-pro-max` (search + `--design-system --persist`) |
-| Style | **Flat Design** — dark utility, teal primary `#0D9488`, accent CTA `#EA580C` |
+| Style | **Flat Design** — light utility shell, teal primary `#0F766E`, accent CTA `#C2410C`; console Dracula dark |
 | Structure | Sidebar nav + primary pane + activity log (desktop tool, not landing “Product Demo”) |
 | Type | Inter / system-ui (no remote font CDN under Electron CSP) |
 | A11y | Focus rings, keyboard nav, reduced-motion, no emoji-as-icons |
