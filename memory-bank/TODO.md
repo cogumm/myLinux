@@ -88,11 +88,14 @@ Policy stays **apt → Flatpak/Flathub → Snap**. Thin installers + 1.x menus +
 - [ ] **OBS Studio** (Media)
 - [ ] Update `softwares.md` as each lands
 
-### Wave B — new categories + storefronts
+### Wave B — fill Snap Store categories (2.0 already lists all 19)
 
-- [ ] Category **Browsers**: Firefox, Brave, Vivaldi, Opera GX, Zem Browser
-- [ ] Category **Games**: Steam; **Epic** + **GOG** via **Heroic** (Flatpak); **Battle.net** via Wine/Lutris (no fragile vendor script)
-- [ ] Category **Media** (optional split from Utilities): OBS, Audacity, **Navidrome**
+Categories mirror [Snap Store](https://snapcraft.io/store): Development, Games, Social, Productivity, Utilities, Music and Audio, Art and Design, Photo and Video, Server and Cloud, Books and Reference, Devices and IoT, Education, Entertainment, Finance, Health and Fitness, News and Weather, Personalisation, Science, Security.
+
+- [ ] **Games**: Steam; Epic + GOG via Heroic; Battle.net via Wine/Lutris
+- [ ] **Browsers** (map into Utilities or Personalisation until a dedicated slot — or Productivity): Firefox, Brave, Vivaldi, Opera GX, Zem
+- [ ] **Photo and Video / Music**: OBS, Audacity, Navidrome (beyond VLC / Spotify already placed)
+- [ ] Wire 1.x `menuSof` folders to the same taxonomy when installers land (today 1.x still has 4 folders)
 
 ### Wave C — depth (remainder of the wishlist)
 

@@ -59,3 +59,4 @@ Append-only log. Do not delete completed history.
 - [x] Brand version pill ← `package.json` version (`lib/version.ts`) (2026-11-17)
 - [x] TODO v2.0.1 waves synced to wishlist; `listSoftwares.md` reduced to Snap pointer + date (2026-11-17)
 - [x] Session knowledge re-consolidated (i18n nest, rail lang, sync-time, pager, brand version, v2.0.1 catalog, old/ guidance) → memory-bank + playbook + AGENTS (2026-11-17)
+- [x] Software 2.0 categories = Snap Store 19; realistic `desc.*` i18n; empty-state placeholder (2026-11-17)

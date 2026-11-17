@@ -33,7 +33,7 @@ Dotfiles tree is user-space (`dotfiles/apply.sh`); Carcará menus only **invoke*
 
 1. **Central config (1.x)** — Yad flags and dirs in `config.sh`; shared API in `install_backends.sh`.
 2. **One script per app** — thin installers on backends.
-3. **Category menus** — Social / Utilities / Development / Productivity (same in 2.0 Software); v2.0.1 may add Browsers / Games / Media.
+3. **Category menus** — 2.0 Software follows **Snap Store** taxonomy (19 cats); 1.x still has 4 folders until Wave B rewires.
 4. **Disclaimer + root gate** — 1.x Zenity license + `isRoot`; 2.0 license-gate + `requireRoot()` + action confirms.
 5. **Archive, don’t delete history** — `old/` stays for reference; port *ideas*, not dead scripts.
 6. **2.0 component factories** — `createTile` / `createRail` / `createLicenseGate` / `createActivityConsole` / `createPagedTiles` / `createLangSwitch`; one view file per menu.

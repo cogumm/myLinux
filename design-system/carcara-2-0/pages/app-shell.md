@@ -25,7 +25,7 @@
 - Rail footer: compact **PT | EN** language switch (`CARCARA_LANG` default; `localStorage` override) + MIT meta.
 - Brand version pill = `package.json` version (not hardcoded `2.0`).
 - One job per view: Sistema = maintenance (incl. sync clock); Software = installs; Dotfiles = `$HOME` apply; Sobre = identity.
-- Software catalog: **6 tiles per page** + Anterior/Próxima (pager hidden when ≤1 page).
+- Software catalog: Snap Store **19 categories**; **6 tiles per page** + Anterior/Próxima; empty cats show muted placeholder.
 - Activity log is always visible (source of truth for apt/flatpak/snap).
 - No marketing “Product Demo + Features” section order from MASTER.
 

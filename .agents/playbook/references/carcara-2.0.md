@@ -68,7 +68,7 @@ src/native-i18n.ts     # main-process nested locale flatten
 | Rail | Sistema / Software / **Dotfiles** / Sobre; footer PT\|EN + `MIT · 2010–YYYY · cogumm.net` |
 | Lang | Env `CARCARA_LANG` default; rail switch → `localStorage` `carcara.lang` + remount |
 | Tiles | Resting = neutral border; **hover** = teal left inset + primary border (no permanent orange outline) |
-| Software | Category `nav-list` → **paged** tiles (`SOFTWARE_PAGE_SIZE=6`); pager i18n |
+| Software | Snap Store **19 categories** → **paged** tiles (6/page); empty = `cat.empty` |
 | Confirms | `<dialog>` before mutating helper actions |
 | Terminal | Dracula-like; JetBrains Mono 13px (local woff2); line numbers; stdout+stderr merged chronologically |
 | Sobre | Nested locale facts (`sobre.fact.*.label/.value`); allowlisted external links |
