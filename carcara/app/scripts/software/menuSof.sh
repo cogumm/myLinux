@@ -2,44 +2,40 @@
 . app/config/config.sh
 #----------------------------------------------------------------------------------------------------#
 # Data criação: 15 de Fevereiro de 2020
-# Última alteração: 16 de Novembro de 2026
+# Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
 # Telegram: http://t.me/CoGUMm
-# Script: menu
+# Script: menuSof
 # Descrição: Menu de instalação dos aplicativos de software.
-# Variáveis: $menu		 : Carrega as opções do menu.
-#			 $configYad	 : Carrega as configurações do Yad (sem botões).
-#			 $configYadB : Carrega as configurações do Yad (com botões).
-#			 $dirSof	 : Carega o diretório padrão dos scripts dos software.
+# Variáveis: $menu $configYad $configYadB $dirSof $menuSof $menuApp
 #----------------------------------------------------------------------------------------------------#
 
-while [ true ]; do
+while true; do
 	menu=$(zenity --width=330 --height=500 --list --column "Escolha uma das opções" --title="cGm" \
-			"Desenvolvimento" \
-			"Produção" \
-			"Social" \
-			"Utilidades"  \
-	    	"Voltar" )
+		"Desenvolvimento" \
+		"Produção" \
+		"Social" \
+		"Utilidades" \
+		"Voltar")
 	case "$menu" in
-		"Desenvolvimento" )
-			yad --text "Ainda em desenvolvimento!!!" $configYadB
-			# bash app/scripts/software/development/menu.sh
-		;;
-		"Produção" )
-			yad --text "Ainda em desenvolvimento!!!" $configYadB
-            # bash app/scripts/software/productivity/menu.sh
-		;;
-		"Social" )
-            bash app/scripts/software/social/_menu.sh
-		;;
-		"Utilidades" )
-			# yad --text "Ainda em desenvolvimento!!!" $configYadB
-            bash app/scripts/software/utilities/_menu.sh
-		;;
-        "Voltar" )
-			bash $menuApp
-		;;
+		"Desenvolvimento")
+			bash app/scripts/software/development/_menu.sh
+			;;
+		"Produção")
+			bash app/scripts/software/productivity/_menu.sh
+			;;
+		"Social")
+			bash app/scripts/software/social/_menu.sh
+			;;
+		"Utilidades")
+			bash app/scripts/software/utilities/_menu.sh
+			;;
+		"Voltar"|*)
+			# Return to parent menuGeral loop (this script was started with bash).
+			break
+			;;
 	esac
 done
 # Fim
+
