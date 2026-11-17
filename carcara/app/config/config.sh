@@ -2,12 +2,12 @@
 clear
 #---------------------------------------------------------------------------#
 # Data criação: 06 de Setembro de 2017
-# Última alteração: 16 de Novembro de 2026
+# Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
 # Telegram: http://t.me/CoGUMm
 # Script: config
-# Descrição: Configurações compartilhadas do Carcará (paths, Yad, head, isRoot).
+# Descrição: Configurações compartilhadas do Carcará (paths, Yad, head, isRoot, backends).
 # Variáveis: $dirSof $dirSys $license $menuApp $menuSof $configYad $configYadB
 #---------------------------------------------------------------------------#
 
@@ -34,6 +34,10 @@ configYadB="--width=500
 		   --text-align=center
 		   --center
 		   --timeout 3"
+
+# Shared install API (apt / Flatpak / Snap) — Carcará 1.x engine for 2.0
+# shellcheck source=install_backends.sh
+. app/config/install_backends.sh
 
 # Cabeçalho de todos os scripts
 head(){
