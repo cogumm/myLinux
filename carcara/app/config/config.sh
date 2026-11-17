@@ -5,7 +5,7 @@
 # Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
-# Telegram: http://t.me/CoGUMm
+# Telegram: https://t.me/CoGUMm
 # Script: config
 # Descrição: Configurações compartilhadas do Carcará (paths, Yad, head, isRoot, backends).
 # Variáveis: $dirSof $dirSys $license $menuApp $menuSof $configYad $configYadB
@@ -44,8 +44,8 @@ head(){
    echo "------------------------------------------------------------------"
    echo "Idealizador e desenvolvedor: Gabriel F. Vilar (CoGUMm)"
    echo "E-mail: gabriel[at]cogumm[dot]net"
-   echo "Telegram: http://t.me/CoGUMm"
-   echo "Website: http://cogumm.net"
+   echo "Telegram: https://t.me/CoGUMm"
+   echo "Website: https://cogumm.net"
    echo "NÃO ME RESPONSABILIZO POR MAUS DANOS À SUA MÁQUINA COM ESTE SCRIPT,"
    echo "FAVOR UTILIZÁ-LO SE APENAS TIVER CERTEZA DO QUE ESTEJA FAZENDO."
    echo "------------------------------------------------------------------"

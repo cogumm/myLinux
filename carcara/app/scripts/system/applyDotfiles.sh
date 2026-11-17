@@ -6,7 +6,7 @@
 # Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
-# Telegram: http://t.me/CoGUMm
+# Telegram: https://t.me/CoGUMm
 # Script: applyDotfiles
 # Descrição: Menu 1.x → dotfiles/apply.sh como $SUDO_USER (i18n).
 # Variáveis: $SUDO_USER $configYad ; CARCARA_LANG ; CARCARA_NONINTERACTIVE

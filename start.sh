@@ -4,7 +4,7 @@
 # Última alteração: 17 de Novembro de 2026 (Electron exige root como 1.x)
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
-# Telegram: http://t.me/CoGUMm
+# Telegram: https://t.me/CoGUMm
 # Script: start
 # Descrição: Escolhe entre Carcará 2.0 (Electron) e Carcará 1.x (terminal / Zenity).
 #            Também faz bootstrap (git clone) quando executado via curl | bash.

@@ -5,7 +5,7 @@
 # Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
-# Telegram: http://t.me/CoGUMm
+# Telegram: https://t.me/CoGUMm
 # Script: menu
 # Descrição: Menu principal 1.x — i18n via t(); IDs estáveis no Zenity.
 # Variáveis: $menu $configYad $dirSys $menuSof ; CARCARA_LANG

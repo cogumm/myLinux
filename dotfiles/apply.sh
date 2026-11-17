@@ -4,7 +4,7 @@
 # Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
-# Telegram: http://t.me/CoGUMm
+# Telegram: https://t.me/CoGUMm
 # Script: apply
 # Descrição: Aplica dotfiles no $HOME com backup *.bak (sem root).
 # Uso: ./apply.sh [--dry-run] [--symlink] [--all] [--aliases] [--git] [--hyper] [--theme] [--bashrc]

@@ -6,7 +6,7 @@
 # Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
-# Telegram: http://t.me/CoGUMm
+# Telegram: https://t.me/CoGUMm
 # Script: sync_time
 # Descrição: Sincroniza o relógio (timedatectl NTP ou ntpdate).
 # Variáveis: $configYad ; CARCARA_NTP_HOST ; root / CARCARA_NONINTERACTIVE → auto-yes

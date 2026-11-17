@@ -6,7 +6,7 @@
 # Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
-# Telegram: http://t.me/CoGUMm
+# Telegram: https://t.me/CoGUMm
 # Script: fixSystem
 # Descrição: Corrige dependências e reconfigura pacotes (apt -f / dpkg --configure -a).
 # Variáveis: $configYad ; CARCARA_NONINTERACTIVE=1 (Electron/helper)

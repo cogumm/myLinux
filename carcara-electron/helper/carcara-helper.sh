@@ -4,7 +4,7 @@
 # Última alteração: 17 de Novembro de 2026 (ping ICMP)
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
-# Telegram: http://t.me/CoGUMm
+# Telegram: https://t.me/CoGUMm
 # Script: carcara-helper
 # Descrição: Allowlist privilege helper for Carcará 2.0 (pkexec). No arbitrary shell.
 # Variáveis: $1 = action name ; CARCARA_ROOT resolved from this file’s path

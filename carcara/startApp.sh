@@ -7,7 +7,7 @@
 # Última alteração: 16 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
-# Telegram: http://t.me/CoGUMm
+# Telegram: https://t.me/CoGUMm
 # Script: startApp
 # Descrição: Script de inicialização da aplicação.
 # Variáveis: $license   : Arquivo de licença de uso

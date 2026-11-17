@@ -5,7 +5,7 @@
 # Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
-# Telegram: http://t.me/CoGUMm
+# Telegram: https://t.me/CoGUMm
 # Script: Spotify
 # Descrição: Instala o Spotify (apt keyring → Flatpak → Snap).
 #----------------------------------------------------------------------------------------------------#
@@ -19,7 +19,7 @@ if pkg_present command spotify || pkg_present dpkg spotify-client \
 fi
 
 key_url="https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg"
-deb_line="deb [signed-by=/etc/apt/keyrings/spotify.gpg] http://repository.spotify.com stable non-free"
+deb_line="deb [signed-by=/etc/apt/keyrings/spotify.gpg] https://repository.spotify.com stable non-free"
 
 if ensure_apt_keyring_repo spotify "$key_url" "$deb_line" \
 	&& run_with_progress "Spotify (apt)" apt_install spotify-client; then

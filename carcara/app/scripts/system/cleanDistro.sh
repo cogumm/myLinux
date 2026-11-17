@@ -6,7 +6,7 @@
 # Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
-# Telegram: http://t.me/CoGUMm
+# Telegram: https://t.me/CoGUMm
 # Script: cleanDistro
 # Descrição: Limpeza (lixeira, tmp, apt clean/autoclean/autoremove; locks/lists via carcara_confirm).
 # Variáveis: $SUDO_USER $configYad ; root / CARCARA_NONINTERACTIVE → auto-yes

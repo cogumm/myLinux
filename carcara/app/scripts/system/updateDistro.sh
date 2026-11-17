@@ -6,7 +6,7 @@
 # Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
-# Telegram: http://t.me/CoGUMm
+# Telegram: https://t.me/CoGUMm
 # Script: updateDistro
 # Descrição: Atualização do sistema (update, upgrade, full-upgrade).
 # Variáveis: $configYad ; root / CARCARA_NONINTERACTIVE → carcara_confirm auto-yes

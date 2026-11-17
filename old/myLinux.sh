@@ -4,7 +4,7 @@ clear
 echo "---------------------------------------------------------------"
 echo "Desenvolvido por Gabriel F. Vilar"
 echo "E-mail: cogumm@gmail.com"
-echo "Website: http://cogumm.net"
+echo "Website: https://cogumm.net"
 echo "NÃO ME RESPONSABILIZO POR MAUS DANOS À SUA MÁQUINA COM ESTE SCRIPT,\nFAVOR UTILIZÁ-LO SE APENAS TIVER CERTEZA DO QUE ESTEJA FAZENDO."
 echo "---------------------------------------------------------------"
 

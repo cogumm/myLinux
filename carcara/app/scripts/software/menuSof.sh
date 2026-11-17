@@ -5,7 +5,7 @@
 # Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
-# Telegram: http://t.me/CoGUMm
+# Telegram: https://t.me/CoGUMm
 # Script: menuSof
 # Descrição: Menu de software — i18n (t) + IDs Zenity.
 #----------------------------------------------------------------------------------------------------#

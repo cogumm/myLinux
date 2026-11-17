@@ -4,7 +4,7 @@
 # Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
-# Telegram: http://t.me/CoGUMm
+# Telegram: https://t.me/CoGUMm
 # Script: install_backends
 # Descrição: API compartilhada de instalação (apt keyring, Flatpak, Snap) para Carcará 1.x / 2.0.
 # Variáveis: $configYad : flags Yad opcionais para run_with_progress

@@ -5,7 +5,7 @@
 # Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
-# Telegram: http://t.me/CoGUMm
+# Telegram: https://t.me/CoGUMm
 # Script: productivity/_menu
 # Descrição: Menu produção — i18n.
 #----------------------------------------------------------------------------------------------------#

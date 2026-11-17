@@ -4,7 +4,7 @@
 # Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
-# Telegram: http://t.me/CoGUMm
+# Telegram: https://t.me/CoGUMm
 # Script: testConnection
 # Descrição: Testa conectividade de rede (ICMP) antes de downloads/atualizações.
 #            Alvo padrão: IP do Google Public DNS (8.8.8.8).

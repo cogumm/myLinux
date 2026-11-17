@@ -5,7 +5,7 @@
 # Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
 # E-mail: gabriel[at]cogumm[dot]net
-# Telegram: http://t.me/CoGUMm
+# Telegram: https://t.me/CoGUMm
 # Script: docker
 # Descrição: Instala Docker Engine (repo oficial apt → docker.io). Substitui old/scripts/docker.sh.
 #            Não usa curl|bash; não limpa containers; não sobe imagens tutum legadas.
