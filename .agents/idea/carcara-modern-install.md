@@ -178,8 +178,8 @@ Explicitly **out** of Wave 3 now: Yad redesign, `gum` migration, nala-as-UI.
 - [x] Wave 1 Step 2 — `install_backends.sh` (17 de Novembro de 2026)
 - [x] Wave 1 Step 3 — system scripts (17 de Novembro de 2026)
 - [x] Wave 1 Step 4 — minimal menu wiring (17 de Novembro de 2026)
-- [ ] Wave 1 Step 5 — ShellCheck + docs
+- [x] Wave 1 Step 5 — ShellCheck + docs (17 de Novembro de 2026)
 - [ ] Wave 2 — thin installers onto backends
 - [ ] Wave 3 — optional CLI only / **skip** if 2.0 starts
 
-Next coding session when approved: **Wave 1 Step 5** (ShellCheck + docs) or **Wave 2**.
+**Wave 1 complete.** Next coding session when approved: **Wave 2** (thin installers).

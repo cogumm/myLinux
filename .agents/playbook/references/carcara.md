@@ -59,8 +59,13 @@ snap_install code --classic
 - Produção → Dropbox
 - Voltar breaks back to parent (no nested `bash $menuSof`)
 
+## QA (Wave 1 Step 5 — done)
+
+- Project `.shellcheckrc` (`shell=bash`, `SC1091` disabled for runtime sources).
+- Wave 1 scripts: `bash -n` + ShellCheck clean (`shellcheck` binary optional under `.tools/`, gitignored).
+- Shared paths/`configYad*` are `export`ed from `config.sh`; `isRoot` uses `$(id -u)`.
+
 ## Fix priorities (remaining)
 
-1. Wave 1 Step 5 — ShellCheck on touched tree.
-2. Wave 2 — thin installers onto backends (no Yad polish).
-3. Optional: fix legacy Social/Utilities “Voltar” nesting the same way.
+1. Wave 2 — thin installers onto backends (no Yad polish).
+2. Optional: fix legacy Social/Utilities “Voltar” nesting the same way.
