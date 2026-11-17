@@ -64,9 +64,18 @@ carcara-electron/
     main.ts                   # BrowserWindow + IPC → spawn bun bridge
     preload.ts
     renderer/
-      index.html
+      index.html              # #app mount + CSP
       styles.css
-      renderer.ts
+      main.ts                 # entry → Bun bundle → dist/renderer/renderer.js
+      app.ts                  # shell + routing
+      views/                  # one file per menu
+        sistema.ts
+        software.ts
+        sobre.ts
+        index.ts
+      components/             # reusable UI factories
+        tile.ts / tile-grid.ts / group.ts / rail.ts / …
+      lib/                    # types + helper API
   README.md
 design-system/carcara-2-0/    # ui-ux-pro-max MASTER + page overrides
   MASTER.md
@@ -125,6 +134,7 @@ flowchart LR
 - [x] Spike scaffold: `carcara-electron/` + Bun bridge (`bun run build` / `bun scripts/run-helper.ts ping` OK; GUI/`pkexec` validation pending)
 - [x] UI direction via `ui-ux-pro-max` → `design-system/carcara-2-0/` + app-shell renderer
 - [x] Full UI rebuild from scratch (Flat tokens, rail + tiles + dialog confirm, brand `logo_moderno_final`) — 17 de Novembro de 2026
+- [x] Renderer modular: `views/{sistema,software,sobre}.ts` + reusable `components/` (Bun IIFE bundle) — 17 de Novembro de 2026
 - [x] Port system actions (update / fix / clean) through helper → 1.x scripts (17 de Novembro de 2026)
 - [x] Port software categories / installers through helper (17 de Novembro de 2026)
 - [ ] Package `.deb` (AppImage optional)

@@ -12,7 +12,7 @@ Wave 3 polish was **cancelled / removed**.
 
 - Repo layout: sibling `carcara-electron/` (not nested under Bash `carcara/`).
 - Toolchain: **Bun** (install/scripts + `Bun.$` shell bridge); Electron main spawns `bun scripts/run-helper.ts`.
-- UI: vanilla HTML/CSS + TypeScript; **`ui-ux-pro-max`** Flat Design rebuild (17 Nov 2026) — rail brand, tile actions, `<dialog>` confirms, activity console; tokens in `design-system/carcara-2-0/`.
+- UI: vanilla HTML/CSS + TypeScript; **`ui-ux-pro-max`** Flat Design; modular `views/` + `components/` (Bun-bundled renderer); tokens in `design-system/carcara-2-0/`.
 - Privilege: allowlisted `helper/carcara-helper.sh` + `pkexec` (when available).
 - Install engine: reuse `install_backends.sh` / 1.x scripts — never fork into the renderer.
 
