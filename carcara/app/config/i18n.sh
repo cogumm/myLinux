@@ -35,21 +35,41 @@ _carcara_resolve_lang() {
 	esac
 }
 
+# Flatten nested locales JSON → dotted keys (menu.choose, tile.update.title, …).
 _carcara_load_locale_file() {
 	local file="$1"
 	local line key val
 	[[ -f "$file" ]] || return 1
-	while IFS= read -r line || [[ -n "$line" ]]; do
-		# Flat JSON: "key": "value",
-		if [[ "$line" =~ ^[[:space:]]*\"([^\"]+)\"[[:space:]]*:[[:space:]]*\"(.*)\"[[:space:]]*,?[[:space:]]*$ ]]; then
-			key="${BASH_REMATCH[1]}"
-			val="${BASH_REMATCH[2]}"
-			# Unescape common JSON sequences we use
-			val="${val//\\n/$'\n'}"
-			val="${val//\\\"/\"}"
-			CARCARA_I18N["$key"]="$val"
-		fi
-	done <"$file"
+	if ! command -v python3 >/dev/null 2>&1; then
+		echo "[carcara:i18n] python3 required to load nested locales" >&2
+		return 1
+	fi
+	while IFS=$'\t' read -r key val || [[ -n "$key" ]]; do
+		[[ -n "$key" ]] || continue
+		val="${val//\\n/$'\n'}"
+		val="${val//\\\"/\"}"
+		CARCARA_I18N["$key"]="$val"
+	done < <(
+		python3 - "$file" <<'PY'
+import json, sys
+path = sys.argv[1]
+with open(path, encoding="utf-8") as f:
+    data = json.load(f)
+
+def walk(node, prefix=""):
+    if isinstance(node, dict):
+        for k, v in node.items():
+            key = f"{prefix}.{k}" if prefix else k
+            yield from walk(v, key)
+    else:
+        # Keep JSON escapes for \\n so Bash can expand them.
+        text = json.dumps(str(node), ensure_ascii=False)[1:-1]
+        yield f"{prefix}\t{text}"
+
+for line in walk(data):
+    print(line)
+PY
+	)
 	return 0
 }
 

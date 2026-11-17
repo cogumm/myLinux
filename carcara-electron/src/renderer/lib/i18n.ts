@@ -1,13 +1,14 @@
 import en from "../../../../locales/en.json";
 import pt from "../../../../locales/pt.json";
+import { flattenLocale, type LocaleTree } from "./flatten-locale.js";
 
 export type Lang = "pt" | "en";
 
 type Dict = Record<string, string>;
 
 const catalogs: Record<Lang, Dict> = {
-  pt: pt as Dict,
-  en: en as Dict,
+  pt: flattenLocale(pt as LocaleTree),
+  en: flattenLocale(en as LocaleTree),
 };
 
 const STORAGE_KEY = "carcara.lang";

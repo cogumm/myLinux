@@ -14,12 +14,12 @@ type Fact = { label: string; value: string };
 
 function facts(): Fact[] {
   return [
-    { label: t("sobre.fact.product"), value: t("sobre.fact.product.value") },
-    { label: t("sobre.fact.target"), value: t("sobre.fact.target.value") },
-    { label: t("sobre.fact.entry"), value: t("sobre.fact.entry.value") },
-    { label: t("sobre.fact.author"), value: t("sobre.fact.author.value") },
-    { label: t("sobre.fact.license"), value: t("sobre.fact.license.value") },
-    { label: t("sobre.fact.repo"), value: t("sobre.fact.repo.value") },
+    { label: t("sobre.fact.product.label"), value: t("sobre.fact.product.value") },
+    { label: t("sobre.fact.target.label"), value: t("sobre.fact.target.value") },
+    { label: t("sobre.fact.entry.label"), value: t("sobre.fact.entry.value") },
+    { label: t("sobre.fact.author.label"), value: t("sobre.fact.author.value") },
+    { label: t("sobre.fact.license.label"), value: t("sobre.fact.license.value") },
+    { label: t("sobre.fact.repo.label"), value: t("sobre.fact.repo.value") },
   ];
 }
 

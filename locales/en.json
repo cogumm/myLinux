@@ -1,129 +1,209 @@
 {
-  "lang.name": "English",
-  "app.name": "Carcará",
-  "menu.choose": "Choose an option",
-  "menu.update": "Update system",
-  "menu.install": "Install software",
-  "menu.fix": "Repair system",
-  "menu.clean": "Clean system",
-  "menu.dotfiles": "Dotfiles",
-  "menu.exit": "Quit",
-  "menu.back": "Back",
-  "menu.exiting": "Leaving the program …",
-  "sof.development": "Development",
-  "sof.productivity": "Productivity",
-  "sof.social": "Social",
-  "sof.utilities": "Utilities",
-  "install.git": "Install Git",
-  "install.vscode": "Install VS Code",
-  "install.insomnia": "Install Insomnia",
-  "install.firacode": "Install Fira Code",
-  "install.docker": "Install Docker",
-  "install.discord": "Install Discord",
-  "install.spotify": "Install Spotify",
-  "install.telegram": "Install Telegram",
-  "install.vlc": "Install VLC",
-  "install.dropbox": "Install Dropbox",
-  "dotfiles.column": "Dotfiles (*.bak backup)",
-  "dotfiles.title": "Carcará — Dotfiles",
-  "dotfiles.dryrun": "Preview (dry-run)",
-  "dotfiles.aliases": "Aliases",
-  "dotfiles.all": "Everything (except bashrc)",
-  "dotfiles.git": "Git",
-  "dotfiles.hyper": "Hyper",
-  "dotfiles.theme": "Zsh theme",
-  "dotfiles.bashrc": "Bashrc",
-  "dotfiles.notify.dryrun": "Preview finished (nothing written).",
-  "dotfiles.notify.aliases": "Aliases applied (see *.bak if files existed).",
-  "dotfiles.notify.all": "Package --all applied.",
-  "dotfiles.notify.git": "Git config applied (empty tokens in template).",
-  "dotfiles.notify.hyper": "Hyper applied.",
-  "dotfiles.notify.theme": "cgm theme (if oh-my-zsh exists).",
-  "dotfiles.notify.bashrc": "bashrc applied (*.bak backup).",
-  "license.title": "License agreement",
-  "license.lede": "Read the terms (same notice as Carcará 1.x). Check Continue to open the app.",
-  "license.checkbox": "Continue",
-  "license.accept": "Accept and continue",
-  "license.quit": "Quit",
-  "rail.sistema": "System",
-  "rail.software": "Software",
-  "rail.dotfiles": "Dotfiles",
-  "rail.sobre": "About",
-  "status.ready": "Ready",
-  "status.busy": "Running…",
-  "status.ok": "Done",
-  "status.err": "Error",
-  "status.cancelled": "Cancelled",
-  "confirm.title": "Confirm",
-  "confirm.cancel": "Cancel",
-  "confirm.ok": "Continue",
-  "view.sistema.eyebrow": "Maintenance",
-  "view.sistema.title": "System",
-  "view.sistema.lede": "Update, repair, clean, test the network, and sync the clock.",
-  "view.software.eyebrow": "Catalog",
-  "view.software.title": "Software",
-  "view.software.lede": "Curated installs — apt → Flatpak → Snap.",
-  "view.dotfiles.eyebrow": "Home",
-  "view.dotfiles.title": "Dotfiles",
-  "view.dotfiles.lede": "Apply aliases, git, Hyper, and themes to your $HOME (*.bak backup; no root).",
-  "view.sobre.eyebrow": "Project",
-  "view.sobre.title": "About",
-  "view.sobre.lede": "Identity, license, and myLinux links.",
-  "tile.update.title": "Update system",
-  "tile.update.desc": "update → upgrade → full-upgrade",
-  "tile.update.confirm": "Update the system (apt update + upgrade + full-upgrade)? Requires privileges.",
-  "tile.fix.title": "Repair system",
-  "tile.fix.desc": "Dependencies and configure -a",
-  "tile.fix.confirm": "Fix broken packages (apt -f + dpkg --configure -a)?",
-  "tile.clean.title": "Clean system",
-  "tile.clean.desc": "Trash, tmp, apt clean and locks",
-  "tile.clean.confirm": "System cleanup (trash, tmp, apt clean/autoclean/autoremove, locks and apt lists)? Requires privileges.",
-  "tile.ping.title": "Test connection",
-  "tile.ping.desc": "Connection test → Google (ICMP)",
-  "tile.sync.title": "Sync clock",
-  "tile.sync.desc": "timedatectl NTP or ntpdate",
-  "tile.sync.confirm": "Synchronize the system clock (NTP / ntpdate)? Requires privileges.",
-  "tile.docker.confirm": "Install Docker Engine (official apt or docker.io) and add your user to the docker group?",
-  "cat.development": "Development",
-  "cat.productivity": "Productivity",
-  "cat.social": "Social",
-  "cat.utilities": "Utilities",
-  "native.file": "File",
-  "native.quit": "Quit",
-  "native.about": "About",
-  "native.aboutItem": "About this project",
-  "skip.link": "Skip to content",
-  "ready.log": "$ Carcará 2.0 ready.\n",
-  "console.title": "Activity",
-  "console.clear": "Clear",
-  "console.clearAria": "Clear log",
-  "rail.navAria": "Navigation",
-  "sobre.lead": "Personal Linux workstation toolkit — installers, maintenance, and dotfiles. The 2.0 UI reuses the 1.x backends (apt → Flatpak → Snap).",
-  "sobre.note": "Many scripts need root and change the system. Review before running. The author is not liable for misuse.",
-  "sobre.fact.product": "Product",
-  "sobre.fact.product.value": "Carcará 2.0 — Electron + Bun on the Bash 1.x engine",
-  "sobre.fact.target": "Target",
-  "sobre.fact.target.value": "Ubuntu, Debian, Linux Mint (apt), x86_64",
-  "sobre.fact.entry": "Entry",
-  "sobre.fact.entry.value": "sudo ./start.sh --electron | --terminal",
-  "sobre.fact.author": "Author",
-  "sobre.fact.author.value": "Gabriel F. Vilar (CoGUMm)",
-  "sobre.fact.license": "License",
-  "sobre.fact.license.value": "MIT · Copyright (c) 2010 CoGUMm",
-  "sobre.fact.repo": "Repo",
-  "sobre.fact.repo.value": "github.com/cogumm/myLinux",
-  "sobre.link.mit": "MIT License",
-  "sobre.link.copied": "(copied)",
-  "sobre.link.failed": "failed",
-  "sobre.link.noBrowser": "no browser",
-  "main.requireRoot": "You need administrative privileges (root)",
-  "main.exiting": "The application is exiting.",
-  "main.useSudo": "Use: sudo ./start.sh --electron",
-  "main.urlDenied": "URL not allowed",
-  "window.title": "Carcará 2.0",
-  "lang.switchAria": "Language",
-  "pager.prev": "Previous",
-  "pager.next": "Next",
-  "pager.status": "Page {current} of {total}",
-  "pager.aria": "Catalog pagination"
+  "lang": {
+    "name": "English",
+    "switchAria": "Language"
+  },
+  "app": {
+    "name": "Carcará"
+  },
+  "window": {
+    "title": "Carcará 2.0"
+  },
+  "menu": {
+    "choose": "Choose an option",
+    "update": "Update system",
+    "install": "Install software",
+    "fix": "Repair system",
+    "clean": "Clean system",
+    "dotfiles": "Dotfiles",
+    "exit": "Quit",
+    "back": "Back",
+    "exiting": "Leaving the program …"
+  },
+  "sof": {
+    "development": "Development",
+    "productivity": "Productivity",
+    "social": "Social",
+    "utilities": "Utilities"
+  },
+  "install": {
+    "git": "Install Git",
+    "vscode": "Install VS Code",
+    "insomnia": "Install Insomnia",
+    "firacode": "Install Fira Code",
+    "docker": "Install Docker",
+    "discord": "Install Discord",
+    "spotify": "Install Spotify",
+    "telegram": "Install Telegram",
+    "vlc": "Install VLC",
+    "dropbox": "Install Dropbox"
+  },
+  "dotfiles": {
+    "column": "Dotfiles (*.bak backup)",
+    "title": "Carcará — Dotfiles",
+    "dryrun": "Preview (dry-run)",
+    "aliases": "Aliases",
+    "all": "Everything (except bashrc)",
+    "git": "Git",
+    "hyper": "Hyper",
+    "theme": "Zsh theme",
+    "bashrc": "Bashrc",
+    "notify": {
+      "dryrun": "Preview finished (nothing written).",
+      "aliases": "Aliases applied (see *.bak if files existed).",
+      "all": "Package --all applied.",
+      "git": "Git config applied (empty tokens in template).",
+      "hyper": "Hyper applied.",
+      "theme": "cgm theme (if oh-my-zsh exists).",
+      "bashrc": "bashrc applied (*.bak backup)."
+    }
+  },
+  "license": {
+    "title": "License agreement",
+    "lede": "Read the terms (same notice as Carcará 1.x). Check Continue to open the app.",
+    "checkbox": "Continue",
+    "accept": "Accept and continue",
+    "quit": "Quit"
+  },
+  "rail": {
+    "sistema": "System",
+    "software": "Software",
+    "dotfiles": "Dotfiles",
+    "sobre": "About",
+    "navAria": "Navigation"
+  },
+  "status": {
+    "ready": "Ready",
+    "busy": "Running…",
+    "ok": "Done",
+    "err": "Error",
+    "cancelled": "Cancelled"
+  },
+  "confirm": {
+    "title": "Confirm",
+    "cancel": "Cancel",
+    "ok": "Continue"
+  },
+  "view": {
+    "sistema": {
+      "eyebrow": "Maintenance",
+      "title": "System",
+      "lede": "Update, repair, clean, test the network, and sync the clock."
+    },
+    "software": {
+      "eyebrow": "Catalog",
+      "title": "Software",
+      "lede": "Curated installs — apt → Flatpak → Snap."
+    },
+    "dotfiles": {
+      "eyebrow": "Home",
+      "title": "Dotfiles",
+      "lede": "Apply aliases, git, Hyper, and themes to your $HOME (*.bak backup; no root)."
+    },
+    "sobre": {
+      "eyebrow": "Project",
+      "title": "About",
+      "lede": "Identity, license, and myLinux links."
+    }
+  },
+  "tile": {
+    "update": {
+      "title": "Update system",
+      "desc": "update → upgrade → full-upgrade",
+      "confirm": "Update the system (apt update + upgrade + full-upgrade)? Requires privileges."
+    },
+    "fix": {
+      "title": "Repair system",
+      "desc": "Dependencies and configure -a",
+      "confirm": "Fix broken packages (apt -f + dpkg --configure -a)?"
+    },
+    "clean": {
+      "title": "Clean system",
+      "desc": "Trash, tmp, apt clean and locks",
+      "confirm": "System cleanup (trash, tmp, apt clean/autoclean/autoremove, locks and apt lists)? Requires privileges."
+    },
+    "ping": {
+      "title": "Test connection",
+      "desc": "Connection test → Google (ICMP)"
+    },
+    "sync": {
+      "title": "Sync clock",
+      "desc": "timedatectl NTP or ntpdate",
+      "confirm": "Synchronize the system clock (NTP / ntpdate)? Requires privileges."
+    },
+    "docker": {
+      "confirm": "Install Docker Engine (official apt or docker.io) and add your user to the docker group?"
+    }
+  },
+  "cat": {
+    "development": "Development",
+    "productivity": "Productivity",
+    "social": "Social",
+    "utilities": "Utilities"
+  },
+  "native": {
+    "file": "File",
+    "quit": "Quit",
+    "about": "About",
+    "aboutItem": "About this project"
+  },
+  "skip": {
+    "link": "Skip to content"
+  },
+  "ready": {
+    "log": "$ Carcará 2.0 ready.\n"
+  },
+  "console": {
+    "title": "Activity",
+    "clear": "Clear",
+    "clearAria": "Clear log"
+  },
+  "sobre": {
+    "lead": "Personal Linux workstation toolkit — installers, maintenance, and dotfiles. The 2.0 UI reuses the 1.x backends (apt → Flatpak → Snap).",
+    "note": "Many scripts need root and change the system. Review before running. The author is not liable for misuse.",
+    "fact": {
+      "product": {
+        "label": "Product",
+        "value": "Carcará 2.0 — Electron + Bun on the Bash 1.x engine"
+      },
+      "target": {
+        "label": "Target",
+        "value": "Ubuntu, Debian, Linux Mint (apt), x86_64"
+      },
+      "entry": {
+        "label": "Entry",
+        "value": "sudo ./start.sh --electron | --terminal"
+      },
+      "author": {
+        "label": "Author",
+        "value": "Gabriel F. Vilar (CoGUMm)"
+      },
+      "license": {
+        "label": "License",
+        "value": "MIT · Copyright (c) 2010 CoGUMm"
+      },
+      "repo": {
+        "label": "Repo",
+        "value": "github.com/cogumm/myLinux"
+      }
+    },
+    "link": {
+      "mit": "MIT License",
+      "copied": "(copied)",
+      "failed": "failed",
+      "noBrowser": "no browser"
+    }
+  },
+  "main": {
+    "requireRoot": "You need administrative privileges (root)",
+    "exiting": "The application is exiting.",
+    "useSudo": "Use: sudo ./start.sh --electron",
+    "urlDenied": "URL not allowed"
+  },
+  "pager": {
+    "prev": "Previous",
+    "next": "Next",
+    "status": "Page {current} of {total}",
+    "aria": "Catalog pagination"
+  }
 }
