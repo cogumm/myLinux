@@ -1,0 +1,27 @@
+export type HelperResult = {
+  code: number | null;
+  stdout: string;
+  stderr: string;
+};
+
+export type CarcaraApi = {
+  runHelper: (action: string) => Promise<HelperResult>;
+};
+
+export type StatusKind = "idle" | "busy" | "ok" | "err";
+
+export type ViewId = "sistema" | "software" | "sobre";
+
+export type ViewMeta = {
+  eyebrow: string;
+  title: string;
+  lede: string;
+};
+
+export type AppContext = {
+  runAction: (action: string, confirmMsg?: string) => Promise<void>;
+  appendLog: (text: string) => void;
+  setStatus: (text: string, kind: StatusKind) => void;
+  setBusy: (busy: boolean) => void;
+  askConfirm: (message: string) => Promise<boolean>;
+};

@@ -7,11 +7,25 @@ const repoRoot = path.join(root, "..");
 const rendererDest = path.join(root, "dist", "renderer");
 const assetsDest = path.join(rendererDest, "assets");
 const imgSrcDir = path.join(repoRoot, "assets/img");
-/** Primary mark for UI + window icon */
 const primaryLogo = "logo_moderno_final.png";
 
 await $`tsc`.cwd(root);
 await mkdir(assetsDest, { recursive: true });
+
+const bundle = await Bun.build({
+  entrypoints: [path.join(root, "src/renderer/main.ts")],
+  outdir: rendererDest,
+  target: "browser",
+  format: "iife",
+  naming: "renderer.js",
+});
+
+if (!bundle.success) {
+  console.error("[carcara-electron] renderer bundle failed:");
+  for (const log of bundle.logs) console.error(log);
+  process.exit(1);
+}
+
 await $`cp ${path.join(root, "src/renderer/index.html")} ${rendererDest}/`;
 await $`cp ${path.join(root, "src/renderer/styles.css")} ${rendererDest}/`;
 
@@ -23,4 +37,6 @@ for (const name of images) {
 }
 await $`cp ${path.join(assetsDest, primaryLogo)} ${path.join(assetsDest, "logo.png")}`;
 
-console.log(`[carcara-electron] build ok (${images.length} images → assets/)`);
+console.log(
+  `[carcara-electron] build ok (renderer bundle + ${images.length} images)`,
+);

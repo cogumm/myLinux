@@ -8,7 +8,7 @@
     "build": "bun run scripts/build.ts",
     "dev": "bun run build && electron . --no-sandbox",
     "start": "electron . --no-sandbox",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.renderer.json",
     "helper": "bun scripts/run-helper.ts"
   },
   "engines": {
