@@ -20,7 +20,7 @@ export type ViewMeta = {
 
 export type AppContext = {
   runAction: (action: string, confirmMsg?: string) => Promise<void>;
-  appendLog: (text: string) => void;
+  appendLog: (text: string, kind?: "default" | "info" | "error" | "cmd") => void;
   setStatus: (text: string, kind: StatusKind) => void;
   setBusy: (busy: boolean) => void;
   askConfirm: (message: string) => Promise<boolean>;

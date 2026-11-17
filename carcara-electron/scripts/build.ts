@@ -29,6 +29,16 @@ if (!bundle.success) {
 await $`cp ${path.join(root, "src/renderer/index.html")} ${rendererDest}/`;
 await $`cp ${path.join(root, "src/renderer/styles.css")} ${rendererDest}/`;
 
+const fontsSrc = path.join(root, "assets/fonts");
+const fontsDest = path.join(assetsDest, "fonts");
+await mkdir(fontsDest, { recursive: true });
+const fonts = (await readdir(fontsSrc)).filter((name) =>
+  /\.(woff2?|ttf|otf)$/i.test(name),
+);
+for (const name of fonts) {
+  await $`cp ${path.join(fontsSrc, name)} ${path.join(fontsDest, name)}`;
+}
+
 const images = (await readdir(imgSrcDir)).filter((name) =>
   /\.(png|jpe?g|webp|svg)$/i.test(name),
 );
@@ -38,5 +48,5 @@ for (const name of images) {
 await $`cp ${path.join(assetsDest, primaryLogo)} ${path.join(assetsDest, "logo.png")}`;
 
 console.log(
-  `[carcara-electron] build ok (renderer bundle + ${images.length} images)`,
+  `[carcara-electron] build ok (bundle + ${images.length} images + ${fonts.length} fonts)`,
 );

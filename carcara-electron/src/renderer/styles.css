@@ -20,12 +20,33 @@
 
   --font-heading: Inter, "Segoe UI", system-ui, sans-serif;
   --font-body: Inter, "Segoe UI", system-ui, sans-serif;
-  --font-mono: ui-monospace, "Cascadia Code", "SFMono-Regular", Menlo, Consolas, monospace;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Terminal (Dracula-like) */
+  --term-bg: #282a36;
+  --term-fg: #f8f8f2;
+  --term-info: #6272a4;
+  --term-ln-fg: #6272a4;
+  --term-ln-bg: #1d2128;
+  --term-str: #f1fa8c;
+  --term-num: #bd93f9;
+  --term-bool: #bd93f9;
+  --term-null: #bd93f9;
+  --term-prop: #8be9fd;
+  --term-err: #ed2655;
 
   --rail-w: 240px;
   --radius: 10px;
   --ease: 180ms ease;
   --focus: 0 0 0 2px var(--color-background), 0 0 0 4px var(--color-ring);
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("assets/fonts/JetBrainsMono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 *,
@@ -404,30 +425,51 @@ button:disabled {
   padding: 4px;
 }
 
-/* Console */
+/* Console / terminal */
 .console {
   display: flex;
   flex-direction: column;
   min-height: 0;
-  border-top: 1px solid var(--color-border);
-  background: #020617;
+  border-top: 1px solid #1d2128;
+  background: var(--term-bg);
+  color: var(--term-fg);
 }
 
 .console__bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.45rem 1rem;
-  border-bottom: 1px solid var(--color-border);
+  padding: 0.45rem 0.75rem 0.45rem 0;
+  background: var(--term-ln-bg);
+  border-bottom: 1px solid #14171c;
 }
 
 .console__bar h2 {
   margin: 0;
-  font-size: 0.7rem;
+  padding-left: 3.5rem;
+  font-family: var(--font-mono);
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-muted-foreground);
+  color: var(--term-info);
+}
+
+.console__clear {
+  min-height: 28px;
+  margin-right: 0.5rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--term-info);
+  transition: color var(--ease), background var(--ease);
+}
+
+.console__clear:hover {
+  color: var(--term-info);
+  background: rgb(98 114 164 / 0.18);
 }
 
 .ghost {
@@ -445,17 +487,61 @@ button:disabled {
   color: var(--color-foreground);
 }
 
-.console__out {
-  margin: 0;
+.console__scroll {
   flex: 1;
   overflow: auto;
-  padding: 0.75rem 1rem;
+  min-height: 0;
+  background: var(--term-bg);
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  line-height: 1.5;
-  color: #94a3b8;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--term-fg);
+}
+
+.console__row {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  min-height: 1.55em;
+}
+
+.console__ln {
+  padding: 0 0.65rem 0 0.35rem;
+  background: var(--term-ln-bg);
+  color: var(--term-ln-fg);
+  text-align: right;
+  user-select: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.console__code {
+  padding: 0 0.85rem;
   white-space: pre-wrap;
   word-break: break-word;
+}
+
+.tok-info {
+  color: var(--term-info);
+}
+
+.tok-str {
+  color: var(--term-str);
+}
+
+.tok-num {
+  color: var(--term-num);
+}
+
+.tok-bool,
+.tok-null {
+  color: var(--term-bool);
+}
+
+.tok-prop {
+  color: var(--term-prop);
+}
+
+.tok-err {
+  color: var(--term-err);
 }
 
 /* Dialog */

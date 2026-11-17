@@ -1,4 +1,5 @@
 export { createActivityConsole } from "./activity-console.js";
+export type { ActivityConsoleHandle } from "./activity-console.js";
 export { createBrand } from "./brand.js";
 export { createConfirmDialog } from "./confirm-dialog.js";
 export { createGroup, createStack } from "./group.js";

@@ -53,19 +53,19 @@ export function mountApp(root: HTMLElement): void {
 
       ctx.setBusy(true);
       header.setStatus("Executando…", "busy");
-      console.append(`\n$ carcara ${action}\n`);
+      console.append(`$ carcara ${action}\n`, "cmd");
 
       try {
         const result = await carcaraApi().runHelper(action);
         if (result.stdout) console.append(result.stdout);
-        if (result.stderr) console.append(result.stderr);
+        if (result.stderr) console.append(result.stderr, "error");
         const code = result.code ?? 1;
-        console.append(`\n[exit ${code}]\n`);
+        console.append(`[exit ${code}]\n`);
         if (code === 0) header.setStatus("Concluído", "ok");
         else header.setStatus(`Falhou (${code})`, "err");
       } catch (err) {
         const msg = err instanceof Error ? err.message : String(err);
-        console.append(`\n[erro] ${msg}\n`);
+        console.append(`[erro] ${msg}\n`, "error");
         header.setStatus("Erro", "err");
       } finally {
         ctx.setBusy(false);
@@ -91,5 +91,5 @@ export function mountApp(root: HTMLElement): void {
   root.replaceChildren(skip, shell, dialog.root);
 
   navigate("sistema");
-  console.append("Carcará 2.0 pronto.\n");
+  console.append("Carcará 2.0 pronto.\n", "info");
 }

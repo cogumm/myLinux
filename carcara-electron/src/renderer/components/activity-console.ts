@@ -1,6 +1,8 @@
+import { highlightLogLine, type LogKind } from "../lib/log-highlight.js";
+
 export type ActivityConsoleHandle = {
   root: HTMLElement;
-  append: (text: string) => void;
+  append: (text: string, kind?: LogKind) => void;
   clear: () => void;
 };
 
@@ -20,32 +22,62 @@ export function createActivityConsole(
 
   const clearBtn = document.createElement("button");
   clearBtn.type = "button";
-  clearBtn.className = "ghost";
+  clearBtn.className = "console__clear";
   clearBtn.id = "btn-clear-log";
   clearBtn.setAttribute("aria-label", "Limpar log");
   clearBtn.textContent = "Limpar";
 
-  const out = document.createElement("pre");
-  out.id = "log";
-  out.className = "console__out";
-  out.tabIndex = 0;
+  const scroll = document.createElement("div");
+  scroll.className = "console__scroll";
+  scroll.id = "log";
+  scroll.tabIndex = 0;
+  scroll.setAttribute("role", "log");
+  scroll.setAttribute("aria-live", "polite");
+
+  let lineNo = 0;
+  let pending = "";
+
+  function addLine(line: string, kind: LogKind): void {
+    lineNo += 1;
+    const row = document.createElement("div");
+    row.className = "console__row";
+
+    const ln = document.createElement("span");
+    ln.className = "console__ln";
+    ln.textContent = String(lineNo);
+    ln.setAttribute("aria-hidden", "true");
+
+    const code = document.createElement("span");
+    code.className = "console__code";
+    code.innerHTML = highlightLogLine(line, kind);
+
+    row.append(ln, code);
+    scroll.append(row);
+  }
+
+  function append(text: string, kind: LogKind = "default"): void {
+    const chunk = pending + text;
+    const parts = chunk.split("\n");
+    pending = parts.pop() ?? "";
+    for (const line of parts) {
+      addLine(line, kind);
+    }
+    scroll.scrollTop = scroll.scrollHeight;
+  }
+
+  function clear(): void {
+    scroll.replaceChildren();
+    lineNo = 0;
+    pending = "";
+  }
 
   clearBtn.addEventListener("click", () => {
-    out.textContent = "";
+    clear();
     onClear?.();
   });
 
   bar.append(heading, clearBtn);
-  section.append(bar, out);
+  section.append(bar, scroll);
 
-  return {
-    root: section,
-    append(text) {
-      out.textContent += text;
-      out.scrollTop = out.scrollHeight;
-    },
-    clear() {
-      out.textContent = "";
-    },
-  };
+  return { root: section, append, clear };
 }
