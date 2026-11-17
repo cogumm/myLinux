@@ -27,7 +27,7 @@ Unscheduled ideas (promote into active work deliberately):
 - [x] System + software helper actions wired
 - [x] Dual entry via root `start.sh` + README
 - [x] WSL openExternal + quieter `ping`
-- [x] Smoke-test Sistema as root: update / fix / clean → exit 0 (17 de Novembro de 2026)
+- [x] Smoke-test Sistema as root (sudo+Bun PATH): ping / update / fix / clean → exit 0 (17 de Novembro de 2026)
 - [ ] Smoke-test Software installers (owner-requested)
 - [ ] Package `.deb` for Carcará 2.0
 

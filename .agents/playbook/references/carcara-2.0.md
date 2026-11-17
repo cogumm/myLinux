@@ -14,7 +14,8 @@ Skill: `.agents/skills/ui-ux-pro-max`
 | `cd carcara-electron && bun run build` | `tsc` + Bun IIFE renderer (build OK as user) |
 | `bun run helper -- ping` | Runs `carcara/app/config/testConnection.sh` (Google DNS IP `8.8.8.8`; override `CARCARA_TEST_HOST` / `CARCARA_TEST_COUNT`) |
 
-**Root policy:** Electron main calls `requireRoot()` (uid must be 0), mirroring 1.x `isRoot`. `start.sh --electron` elevates with `sudo` and preserves `DISPLAY`/`WAYLAND_DISPLAY`/`XAUTHORITY`.
+**Root policy:** Electron main calls `requireRoot()` (uid must be 0), mirroring 1.x `isRoot`. `start.sh --electron` elevates with `sudo` and preserves `DISPLAY`/`WAYLAND_DISPLAY`/`XAUTHORITY`.  
+**Bun under sudo:** Linux `secure_path` drops `~/.bun/bin`. `ensure_bun_on_path` in `start.sh` recovers `$SUDO_USER/.bun/bin` when you run `sudo ./start.sh` directly (not a WSL bug).
 
 ## Architecture
 
@@ -67,13 +68,19 @@ When changing visuals: run skill `--design-system`; read `pages/app-shell.md` fi
 - When already root, helper skips `pkexec` (direct allowlist script).
 - **Unprivileged helper action:** `ping` (ICMP) — no pkexec warning if somehow run as non-root via `bun run helper`.
 - **External URLs (Sobre):** allowlist in `main.ts`; on WSL open via Windows PowerShell `Start-Process` (`src/open-external.ts`), fallback `cmd start`, then `shell.openExternal`. If all fail, UI copies URL.
-- GPU/`--no-sandbox` noise on WSL is expected; Electron as root typically needs `--no-sandbox` (already in `package.json`).
+- Electron as root needs `--no-sandbox`. On WSL also `--disable-gpu` + `--disable-dev-shm-usage` (+ `LIBGL_ALWAYS_SOFTWARE=1` in `start.sh`) to avoid DRI3/`MESA: Failed to attach to x11 shm` under WSLg sudo.
 - Native menubar: **Arquivo → Sair** and **Sobre → Sobre o Carcará** (IPC → view Sobre) — see `src/app-menu.ts`.
 
 ## Helper allowlist
 
 `ping` · `apt-dry-run` · `update-distro` · `fix-system` · `clean-distro` ·  
 `install-{vlc,discord,spotify,telegram,git,vscode,insomnia,firacode,dropbox}`
+
+## Environment (Zod)
+
+- Example: `carcara-electron/.env.example` → copy to `.env` (gitignored)
+- Schema/load: `src/env.ts` (`dotenv` + **Zod**)
+- Used by Electron `main.ts` (window + root gate) and `scripts/run-helper.ts` (ping host/count → Bash)
 
 ## Assets
 

@@ -141,6 +141,7 @@ flowchart LR
 - [x] Sobre from README + WSL-safe `openExternal`; `ping` unprivileged (no pkexec noise) (17 de Novembro de 2026)
 - [x] Session knowledge consolidated in playbook + memory-bank (17 de Novembro de 2026)
 - [x] Root gate for 2.0 UI + live Sistema smoke-test (update/fix/clean exit 0) (17 de Novembro de 2026)
+- [x] Env: `.env.example` + Zod/`dotenv` (`src/env.ts`) wired to main + helper (17 de Novembro de 2026)
 - [ ] Package `.deb` (AppImage optional)
 - [ ] Software installer smoke-test via 2.0 UI
 - [x] Document dual entry in root README + `carcara-electron/README.md` (alpha)

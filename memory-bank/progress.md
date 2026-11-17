@@ -42,3 +42,5 @@ Append-only log. Do not delete completed history.
 - [x] Carcará 2.0 exige root como 1.x: `start.sh --electron` via sudo + `requireRoot()` no Electron main (2026-11-17)
 - [x] Live smoke-test Sistema (2.0 as root): update-distro / fix-system / clean-distro all exit 0; NI skips locks/lists (2026-11-17)
 - [x] Menus trimmed to essentials: 2.0 Sistema (no apt-dry-run); 1.x menuGeral without stubs (2026-11-17)
+- [x] Atividade log: merge stdout+stderr chronologically (apt vs [carcara] ordering) (2026-11-17)
+- [x] Carcará 2.0 env: `.env.example` + Zod/`dotenv` in `src/env.ts`; wired to main + run-helper (2026-11-17)

@@ -12,9 +12,18 @@ Structure: `src/renderer/views/` (Sistema / Software / Sobre) + `src/renderer/co
 ## Requirements
 
 - **Root / sudo** — same policy as Carcará 1.x (`isRoot`). Prefer `sudo ./start.sh --electron` from the repo root.
-- [Bun](https://bun.sh) ≥ 1.1 (`curl -fsSL https://bun.sh/install | bash`)
+- [Bun](https://bun.sh) ≥ 1.1 (usually `~/.bun/bin`; `start.sh` restores it under sudo’s `secure_path`)
 - Linux desktop (or WSLg) for the window
 - Already-root sessions skip `pkexec` for helper actions
+
+## Environment
+
+```bash
+cd carcara-electron
+cp .env.example .env   # edit as needed
+```
+
+Validated with **Zod** in `src/env.ts` (loads `.env` via `dotenv`). Notable keys: `CARCARA_TEST_HOST` / `CARCARA_TEST_COUNT`, window size, `CARCARA_REQUIRE_ROOT`, `LIBGL_ALWAYS_SOFTWARE`.
 
 ## Dev
 
@@ -28,7 +37,7 @@ bun install
 bun run dev
 ```
 
-`electron` / `bun run start` exit if uid ≠ 0.
+`electron` / `bun run start` exit if uid ≠ 0 (unless `CARCARA_REQUIRE_ROOT=0`).
 
 | Script | What it does |
 |--------|----------------|
@@ -38,7 +47,8 @@ bun run dev
 | `bun run helper -- ping` | `testConnection.sh` → ping Google DNS IP (−c 3) |
 | `bun run typecheck` | `tsc --noEmit` |
 
-`--no-sandbox` is required on many WSL/Linux setups where `chrome-sandbox` is not root-owned (SUID). Prefer fixing sandbox ownership on a real desktop install when packaging.
+`--no-sandbox` is required on many WSL/Linux setups where `chrome-sandbox` is not root-owned (SUID).  
+On **WSL**, `--disable-gpu` / `--disable-dev-shm-usage` (and `LIBGL_ALWAYS_SOFTWARE=1` from `start.sh`) reduce `libEGL` / `MESA` / DRI3 noise when running as root under WSLg. Prefer a real desktop for packaging.
 
 ## Dual entry
 
