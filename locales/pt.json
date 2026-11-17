@@ -121,5 +121,9 @@
   "main.useSudo": "Use: sudo ./start.sh --electron",
   "main.urlDenied": "URL não permitida",
   "window.title": "Carcará 2.0",
-  "lang.switchAria": "Idioma"
+  "lang.switchAria": "Idioma",
+  "pager.prev": "Anterior",
+  "pager.next": "Próxima",
+  "pager.status": "Página {current} de {total}",
+  "pager.aria": "Paginação do catálogo"
 }

@@ -36,20 +36,24 @@ export function createTile(props: TileProps): HTMLButtonElement {
   return btn;
 }
 
+/**
+ * Event delegation so paginated / swapped tile grids keep working without
+ * re-binding after each page change.
+ */
 export function bindTiles(
   root: ParentNode,
   onAction: (action: string, confirm?: string) => void,
 ): void {
-  const buttons = Array.from(
-    root.querySelectorAll<HTMLButtonElement>("[data-action]"),
-  );
-  for (const btn of buttons) {
-    btn.addEventListener("click", () => {
-      const action = btn.dataset.action;
-      if (!action) return;
-      onAction(action, btn.dataset.confirm);
-    });
-  }
+  root.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+    const btn = target.closest<HTMLButtonElement>("button[data-action]");
+    if (!btn || !root.contains(btn)) return;
+    if (btn.disabled) return;
+    const action = btn.dataset.action;
+    if (!action) return;
+    onAction(action, btn.dataset.confirm);
+  });
 }
 
 export function setTilesDisabled(root: ParentNode, disabled: boolean): void {

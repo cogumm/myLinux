@@ -1,9 +1,12 @@
 import { createNavList } from "../components/nav-list.js";
-import { createTileGrid } from "../components/tile-grid.js";
+import { createPagedTiles } from "../components/paged-tiles.js";
 import { icons } from "../components/icons.js";
 import { t } from "../lib/i18n.js";
 import type { TileProps } from "../components/tile.js";
 import type { ViewMeta } from "../lib/types.js";
+
+/** Catalog page size — grows with Wave A/B/C without flooding the pane. */
+const SOFTWARE_PAGE_SIZE = 6;
 
 export function getSoftwareMeta(): ViewMeta {
   return {
@@ -132,18 +135,20 @@ export function renderSoftware(): HTMLElement {
   const pane = document.createElement("div");
   pane.className = "soft-layout__pane";
   pane.setAttribute("role", "region");
+  pane.setAttribute("aria-label", t("view.software.title"));
 
-  const grids = new Map<string, HTMLElement>();
+  const panels = new Map<string, HTMLElement>();
   for (const cat of cats) {
-    const grid = createTileGrid(cat.tiles);
-    grid.hidden = true;
-    grids.set(cat.id, grid);
-    pane.append(grid);
+    const paged = createPagedTiles(cat.tiles, { pageSize: SOFTWARE_PAGE_SIZE });
+    paged.root.hidden = true;
+    paged.root.dataset.category = cat.id;
+    panels.set(cat.id, paged.root);
+    pane.append(paged.root);
   }
 
   function showCategory(id: string): void {
-    for (const [catId, grid] of grids) {
-      grid.hidden = catId !== id;
+    for (const [catId, panel] of panels) {
+      panel.hidden = catId !== id;
     }
     nav.setActive(id);
   }

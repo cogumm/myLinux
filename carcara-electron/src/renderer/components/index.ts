@@ -13,3 +13,6 @@ export { createLicenseGate } from "./license-gate.js";
 export { bindTiles, createTile, setTilesDisabled } from "./tile.js";
 export type { TileProps } from "./tile.js";
 export { createTileGrid } from "./tile-grid.js";
+export { createPagedTiles } from "./paged-tiles.js";
+export type { PagedTilesHandle } from "./paged-tiles.js";
+export { createPager } from "./pager.js";
