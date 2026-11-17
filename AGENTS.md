@@ -11,7 +11,8 @@ Playbook: `.agents/playbook/SKILL.md`
 
 | Path | Role |
 |------|------|
-| `carcara/` | Active installer UI (Bash + Zenity/Yad). Entry: `sudo bash startApp.sh` from `carcara/` |
+| `carcara/` | 1.x install engine + CLI/TUI (Bash + Zenity/Yad). Entry: `sudo bash startApp.sh` from `carcara/` |
+| `carcara-electron/` | 2.0 desktop UI (Electron + Bun). Entry: `cd carcara-electron && bun run dev` |
 | `dotfiles/` | Shell aliases, Bash/Zsh themes, git config, Hyper |
 | `old/` | Frozen legacy (dialog Ubuntu packagers, Docker helper). **Archive** — migrate useful bits into `carcara/`, do not grow this tree |
 | `cleanup-zone-identifiers.sh` | WSL/Windows `:Zone.Identifier` cleanup |
@@ -58,10 +59,9 @@ Act as a **Linux systems analysis & development** specialist:
 ## Known debt (do not paper over)
 
 - Legacy `old/scripts/*.sh` install obsolete stacks and unsafe defaults (`chmod 777 www`, hardcoded passwords)
-- Optional future `init.sh` wrapper still open in `TODO.md` if desired
-- Wave 1 + Wave 2 done: bootstrap, backends, system scripts, menus, thin installers (apt → Flatpak → Snap)
-- Next: optional Wave 3 CLI polish, or Electron 2.0 (see `.agents/idea/carcara-2.0-electron.md`)
-- Several Carcará menus still say “Ainda em desenvolvimento” — only “Limpeza de memória” / “programas diversos” stubs remain in `menuGeral`
+- Wave 1 + Wave 2 done (1.x engine). Wave 3 cancelled — product UI is Electron 2.0
+- Active: `carcara-electron/` spike (helper + apt dry-run); see `.agents/idea/carcara-2.0-electron.md`
+- Several 1.x menus still say “Ainda em desenvolvimento” — only “Limpeza de memória” / “programas diversos” stubs remain in `menuGeral`
 - Wave 2 installers not yet smoke-tested live (needs owner-requested apt/flatpak/snap run)
 
 ## Project guidance

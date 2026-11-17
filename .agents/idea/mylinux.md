@@ -27,13 +27,11 @@ Web application, payments, multi-user SaaS, equal support for every distro.
 
 ## Modernization direction
 
-- Single documented entrypoint: `carcara/startApp.sh` (README aligned; optional root `init.sh` wrapper only if desired).
-- Incomplete menus wired to existing installers (`development/`, `social/`, `utilities/`).
-- Correct, idempotent dependency detection.
-- Packages and PPAs brought up to date (no PHP5 / MySQL 5.6 / dead links).
+- **1.x engine** complete: `carcara/startApp.sh` + `install_backends.sh` + thin installers.
+- **2.0 UI** in progress: `carcara-electron/` (Electron + Bun); reuses 1.x backends via privilege helper.
 - Dotfiles installable without overwriting `$HOME` without confirmation.
 
-## Related ideas (not implemented until requested)
+## Related ideas
 
-- **[Carcará modern install (1.x)](carcara-modern-install.md)** — apt keyrings + Flatpak/Flathub + Snap fallback; Bash + Zenity/Yad waves.
-- **[Carcará 2.0 Electron](carcara-2.0-electron.md)** — desktop app UI; reuses 1.x install backends; dual-entry with `startApp.sh`.
+- **[Carcará modern install (1.x)](carcara-modern-install.md)** — complete (Waves 1–2).
+- **[Carcará 2.0 Electron](carcara-2.0-electron.md)** — active product UI track.

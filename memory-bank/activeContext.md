@@ -4,23 +4,26 @@ Last updated: 2026-11-17
 
 ## Current focus
 
-Carcará **1.x = install engine**. Plan: `.agents/idea/carcara-modern-install.md`.  
-**Wave 1 + Wave 2 complete.** Next: optional **Wave 3** CLI polish, or **Electron 2.0** when requested.  
-**2.0** vision: `.agents/idea/carcara-2.0-electron.md`.
+**Carcará 2.0 (Electron + Bun)** — spike under `carcara-electron/`.  
+1.x Bash engine (Waves 1–2) is **complete** and stays as CLI/fallback.  
+Wave 3 polish was **cancelled / removed**.
 
 ## Recent decisions
 
-- Install backend policy: apt keyrings → Flatpak/Flathub → Snap fallback.
-- Wave 2 installers are thin wrappers over `install_backends.sh` (idempotent).
-- Yad/Zenity remain temporary; no Yad polish investment.
-- Script header banner required on all Carcará `.sh` files.
+- Repo layout: sibling `carcara-electron/` (not nested under Bash `carcara/`).
+- Toolchain: **Bun** (install/scripts + `Bun.$` shell bridge); Electron main spawns `bun scripts/run-helper.ts`.
+- UI: vanilla HTML/CSS + TypeScript; visual system from skill **`ui-ux-pro-max`** → `design-system/carcara-2-0/` (Flat Design app shell).
+
+- Privilege: allowlisted `helper/carcara-helper.sh` + `pkexec` (when available).
+- Install engine: reuse `install_backends.sh` / 1.x scripts — never fork into the renderer.
 
 ## Next useful engineering work
 
-1. Optional Wave 3 (init wrapper / dry-run) — low priority.
-2. Owner smoke-test of installers on a real/apt machine.
-3. Electron 2.0 when requested.
+1. Finish spike validation (run UI; ping + apt dry-run with pkexec).
+2. Wire system actions (update / fix / clean) through helper → 1.x scripts.
+3. Port software installers via helper allowlist.
+4. Dual-entry note in root README when spike is solid; later `.deb` packaging.
 
 ## Blockers
 
-None for documentation. Live apt/snap/flatpak testing needs explicit owner request.
+GUI/`pkexec` smoke-test needs a desktop session (or WSLg) and owner-approved elevation.

@@ -1,74 +1,129 @@
 # Idea — Carcará 2.0 (Electron)
 
-Status: **vision / not started**  
+Status: **in progress** (plan locked + spike started)  
 Saved: 16 de Novembro de 2026  
-Related: [mylinux.md](mylinux.md) · [carcara-modern-install.md](carcara-modern-install.md) (1.x Bash line)
+Updated: 17 de Novembro de 2026  
+Related: [mylinux.md](mylinux.md) · [carcara-modern-install.md](carcara-modern-install.md) (1.x engine — complete)
 
 ## Intent
 
-Ship a **Carcará 2.0** desktop app with a modern UI using **Electron**, while **Carcará 1.x** (Bash + Zenity/Yad under `carcara/`) remains the active modernization track until 2.0 is ready.
+Ship **Carcará 2.0** as a desktop app with a modern UI using **Electron**.  
+**Carcará 1.x** (`carcara/` Bash + Zenity/Yad) stays as CLI/fallback and owns the install engine (`install_backends.sh` + thin installers).
 
-1.x keeps working on headless-ish / scriptable installs; 2.0 is the polished workstation control panel.
+## Locked decisions (17 de Novembro de 2026)
 
-## Why Electron
+| Question | Decision |
+|----------|----------|
+| Repo layout | Sibling app: **`carcara-electron/`** (do not nest under Bash `carcara/`) |
+| Toolchain | **[Bun](https://bun.sh/docs)** — install, scripts, and Shell (`$`) bridge ([runtime/shell](https://bun.sh/docs/runtime/shell)) |
+| UI kit | **Vanilla** HTML/CSS + TypeScript renderer (no React for first ship) |
+| UI/UX | Skill **`ui-ux-pro-max`** → `design-system/carcara-2-0/` (Flat Design, dark utility) |
+| Privilege | **Allowlisted helper** + `pkexec` via Bun bridge `scripts/run-helper.ts` |
+| Packaging | Later: `.deb` first; AppImage optional — not part of the spike |
+| Engine | **Reuse** `carcara/app/config/install_backends.sh` and existing system/app scripts — never reimplement apt/flatpak/snap in the renderer |
 
-- Familiar web UI (HTML/CSS/JS or a small React/Vue layer) without inventing a new desktop toolkit.
-- Better layout, theming, accessibility, and progress UX than Yad dialogs.
-- Can still call the same install backends (apt keyrings, Flatpak, Snap) via a privileged helper or `pkexec`/`sudo` bridge — UI must never be the source of truth for package safety.
+## Why Electron + Bun
 
-## Product sketch (2.0)
+- Web UI without inventing a new desktop toolkit.
+- Better layout, theming, accessibility, and progress UX than Yad.
+- Same install backends via privileged helper; UI is never the source of truth for package safety.
+- Bun owns package install + build scripts + safe shell orchestration (`import { $ } from "bun"`). Electron main still uses Chromium’s Node and **spawns** `bun scripts/run-helper.ts` so Shell APIs stay on the Bun runtime.
+
+## Product sketch
 
 | Area | 2.0 behavior |
 |------|----------------|
-| Shell | Electron main + renderer; no Yad/Zenity required for primary UX |
-| Actions | Update / repair / clean / install curated apps (same categories as today) |
-| Install engine | Reuse policies from 1.x `install_backends` (apt → Flatpak → Snap) — preferably as shared scripts or a small Node/Go helper invoked by Electron |
-| Privilege | Explicit elevation per dangerous action; clear logs in the UI |
-| Dotfiles | Optional later tab: apply/backup from `dotfiles/` with confirmation |
-| WSL | Detect WSLg; degrade gracefully with copy-paste CLI fallback if no display |
+| Shell | Electron main + preload + renderer; Yad/Zenity not required for primary UX |
+| Actions | Update / repair / clean / install curated apps (same categories as 1.x) |
+| Install engine | Invoke 1.x scripts/backends through `helper/carcara-helper.sh` |
+| Privilege | Explicit elevation per dangerous action; stream logs into the UI |
+| Dotfiles | Optional later tab — not in spike |
+| WSL | Detect limited GUI/polkit; show CLI fallback hints |
 
-## Suggested stack (when planning starts)
+## Stack
 
-- Electron (current LTS) + TypeScript
-- UI: lightweight (e.g. plain CSS or a minimal component set) — brand later; avoid dragging unrelated design systems
-- Packaging: `.deb` and/or AppImage for Debian/Ubuntu family
-- Keep **npm** if Node tooling is used (repo convention)
+- **Bun** ≥ 1.1 (package manager + script runner + Shell)
+- Electron (current stable) + TypeScript (main/preload compiled with `tsc` for Electron’s Node)
+- Vanilla renderer (PT labels, same verbs as 1.x)
+- Scripts: `bun run dev` / `build` / `start` / `helper`
+- Helper: Bash allowlist under `carcara-electron/helper/` + Bun bridge `scripts/run-helper.ts`
 
-Exact framework choice (React vs vanilla) is deferred until a dedicated 2.0 plan wave.
+## Repo layout
+
+```
+carcara-electron/
+  package.json                # packageManager: bun
+  bun.lock
+  tsconfig.json
+  helper/carcara-helper.sh    # pkexec-facing allowlist
+  scripts/
+    build.ts                  # Bun.$ → tsc + copy static
+    run-helper.ts             # Bun.$ → pkexec|helper
+  src/
+    main.ts                   # BrowserWindow + IPC → spawn bun bridge
+    preload.ts
+    renderer/
+      index.html
+      styles.css
+      renderer.ts
+  README.md
+design-system/carcara-2-0/    # ui-ux-pro-max MASTER + page overrides
+  MASTER.md
+  pages/app-shell.md
+```
+
+## App UI layout (`ui-ux-pro-max`)
+
+Canonical tokens and rules: [`design-system/carcara-2-0/MASTER.md`](../../design-system/carcara-2-0/MASTER.md).  
+Shell overrides: [`design-system/carcara-2-0/pages/app-shell.md`](../../design-system/carcara-2-0/pages/app-shell.md).
+
+| Decision | Choice |
+|----------|--------|
+| Skill | `.agents/skills/ui-ux-pro-max` (search + `--design-system --persist`) |
+| Style | **Flat Design** — dark utility, teal primary `#0D9488`, accent CTA `#EA580C` |
+| Structure | Sidebar nav + primary pane + activity log (desktop tool, not landing “Product Demo”) |
+| Type | Inter / system-ui (no remote font CDN under Electron CSP) |
+| A11y | Focus rings, keyboard nav, reduced-motion, no emoji-as-icons |
+
+Any new 2.0 screen: read page override under `pages/` first, else MASTER. Re-run the skill search when changing visual direction — do not invent a parallel palette.
+
+## Privilege helper contract
+
+- Renderer → preload IPC → Electron main → `bun scripts/run-helper.ts <action>` → Bun `$` → `pkexec` (or direct) `helper/carcara-helper.sh`.
+- Helper **only** runs allowlisted actions (e.g. `apt-dry-run`, later `update-distro`, `install-app <id>`).
+- Unknown actions → exit 2. No arbitrary shell from the UI.
+- Bun Shell escapes interpolations by default (injection-resistant argv).
+- stdout/stderr streamed back to the renderer as log lines; exit code is the action result.
 
 ## Relationship to 1.x
 
 ```mermaid
 flowchart LR
   bash1x[Carcara_1x_Bash_Yad] --> backends[Shared_install_backends]
-  electron2x[Carcara_2x_Electron] --> backends
+  electron2x[Carcara_2x_Electron] --> helper[carcara_helper_allowlist]
+  helper --> backends
   backends --> aptChan[apt_keyrings]
   backends --> flatpakChan[Flatpak_Flathub]
   backends --> snapChan[Snap]
 ```
 
-- 1.x plan is **engine-first**: [carcara-modern-install.md](carcara-modern-install.md) prioritizes `install_backends.sh` + system scripts; Yad polish is explicitly deprioritized.
-- 2.0 consumes those backends; do not fork install logic into the renderer.
-- Do not delete 1.x when 2.0 ships — keep as CLI/fallback entry (`startApp.sh`).
+- Do not delete 1.x when 2.0 ships — keep `cd carcara && sudo bash startApp.sh`.
+- Dual entry documented in root README when the spike is usable.
 
-## Non-goals (2.0 vision)
+## Non-goals
 
-- Not a cloud SaaS, not multi-tenant.
+- Not a cloud SaaS / multi-tenant product.
 - Not a full distro installer / ISO builder.
 - Not silent remote `curl | bash` as the default install path for the app itself.
-- Not replacing `dotfiles/` with a cloud sync product in v2.0.0.
+- Not replacing `dotfiles/` with cloud sync in v2.0.0.
+- Not porting Yad polish or a third Bash “polish wave”.
 
-## Open questions (resolve before coding 2.0)
+## Implementation checklist
 
-1. Privilege model: `pkexec` helper vs “run whole app as root” (prefer helper).
-2. First UI kit: vanilla vs React.
-3. Package artifact: `.deb` only vs AppImage + deb.
-4. Repo layout: `carcara-electron/` sibling vs monorepo app under `carcara/v2/`.
-
-## Checklist (do not start until explicitly requested)
-
-- [ ] Write detailed 2.0 plan (stack, folder layout, privilege helper)
-- [ ] Spike: Electron window + one apt dry-run via helper
-- [ ] Port menus (system + software categories) to 2.0 UI
-- [ ] Package `.deb` / AppImage
-- [ ] Document dual entry: 1.x script vs 2.0 app in root README
+- [x] Write detailed 2.0 plan (stack, folder layout, privilege helper)
+- [x] Spike scaffold: `carcara-electron/` + Bun bridge (`bun run build` / `bun scripts/run-helper.ts ping` OK; GUI/`pkexec` validation pending)
+- [x] UI direction via `ui-ux-pro-max` → `design-system/carcara-2-0/` + app-shell renderer
+- [ ] Port system actions (update / fix / clean) through helper → 1.x scripts
+- [ ] Port software categories / installers through helper
+- [ ] Package `.deb` (AppImage optional)
+- [x] Document dual entry in root README + `carcara-electron/README.md` (alpha)

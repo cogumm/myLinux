@@ -24,3 +24,7 @@ Append-only log. Do not delete completed history.
 - [x] Wave 1 Step 4: wired Desenvolvimento + Produção menus (`development/_menu.sh`, `productivity/_menu.sh`)
 - [x] Wave 1 Step 5 (2026-11-17): ShellCheck + `bash -n` on Wave 1 scripts; `.shellcheckrc`; export shared config; docs/playbook/memory-bank closed — **Wave 1 complete**
 - [x] Wave 2 (2026-11-17): thin installers on backends (vlc, discord, spotify, telegram, git, vscode, insomnia, firacode, dropbox); Social/Utilities Voltar → `break`; ShellCheck clean — **Wave 2 complete**
+- [x] Cancelled Wave 3 (1.x polish / init.sh / dry-run UI); removed Wave 3 sections and references (2026-11-17)
+- [x] Started Carcará 2.0: locked decisions in `carcara-2.0-electron.md`; scaffolded `carcara-electron/` (Electron + TS vanilla + `carcara-helper.sh` apt dry-run spike); `npm run build` OK
+- [x] Switched Carcará 2.0 toolchain to **Bun** (2026-11-17): `bun install` / `bun.lock`; `scripts/build.ts` + `scripts/run-helper.ts` via `Bun.$`; Electron main spawns Bun bridge; docs/stack updated
+- [x] Installed skill `ui-ux-pro-max`; persisted `design-system/carcara-2-0/`; app-shell UI (sidebar + pane + log) applied to Electron renderer (2026-11-17)

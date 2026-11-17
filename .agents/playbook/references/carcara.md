@@ -78,7 +78,12 @@ snap_install code --classic
 
 All software category menus (`development`, `productivity`, `social`, `utilities`) and `menuSof` use `break` (no nested `bash $menuSof`).
 
+## Carcará 2.0 (Electron)
+
+Active UI track: sibling app `carcara-electron/` (Electron + **Bun**) — see `.agents/idea/carcara-2.0-electron.md`.  
+1.x remains CLI/fallback (`startApp.sh`). Spike: `Bun.$` bridge → helper allowlist + apt dry-run (`bun run dev`).
+
 ## Fix priorities (remaining)
 
-1. Wave 3 — optional CLI only / skip if Electron 2.0 starts.
+1. Continue Electron 2.0 (system actions → software installers → packaging).
 2. Live install smoke-test on a disposable machine (owner-requested).

@@ -4,29 +4,28 @@ Last updated: 2026-11-17
 
 Unscheduled ideas (promote into active work deliberately):
 
-## Planned ideas (do not start until explicitly requested)
+## Planned ideas
 
 - [x] Wave 1 Steps 1–5 — engine complete (17 de Novembro de 2026)
 - [x] Wave 2 — thin installers on backends (17 de Novembro de 2026)
-- [ ] Optional Wave 3 CLI only / **skip** if 2.0 starts ([`.agents/idea/carcara-modern-install.md`](../.agents/idea/carcara-modern-install.md))
-- [ ] Future: [`.agents/idea/carcara-2.0-electron.md`](../.agents/idea/carcara-2.0-electron.md) — Electron (**2.0**)
+- [x] Cancel Wave 3 / start Electron 2.0 (17 de Novembro de 2026)
+- [ ] Continue [`.agents/idea/carcara-2.0-electron.md`](../.agents/idea/carcara-2.0-electron.md) — system actions, software menus, packaging
 
-## Carcará / scripts
+## Carcará / scripts (1.x)
 
-- [x] Repair `carcara/app/config/dependences.sh` detection logic (Wave 1 Step 1)
-- [x] Unify all `. app/config/config.sh` includes (Wave 1 Step 1)
-- [x] Restore `startApp.sh` Zenity license gate (Wave 1 Step 1)
-- [x] Wire `menuSof.sh` Desenvolvimento → `development/_menu.sh`
-- [x] Wire Produção → `productivity/_menu.sh` (Dropbox)
-- [x] README: document Carcará as real entry (no fake `init.sh` / curl pipe)
-- [x] Wave 1 Step 5 — `bash -n` + ShellCheck on Wave 1 scripts
-- [x] Wave 2 — rewrite installers onto `install_backends.sh` + Social/Utilities Voltar
-- [ ] Optional: thin root `init.sh` wrapper that delegates to `carcara/startApp.sh` (only if wanted)
+- [x] Wave 1 + Wave 2 engine work
+- [ ] Live smoke-test of Wave 2 installers (owner-requested machine)
 - [ ] Dotfiles apply helper with `*.bak` backups
 - [ ] Replace dead patterns from `old/` only when needed (docker helper refresh?)
-- [ ] Consider non-root mode for dry-run / help
 - [ ] i18n optional (en) for menus — low priority
-- [ ] Live smoke-test of Wave 2 installers (owner-requested machine)
+
+## Carcará 2.0
+
+- [x] Plan + scaffold `carcara-electron/` spike (helper + apt dry-run UI)
+- [ ] Validate spike on desktop / WSLg
+- [ ] Helper actions for update / fix / clean
+- [ ] Helper actions for software installers
+- [ ] Package `.deb`; document dual entry in root README
 
 ## Future agent skills (skills.sh) — install when modernizing that area
 

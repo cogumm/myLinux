@@ -36,7 +36,8 @@
 
 | Piece | Role |
 |-------|------|
-| **[Carcará](carcara/README.md)** | Interactive installer / maintenance UI (Bash + Zenity/Yad) |
+| **[Carcará 1.x](carcara/README.md)** | Install engine + CLI/TUI (Bash + Zenity/Yad) |
+| **[Carcará 2.0](carcara-electron/README.md)** | Electron desktop UI (alpha; reuses 1.x backends) |
 | **`dotfiles/`** | Shell aliases, Bash/Zsh themes, git template, Hyper |
 | **`old/`** | Frozen legacy scripts — archive only |
 | **`cleanup-zone-identifiers.sh`** | Remove Windows `*:Zone.Identifier` junk on WSL |
@@ -64,7 +65,7 @@ git config --global user.email 'you@example.com'
 
 ## Quick start
 
-### Carcará (installer / maintenance)
+### Carcará 1.x (installer / maintenance)
 
 ```bash
 git clone https://github.com/cogumm/myLinux.git
@@ -73,6 +74,16 @@ sudo bash startApp.sh
 ```
 
 Main menu covers system update, software install, repair, and cleanup. See [carcara/README.md](carcara/README.md) for the tree and menu map.
+
+### Carcará 2.0 (Electron — alpha)
+
+```bash
+cd myLinux/carcara-electron
+bun install
+bun run dev
+```
+
+Requires [Bun](https://bun.sh). Spike UI + privilege helper (`apt` dry-run). Plan: [`.agents/idea/carcara-2.0-electron.md`](.agents/idea/carcara-2.0-electron.md).
 
 ### Dotfiles
 
@@ -92,12 +103,13 @@ See [docs/wsl-cleanup.md](docs/wsl-cleanup.md).
 
 ```
 .
-├── carcara/                      # Active TUI installer (entry: startApp.sh)
+├── carcara/                      # 1.x engine + TUI (entry: startApp.sh)
+├── carcara-electron/             # 2.0 Electron + Bun (entry: bun run dev)
 ├── dotfiles/                     # Aliases, bashrc, oh-my-zsh, git, Hyper
 ├── old/                          # Legacy archive (do not extend)
 ├── cleanup-zone-identifiers.sh   # WSL helper
 ├── docs/                         # Operator docs
-├── design-system/carcara/        # TUI UX notes
+├── design-system/carcara/        # 1.x TUI UX notes
 ├── AGENTS.md                     # Agent entry
 ├── .agents/                      # Agent-agnostic idea + playbook + skills
 ├── .cursor/rules/                # Cursor adapter
@@ -121,7 +133,7 @@ See [docs/wsl-cleanup.md](docs/wsl-cleanup.md).
 - Push: `git push origin my-feature`
 - Open a pull request
 
-Prefer improving `carcara/` or `dotfiles/` over adding new top-level trees. Leave `old/` as archive.
+Prefer improving `carcara/`, `carcara-electron/`, or `dotfiles/`. Leave `old/` as archive.
 
 ## :memo: License
 

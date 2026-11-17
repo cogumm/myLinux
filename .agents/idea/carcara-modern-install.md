@@ -1,6 +1,6 @@
 # Idea — Modernize Carcará install stack (Debian/Ubuntu+) — **1.x**
 
-Status: **in progress** (Wave 1 Step 1 done)  
+Status: **complete** (Waves 1–2)  
 Saved: 16 de Novembro de 2026  
 Related: [mylinux.md](mylinux.md) · [carcara-2.0-electron.md](carcara-2.0-electron.md) · playbook [carcara.md](../playbook/references/carcara.md)
 
@@ -11,22 +11,21 @@ Treat **1.x as the install engine + CLI/fallback**, not the final UI product.
 | Invest in 1.x | Defer / skip in 1.x |
 |---------------|---------------------|
 | `install_backends.sh` (apt keyrings, Flatpak, Snap, idempotency, exit codes) | Yad/Zenity polish, animations, “pretty” dialogs |
-| System scripts with correct apt behavior | Wave 3 TUI polish (`gum`, fancy dry-run UI) |
+| System scripts with correct apt behavior | TUI polish (`gum`, fancy dry-run UI) |
 | Thin installers that call backends (stable **contract** for Electron) | Rewriting UX twice for Yad then Electron |
 | Minimal menu wiring so backends can be tested | Large Yad-only feature work |
 
-**2.0** ([carcara-2.0-electron.md](carcara-2.0-electron.md)) will call the same backends via a privilege helper. Do not fork install logic into the Electron renderer later.
+**2.0** ([carcara-2.0-electron.md](carcara-2.0-electron.md)) calls the same backends via a privilege helper. Do not fork install logic into the Electron renderer.
 
 ## Overview
 
-Modernize Carcará in lean waves: shared install helpers (current Debian/Ubuntu practices), then thin app installers. Yad/Zenity stay as a **temporary** front-end until Electron 2.0.
+1.x delivered shared install helpers and thin app installers. Yad/Zenity remain the **temporary** CLI/TUI front-end; product UI moves to Electron 2.0.
 
-## Defaults (gradual modernization)
+## Defaults
 
 - **Backend policy:** (1) official **apt/.deb** with modern keyrings when the vendor ships a signed repo; (2) **Flatpak + Flathub** for most GUI apps; (3) **Snap** only when that is the practical/recommended channel (or classic confinement). Never revive `apt-key` or blind `curl | bash` in new code.
-- **Wave 1 (priority):** bootstrap + **`install_backends.sh`** + system scripts + enough menu wiring to exercise them.
-- **Wave 2 (lean):** rewrite installers onto backends only — success/fail/log matter; Yad toasts are enough.
-- **Wave 3:** **low priority / mostly skip** if 2.0 is next — optional CLI helpers only (`init.sh`, dry-run flags), not Yad redesign.
+- **Wave 1:** bootstrap + **`install_backends.sh`** + system scripts + menu wiring — **done**.
+- **Wave 2:** thin installers onto backends — **done**.
 - **WSL:** helpers must detect limited GUI/Snap/Flatpak and warn instead of failing obscurely.
 - **Script header:** every Carcará `.sh` file **must** keep the banner below.
 
@@ -56,11 +55,7 @@ Rules:
 - List important variables (`$configYad`, `$SUDO_USER`, paths, etc.) in `Variáveis`.
 - Use Portuguese long-form dates (not ISO `YYYY-MM-DD`). Months: Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro.
 - On modernization edits, set or refresh `Última alteração` when rewriting.
-- Applies to: `startApp.sh`, `app/config/*.sh`, `app/scripts/**/*.sh`, and any new helper such as `install_backends.sh`.
-
-## Why (current gaps)
-
-Carcará is ~2020-era: brittle installers, Snap-only paths, menus stubbed for Development/Productivity, apt exit codes hidden by Yad pipes. Bootstrap (deps / license / config sourcing) was fixed in Wave 1 Step 1; backends and system scripts remain.
+- Applies to: `startApp.sh`, `app/config/*.sh`, `app/scripts/**/*.sh`, and helpers such as `install_backends.sh`.
 
 ## Target architecture
 
@@ -79,9 +74,9 @@ flowchart TD
   lib --> idem[already_installed_checks]
 ```
 
-Shared library: one new file `carcara/app/config/install_backends.sh` next to `config.sh`. **This file is the main 1.x deliverable for 2.0.**
+Shared library: `carcara/app/config/install_backends.sh` — **main 1.x deliverable for 2.0.**
 
-### Backend helpers (Wave 1 Step 2) — high priority
+### Backend helpers (Wave 1 Step 2) — done
 
 | Helper | Behavior |
 |--------|----------|
@@ -91,78 +86,24 @@ Shared library: one new file `carcara/app/config/install_backends.sh` next to `c
 | `ensure_flatpak_flathub` | Install flatpak if missing; add Flathub remote |
 | `flatpak_install` | `flatpak install -y flathub <app-id>` |
 | `snap_install` | `snap install …` (+ `--classic` when needed) |
-| `run_with_progress` | Optional Yad pulsate **without** hiding exit codes; always printable logs for Electron later |
+| `run_with_progress` | Optional Yad pulsate **without** hiding exit codes; always printable logs for Electron |
 
-Machine-friendly outcomes matter: non-zero exit + stderr/log lines the 2.0 UI can show.
-
-### Install preference per app class (Wave 2 lean)
+### Install preference per app class (Wave 2) — done
 
 | Class | Preferred channel | Examples |
 |-------|-------------------|----------|
 | System / CLI | apt | git, curl, fonts via apt when available |
-| GUI (cross-distro) | Flatpak/Flathub | Discord, Spotify, Telegram, VLC, Insomnia if on Flathub |
+| GUI (cross-distro) | Flatpak/Flathub | Discord, Spotify, Telegram, VLC, Insomnia |
 | Vendor desktop IDE | Official Microsoft apt repo (keyring) or Snap classic | VS Code |
-| Productivity | Official .deb/Flatpak | Dropbox — verify current vendor method |
+| Productivity | Flatpak / Snap | Dropbox |
 
-Confirm Flathub app IDs / apt package names per-app when Wave 2 starts. Do not hardcode obsolete PPAs.
+## Wave 1 — Foundation — **done**
 
-## Wave 1 — Foundation (do first)
+Steps 1–5 completed (16–17 de Novembro de 2026): bootstrap, `install_backends.sh`, system scripts, menus, ShellCheck.
 
-### Step 1 — Stabilize bootstrap — **done** (16 de Novembro de 2026)
+## Wave 2 — Thin installers — **done**
 
-- `dependences.sh`: install `yad`/`zenity`/`curl` **before** any Yad use; then network check; snapd/flatpak optional.
-- `startApp.sh`: Zenity license gate; abort if `dependences` fails.
-- Unified `. app/config/config.sh` sourcing.
-
-### Step 2 — Add shared install library — **done** (17 de Novembro de 2026)
-
-- `carcara/app/config/install_backends.sh` loaded from `config.sh`.
-- Helpers: `pkg_present`, `apt_install`, `ensure_apt_keyring_repo`, `ensure_flatpak_flathub`, `flatpak_install`, `snap_install`, `run_with_progress`.
-- stderr logs `[carcara]` / `[carcara:error]` for CLI and future Electron.
-
-### Step 3 — Modernize system scripts — **done** (17 de Novembro de 2026)
-
-- `updateDistro.sh` — confirm + `update` / `upgrade` / `full-upgrade` via `run_with_progress`; reports failures.
-- `fixSystem.sh` — `apt-get -f install` + `dpkg --configure -a` with exit tracking.
-- `cleanDistro.sh` — trash/`tmp`/apt clean suite; **dpkg/apt locks and apt lists only with explicit confirm**.
-
-### Step 4 — Wire menus — **done** (17 de Novembro de 2026)
-
-- `development/_menu.sh` → git, VS Code, Insomnia, Fira Code.
-- `productivity/_menu.sh` → Dropbox.
-- `menuSof.sh` calls both (no more “Ainda em desenvolvimento” stubs for those entries).
-- Voltar uses `break` to return to the parent `bash` caller (avoids nested menu loops).
-
-### Step 5 — Quality gate
-
-- `bash -n` + ShellCheck on touched scripts (especially `install_backends.sh`).
-- Update `docs/carcara.md`, playbook, memory-bank.
-
-**Wave 1 exit criteria:** shared backends exist with clear exit codes; system scripts report apt status; menus can reach installers; Yad remains functional but unpolished.
-
-## Wave 2 — Thin installers (engine contract)
-
-Order: utilities → social → development → productivity.
-
-Each installer:
-
-```bash
-. app/config/config.sh
-. app/config/install_backends.sh
-# idempotent check → preferred backend → exit 0/1 (+ simple Yad or echo)
-```
-
-Skip Yad-only niceties. Prefer stable function names / args that 2.0 can wrap.
-
-## Wave 3 — Polish — **low priority / skip if starting 2.0**
-
-Only if still useful as CLI fallback:
-
-- Optional root `init.sh` → `carcara/startApp.sh`
-- Non-root dry-run / help flags on backends
-- Skills backlog (`bash-scripting`, `debian-linux-triage`)
-
-Explicitly **out** of Wave 3 now: Yad redesign, `gum` migration, nala-as-UI.
+utilities → social → development → productivity; each installer calls backends with idempotent checks.
 
 ## Non-goals (this 1.x Bash plan)
 
@@ -171,6 +112,7 @@ Explicitly **out** of Wave 3 now: Yad redesign, `gum` migration, nala-as-UI.
 - No Electron UI **here** — see [carcara-2.0-electron.md](carcara-2.0-electron.md).
 - No silent `curl | bash` as default UX.
 - No investing in Yad as the long-term product UI.
+- No further 1.x “polish” wave — product UI is 2.0.
 
 ## Implementation checklist
 
@@ -180,6 +122,5 @@ Explicitly **out** of Wave 3 now: Yad redesign, `gum` migration, nala-as-UI.
 - [x] Wave 1 Step 4 — minimal menu wiring (17 de Novembro de 2026)
 - [x] Wave 1 Step 5 — ShellCheck + docs (17 de Novembro de 2026)
 - [x] Wave 2 — thin installers onto backends (17 de Novembro de 2026)
-- [ ] Wave 3 — optional CLI only / **skip** if 2.0 starts
 
-**Wave 2 complete.** Next: optional Wave 3 CLI polish, or start Electron **2.0** when approved.
+**1.x complete.** Active product UI work: [carcara-2.0-electron.md](carcara-2.0-electron.md).
