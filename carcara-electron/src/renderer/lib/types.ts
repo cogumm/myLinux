@@ -12,6 +12,12 @@ export type CarcaraApi = {
   onNavigate?: (callback: (view: string) => void) => void;
   getLicenseText?: () => Promise<string>;
   getLang?: () => Promise<string>;
+  getHostInfo?: () => Promise<{
+    distro: string;
+    arch: string;
+    flatpak: boolean;
+    snap: boolean;
+  }>;
   quitApp?: () => Promise<void>;
 };
 

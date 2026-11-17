@@ -1,4 +1,4 @@
-import { openExternal } from "../lib/api.js";
+import { carcaraApi, openExternal } from "../lib/api.js";
 import { t } from "../lib/i18n.js";
 import type { ViewMeta } from "../lib/types.js";
 
@@ -92,7 +92,35 @@ export function renderSobre(): HTMLElement {
     linkRow.append(btn);
   }
 
-  body.append(lead, list, note, linkRow);
+  const health = el("dl", "about__facts about__facts--host");
+  health.setAttribute("aria-busy", "true");
+
+  void carcaraApi()
+    .getHostInfo?.()
+    .then((info) => {
+      if (!info) return;
+      const rows: Fact[] = [
+        { label: t("host.distro"), value: info.distro },
+        { label: t("host.arch"), value: info.arch },
+        {
+          label: t("host.flatpak"),
+          value: info.flatpak ? t("host.yes") : t("host.no"),
+        },
+        {
+          label: t("host.snap"),
+          value: info.snap ? t("host.yes") : t("host.no"),
+        },
+      ];
+      for (const fact of rows) {
+        health.append(el("dt", undefined, fact.label), el("dd", undefined, fact.value));
+      }
+      health.removeAttribute("aria-busy");
+    })
+    .catch(() => {
+      health.removeAttribute("aria-busy");
+    });
+
+  body.append(lead, list, health, note, linkRow);
   about.append(hero, body);
   return about;
 }

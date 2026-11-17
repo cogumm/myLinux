@@ -31,9 +31,13 @@ usage() {
 	echo "          install-opera | install-zen | install-steam | install-heroic | install-lutris |" >&2
 	echo "          install-audacity | install-navidrome |" >&2
 	echo "          install-discord | install-spotify | install-telegram | install-whatsapp |" >&2
+	echo "          install-proton-mail | install-proton-vpn | install-nordvpn |" >&2
 	echo "          install-git | install-vscode | install-cursor | install-insomnia |" >&2
-	echo "          install-postman | install-termius | install-firacode | install-docker |" >&2
-	echo "          install-dropbox | install-anki | install-notion | install-thunderbird" >&2
+	echo "          install-postman | install-termius | install-firacode | install-nodejs |" >&2
+	echo "          install-docker | install-dropbox | install-anki | install-notion |" >&2
+	echo "          install-thunderbird | install-libreoffice | install-onlyoffice |" >&2
+	echo "          install-bitwarden | install-onepassword |" >&2
+	echo "presets:  preset-dev | preset-social | preset-gaming" >&2
 }
 
 # Run repo dotfiles/apply.sh as the real desktop user (never as root home).
@@ -232,6 +236,10 @@ case "$action" in
 		_run_carcara_script "app/scripts/software/development/firacode.sh"
 		exit $?
 		;;
+	install-nodejs)
+		_run_carcara_script "app/scripts/software/development/nodejs.sh"
+		exit $?
+		;;
 	install-docker)
 		_run_carcara_script "app/scripts/software/development/docker.sh"
 		exit $?
@@ -250,6 +258,46 @@ case "$action" in
 		;;
 	install-thunderbird)
 		_run_carcara_script "app/scripts/software/productivity/thunderbird.sh"
+		exit $?
+		;;
+	install-libreoffice)
+		_run_carcara_script "app/scripts/software/productivity/libreoffice.sh"
+		exit $?
+		;;
+	install-onlyoffice)
+		_run_carcara_script "app/scripts/software/productivity/onlyoffice.sh"
+		exit $?
+		;;
+	install-proton-mail)
+		_run_carcara_script "app/scripts/software/social/proton-mail.sh"
+		exit $?
+		;;
+	install-proton-vpn)
+		_run_carcara_script "app/scripts/software/utilities/proton-vpn.sh"
+		exit $?
+		;;
+	install-nordvpn)
+		_run_carcara_script "app/scripts/software/utilities/nordvpn.sh"
+		exit $?
+		;;
+	install-bitwarden)
+		_run_carcara_script "app/scripts/software/security/bitwarden.sh"
+		exit $?
+		;;
+	install-onepassword)
+		_run_carcara_script "app/scripts/software/security/onepassword.sh"
+		exit $?
+		;;
+	preset-dev)
+		_run_carcara_script "app/scripts/software/presets/dev-box.sh"
+		exit $?
+		;;
+	preset-social)
+		_run_carcara_script "app/scripts/software/presets/social-box.sh"
+		exit $?
+		;;
+	preset-gaming)
+		_run_carcara_script "app/scripts/software/presets/gaming-light.sh"
 		exit $?
 		;;
 	""|-h|--help)

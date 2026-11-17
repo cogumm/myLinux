@@ -27,7 +27,9 @@
     "productivity": "Produtividade",
     "social": "Social",
     "music": "Música e áudio",
-    "utilities": "Utilitários"
+    "security": "Segurança",
+    "utilities": "Utilitários",
+    "presets": "Presets"
   },
   "install": {
     "git": "Instalar o Git",
@@ -38,10 +40,14 @@
     "termius": "Instalar o Termius",
     "firacode": "Instalar a Fira Code",
     "docker": "Instalar o Docker",
+    "nodejs": "Instalar Node.js (toolchain)",
     "discord": "Instalar o Discord",
     "spotify": "Instalar o Spotify",
     "telegram": "Instalar o Telegram",
     "whatsapp": "Instalar o WhatsApp",
+    "protonMail": "Instalar o Proton Mail",
+    "protonVpn": "Instalar o Proton VPN",
+    "nordvpn": "Instalar o NordVPN",
     "vlc": "Instalar o VLC",
     "firefox": "Instalar o Firefox",
     "brave": "Instalar o Brave",
@@ -57,7 +63,14 @@
     "dropbox": "Instalar o Dropbox",
     "anki": "Instalar o Anki",
     "notion": "Instalar o Notion",
-    "thunderbird": "Instalar o Thunderbird"
+    "thunderbird": "Instalar o Thunderbird",
+    "libreoffice": "Instalar o LibreOffice",
+    "onlyoffice": "Instalar o OnlyOffice",
+    "bitwarden": "Instalar o Bitwarden",
+    "onepassword": "Instalar o 1Password",
+    "presetDev": "Preset Dev box",
+    "presetSocial": "Preset Social box",
+    "presetGaming": "Preset Gaming light"
   },
   "desc": {
     "git": "Controle de versão distribuído (CLI + gitg)",
@@ -68,10 +81,14 @@
     "termius": "Cliente SSH moderno",
     "firacode": "Fonte monoespaçada com ligaduras",
     "docker": "Containers e imagens no Linux",
+    "nodejs": "Node 22 + npm + pnpm + Yarn + Bun",
     "discord": "Voz, chat e comunidades",
     "spotify": "Streaming de música e podcasts",
     "telegram": "Mensagens rápidas e canais",
     "whatsapp": "WhatsApp Desktop (Flatpak / Snap)",
+    "protonMail": "Cliente de e-mail Proton",
+    "protonVpn": "VPN da Proton",
+    "nordvpn": "VPN NordVPN (Snap)",
     "vlc": "Player multimídia para quase qualquer formato",
     "firefox": "Navegador da Mozilla",
     "brave": "Navegador com bloqueio de anúncios",
@@ -87,7 +104,19 @@
     "dropbox": "Arquivos sincronizados na nuvem",
     "anki": "Cartões de memória (spaced repetition)",
     "notion": "Notas e wikis no desktop",
-    "thunderbird": "Cliente de e-mail da Mozilla"
+    "thunderbird": "Cliente de e-mail da Mozilla",
+    "libreoffice": "Suíte office livre",
+    "onlyoffice": "Editores OnlyOffice Desktop",
+    "bitwarden": "Gerenciador de senhas open source",
+    "onepassword": "Gerenciador de senhas 1Password",
+    "presetDev": "Git, VS Code, Fira, Node, Docker, Insomnia",
+    "presetSocial": "Discord, Telegram, WhatsApp, Spotify",
+    "presetGaming": "Steam, Heroic, Lutris"
+  },
+  "soft": {
+    "searchPlaceholder": "Filtrar apps nesta categoria…",
+    "searchAria": "Buscar software",
+    "noMatch": "Nenhum app corresponde à busca."
   },
   "dotfiles": {
     "column": "Dotfiles (backup *.bak)",
@@ -224,6 +253,14 @@
     "title": "Atividade",
     "clear": "Limpar",
     "clearAria": "Limpar log"
+  },
+  "host": {
+    "distro": "Distro",
+    "arch": "Arch",
+    "flatpak": "Flatpak",
+    "snap": "Snap",
+    "yes": "presente",
+    "no": "ausente"
   },
   "sobre": {
     "lead": "Toolkit pessoal de workstation Linux — instaladores, manutenção e dotfiles. A UI 2.0 reutiliza os backends 1.x (apt → Flatpak → Snap).",

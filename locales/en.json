@@ -27,7 +27,9 @@
     "productivity": "Productivity",
     "social": "Social",
     "music": "Music and audio",
-    "utilities": "Utilities"
+    "security": "Security",
+    "utilities": "Utilities",
+    "presets": "Presets"
   },
   "install": {
     "git": "Install Git",
@@ -38,10 +40,14 @@
     "termius": "Install Termius",
     "firacode": "Install Fira Code",
     "docker": "Install Docker",
+    "nodejs": "Install Node.js toolchain",
     "discord": "Install Discord",
     "spotify": "Install Spotify",
     "telegram": "Install Telegram",
     "whatsapp": "Install WhatsApp",
+    "protonMail": "Install Proton Mail",
+    "protonVpn": "Install Proton VPN",
+    "nordvpn": "Install NordVPN",
     "vlc": "Install VLC",
     "firefox": "Install Firefox",
     "brave": "Install Brave",
@@ -57,7 +63,14 @@
     "dropbox": "Install Dropbox",
     "anki": "Install Anki",
     "notion": "Install Notion",
-    "thunderbird": "Install Thunderbird"
+    "thunderbird": "Install Thunderbird",
+    "libreoffice": "Install LibreOffice",
+    "onlyoffice": "Install OnlyOffice",
+    "bitwarden": "Install Bitwarden",
+    "onepassword": "Install 1Password",
+    "presetDev": "Dev box preset",
+    "presetSocial": "Social box preset",
+    "presetGaming": "Gaming light preset"
   },
   "desc": {
     "git": "Distributed version control (CLI + gitg)",
@@ -68,10 +81,14 @@
     "termius": "Modern SSH client",
     "firacode": "Monospace font with coding ligatures",
     "docker": "Linux containers and images",
+    "nodejs": "Node 22 + npm + pnpm + Yarn + Bun",
     "discord": "Voice, chat, and communities",
     "spotify": "Music and podcast streaming",
     "telegram": "Fast messaging and channels",
     "whatsapp": "WhatsApp Desktop (Flatpak / Snap)",
+    "protonMail": "Proton Mail desktop client",
+    "protonVpn": "Proton VPN client",
+    "nordvpn": "NordVPN (Snap)",
     "vlc": "Plays almost any media format",
     "firefox": "Mozilla web browser",
     "brave": "Browser with built-in ad blocking",
@@ -87,7 +104,19 @@
     "dropbox": "Cloud file sync across devices",
     "anki": "Spaced-repetition flashcards",
     "notion": "Notes and wikis on the desktop",
-    "thunderbird": "Mozilla email client"
+    "thunderbird": "Mozilla email client",
+    "libreoffice": "Free office suite",
+    "onlyoffice": "OnlyOffice Desktop editors",
+    "bitwarden": "Open-source password manager",
+    "onepassword": "1Password password manager",
+    "presetDev": "Git, VS Code, Fira, Node, Docker, Insomnia",
+    "presetSocial": "Discord, Telegram, WhatsApp, Spotify",
+    "presetGaming": "Steam, Heroic, Lutris"
+  },
+  "soft": {
+    "searchPlaceholder": "Filter apps in this category…",
+    "searchAria": "Search software",
+    "noMatch": "No apps match this search."
   },
   "dotfiles": {
     "column": "Dotfiles (*.bak backup)",
@@ -224,6 +253,14 @@
     "title": "Activity",
     "clear": "Clear",
     "clearAria": "Clear log"
+  },
+  "host": {
+    "distro": "Distro",
+    "arch": "Arch",
+    "flatpak": "Flatpak",
+    "snap": "Snap",
+    "yes": "present",
+    "no": "missing"
   },
   "sobre": {
     "lead": "Personal Linux workstation toolkit — installers, maintenance, and dotfiles. The 2.0 UI reuses the 1.x backends (apt → Flatpak → Snap).",

@@ -487,6 +487,14 @@ button:disabled {
   max-width: 36rem;
 }
 
+.soft-layout__stack {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  flex: 1;
+}
+
 .soft-layout__pane {
   min-width: 0;
   min-height: 0;
@@ -641,6 +649,42 @@ button:disabled {
 }
 
 /* `.tile--accent` kept for markup/semântica; visual highlight is hover-only. */
+
+.tile__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.tile__backend {
+  flex-shrink: 0;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted, #9ca3af);
+  border: 1px solid color-mix(in srgb, var(--muted, #9ca3af) 40%, transparent);
+  border-radius: 4px;
+  padding: 0.1rem 0.35rem;
+}
+
+.soft-search {
+  width: 100%;
+  margin: 0 0 0.75rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--border, #374151) 80%, transparent);
+  background: color-mix(in srgb, var(--card, #111827) 90%, black);
+  color: inherit;
+  font: inherit;
+}
+
+.soft-search:focus {
+  outline: 2px solid var(--primary, #0d9488);
+  outline-offset: 1px;
+}
 
 .tile__kicker {
   font-size: 0.65rem;

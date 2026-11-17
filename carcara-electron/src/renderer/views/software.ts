@@ -80,6 +80,24 @@ function categories(): Category[] {
           desc: t("desc.firacode"),
           action: "install-firacode",
           confirm: t("install.firacode") + "?",
+          backend: "apt",
+        },
+        {
+          kicker: "Runtime",
+          title: "Node toolchain",
+          desc: t("desc.nodejs"),
+          action: "install-nodejs",
+          confirm: t("install.nodejs") + "?",
+          backend: "mixed",
+          accent: true,
+        },
+        {
+          kicker: "Preset",
+          title: "Dev box",
+          desc: t("desc.presetDev"),
+          action: "preset-dev",
+          confirm: t("install.presetDev") + "?",
+          backend: "mixed",
         },
       ],
     },
@@ -95,6 +113,7 @@ function categories(): Category[] {
           action: "install-steam",
           confirm: t("install.steam") + "?",
           accent: true,
+          backend: "flatpak",
         },
         {
           kicker: "Epic/GOG",
@@ -102,6 +121,7 @@ function categories(): Category[] {
           desc: t("desc.heroic"),
           action: "install-heroic",
           confirm: t("install.heroic") + "?",
+          backend: "flatpak",
         },
         {
           kicker: "Wine",
@@ -109,6 +129,15 @@ function categories(): Category[] {
           desc: t("desc.lutris"),
           action: "install-lutris",
           confirm: t("install.lutris") + "?",
+          backend: "flatpak",
+        },
+        {
+          kicker: "Preset",
+          title: "Gaming light",
+          desc: t("desc.presetGaming"),
+          action: "preset-gaming",
+          confirm: t("install.presetGaming") + "?",
+          backend: "mixed",
         },
       ],
     },
@@ -123,6 +152,7 @@ function categories(): Category[] {
           desc: t("desc.discord"),
           action: "install-discord",
           confirm: t("install.discord") + "?",
+          backend: "flatpak",
         },
         {
           kicker: "Msg",
@@ -130,6 +160,7 @@ function categories(): Category[] {
           desc: t("desc.telegram"),
           action: "install-telegram",
           confirm: t("install.telegram") + "?",
+          backend: "flatpak",
         },
         {
           kicker: "Msg",
@@ -137,6 +168,23 @@ function categories(): Category[] {
           desc: t("desc.whatsapp"),
           action: "install-whatsapp",
           confirm: t("install.whatsapp") + "?",
+          backend: "flatpak",
+        },
+        {
+          kicker: "Mail",
+          title: "Proton Mail",
+          desc: t("desc.protonMail"),
+          action: "install-proton-mail",
+          confirm: t("install.protonMail") + "?",
+          backend: "flatpak",
+        },
+        {
+          kicker: "Preset",
+          title: "Social box",
+          desc: t("desc.presetSocial"),
+          action: "preset-social",
+          confirm: t("install.presetSocial") + "?",
+          backend: "mixed",
         },
       ],
     },
@@ -151,6 +199,7 @@ function categories(): Category[] {
           desc: t("desc.dropbox"),
           action: "install-dropbox",
           confirm: t("install.dropbox") + "?",
+          backend: "flatpak",
         },
         {
           kicker: "Cards",
@@ -158,6 +207,7 @@ function categories(): Category[] {
           desc: t("desc.anki"),
           action: "install-anki",
           confirm: t("install.anki") + "?",
+          backend: "flatpak",
         },
         {
           kicker: "Notes",
@@ -165,6 +215,7 @@ function categories(): Category[] {
           desc: t("desc.notion"),
           action: "install-notion",
           confirm: t("install.notion") + "?",
+          backend: "snap",
         },
         {
           kicker: "Mail",
@@ -172,6 +223,24 @@ function categories(): Category[] {
           desc: t("desc.thunderbird"),
           action: "install-thunderbird",
           confirm: t("install.thunderbird") + "?",
+          backend: "apt",
+        },
+        {
+          kicker: "Office",
+          title: "LibreOffice",
+          desc: t("desc.libreoffice"),
+          action: "install-libreoffice",
+          confirm: t("install.libreoffice") + "?",
+          backend: "apt",
+          accent: true,
+        },
+        {
+          kicker: "Office",
+          title: "OnlyOffice",
+          desc: t("desc.onlyoffice"),
+          action: "install-onlyoffice",
+          confirm: t("install.onlyoffice") + "?",
+          backend: "flatpak",
         },
       ],
     },
@@ -187,6 +256,7 @@ function categories(): Category[] {
           action: "install-firefox",
           confirm: t("install.firefox") + "?",
           accent: true,
+          backend: "apt",
         },
         {
           kicker: "Web",
@@ -194,6 +264,7 @@ function categories(): Category[] {
           desc: t("desc.brave"),
           action: "install-brave",
           confirm: t("install.brave") + "?",
+          backend: "apt",
         },
         {
           kicker: "Web",
@@ -201,6 +272,7 @@ function categories(): Category[] {
           desc: t("desc.vivaldi"),
           action: "install-vivaldi",
           confirm: t("install.vivaldi") + "?",
+          backend: "apt",
         },
         {
           kicker: "Web",
@@ -208,6 +280,7 @@ function categories(): Category[] {
           desc: t("desc.opera"),
           action: "install-opera",
           confirm: t("install.opera") + "?",
+          backend: "snap",
         },
         {
           kicker: "Web",
@@ -215,6 +288,23 @@ function categories(): Category[] {
           desc: t("desc.zen"),
           action: "install-zen",
           confirm: t("install.zen") + "?",
+          backend: "appimage",
+        },
+        {
+          kicker: "VPN",
+          title: "Proton VPN",
+          desc: t("desc.protonVpn"),
+          action: "install-proton-vpn",
+          confirm: t("install.protonVpn") + "?",
+          backend: "flatpak",
+        },
+        {
+          kicker: "VPN",
+          title: "NordVPN",
+          desc: t("desc.nordvpn"),
+          action: "install-nordvpn",
+          confirm: t("install.nordvpn") + "?",
+          backend: "snap",
         },
       ],
     },
@@ -347,17 +437,44 @@ function categories(): Category[] {
       id: "security",
       titleKey: "cat.security",
       icon: "shield",
-      tiles: [],
+      tiles: [
+        {
+          kicker: "Pass",
+          title: "Bitwarden",
+          desc: t("desc.bitwarden"),
+          action: "install-bitwarden",
+          confirm: t("install.bitwarden") + "?",
+          backend: "flatpak",
+          accent: true,
+        },
+        {
+          kicker: "Pass",
+          title: "1Password",
+          desc: t("desc.onepassword"),
+          action: "install-onepassword",
+          confirm: t("install.onepassword") + "?",
+          backend: "deb",
+        },
+      ],
     },
   ];
 }
 
-function createEmptyCategory(): HTMLElement {
+function createEmptyCategory(message?: string): HTMLElement {
   const empty = document.createElement("div");
   empty.className = "soft-empty";
   empty.setAttribute("role", "status");
-  empty.textContent = t("cat.empty");
+  empty.textContent = message ?? t("cat.empty");
   return empty;
+}
+
+function filterTiles(tiles: TileProps[], query: string): TileProps[] {
+  const q = query.trim().toLowerCase();
+  if (!q) return tiles;
+  return tiles.filter((tile) => {
+    const hay = `${tile.title} ${tile.desc ?? ""} ${tile.kicker ?? ""} ${tile.backend ?? ""}`.toLowerCase();
+    return hay.includes(q);
+  });
 }
 
 export function renderSoftware(): HTMLElement {
@@ -370,24 +487,67 @@ export function renderSoftware(): HTMLElement {
   pane.setAttribute("role", "region");
   pane.setAttribute("aria-label", t("view.software.title"));
 
-  const panels = new Map<string, HTMLElement>();
+  const search = document.createElement("input");
+  search.type = "search";
+  search.className = "soft-search";
+  search.placeholder = t("soft.searchPlaceholder");
+  search.setAttribute("aria-label", t("soft.searchAria"));
+
+  type PanelState = {
+    root: HTMLElement;
+    tiles: TileProps[];
+    paged: ReturnType<typeof createPagedTiles> | null;
+  };
+
+  const panels = new Map<string, PanelState>();
+  let activeId = cats[0]?.id ?? "development";
+
   for (const cat of cats) {
-    const panel =
-      cat.tiles.length > 0
-        ? createPagedTiles(cat.tiles, { pageSize: SOFTWARE_PAGE_SIZE }).root
-        : createEmptyCategory();
-    panel.hidden = true;
-    panel.dataset.category = cat.id;
-    panels.set(cat.id, panel);
-    pane.append(panel);
+    const wrap = document.createElement("div");
+    wrap.hidden = true;
+    wrap.dataset.category = cat.id;
+    wrap.className = "soft-cat";
+
+    if (cat.tiles.length === 0) {
+      wrap.append(createEmptyCategory());
+      panels.set(cat.id, { root: wrap, tiles: [], paged: null });
+    } else {
+      const paged = createPagedTiles(cat.tiles, { pageSize: SOFTWARE_PAGE_SIZE });
+      wrap.append(paged.root);
+      panels.set(cat.id, { root: wrap, tiles: cat.tiles, paged });
+    }
+    pane.append(wrap);
+  }
+
+  function applyFilter(): void {
+    const state = panels.get(activeId);
+    if (!state) return;
+    if (state.tiles.length === 0) return;
+    const filtered = filterTiles(state.tiles, search.value);
+    if (filtered.length === 0) {
+      state.root.replaceChildren(createEmptyCategory(t("soft.noMatch")));
+      state.paged = null;
+      return;
+    }
+    if (!state.paged) {
+      const paged = createPagedTiles(filtered, { pageSize: SOFTWARE_PAGE_SIZE });
+      state.root.replaceChildren(paged.root);
+      state.paged = paged;
+      return;
+    }
+    state.paged.setTiles(filtered);
   }
 
   function showCategory(id: string): void {
-    for (const [catId, panel] of panels) {
-      panel.hidden = catId !== id;
+    activeId = id;
+    for (const [catId, state] of panels) {
+      state.root.hidden = catId !== id;
     }
     nav.setActive(id);
+    applyFilter();
   }
+
+  search.addEventListener("input", () => applyFilter());
 
   const nav = createNavList(
     cats.map((cat) => ({
@@ -399,7 +559,11 @@ export function renderSoftware(): HTMLElement {
     { label: t("view.software.title"), className: "nav-list soft-layout__nav" },
   );
 
-  layout.append(nav.root, pane);
-  showCategory(cats[0].id);
+  const paneStack = document.createElement("div");
+  paneStack.className = "soft-layout__stack";
+  paneStack.append(search, pane);
+
+  layout.append(nav.root, paneStack);
+  showCategory(activeId);
   return layout;
 }

@@ -22,6 +22,12 @@ contextBridge.exposeInMainWorld("carcara", {
   getLicenseText: (): Promise<string> =>
     ipcRenderer.invoke("license:get"),
   getLang: (): Promise<string> => ipcRenderer.invoke("app:lang"),
+  getHostInfo: (): Promise<{
+    distro: string;
+    arch: string;
+    flatpak: boolean;
+    snap: boolean;
+  }> => ipcRenderer.invoke("host:info"),
   quitApp: (): Promise<void> => ipcRenderer.invoke("app:quit"),
   onNavigate: (callback: (view: string) => void): void => {
     navigateHandler = callback;

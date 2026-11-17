@@ -1,6 +1,11 @@
 import { app, BrowserWindow, ipcMain } from "electron";
 import { readFile } from "node:fs/promises";
+import os from "node:os";
 import path from "node:path";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
+
+const execFileAsync = promisify(execFile);
 import { installAppMenu } from "./app-menu";
 import { env } from "./env";
 import { nativeT } from "./native-i18n";
@@ -89,6 +94,32 @@ app.whenReady().then(() => {
   });
 
   ipcMain.handle("app:lang", () => env.CARCARA_LANG);
+
+  ipcMain.handle("host:info", async () => {
+    let distro = "unknown";
+    try {
+      const raw = await readFile("/etc/os-release", "utf8");
+      const pretty = raw.match(/^PRETTY_NAME=(.*)$/m)?.[1]?.replace(/^"|"$/g, "");
+      const name = raw.match(/^NAME=(.*)$/m)?.[1]?.replace(/^"|"$/g, "");
+      distro = pretty || name || distro;
+    } catch {
+      /* ignore */
+    }
+    const which = async (cmd: string): Promise<boolean> => {
+      try {
+        await execFileAsync("sh", ["-c", `command -v ${cmd}`]);
+        return true;
+      } catch {
+        return false;
+      }
+    };
+    return {
+      distro,
+      arch: os.arch(),
+      flatpak: await which("flatpak"),
+      snap: await which("snap"),
+    };
+  });
 
   ipcMain.handle("app:quit", () => {
     app.quit();

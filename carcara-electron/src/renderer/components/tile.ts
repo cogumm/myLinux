@@ -1,7 +1,11 @@
+export type TileBackend = "apt" | "flatpak" | "snap" | "deb" | "appimage" | "mixed";
+
 export type TileProps = {
   title: string;
   desc?: string;
   kicker?: string;
+  /** Preferred install backend badge (Wave C). */
+  backend?: TileBackend;
   action: string;
   confirm?: string;
   accent?: boolean;
@@ -14,11 +18,23 @@ export function createTile(props: TileProps): HTMLButtonElement {
   btn.dataset.action = props.action;
   if (props.confirm) btn.dataset.confirm = props.confirm;
 
-  if (props.kicker) {
-    const kicker = document.createElement("span");
-    kicker.className = "tile__kicker";
-    kicker.textContent = props.kicker;
-    btn.append(kicker);
+  if (props.kicker || props.backend) {
+    const row = document.createElement("span");
+    row.className = "tile__meta";
+    if (props.kicker) {
+      const kicker = document.createElement("span");
+      kicker.className = "tile__kicker";
+      kicker.textContent = props.kicker;
+      row.append(kicker);
+    }
+    if (props.backend) {
+      const badge = document.createElement("span");
+      badge.className = "tile__backend";
+      badge.textContent = props.backend;
+      badge.title = props.backend;
+      row.append(badge);
+    }
+    btn.append(row);
   }
 
   const title = document.createElement("span");

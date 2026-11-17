@@ -4,14 +4,12 @@
 # Data criação: 17 de Novembro de 2026
 # Última alteração: 17 de Novembro de 2026
 # Nome: Gabriel F. Vilar (CoGUMm)
-# E-mail: gabriel[at]cogumm[dot]net
-# Telegram: https://t.me/CoGUMm
 # Script: development/_menu
-# Descrição: Menu desenvolvimento — i18n (+ Wave A).
+# Descrição: Menu desenvolvimento — Wave A + Node toolchain.
 #----------------------------------------------------------------------------------------------------#
 
 while true; do
-	menu=$(zenity --width=330 --height=560 --list \
+	menu=$(zenity --width=330 --height=600 --list \
 		--title="$(t app.name)" \
 		--column="id" --column="$(t menu.choose)" \
 		--hide-column=1 --print-column=1 \
@@ -22,6 +20,7 @@ while true; do
 		postman "$(t install.postman)" \
 		termius "$(t install.termius)" \
 		firacode "$(t install.firacode)" \
+		nodejs "$(t install.nodejs)" \
 		docker "$(t install.docker)" \
 		back "$(t menu.back)") || menu="back"
 
@@ -33,6 +32,7 @@ while true; do
 		postman) bash app/scripts/software/development/postman.sh ;;
 		termius) bash app/scripts/software/development/termius.sh ;;
 		firacode) bash app/scripts/software/development/firacode.sh ;;
+		nodejs) bash app/scripts/software/development/nodejs.sh ;;
 		docker) bash app/scripts/software/development/docker.sh ;;
 		back|*) break ;;
 	esac
