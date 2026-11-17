@@ -1,6 +1,7 @@
 import { app, BrowserWindow, ipcMain } from "electron";
 import { spawn } from "node:child_process";
 import path from "node:path";
+import { installAppMenu } from "./app-menu";
 import { openExternalUrl } from "./open-external";
 
 /** Bun Shell bridge — privilege allowlist runs under Bun, not Electron's Node. */
@@ -85,6 +86,7 @@ const ALLOWED_EXTERNAL = new Set([
 
 app.whenReady().then(() => {
   requireRoot();
+  installAppMenu();
 
   ipcMain.handle("helper:run", async (_event, action: string) => {
     if (typeof action !== "string" || !/^[a-z][a-z0-9-]*$/.test(action)) {

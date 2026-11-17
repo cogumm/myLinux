@@ -13,4 +13,9 @@ contextBridge.exposeInMainWorld("carcara", {
     url: string,
   ): Promise<{ ok: boolean; error?: string }> =>
     ipcRenderer.invoke("shell:openExternal", url),
+  onNavigate: (callback: (view: string) => void): void => {
+    ipcRenderer.on("app:navigate", (_event, view: unknown) => {
+      if (typeof view === "string") callback(view);
+    });
+  },
 });

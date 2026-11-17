@@ -13,6 +13,11 @@
     "resolveJsonModule": true,
     "types": ["node"]
   },
-  "include": ["src/main.ts", "src/preload.ts", "src/open-external.ts"],
+  "include": [
+    "src/main.ts",
+    "src/preload.ts",
+    "src/open-external.ts",
+    "src/app-menu.ts"
+  ],
   "exclude": ["node_modules", "dist", "src/renderer"]
 }

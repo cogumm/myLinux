@@ -9,6 +9,7 @@ export type OpenExternalResult = { ok: boolean; error?: string };
 export type CarcaraApi = {
   runHelper: (action: string) => Promise<HelperResult>;
   openExternal?: (url: string) => Promise<OpenExternalResult>;
+  onNavigate?: (callback: (view: string) => void) => void;
 };
 
 export type StatusKind = "idle" | "busy" | "ok" | "err";

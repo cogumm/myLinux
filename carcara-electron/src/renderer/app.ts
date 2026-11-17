@@ -92,4 +92,10 @@ export function mountApp(root: HTMLElement): void {
 
   navigate("sistema");
   console.append("Carcará 2.0 pronto.\n", "info");
+
+  carcaraApi().onNavigate?.((view) => {
+    if (view === "sistema" || view === "software" || view === "sobre") {
+      navigate(view);
+    }
+  });
 }
